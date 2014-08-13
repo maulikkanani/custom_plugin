@@ -1,0 +1,43 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: 'Open Sans', sans-serif !important;
+        background-color: inherit!important;
+}
+#customize_attribute .inside{
+    line-height:inherit;
+}
+.radio > label {
+    margin-right: 10px;
+}
+.pocket_selected_main{
+	margin-top: 20px;    
+}
+.box_part img{
+	border: 2px solid #e6e6e6;
+    border-radius: 7px;
+    box-shadow: 0 4px 7px #ddd;
+}
+.pocket_modal_main{
+	margin-bottom: 15px;
+}
+.box_title p{
+	font-size: 11px;
+}
+
+
+.container{
+    width: 727px; 
+    padding: 0px; 
+    margin: 0px;
+}
+
+.box_part img {
+    cursor: pointer;
+}
+
+.boxpart_active,.box_part img:hover{
+   border-color:#008000 !important
+}

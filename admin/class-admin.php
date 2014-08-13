@@ -132,15 +132,10 @@ class woocommerce_custom_attribute_admin {
      * @return    null    Return early if no settings page is registered.
      */
     public function enqueue_admin_styles() {
-
-        if (!isset($this->plugin_screen_hook_suffix)) {
-            return;
-        }
-
         $screen = get_current_screen();
-        if ($this->plugin_screen_hook_suffix == $screen->id) {
-            wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/admin.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
-        }
+            wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
     }
 
     /**
@@ -155,15 +150,8 @@ class woocommerce_custom_attribute_admin {
      * @return    null    Return early if no settings page is registered.
      */
     public function enqueue_admin_scripts() {
-
-        if (!isset($this->plugin_screen_hook_suffix)) {
-            return;
-        }
-
-        $screen = get_current_screen();
-        if ($this->plugin_screen_hook_suffix == $screen->id) {
-            wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/admin.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
-        }
+            wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/comman.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
     }
 
     /**
@@ -194,7 +182,7 @@ class woocommerce_custom_attribute_admin {
           $this->plugin_slug,
           array( $this, 'display_plugin_admin_page' )
           ); */
-        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custome-attribute/admin/assets/images/woo-custome_attribute.png'), 60);
+        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'), 60);
 
 
 
@@ -289,8 +277,7 @@ class woocommerce_custom_attribute_admin {
      * @param int $post_id The ID of the post being saved.
      */
     public function save_attributs($post_id) {
-            echo '<pre>'; print_r($_POST); echo '</pre>';
-            exit;
+            
     }
 
     /**
@@ -299,7 +286,9 @@ class woocommerce_custom_attribute_admin {
      * @param WP_Post $post The post object.
      */
     public function rander_attributes($post) {
-
+        global $post;
+        include_once( 'views/customize-attributes.php' );
+        /*
         // Add an nonce field so we can check for it later.
         wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
@@ -312,10 +301,14 @@ class woocommerce_custom_attribute_admin {
         echo '</label> ';
         echo '<input type="text" id="myplugin_new_field" name="myplugin_new_field"';
         echo ' value="' . esc_attr($value) . '" size="25" />';
+         * 
+         */
     }
     
     public function rander_image_layers($post) {
-
+         global $post;
+        include_once( 'views/image-layer.php' );
+        /*
         // Add an nonce field so we can check for it later.
         wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
@@ -328,6 +321,8 @@ class woocommerce_custom_attribute_admin {
         echo '</label> ';
         echo '<input type="text" id="myplugin_new_field" name="myplugin_new_field"';
         echo ' value="' . esc_attr($value) . '" size="25" />';
+         * 
+         */
     }
 
 }
