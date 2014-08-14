@@ -75,12 +75,13 @@ jQuery(document).ready(function(){
         }  
        if(closuer=='boton'){
             var but_img=color+'_boton_body_'+btn_style+'_boton_'+clouser_type+'.png';
+            jQuery('.front .layer[pos=4] img').attr('src', button_url+'/'+but_img);
          }else{
             var but_img='mi_'+btn_style+'_zipper_'+clouser_type+'_'+coat_legth+'.png'; 
+            jQuery('.front .layer[pos=4] img').attr('src', zipper_url+'/'+but_img);
          }
          
-        jQuery('.front .layer[pos=4] img').attr('src', button_url+'/'+but_img);
-    
+        
     });
    
     /*This is for change fabric :- Start*/

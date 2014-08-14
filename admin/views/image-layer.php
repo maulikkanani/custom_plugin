@@ -14,6 +14,7 @@ $fabric='813_fabric';
 var image_front_url='<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/front';    
 var image_back_url='<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/back';    
 var button_url='<?php echo $plugins_url ?>/assets/images/3d/man/trenchcoat/botones';
+var zipper_url='<?php echo $plugins_url ?>/assets/images/3d/man/trenchcoat/zipper';
 var category='<?php echo $category ?>';
 var fabric='<?php echo $fabric ?>';
 </script>
