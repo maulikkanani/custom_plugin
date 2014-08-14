@@ -133,7 +133,7 @@ class woocommerce_custom_attribute_admin {
      */
     public function enqueue_admin_styles() {
         $screen = get_current_screen();
-            wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            //wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
     }
