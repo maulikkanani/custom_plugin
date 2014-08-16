@@ -26,7 +26,7 @@ $default_values = array(
                        ),
                        array( 
                         'name'=>'wca_trenchcoat_closure',
-                        'value'=>'boton'
+                        'value'=>'zipper'
                        ),
                        array( 
                         'name'=>'wca_trenchcoat_closure_type_boton',
@@ -38,7 +38,7 @@ $default_values = array(
                        ),
                        array( 
                         'name'=>'wca_trenchcoat_pockets_type',
-                        'value'=>'1'
+                        'value'=>'5'
                        ),
                        array( 
                         'name'=>'wca_trenchcoat_chest_pocket',
@@ -77,9 +77,31 @@ $default_values=  json_encode($default_values);
     jQuery(document).ready(function() {
         var default_data = '<?php echo $default_values ?>';
         jQuery.each(jQuery.parseJSON(default_data), function(key, val) {
-            jQuery('input[name='+val.name+'][value='+val.value+']').attr('checked','');
+             if(val.name=='wca_trenchcoat_pockets_type'){
+                 if(val.value >= 1 && val.value<=5)
+                   jQuery('.trenchcoat_pockets_2').show();
+               if(val.value>= 6)
+                   jQuery('.trenchcoat_pockets_3').show();
+               
+                   jQuery('.pocket_modal_main[data-rel='+ val.value +'] img').addClass('boxpart_active');
+             } 
+                    jQuery('input[name='+val.name+'][value='+val.value+']').attr('checked','');
         });
-        jQuery('.pocket_modal_main[data-rel=1] img').addClass('boxpart_active');
+        
+        
+        jQuery(document).trigger("set-pos-1");
+        jQuery(document).trigger("set-pos-3");
+        jQuery(document).trigger("set-pos-5");
+        jQuery(document).trigger("set-pos-6");
+        jQuery(document).trigger("set-pos-7");
+        jQuery(document).trigger("set-pos-8");
+        jQuery(document).trigger("set-pos-1");
+        jQuery(document).trigger("set-pos-1");
+        jQuery(document).trigger("back-pos-10");
+        
+        $pocket_selector = jQuery('input[name=wca_trenchcoat_pockets]:checked');
+        jQuery(document).trigger("pockat-change");
+        
     });
     
     
@@ -108,7 +130,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Style:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1 pos4">
+                    <div class="radio attr-front pos1 pos4">
                         <label>
                             <input type="radio" name="wca_trenchcoat_style" value="simple" data-imgpos="1" id="wca_trenchcoat_style_simple" class="rel_enable"> Single breasted
                         </label>
@@ -121,7 +143,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Coat length:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1">
+                    <div class="radio attr-front pos1">
                         <label>
                             <input id="wca_trenchcoat_length_short" type="radio" value="long" data-imgpos="1" name="wca_trenchcoat_length"> Long
                         </label>
@@ -134,7 +156,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Fit:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1">
+                    <div class="radio attr-front pos1 pos2 pos5">
                         <label>
                             <input type="radio" value="1" name="wca_trenchcoat_fit"> Waisted
                         </label>
@@ -147,7 +169,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Fastening:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1">
+                    <div class="radio attr-front pos1">
                         <label>
                             <input type="radio" value="zipper" name="wca_trenchcoat_closure"> Zipper
                         </label>
@@ -160,7 +182,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Fastening type:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1">
+                    <div class="radio attr-front pos1">
                         <label>
                             <input type="radio" name="wca_trenchcoat_closure_type_boton" value="hide"> Hidden
                         </label>
@@ -173,12 +195,12 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Pockets:</label>
                 <div class="col-sm-10">
-                    <div class="radio ">
+                    <div class="radio attr-front ">
                         <label>
-                            <input type="radio" value="0" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_1"> No pockets
+                            <input type="radio" value="0" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_0"> No pockets
                         </label>
                         <label>
-                            <input type="radio" value="2" name="wca_trenchcoat_pockets" checked="" class="subshow" data-sh="trenchcoat_pockets_2"> 2 pockets
+                            <input type="radio" value="2" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_2"> 2 pockets
                         </label>
                         <label>
                             <input type="radio" value="3" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_3"> 3 pockets
@@ -187,11 +209,11 @@ $default_values=  json_encode($default_values);
                     <div class="pocket_selected_main row col-sm-12">
                         <input id="hidden_trenchcoat_pockets" class="option_input" type="hidden" value="1" name="wca_trenchcoat_pockets_type">
 
-                        <div class="trenchcoat_pockets_1 wca_trenchcoat_pockets hide"> 
+                        <div class="trenchcoat_pockets_0 wca_trenchcoat_pockets" style="display: none"> 
 
                         </div>    
 
-                        <div class="trenchcoat_pockets_2 wca_trenchcoat_pockets ">   
+                        <div class="trenchcoat_pockets_2 wca_trenchcoat_pockets " style="display:none">   
                             <div class="col-sm-3 pocket_modal_main" data-rel="1">
                                 <div class="box_part">
                                     <img src="<?php echo $plugins_url ?>/admin/assets/images/man/trenchcoat/estilo/trenchcoat_pockets_1.png">
@@ -224,7 +246,7 @@ $default_values=  json_encode($default_values);
                                 <div class="box_title"><p>Diag. zipper</p></div>
                             </div>
                         </div>
-                        <div class="trenchcoat_pockets_3 wca_trenchcoat_pockets hide">   
+                        <div class="trenchcoat_pockets_3 wca_trenchcoat_pockets" style="display:none">   
                             <div class="col-sm-3 pocket_modal_main" data-rel="6">
                                 <div class="box_part">
                                     <img src="<?php echo $plugins_url ?>/admin/assets/images/man/trenchcoat/estilo/trenchcoat_pockets_1.png">
@@ -244,7 +266,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Chest pocket:</label>
                 <div class="col-sm-10">
-                    <div class="radio">
+                    <div class="radio attr-front pos3">
                         <label>
                             <input type="radio" value="0"  name="wca_trenchcoat_chest_pocket"> No
                         </label>
@@ -252,13 +274,13 @@ $default_values=  json_encode($default_values);
                             <input type="radio" value="welt"  name="wca_trenchcoat_chest_pocket"> Welt
                         </label>
                         <label>
-                            <input type="radio" value="verical" name="wca_trenchcoat_chest_pocket" > Vertical
+                            <input type="radio" value="vertical" name="wca_trenchcoat_chest_pocket" > Vertical
                         </label>
                         <label>
                             <input type="radio" value="zipper" name="wca_trenchcoat_chest_pocket" > Zipper
                         </label>
                         <label>
-                            <input type="radio" value="patches" name="wca_trenchcoat_chest_pocket" > Patched
+                            <input type="radio" value="patched" name="wca_trenchcoat_chest_pocket" > Patched
                         </label>
                     </div>		      
                 </div>
@@ -266,15 +288,15 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Belt:</label>
                 <div class="col-sm-10">
-                    <div class="radio">
+                    <div class="radio  attr-back pos5">
                         <label>
                             <input type="radio" value="0"  name="wca_trenchcoat_belt" > No
                         </label>
                         <label>
-                            <input type="radio" value="sewing"  name="wca_trenchcoat_belt" > Sewed
+                            <input type="radio" value="sewing"  name="wca_trenchcoat_belt" id="trenchcoat_belt_sewing"> Sewed
                         </label>
                         <label>
-                            <input type="radio" value="loose" name="wca_trenchcoat_belt" > Loose
+                            <input type="radio" value="loose" name="wca_trenchcoat_belt" id="trenchcoat_belt_loose"> Loose
                         </label>
                     </div>		      
                 </div>
@@ -282,7 +304,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Back side:</label>
                 <div class="col-sm-10">
-                    <div class="radio pos1">
+                    <div class="radio  attr-back pos1">
                         <label>
                             <input type="radio" value="0" name="wca_trenchcoat_backcut" > Ventless
                         </label>
@@ -298,7 +320,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Sleeves:</label>
                 <div class="col-sm-10">
-                    <div class="radio">
+                    <div class="radio attr-front pos7">
                         <label>
                             <input type="radio" value="0" name="wca_trenchcoat_sleeve" > No
                         </label>
@@ -314,7 +336,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Epaulettes:</label>
                 <div class="col-sm-10">
-                    <div class="radio">
+                    <div class="radio attr-front pos6">
                         <label>
                             <input type="radio" value="0" name="wca_trenchcoat_shoulder" > No
                         </label>
@@ -327,7 +349,7 @@ $default_values=  json_encode($default_values);
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Back piece:</label>
                 <div class="col-sm-10">
-                    <div class="radio">
+                    <div class="radio attr-back bck_pos10">
                         <label>
                             <input type="radio" value="0" name="wca_trenchcoat_back_lapel" > No
                         </label>
