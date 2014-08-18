@@ -1,0 +1,155 @@
+<?php
+
+$attributes=array(
+                'wca_trenchcoat_style'=>array(
+                                           'simple'=>array(
+                                                     'price'=>'0'
+                                                     ),   
+                                            'crossed'=>array(
+                                                     'price'=>'10'
+                                                     ),   
+                                        ),
+                'wca_trenchcoat_length'=>array(
+                                           'long'=>array(
+                                                     'price'=>'0'
+                                                     ),   
+                                            'short'=>array(
+                                                     'price'=>'10'
+                                                     ),   
+                                        ),
+                'wca_trenchcoat_fit'=>array(
+                                           '1'=>array(
+                                                     'price'=>'0'
+                                                     ),   
+                                            '0'=>array(
+                                                     'price'=>'10'
+                                                     ),   
+                                        ),
+                'wca_trenchcoat_closure'=>array(
+                                           'zipper'=>array(
+                                                     'price'=>'0'
+                                                     ),   
+                                            'boton'=>array(
+                                                     'price'=>'12'
+                                                     ),   
+                                        ),
+                'wca_trenchcoat_closure_type_boton'=>array(
+                                                        'hide'=>array(
+                                                                  'price'=>'0'
+                                                                  ),   
+                                                         'standard'=>array(
+                                                                  'price'=>'12'
+                                                                  ),   
+                                                     ),
+               'wca_trenchcoat_pockets_type'=>array(
+                                                 '0'=>array(
+                                                          'price'=>'0'
+                                                          ),   
+                                                 '1'=>array(
+                                                          'price'=>'10'
+                                                          ),   
+                                                 '2'=>array(
+                                                          'price'=>'10'
+                                                          ),   
+                                                 '3'=>array(
+                                                          'price'=>'10'
+                                                          ),   
+                                                 '4'=>array(
+                                                          'price'=>'10'
+                                                          ),   
+                                                 '5'=>array(
+                                                          'price'=>'10'
+                                                          ),   
+                                                 '6'=>array(
+                                                          'price'=>'15'
+                                                          ),   
+                                                 '7'=>array(
+                                                          'price'=>'15'
+                                                          ),   
+                                             ),                         
+               'wca_trenchcoat_chest_pocket'=>array(
+                                                 '0'=>array(
+                                                          'price'=>'0'
+                                                          ),   
+                                                 'welt'=>array(
+                                                          'price'=>'5'
+                                                          ),   
+                                                 'vertical'=>array(
+                                                          'price'=>'5'
+                                                          ),   
+                                                 'zipper'=>array(
+                                                          'price'=>'5'
+                                                          ),   
+                                                 'patched'=>array(
+                                                          'price'=>'6'
+                                                          ),   
+                                             ), 
+             'wca_trenchcoat_belt'=>array(
+                                            '0'=>array(
+                                                      'price'=>'0'
+                                                      ),   
+                                             'sewing'=>array(
+                                                      'price'=>'5'
+                                                      ),   
+                                             'loose'=>array(
+                                                      'price'=>'10'
+                                                      ),   
+                                         ),                                   
+             'wca_trenchcoat_backcut'=>array(
+                                        '0'=>array(
+                                                  'price'=>'0'
+                                                  ),   
+                                         '1'=>array(
+                                                  'price'=>'1'
+                                                  ),   
+                                         '2'=>array(
+                                                  'price'=>'2'
+                                                  ),   
+                                         ),                                   
+             'wca_trenchcoat_sleeve'=>array(
+                                        '0'=>array(
+                                                  'price'=>'0'
+                                                  ),   
+                                         'tape'=>array(
+                                                  'price'=>'2'
+                                                  ),   
+                                         'button'=>array(
+                                                  'price'=>'2'
+                                                  ),   
+                                         ),                                   
+             'wca_trenchcoat_shoulder'=>array(
+                                        '0'=>array(
+                                                  'price'=>'0'
+                                                  ),   
+                                         '1'=>array(
+                                                  'price'=>'2'
+                                                  ),  
+                                         ),                                   
+             'wca_trenchcoat_back_lapel'=>array(
+                                        '0'=>array(
+                                                  'price'=>'0'
+                                                  ),   
+                                         '1'=>array(
+                                                  'price'=>'2'
+                                                  ),  
+                                         ),                                   
+    
+            );
+
+
+
+
+$attribute_price=array();
+
+foreach($attributes as $attr_slug=>$subattributes):
+     foreach($subattributes as $value=>$sub_data):
+             $k=$attr_slug.'**NIS**'.$value;
+             $attribute_price[$k]=$sub_data['price'];
+     endforeach;     
+endforeach;
+
+
+$atribute_slugs=array_keys($attributes);
+
+$atribute_slugs= json_encode($atribute_slugs);
+?>

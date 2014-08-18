@@ -89,3 +89,10 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 	add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
 
 }
+
+define('ABS_WCA', plugin_dir_path( __FILE__ ));   //absolute path of plugin
+define('wca_url', plugins_url('woocommerce-custom-attribute'));   //url of plugin
+define('wca_admin_asset_url', wca_url.'/admin/assets');   //url of plugin
+define('wca_admin_image_url', wca_url.'/admin/assets/images');   //url of plugin
+define('wca_asset_url', wca_url.'/assets');   //url of plugin
+define('wca_image_url', wca_url.'/assets/images');   //url of plugin

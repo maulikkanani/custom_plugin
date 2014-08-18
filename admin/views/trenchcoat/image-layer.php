@@ -50,7 +50,7 @@ jQuery(document).data({
                 <img style="z-index: 1500;">
             </div>        
             <div class="layer" pos="3">
-                <img  style="z-index: 1600;">
+                
             </div>
             <div class="layer" pos="4">
                 <img  style="z-index: 1700;">

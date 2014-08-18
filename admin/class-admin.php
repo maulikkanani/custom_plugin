@@ -288,7 +288,8 @@ class woocommerce_custom_attribute_admin {
      */
     public function rander_attributes($post) {
         global $post;
-        include_once( 'views/customize-attributes.php' );
+        $category='trenchcoat';                                         // Current category
+        include_once("views/$category/customize-attributes.php");
         /*
         // Add an nonce field so we can check for it later.
         wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
@@ -308,7 +309,8 @@ class woocommerce_custom_attribute_admin {
     
     public function rander_image_layers($post) {
          global $post;
-        include_once( 'views/image-layer.php' );
+         $category='trenchcoat';                                         // Current category
+        include_once( "views/$category/image-layer.php" );
         /*
         // Add an nonce field so we can check for it later.
         wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
