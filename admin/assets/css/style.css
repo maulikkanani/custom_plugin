@@ -335,6 +335,8 @@ label {
   font-size: 15px !important;
   padding-left: 30px  !important;
   float: left;
+  line-height: 19px !important;
+  margin: 0 !important;
 }
 .arrow_toggle:hover{
   background: url("../../assets/images/design/box_open.jpg") no-repeat 0 -22px;
@@ -428,7 +430,7 @@ label {
 }
 
 .boxpart_active,.box_part img:hover{
-    border-color:2px solid #008000 !important
+    border:2px solid #008000 !important
 }
 
 #customize_image_layer .inside{

@@ -132,7 +132,121 @@ $attributes=array(
                                          '1'=>array(
                                                   'price'=>'2'
                                                   ),  
-                                         ),                                   
+                                         ),
+                        'neck_lining'=>array(
+                                              '0'=>array(
+                                                       'price'=>'0'
+                                                       ),   
+                                              '1'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '2'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '3'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '4'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '5'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '6'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+
+                                          ),                               
+                       'elbow_patch'=>array(
+                                              '0'=>array(
+                                                       'price'=>'0'
+                                                       ),   
+                                              '1'=>array(
+                                                       'price'=>'12.95'
+                                                       ),   
+                                              '2'=>array(
+                                                       'price'=>'12.95'
+                                                       ),   
+                                              '3'=>array(
+                                                       'price'=>'12.95'
+                                                       ),   
+                                              '4'=>array(
+                                                       'price'=>'12.95'
+                                               ), 
+                                          ),  
+            'wca_buton_thread' =>array(
+                                              '0'=>array(
+                                                       'price'=>'0'
+                                                       ),   
+                                              '1'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '2'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '3'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '4'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '5'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '6'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '7'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '8'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '9'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '10'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+
+                                          ), 
+                'wca_buton_hole_thread' =>array(
+                                              '0'=>array(
+                                                       'price'=>'0'
+                                                       ),   
+                                              '1'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '2'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '3'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '4'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '5'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '6'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '7'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '8'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '9'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+                                              '10'=>array(
+                                                       'price'=>'3.50'
+                                                       ),   
+
+                                          ),                            
+                                                
     
             );
 
@@ -152,4 +266,35 @@ endforeach;
 $atribute_slugs=array_keys($attributes);
 
 $atribute_slugs= json_encode($atribute_slugs);
+
+
+
+$extra_relationship=array(
+    'wca_trenchcoat_neck_lapel'=>array(
+                                    'default'=>'0',                          // Default Value for item
+                                    'hidden_name'=>'neck_lining',            // hidden input name for item
+                                    'class'=>'neck_lining',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel  
+                                  ),
+    'wca_trenchcoat_elbow_patch'=>array(
+                                    'default'=>'0',                          // Default Value for item
+                                    'hidden_name'=>'elbow_patch',            // hidden input name for item
+                                    'class'=>'elbow_patch',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel  
+                                  ),
+    'wca_buton_thread'=>array(
+                                    'default'=>'2',                          // Default Value for item
+                                    'hidden_name'=>'wca_buton_thread',            // hidden input name for item
+                                    'class'=>'wca_buton_thread',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel  
+                                  ),
+    'wca_buton_hole_thread'=>array(
+                                    'default'=>'5',                          // Default Value for item
+                                    'hidden_name'=>'wca_buton_hole_thread',            // hidden input name for item
+                                    'class'=>'wca_buton_hole_thread',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel  
+                                  ),
+);
+
+$extra_relationship=json_encode($extra_relationship);
 ?>

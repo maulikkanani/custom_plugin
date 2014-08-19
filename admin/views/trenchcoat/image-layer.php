@@ -11,6 +11,7 @@ $category='trenchcoat';
 $fabric='813_fabric';
 ?>
 <script type="text/javascript">
+var cat_url='<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>';
 var image_front_url='<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/front';    
 var image_back_url='<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/back';    
 var button_url='<?php echo $plugins_url ?>/assets/images/3d/man/trenchcoat/botones';
@@ -32,7 +33,9 @@ jQuery(document).data({
   back_pos6:'<img src="" style="z-index: 1900;">',  
   back_pos7:'<img src="" style="z-index: 2600;">',  
   back_pos10:'<img src="" style="z-index: 2700;">',  
-  back_ref_pos10:'<img src="" style="z-index: 2750;">',  
+  back_pos11:'<img src="" style="z-index: 2750;">',  
+  back_pos12:'<img src="" style="z-index: 2760;">',  
+  back_pos13:'<img src="" style="z-index: 2770;">',  
 });
 </script>
 
@@ -88,13 +91,13 @@ jQuery(document).data({
                 <img src="" style="z-index: 1000;">
             </div>   
             <div class="layer" pos="2">
-                <img src="" style="z-index: 1500;">
+<!--                <img src="" style="z-index: 1500;">-->
             </div>        
             <div class="layer" pos="3">
-                <img src="" style="z-index: 1600;">
+<!--                <img src="" style="z-index: 1600;">-->
             </div>
             <div class="layer" pos="4">
-                <img src="" style="z-index: 1700;">
+<!--                <img src="" style="z-index: 1700;">-->
             </div> 
             <div class="layer" pos="5">
                  <img src="" style="z-index: 1800;">
@@ -103,7 +106,7 @@ jQuery(document).data({
                 <img src="" style="z-index: 1900;">
             </div>
              <div class="layer" pos="7">
-                <img src="" style="z-index: 2600;">
+                <!--<img src="" style="z-index: 2600;">-->
             </div>
             <div class="layer" pos="8"></div>
             <div class="layer" pos="9"></div>

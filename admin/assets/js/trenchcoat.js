@@ -59,38 +59,32 @@ jQuery(document).ready(function() {
     jQuery(document).on('click', '.pos1', function() {
         jQuery(document).trigger("set-pos-1");
         jQuery(document).trigger("set-pos-8");
-        jQuery(document).trigger("count_price");
+        
     });
 
     jQuery(document).on('click', '.pos2', function() {
         jQuery(document).trigger("set-pos-2");
-        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).on('click', '.pos3', function() {
         jQuery(document).trigger("set-pos-3");
-        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).on('click', '.pos5', function() {
         jQuery(document).trigger("set-pos-5");
-        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).on('click', '.pos6', function() {
         jQuery(document).trigger("set-pos-6");
-        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).on('click', '.pos7', function() {
         jQuery(document).trigger("set-pos-7");
-        jQuery(document).trigger("count_price");
     });
 
 
     jQuery(document).on('click', '.bck_pos10', function() {
         jQuery(document).trigger("back-pos-10");
-        jQuery(document).trigger("count_price");
     });
 
 
@@ -125,11 +119,13 @@ jQuery(document).ready(function() {
     jQuery(document).bind("front-show", function() {
         jQuery('.back').hide();
         jQuery('.front').show();
+        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).bind("back-show", function() {
         jQuery('.back').show();
         jQuery('.front').hide();
+        jQuery(document).trigger("count_price");
     });
 
 
@@ -265,6 +261,7 @@ jQuery(document).ready(function() {
                     jQuery('.back .layer[pos=7]').html(jQuery(document).data('pos5'));
                 }
                 jQuery('.back .layer[pos=7] img').attr('src', image_back_url + '/' + image_url);
+                jQuery('#thread_appy').hide();
             }
 
             if (jQuery('.front .layer[pos=7]').html() == '') {
@@ -276,6 +273,7 @@ jQuery(document).ready(function() {
                 var but_img = color + '_boton_sleeve.png';
                 jQuery('.ref_pos7').html(jQuery(document).data('ref_pos7'));
                 jQuery('.ref_pos7 img').attr('src', button_url + '/' + but_img);
+                jQuery('#thread_appy').show();
             } else {
                 jQuery('.ref_pos7').html('');
             }
@@ -284,10 +282,11 @@ jQuery(document).ready(function() {
             jQuery('.front .layer[pos=7]').html('');
             jQuery('.back .layer[pos=7]').html('');
             jQuery('.ref_pos7').html('');
+            jQuery('#thread_appy').hide();
 
         }
 
-
+        
 
     });
 
@@ -311,9 +310,6 @@ jQuery(document).ready(function() {
 
 
 
-
-
-
     jQuery(document).bind("back-pos-10", function() {
         var color = '1';
         var back_lapel = jQuery('input[name=wca_trenchcoat_back_lapel]:checked').val();
@@ -327,7 +323,7 @@ jQuery(document).ready(function() {
             jQuery('.back .layer[pos=10] img').attr('src', image_back_url + '/' + image_url);
 
             if (jQuery('.ref_pos_10').html() == '') {
-                jQuery('.ref_pos_10').html(jQuery(document).data('back_ref_pos10'));
+                jQuery('.ref_pos_10').html(jQuery(document).data('back_pos11'));
             }
 
             jQuery('.ref_pos_10 img').attr('src', button_url + '/' + button_img);
@@ -338,6 +334,7 @@ jQuery(document).ready(function() {
     });
 
 
+   // Start coding for change price
     jQuery(document).bind("count_price", function() {
         $prices=jQuery.parseJSON($price);
         var final_price=100;
@@ -348,9 +345,6 @@ jQuery(document).ready(function() {
         });
         jQuery('#_wca_extra_price').val(final_price);
     });
-
-
-
 
     function GetValue(selector) {
         var tag = "input";
@@ -364,7 +358,7 @@ jQuery(document).ready(function() {
 
         return $selector.val();
     }
-
+    // End coding for change price
 
     /**Bind triggers End**/
 
@@ -374,4 +368,93 @@ jQuery(document).ready(function() {
     //        jQuery(this).attr('src', replaced);
     //    });
     /*This is for change fabric :- End*/
+    
+    
+    
+    /*Start step 3 JS*/
+    
+    //Start for extra item click like neck and ellbow
+     jQuery(document).on('click', '.extra_item', function() {
+          $extra_name =jQuery(this).attr('name');         
+          jQuery(document).trigger('extra_items');
+     });
+    //END for extra item click like neck and ellbow
+    
+     jQuery(document).bind('extra_items',function(){
+            var tmp_data=$extra_relationship[$extra_name];
+            var rel_class='.'+tmp_data.class;       
+            var hidden_name=tmp_data.hidden_name; 
+            $extra_name=jQuery('input[name='+$extra_name+']:checked');
+            $extra_subattrs=jQuery(rel_class+' a img[data-rel='+tmp_data.first_rel+']');
+            $extra_subattrs_all=jQuery(rel_class+' img');
+            $extra_hidden=jQuery('input[name='+hidden_name+']');
+            $extra_default=tmp_data.default;   
+                
+            if($extra_name.val()!=0){
+                    $extra_subattrs_all.removeClass('boxpart_active');
+                    $extra_subattrs.addClass('boxpart_active');
+                    $extra_hidden.val(tmp_data.first_rel);
+            }else{
+                  $extra_hidden.val($extra_default)
+                  $extra_subattrs_all.removeClass('boxpart_active');
+            }
+            
+             jQuery(document).trigger('back-pos-12');
+             jQuery(document).trigger('back-pos-13');
+              jQuery(document).trigger('back-show');
+    });
+     
+    
+     jQuery(document).bind('back-pos-12',function(){
+         var img=jQuery('input[name=neck_lining]').val();
+         var img_url=cat_url+'/neck_lining/'+img+'.png';
+         if(img!=0){
+             if(jQuery('.back .layer[pos=12]').html()=='')
+                 jQuery('.back .layer[pos=12]').html(jQuery(document).data('back_pos12'));
+             
+             jQuery('.back .layer[pos=12] img').attr('src',img_url);
+         }else{
+             jQuery('.back .layer[pos=12]').html('');
+         }
+         
+     });
+     
+     
+     jQuery(document).bind('back-pos-13',function(){
+            var img=jQuery('input[name=elbow_patch]').val();
+            var img_url=cat_url+'/patches/'+img+'.png';
+            if(img!=0){
+                if(jQuery('.back .layer[pos=13]').html()=='')
+                    jQuery('.back .layer[pos=13]').html(jQuery(document).data('back_pos13'));
+
+                jQuery('.back .layer[pos=13] img').attr('src',img_url);
+            }else{
+                jQuery('.back .layer[pos=13]').html('');
+            }
+            
+     });
+     
+     
+     
+     
+     jQuery(document).bind('change-button-thread',function(){
+          var imagename=jQuery('input[name=wca_buton_thread]').val()+'.png';
+          var img_url=static_man_url+'/extras/hilos/'+imagename;
+          jQuery('.hilo').css('background','url('+img_url+')');
+     });
+     
+     jQuery(document).bind('change-button-hole-thread',function(){
+           var imagename=jQuery('input[name=wca_buton_hole_thread]').val()+'.png';
+           var img_url=static_man_url+'/extras/ojales/'+imagename;
+           jQuery('.ojal').css('background','url('+img_url+')');
+         
+     });
+    
+    /*END step 3 JS*/
+    
+    
+    
+    
+    
+    
 });
