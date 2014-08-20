@@ -28,7 +28,7 @@ $default_values = array(
     ),
     'wca_trenchcoat_closure'=>array(
         'name' => 'wca_trenchcoat_closure',
-        'value' => 'zipper'
+        'value' => 'boton'
     ),
     'wca_trenchcoat_closure_type_boton'=>array(
         'name' => 'wca_trenchcoat_closure_type_boton',
@@ -60,11 +60,11 @@ $default_values = array(
     ),
     'wca_trenchcoat_shoulder'=>array(
         'name' => 'wca_trenchcoat_shoulder',
-        'value' => '0'
+        'value' => '1'
     ),
     'wca_trenchcoat_back_lapel'=>array(
         'name' => 'wca_trenchcoat_back_lapel',
-        'value' => '0'
+        'value' => '1'
     ),
     'wca_trenchcoat_neck_lapel'=>array(
         'name' => 'wca_trenchcoat_neck_lapel',
@@ -122,7 +122,10 @@ var static_man_url='<?php echo $man_url ?>';
         $extra_relationship = jQuery.parseJSON('<?php echo $extra_relationship ?>');
         $attribute_lugs = '<?php echo $atribute_slugs ?>';
         $price = '<?php echo $price ?>';
-    
+        $embroidary_attributes = jQuery.parseJSON('<?php echo $embroidary_attributes ?>');
+        $embroidary_fonts=$embroidary_attributes.fonts;
+        $embroidary_color=$embroidary_attributes.color;
+        
     jQuery(document).ready(function() {
         jQuery("#tabs").tabs();
 
@@ -199,12 +202,10 @@ var static_man_url='<?php echo $man_url ?>';
                     jQuery('input[name='+key+'][value=1]').attr('checked','');
                     var value=jQuery(this).data('rel');
                     jQuery('input[name='+val.hidden_name+']').val(value);
-                    
                     jQuery(document).trigger('back-pos-12');
                     jQuery(document).trigger('back-pos-13');
                     jQuery(document).trigger('change-button-thread');
                     jQuery(document).trigger('change-button-hole-thread');
-                    jQuery(document).trigger('back-show');
                 });
         });
         

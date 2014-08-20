@@ -396,6 +396,47 @@ label {
   border: none !important;
 }
 
+
+/*added 8-19 by dharmesh*/
+
+.side_main_img{
+    background: url("../images/man/trenchcoat/initials/interior_coat.jpg") no-repeat;
+    float: left;
+    height: 179px;
+    margin-right: 30px;
+    width: 301px;
+}
+.side_radio{
+  float: left;
+} 
+.custom_bottom_part{
+  margin-top: 15px;  
+}
+.monogram_thread > div img{
+  width: 27px;
+  margin-right: 13px;
+}
+.main_font-seletor{
+  line-height: 25px;
+  margin-top: 5px;
+}
+.monogram_thread > div.active img{
+  border: 2px solid green;
+}
+.color_selecter.active{
+  position: relative;
+}
+.monogram_thread > div.active .active_arrow{
+  background: url("../images/man/ico_active.png") no-repeat left top;
+  display: block;
+  height: 14px;
+  left: 9px;
+  position: absolute;
+  top: 2px;
+  width: 13px;
+}
+
+
 /*---------------Added by mk Start-----------------------*/
 .pull-right {
     float: right !important;
@@ -438,5 +479,8 @@ label {
 }
 .form-group{
     clear: both !important; 
+}
+.text_uper{
+   margin:131px 0px 0px 77px
 }
 /*---------------Added by mk End-----------------------*/

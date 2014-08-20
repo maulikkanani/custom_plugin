@@ -37,22 +37,100 @@
         <h2 toggle="Add_Embroidery" class="arrow_toggle">Add Embroidery<span>(+9,95€)</span></h2>
         <a class="delete" href="#">Delete</a>
     </div>
+
+
+
+
     <div class="category_main_box clearfix Add_Embroidery">
-        <div class="clearfix">
-            <div class="radio">
+        <div class="side_main_img" style="background:url(<?php echo $man_url ?>/initials/interior_coat.jpg) no-repeat;">
+            <div class="text_uper"></div>
+        </div>
+        <div class="side_radio">
+            <label class="label_normal">Font</label>
+            <div class="main_font-seletor wca_embroidary_fonts">
                 <label>
-                    <input type="radio" value="" name="wca_trenchcoat_back_lapel" > Color by default
+                    <input type="radio" value="1" name="wca_trenchcoat_embroidery_fornt" data-rel="1"><img src="<?php echo $man_url ?>/initials/19.png">
                 </label>
                 <div class="clearfix"></div>
                 <label>
-                    <input type="radio" value="" name="wca_trenchcoat_back_lapel" > Custom color (+12,95€) 
+                    <input type="radio" value="2" name="wca_trenchcoat_embroidery_fornt" data-rel="2"> <img src="<?php echo $man_url ?>/initials/24.png"> 
+                </label>
+                <div class="clearfix"></div>
+                <label>
+                    <input type="radio" value="3" name="wca_trenchcoat_embroidery_fornt" data-rel="3"> <img src="<?php echo $man_url ?>/initials/74.png"> 
+                </label>
+                <div class="clearfix"></div>
+                <label>
+                    <input type="radio" value="4" name="wca_trenchcoat_embroidery_fornt" data-rel="4"> <img src="<?php echo $man_url ?>/initials/77.png"> 
                 </label>		       
             </div>		      
-        </div>
-        <div class="clearfix">
-            <a href="#"><img src="<?php echo $man_url ?>/forros_interior.jpg"></a>
         </div>	
-    </div>	
+        <div class="clearfix"></div>
+        <div class="custom_bottom_part">
+            <div class="text_type_part">
+                <label>Type Your Initials</label>
+                <input type="text" name="wca_embroidery_text" value=""  class="form-group">
+            </div>
+            <div class="clearfix"></div>
+            <label class="label_normal">Monogram Thread Color</label>
+            <div class="clearfix monogram_thread">
+                <input type="hidden" name="wca_embroidary_color" value="">
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <div class="active_arrow"></div>
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/9.jpg" data-rel="1">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">			
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/11.jpg" data-rel="2">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/12.jpg" data-rel="3">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/13.jpg" data-rel="4">
+                    </a>
+                </div>	
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/14.jpg" data-rel="5">
+                    </a>
+                </div>	
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/16.jpg" data-rel="6">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/17.jpg" data-rel="7">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/18.jpg" data-rel="8">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/19.jpg"  data-rel="9">
+                    </a>
+                </div>
+                <div class="color_selecter wca_embroidary_color" href="javascript:;">
+                    <a  class="box_color color_item" href="javascript:;">
+                        <img class="color" src="<?php echo $man_url ?>/extras/colors/25.jpg" data-rel="10">
+                    </a>
+                </div>														
+            </div>
+        </div> 
+    </div>
+    
+    
 </div>
 <div class="form-group">
     <div class="heading_main">
@@ -61,7 +139,7 @@
     </div>
     <div class="category_main_box clearfix Neck_Lining">
         <div class="clearfix">
-            <div class="radio">
+            <div class="radio attr-back">
                 <label>
                     <input type="radio" value="0" name="wca_trenchcoat_neck_lapel" class="extra_item"> Color by default
                 </label>
@@ -74,33 +152,33 @@
         <div class="clearfix">
             <input type="hidden" name="neck_lining" value="">
             <div href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="0" href="javascript:;" class="box_color color_item" layer="neck_lining">
+                <a img_index="0" href="javascript:;" class="box_color color_item" >
                     <div class="active"></div>
                     <img src="<?php echo $man_url ?>/neck_lining/1.jpg" class="color" data-rel="1" >
                 </a>
             </div>
             <div  href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="1" href="javascript:;" class="box_color color_item" layer="neck_lining">			
+                <a img_index="1" href="javascript:;" class="box_color color_item" >			
                     <img src="<?php echo $man_url ?>/neck_lining/2.jpg" class="color" data-rel="2" >
                 </a>
             </div>
             <div href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="2" href="javascript:;" class="box_color color_item" layer="neck_lining">
+                <a img_index="2" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/3.jpg" class="color" data-rel="3" >
                 </a>
             </div>
             <div href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="3" href="javascript:;" class="box_color color_item" layer="neck_lining">
+                <a img_index="3" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/4.jpg" class="color" data-rel="4" >
                 </a>
             </div>
             <div  href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="4" href="javascript:;" class="box_color color_item" layer="neck_lining">
+                <a img_index="4" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/5.jpg" class="color" data-rel="5" >
                 </a>
             </div>
             <div href="javascript:;" class="color_selecter neck_lining">
-                <a img_index="5" href="javascript:;" class="box_color color_item" layer="neck_lining">
+                <a img_index="5" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/6.jpg" class="color" data-rel="6" >
                 </a>
             </div>
@@ -114,7 +192,7 @@
     </div>
     <div class="category_main_box clearfix elbow_patches">
         <div class="clearfix">
-            <div class="radio">
+            <div class="radio attr-back">
                 <label>
                     <input type="radio" value="0" name="wca_trenchcoat_elbow_patch" class="extra_item"> No elbow patches 
                 </label>
@@ -175,7 +253,7 @@
             <div style="background: url(<?php echo $man_url ?>/extras/hilo_ojal/btn_1.png) no-repeat scroll left top" class="boton"></div>
             <div class="ojal" style="background: url(<?php echo $man_url ?>/extras/ojales/4.png)"></div>
         </div>
-        <div class="side_hoel_seletor">
+        <div class="side_hoel_seletor attr-front">
             <label class="label_normal">Button threads</label>
             <div class="clearfix">
                 <div href="javascript:;" class="color_selecter wca_buton_thread">

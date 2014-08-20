@@ -179,34 +179,34 @@ $attributes=array(
                                                        'price'=>'0'
                                                        ),   
                                               '1'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '2'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '3'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '4'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '5'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '6'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '7'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '8'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '9'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '10'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
 
                                           ), 
@@ -215,34 +215,34 @@ $attributes=array(
                                                        'price'=>'0'
                                                        ),   
                                               '1'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '2'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '3'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '4'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '5'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '6'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '7'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '8'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '9'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
                                               '10'=>array(
-                                                       'price'=>'3.50'
+                                                       'price'=>'1.75'
                                                        ),   
 
                                           ),                            
@@ -294,7 +294,37 @@ $extra_relationship=array(
                                     'class'=>'wca_buton_hole_thread',                    // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                      // First div rel  
                                   ),
+    
+    'wca_embroidary_color'=>array(
+                                    'default'=>'0',                          // Default Value for item
+                                    'hidden_name'=>'wca_embroidary_color',            // hidden input name for item
+                                    'class'=>'wca_embroidary_color',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel  
+                                  ),
 );
 
 $extra_relationship=json_encode($extra_relationship);
+
+
+$embroidary_attributes=array(
+    'fonts'=>array(
+                '1'=>'Arial',
+                '2'=>'Monotype Corsiva',
+                '3'=>'Times New Roman',
+                '4'=>'Rockwell',
+            ),
+    'color'=>array(
+        '1'=>'#ffcf10',
+        '2'=>'#022061',
+        '3'=>'#ffffff',
+        '4'=>'#a48239',
+        '5'=>'#4d020d',
+        '6'=>'#331b00',
+        '7'=>'#000000',
+        '8'=>'#b80e58',
+        '9'=>'#0ba133',
+        '10'=>'#c20000',
+    )
+);      
+$embroidary_attributes =  json_encode($embroidary_attributes);
 ?>
