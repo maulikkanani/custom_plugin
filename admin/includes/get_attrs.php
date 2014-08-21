@@ -133,6 +133,14 @@ $attributes=array(
                                                   'price'=>'2'
                                                   ),  
                                          ),
+               'wca_embroidery'=>array(
+                                        '0'=>array(
+                                                  'price'=>'0'
+                                                  ),   
+                                         '1'=>array(
+                                                  'price'=>'9.95'
+                                                  ),  
+                                         ),
                         'neck_lining'=>array(
                                               '0'=>array(
                                                        'price'=>'0'
@@ -274,32 +282,49 @@ $extra_relationship=array(
                                     'default'=>'0',                          // Default Value for item
                                     'hidden_name'=>'neck_lining',            // hidden input name for item
                                     'class'=>'neck_lining',                    // item image parent div class -> a -> img  
-                                    'first_rel'=>'1',                      // First div rel  
+                                    'first_rel'=>'1',                      // First div rel 
+                                    'main_div'=>'#main_neck_lapel'    
                                   ),
     'wca_trenchcoat_elbow_patch'=>array(
                                     'default'=>'0',                          // Default Value for item
                                     'hidden_name'=>'elbow_patch',            // hidden input name for item
                                     'class'=>'elbow_patch',                    // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                      // First div rel  
+                                    'main_div'=>'#main_elbow_patch'   
                                   ),
-    'wca_buton_thread'=>array(
-                                    'default'=>'2',                          // Default Value for item
+   'wca_buton_thread'=>array('default'=>'0',                          // Default Value for item
                                     'hidden_name'=>'wca_buton_thread',            // hidden input name for item
                                     'class'=>'wca_buton_thread',                    // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                      // First div rel  
-                                  ),
+                                    'main_div'=>'#main_buton_thread'   
+                            ),
     'wca_buton_hole_thread'=>array(
-                                    'default'=>'5',                          // Default Value for item
+                                    'default'=>'0',                          // Default Value for item
                                     'hidden_name'=>'wca_buton_hole_thread',            // hidden input name for item
                                     'class'=>'wca_buton_hole_thread',                    // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                      // First div rel  
+                                    'main_div'=>'#main_buton_thread'
                                   ),
-    
     'wca_embroidary_color'=>array(
                                     'default'=>'0',                          // Default Value for item
                                     'hidden_name'=>'wca_embroidary_color',            // hidden input name for item
                                     'class'=>'wca_embroidary_color',                    // item image parent div class -> a -> img  
-                                    'first_rel'=>'1',                      // First div rel  
+                                    'first_rel'=>'1',                      // First div rel
+                                    'main_div'=>'#main_embroidery'
+                                  ),
+    'wca_embroidery_text'=>array(
+                                    'default'=>'0',                          // Default Value for item
+                                    'hidden_name'=>'wca_embroidery_text',            // hidden input name for item
+                                    'class'=>'not_define',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel
+                                    'main_div'=>'#main_embroidery'
+                                  ),
+    'wca_trenchcoat_interior_type'=>array(
+                                    'default'=>'0',                          // Default Value for item
+                                    'hidden_name'=>'wca_trenchcoat_interior',            // hidden input name for item
+                                    'class'=>'wca_trenchcoat_interior',                    // item image parent div class -> a -> img  
+                                    'first_rel'=>'1',                      // First div rel
+                                    'main_div'=>'#main_interior'
                                   ),
 );
 
@@ -327,4 +352,11 @@ $embroidary_attributes=array(
     )
 );      
 $embroidary_attributes =  json_encode($embroidary_attributes);
+
+
+
+$extra_scritpt=array(
+    
+);
+
 ?>

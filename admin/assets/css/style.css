@@ -337,6 +337,10 @@ label {
   float: left;
   line-height: 19px !important;
   margin: 0 !important;
+  width: 98%;
+}
+.arrow_toggle a{
+    float: right;
 }
 .arrow_toggle:hover{
   background: url("../../assets/images/design/box_open.jpg") no-repeat 0 -22px;

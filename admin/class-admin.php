@@ -183,7 +183,7 @@ class woocommerce_custom_attribute_admin {
           $this->plugin_slug,
           array( $this, 'display_plugin_admin_page' )
           ); */
-        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'), 60);
+        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'));
 
 
 

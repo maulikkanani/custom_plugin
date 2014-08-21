@@ -58,7 +58,9 @@ $blank_image = $plugins_url . '/assets/images/blank.png';
                 <img style="z-index: 1500;">
             </div>        
             <!-- pos for front end chest pocket-->
-            <div class="layer" pos="3"></div>
+            <div class="layer" pos="3">
+                <img src="" style="z-index: 1500;">
+            </div>
             <!-- pos for not in use -->
             <div class="layer" pos="4">
                 <img  style="z-index: 1700;">
@@ -147,7 +149,9 @@ $blank_image = $plugins_url . '/assets/images/blank.png';
             </div>
 
             <!-- pos for back end sleev tape-->
-            <div class="layer" pos="7"></div>
+            <div class="layer" pos="7">
+                <img src="" style="z-index: 2600;">
+            </div>
 
             <!-- pos not in use  -->
             <div class="layer" pos="8"></div>
@@ -156,7 +160,9 @@ $blank_image = $plugins_url . '/assets/images/blank.png';
             <div class="layer" pos="9"></div>
 
             <!-- pos for back end back lable -->
-            <div class="layer" pos="10"></div>
+            <div class="layer" pos="10">
+                <img src="" style="z-index: 2700;">
+            </div>
 
 
             <!-- pos for back end back lable button-->
