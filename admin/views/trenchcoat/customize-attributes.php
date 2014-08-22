@@ -9,127 +9,16 @@ wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
 // Use get_post_meta to retrieve an existing value from the database.
 $value = get_post_meta($post->ID, '_my_meta_value_key', true);
-$plugins_url = plugins_url('woocommerce-custom-attribute');
+include ABS_WCA . 'admin/includes/get_attrs.php';
+$price = json_encode($attribute_price);                          // Array of default attribute price
+$attr_default_values = json_encode($default_values);               // Array of default attribute values     
 
-include_once ABS_WCA . 'admin/includes/get_attrs.php';
-
-$default_values = array(
-    'wca_trenchcoat_style' => array(
-        'name' => 'wca_trenchcoat_style',
-        'value' => 'simple'
-    ),
-    'wca_trenchcoat_length' => array(
-        'name' => 'wca_trenchcoat_length',
-        'value' => 'long'
-    ),
-    'wca_trenchcoat_fit' => array(
-        'name' => 'wca_trenchcoat_fit',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_closure' => array(
-        'name' => 'wca_trenchcoat_closure',
-        'value' => 'boton'
-    ),
-    'wca_trenchcoat_closure_type_boton' => array(
-        'name' => 'wca_trenchcoat_closure_type_boton',
-        'value' => 'standard'
-    ),
-    'wca_trenchcoat_pockets' => array(
-        'name' => 'wca_trenchcoat_pockets',
-        'value' => '3'
-    ),
-    'wca_trenchcoat_pockets_type' => array(
-        'name' => 'wca_trenchcoat_pockets_type',
-        'value' => '7'
-    ),
-    'wca_trenchcoat_chest_pocket' => array(
-        'name' => 'wca_trenchcoat_chest_pocket',
-        'value' => '0'
-    ),
-    'wca_trenchcoat_belt' => array(
-        'name' => 'wca_trenchcoat_belt',
-        'value' => 'sewing'
-    ),
-    'wca_trenchcoat_backcut' => array(
-        'name' => 'wca_trenchcoat_backcut',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_sleeve' => array(
-        'name' => 'wca_trenchcoat_sleeve',
-        'value' => 'button'
-    ),
-    'wca_trenchcoat_shoulder' => array(
-        'name' => 'wca_trenchcoat_shoulder',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_back_lapel' => array(
-        'name' => 'wca_trenchcoat_back_lapel',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_interior_type' => array(
-        'name' => 'wca_trenchcoat_interior_type',
-        'value' => '0'
-    ),
-    'wca_trenchcoat_interior' => array(
-        'name' => 'wca_trenchcoat_interior',
-        'value' => '0'
-    ),
-    'wca_trenchcoat_embroidery_font' => array(
-        'name' => 'wca_trenchcoat_embroidery_font',
-        'value' => '1'
-    ),
-    'wca_embroidary_color' => array(
-        'name' => 'wca_embroidary_color',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_neck_lapel' => array(
-        'name' => 'wca_trenchcoat_neck_lapel',
-        'value' => '1'
-    ),
-    'wca_trenchcoat_elbow_patch' => array(
-        'name' => 'wca_trenchcoat_elbow_patch',
-        'value' => '1'
-    ),
-    'neck_lining' => array(
-        'name' => 'neck_lining',
-        'value' => '4'
-    ),
-    'elbow_patch' => array(
-        'name' => 'elbow_patch',
-        'value' => '3'
-    ),
-    'wca_trenchcoat_btn_thread_apply' => array(
-        'value' => 'all'
-    ),
-    'wca_buton_thread' => array(
-        'value' => '5'
-    ),
-    'wca_buton_hole_thread' => array(
-        'value' => '7'
-    ),
-);
-
-
-
-$price = json_encode($attribute_price);                         // Array of default attribute price
-
-$default_values = json_encode($default_values);                // Array of default attribute values
-$category = 'trenchcoat';                                         // Current category
-$fabric = '813_fabric';                                           // Current fabric
-$image_category = wca_image_url . "/3d/man/$category";  // category image url
-$image_fabric_url = "$image_category/$fabric";                // category fabric image url
-$image_front_url = "$image_fabric_url/front";                // category image url for front side
-$image_back_url = "$image_fabric_url/back";                  // category image url for back side 
-// category image url for back side 
-$button_url = "$image_category/botones";                           // category image url for buttons
-$zipper_url = "$image_category/zipper";                            // category image url for zippers
-$man_url = wca_image_url . "/man/$category";
 ?>
 <div id="default_value" class="hide"></div>
 <script type="text/javascript">
     //define image url
-     var static_man_url = '<?php echo $man_url ?>';
-
+    var static_man_url = '<?php echo $man_url ?>';
+    $fabric='<?php echo $fabric ?>';
     $extra_relationship = jQuery.parseJSON('<?php echo $extra_relationship ?>');
     $attribute_lugs = '<?php echo $atribute_slugs ?>';
     $price = '<?php echo $price ?>';
@@ -151,7 +40,7 @@ $man_url = wca_image_url . "/man/$category";
         /* END:- step 3---> toggle h2   */ 
 
         /* Start:- function for selected attribute*/
-        var default_data = '<?php echo $default_values ?>';    // JSON of default values of attrybutes
+        var default_data = '<?php echo $attr_default_values ?>';    // JSON of default values of attrybutes
         var chk_array = [];
         chk_array.push('abc');
         chk_array.push('elbow_patch');
@@ -188,8 +77,9 @@ $man_url = wca_image_url . "/man/$category";
         jQuery(document).trigger("set-pos-6");
         jQuery(document).trigger("set-pos-7");
         jQuery(document).trigger("set-pos-8");
-        jQuery(document).trigger("set-pos-1");
-        jQuery(document).trigger("set-pos-1");
+        //jQuery(document).trigger("set-pos-1");
+        //jQuery(document).trigger("set-pos-1");
+        jQuery(document).trigger('set-fabric');
         jQuery(document).trigger("back-pos-10");
         jQuery(document).trigger("set-pos-2");
         jQuery(document).trigger('back-pos-12');

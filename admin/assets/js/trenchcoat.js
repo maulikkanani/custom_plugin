@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
         $main_sub_class.hide();
         $show_sub = jQuery('.' + jQuery(this).data('sh'));
         $show_sub.show();
-
     });
     /*End:- hide show pockets*/
     
@@ -221,11 +220,10 @@ jQuery(document).ready(function() {
 
     /*Start :- This is for a change Belt*/ 
     jQuery(document).bind("set-pos-5", function() {
-        var color = 1;
         var belt = jQuery('input[name=wca_trenchcoat_belt]:checked').val();
         var fit = jQuery('input[name=wca_trenchcoat_fit]:checked').val();
         var image_url = 'belt_' + belt + '_fit' + fit + '.png'
-        var btn_url = color + '_boton_belt_' + belt + '_fit' + fit + '.png';
+        var btn_url = 'boton_belt_' + belt + '_fit' + fit + '.png';
         if (belt != 0) {
             if (belt != 'sewing') {
                 jQuery('.front .layer[pos=5] img').attr('src', image_front_url + '/' + image_url);
@@ -237,9 +235,9 @@ jQuery(document).ready(function() {
             jQuery('.back .layer[pos=5] img').attr('src', image_back_url + '/' + image_url);
 
         } else {
-            jQuery('.front .layer[pos=5]').attr('src',blank_image);
-            jQuery('.back .layer[pos=5]').attr('src',blank_image);
-            jQuery('.back .layer[pos=6]').attr('src',blank_image);
+            jQuery('.front .layer[pos=5] img').attr('src',blank_image);
+            jQuery('.back .layer[pos=5] img').attr('src',blank_image);
+            jQuery('.back .layer[pos=6] img').attr('src',blank_image);
         }
 
         jQuery(document).trigger('change-button-thread');                // for buton thread
@@ -250,10 +248,9 @@ jQuery(document).ready(function() {
 
      /*Start :- This is for a change sholder tap*/ 
     jQuery(document).bind("set-pos-6", function() {
-        var color = '1';
         var shoulder = jQuery('input[name=wca_trenchcoat_shoulder]:checked').val();
         var front_image = 'shoulder.png';
-        var but_img = color + '_boton_shoulder_tape.png';
+        var but_img = 'boton_shoulder_tape.png';
         if (shoulder == 1) {
             jQuery('.front .layer[pos=6] img').attr('src', image_front_url + '/' + front_image);
             jQuery('.ref_pos6 img').attr('src', button_url + '/' + but_img);
@@ -268,7 +265,6 @@ jQuery(document).ready(function() {
     
     /*Start :- This is for a change sleev type*/ 
     jQuery(document).bind("set-pos-7", function() {
-        var color = '1';
         var sleev = jQuery('input[name=wca_trenchcoat_sleeve]:checked').val();
         var image_url = 'sleeve_' + sleev + '.png';
         if (sleev != 0) {
@@ -280,7 +276,7 @@ jQuery(document).ready(function() {
             }
             if (sleev == 'button') {
                 jQuery('.back .layer[pos=7] img').attr('src',blank_image);
-                var but_img = color + '_boton_sleeve.png';
+                var but_img ='boton_sleeve.png';
                 jQuery('.ref_pos7 img').attr('src', button_url + '/' + but_img);
                 jQuery('#thread_appy').show();
             } 
@@ -300,7 +296,6 @@ jQuery(document).ready(function() {
    
    /*Start:- This is for a change sleev type*/
     jQuery(document).bind("set-pos-8", function() {
-        var color = '1';
         var btn_style = jQuery('input[name=wca_trenchcoat_style]:checked').val();
         var closuer = jQuery('input[name=wca_trenchcoat_closure]:checked').val();
         var coat_legth = jQuery('input[name=wca_trenchcoat_length]:checked').val();
@@ -309,10 +304,10 @@ jQuery(document).ready(function() {
             clouser_type = jQuery('input[name=wca_trenchcoat_closure_type_boton]:checked').val();
         }
         if (closuer == 'boton') {
-            var but_img = color + '_boton_body_' + btn_style + '_boton_' + clouser_type + '.png';
+            var but_img = 'boton_body_' + btn_style + '_boton_' + clouser_type + '.png';
             jQuery('.front .layer[pos=8] img').attr('src', button_url + '/' + but_img);
         } else {
-            var but_img = 'mi_' + btn_style + '_zipper_' + clouser_type + '_' + coat_legth + '.png';
+            var but_img = btn_style + '_zipper_' + clouser_type + '_' + coat_legth + '.png';
             jQuery('.front .layer[pos=8] img').attr('src', zipper_url + '/' + but_img);
         }
         jQuery(document).trigger('change-button-thread');              // for buton thread
@@ -322,17 +317,15 @@ jQuery(document).ready(function() {
 
     /*Start:- This is for a change Back laple*/
     jQuery(document).bind("back-pos-10", function() {
-        var color = '1';
         var back_lapel = jQuery('input[name=wca_trenchcoat_back_lapel]:checked').val();
         var image_url = "back_lapel_1.png";
-        var button_img = color + "_boton_belt_back_lapel_1.png";
-
+        var button_img = "boton_belt_back_lapel_1.png";
         if (back_lapel == 1) {
             jQuery('.back .layer[pos=10] img').attr('src', image_back_url + '/' + image_url);
             jQuery('.ref_pos_10 img').attr('src', button_url + '/' + button_img);
         } else {
-            jQuery('.back .layer[pos=10] img').attr(blank_image);
-            jQuery('.ref_pos_10 img').attr(blank_image);
+            jQuery('.back .layer[pos=10] img').attr('src',blank_image);
+            jQuery('.ref_pos_10 img').attr('src',blank_image);
         }
         jQuery(document).trigger('change-button-thread');              // for buton thread
         jQuery(document).trigger('change-button-hole-thread');         // for buton hole thread
@@ -361,7 +354,6 @@ jQuery(document).ready(function() {
         if (tag == "input" && (type == "checkbox" || type == "radio")) {
             return $chkedselector.val();
         }
-
         return $selector.val();
     }
     
@@ -370,10 +362,62 @@ jQuery(document).ready(function() {
     /**Bind triggers End**/
 
     /*This is for change fabric :- Start*/
-    //    jQuery('.layer img').each(function() {
-    //        var replaced = jQuery(this).attr('src').replace('currnt_fabric', 'new_fabric');
-    //        jQuery(this).attr('src', replaced);
-    //    });
+    jQuery(document).on('click','.fabric_change',function(){
+        $new_fabric=jQuery(this).data('rel');
+        jQuery('input[name=wca_trenchcoat_fabric_type]').val($new_fabric);
+        jQuery(document).trigger('set-fabric');
+        jQuery(document).trigger('fabric_change');
+    });
+    
+    jQuery(document).bind('set-fabric',function(){
+        $new_fabric=jQuery('input[name=wca_trenchcoat_fabric_type]').val();
+        jQuery('.fabric_change .image').removeClass('fabric-active');
+        jQuery('.fabric_change[data-rel='+$new_fabric+'] .image').addClass('fabric-active');
+    });
+    
+    jQuery(document).bind('fabric_change',function(){
+         $old_fabric_dir='/fabric/'+$fabric+'/';         //OLD fabric
+         $new_fabric_dir='/fabric/'+$new_fabric+'/';     // New fabric
+         
+         $old_button_dir = '/botones/'+$buttons+'/';       //Old button 
+         $buttons = $fabric_data[$new_fabric].button;    //New button id 
+         $new_button_dir = '/botones/'+$buttons+'/';       // new button
+         
+         $old_zipper_dir ='/zipper/'+$zipper+'/';         // old zipper
+         $zipper = $fabric_data[$new_fabric].zipper;     // new zipper id
+         $new_zipper_dir ='/zipper/'+$zipper+'/';         // new zipper     
+         
+        jQuery('.layer img').each(function() {
+            var replace_fabric = jQuery(this).attr('src').replace($old_fabric_dir, $new_fabric_dir);
+            jQuery(this).attr('src', replace_fabric);
+            
+            var replace_button = jQuery(this).attr('src').replace($old_button_dir, $new_button_dir);
+            jQuery(this).attr('src', replace_button);
+            
+            var replace_zipper = jQuery(this).attr('src').replace($old_zipper_dir, $new_zipper_dir);
+            jQuery(this).attr('src', replace_zipper);
+       });
+       
+       jQuery('.fabric-background').each(function() {
+            var replaced = jQuery(this).css('background').replace($old_fabric_dir, $new_fabric_dir);
+            jQuery(this).css('background',replaced);
+       });
+       
+       jQuery('.boton-background').each(function() {
+            var replaced = jQuery(this).css('background').replace($old_button_dir, $new_button_dir);
+            jQuery(this).css('background',replaced);
+       });
+         
+         
+          $fabric=$new_fabric;
+         image_front_url = cat_url+'/fabric/'+$fabric+'/front';
+         image_back_url =  cat_url+'/fabric/'+$fabric+'/back';
+         button_url =      cat_url+'/botones/'+$buttons;
+         zipper_url =      cat_url+'/zipper/'+$zipper;
+         
+         jQuery(document).trigger("count_price");
+    });
+    
     /*This is for change fabric :- End*/
 
 
@@ -457,7 +501,8 @@ jQuery(document).ready(function() {
     jQuery(document).bind('change-button-thread', function() {
         var thread_id = jQuery('input[name=wca_buton_thread]').val();
         var imagename = thread_id + '.png';
-        var img_url = static_man_url + '/extras/hilos/' + imagename;
+        var hilo_imgs = cat_url + '/hilo/' + thread_id;
+        var img_url = hilo_imgs + '/hilo.png'
         jQuery('.hilo').css('background', 'url(' + img_url + ')');
         var sleev = jQuery('input[name=wca_trenchcoat_sleeve]:checked').val();            //butoon
         var belt = jQuery('input[name=wca_trenchcoat_belt]:checked').val();   //sewing
@@ -469,35 +514,35 @@ jQuery(document).ready(function() {
         var fit = jQuery('input[name=wca_trenchcoat_fit]:checked').val();
         var pos_closuer = jQuery('input[name=wca_trenchcoat_closure]:checked').val();
         var pos_clouser_type = jQuery('input[name=wca_trenchcoat_closure_type_boton]:checked').val();
-        var hilo_imgs = cat_url + '/hilo';
+        
 
         jQuery('.front .btn_hilo img').attr('src', blank_image);
         jQuery('.back .btn_hilo img').attr('src', blank_image);
 
         if (thread_id > 0) {
             if (sleev == 'button') {
-                var img = hilo_imgs + '/sleev/' + thread_id + '_sleeve.png';
+                var img = hilo_imgs + '/sleev.png';
                 jQuery('.front .btn_hilo .sleev').attr('src', img);
             }
 
             if (jQuery('input[name=wca_trenchcoat_btn_thread_apply]:checked').val() == 'all') {
                 if (back_lapel == 1) {
-                    var img = hilo_imgs + '/back_lapel/' + thread_id + '.png';
+                    var img = hilo_imgs + '/back_lapel.png';
                     jQuery('.back .btn_hilo .back_lapel').attr('src', img);
                 }
 
                 if (belt == 'sewing') {
-                    var img = hilo_imgs + '/belt/' + thread_id + '_sewing_fit' + fit + '.png';
+                    var img = hilo_imgs + '/belt_sewing_fit' + fit + '.png';
                     jQuery('.back .btn_hilo .belt').attr('src', img);
                 }
 
                 if (shoulder == 1) {
-                    var img = hilo_imgs + '/shoulder/' + thread_id + '.png';
+                    var img = hilo_imgs + '/shoulder.png';
                     jQuery('.front .btn_hilo .shoulder').attr('src', img);
                 }
 
                 if (pos_closuer == 'boton') {
-                    var img = hilo_imgs + '/body/' + thread_id + '_' + pos_style + '_boton_' + pos_clouser_type + '.png';
+                    var img = hilo_imgs + '/body_' + pos_style + '_boton_' + pos_clouser_type + '.png';
                     jQuery('.front .btn_hilo .body').attr('src', img);
                 }
             }
@@ -510,7 +555,8 @@ jQuery(document).ready(function() {
     jQuery(document).bind('change-button-hole-thread', function() {
         var thread_id = jQuery('input[name=wca_buton_hole_thread]').val();
         var imagename = thread_id + '.png';
-        var img_url = static_man_url + '/extras/ojales/' + imagename;
+        var ojal_imgs = cat_url + '/ojal/' + thread_id;
+        var img_url = ojal_imgs + '/ojal.png';
         jQuery('.ojal').css('background', 'url(' + img_url + ')');
 
         var sleev = jQuery('input[name=wca_trenchcoat_sleeve]:checked').val();         //butoon
@@ -525,28 +571,28 @@ jQuery(document).ready(function() {
         var pos_closuer = jQuery('input[name=wca_trenchcoat_closure]:checked').val();
         var pos_clouser_type = jQuery('input[name=wca_trenchcoat_closure_type_boton]:checked').val();
 
-        var ojal_imgs = cat_url + '/ojal';
+        
 
         jQuery('.front .btn_ojal img').attr('src', blank_image);
         jQuery('.back .btn_ojal img').attr('src', blank_image);
         if (thread_id > 0) {
             if (sleev == 'button') {
-                var img = ojal_imgs + '/sleev/' + thread_id + '_sleeve.png';
+                var img = ojal_imgs + '/sleev.png';
                 jQuery('.front .btn_ojal .sleev').attr('src', img);
             }
 
             if (jQuery('input[name=wca_trenchcoat_btn_thread_apply]:checked').val() == 'all') {
 
                 if (belt == 'sewing') {
-                    var img = ojal_imgs + '/belt/' + thread_id + '_sewing_fit' + fit + '.png';
+                    var img = ojal_imgs + '/belt_sewing_fit' + fit + '.png';
                     jQuery('.back .btn_ojal .belt').attr('src', img);
                 }
                 if (shoulder == 1) {
-                    var img = ojal_imgs + '/shoulder/' + thread_id + '.png';
+                    var img = ojal_imgs + '/shoulder.png';
                     jQuery('.front .btn_ojal .shoulder').attr('src', img);
                 }
                 if (pos_closuer == 'boton') {
-                    var img = ojal_imgs + '/body/' + thread_id + '_' + pos_style + '_boton_' + pos_clouser_type + '.png';
+                    var img = ojal_imgs + '/body_' + pos_style + '_boton_' + pos_clouser_type + '.png';
                     jQuery('.front .btn_ojal .body').attr('src', img);
                 }
             }

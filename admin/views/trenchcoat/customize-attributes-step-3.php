@@ -18,7 +18,7 @@
 <h3 class="main_titel_list">Custom Trench Coat / <span class="sub-titel">Step 3: Add your personal touch</span></h3><br>
 <div class="form-group" id="main_interior">
     <div class="heading_main">
-        <h2 toggle="Add_Interior" class="arrow_toggle">Customize Trench Coat Lining <span>(+12,95€)</span>
+        <h2 toggle="Add_Interior" class="arrow_toggle">Customize Trench Coat Lining <span>(+12,95)</span>
                     <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
@@ -42,7 +42,7 @@
 </div>
 <div class="form-group" id="main_embroidery">
     <div class="heading_main">
-        <h2 toggle="Add_Embroidery" class="arrow_toggle">Add Embroidery<span>(+9,95€)</span>
+        <h2 toggle="Add_Embroidery" class="arrow_toggle">Add Embroidery<span>(+9,95)</span>
                     <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
@@ -144,7 +144,7 @@
 </div>
 <div class="form-group" id="main_neck_lapel">
     <div class="heading_main">
-        <h2 toggle="Neck_Lining" class="arrow_toggle">Neck Lining<span>(+3,50€)</span>
+        <h2 toggle="Neck_Lining" class="arrow_toggle">Neck Lining<span>(+3,50)</span>
         <a class="delete" href="javascript:;">Delete</a></h2>
         
     </div>
@@ -156,7 +156,7 @@
                 </label>
                 <div class="clearfix"></div>
                 <label>
-                    <input type="radio" value="1" name="wca_trenchcoat_neck_lapel" class="extra_item"> Custom color (+3,50€) 
+                    <input type="radio" value="1" name="wca_trenchcoat_neck_lapel" class="extra_item"> Custom color (+3,50) 
                 </label>		       
             </div>		      
         </div>
@@ -198,7 +198,7 @@
 </div>
 <div class="form-group" id="main_elbow_patch">
     <div class="heading_main">
-        <h2 toggle="elbow_patches" class="arrow_toggle">Add elbow patches<span>(+12,95€)</span>
+        <h2 toggle="elbow_patches" class="arrow_toggle">Add elbow patches<span>(+12,95)</span>
         <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
     <div class="category_main_box clearfix elbow_patches">
@@ -209,7 +209,7 @@
                 </label>
                 <div class="clearfix"></div>
                 <label>
-                    <input type="radio" value="1" name="wca_trenchcoat_elbow_patch" class="extra_item"> Add elbow patches (+12,95€)  
+                    <input type="radio" value="1" name="wca_trenchcoat_elbow_patch" class="extra_item"> Add elbow patches (+12,95)  
                 </label>		       
             </div>		      
         </div>
@@ -241,7 +241,7 @@
 </div>
 <div class="form-group" id="main_buton_thread">
     <div class="heading_main">
-        <h2 toggle="button_holes" class="arrow_toggle">Add colored button holes / threads<span>(+3,50€)</span>
+        <h2 toggle="button_holes" class="arrow_toggle">Add colored button holes / threads<span>(+3,50)</span>
         <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
 
@@ -259,10 +259,10 @@
         <input type="hidden" value="0" name="wca_buton_thread">
         <input type="hidden" value="0" name="wca_buton_hole_thread">
         <div id="img_ojal_hilo">
-            <div style="background: url(<?php echo $image_fabric_url ?>/big.jpg) no-repeat left top" class="fabric"></div>
-            <div class="hilo" style="background: url(<?php echo $man_url ?>/extras/hilos/1.png)"></div>
-            <div style="background: url(<?php echo $man_url ?>/extras/hilo_ojal/btn_1.png) no-repeat scroll left top" class="boton"></div>
-            <div class="ojal" style="background: url(<?php echo $man_url ?>/extras/ojales/4.png)"></div>
+            <div style="background: url(<?php echo $image_fabric_url ?>/big.jpg) no-repeat left top" class="fabric fabric-background"></div>
+            <div class="hilo" style="background: url(<?php echo $image_category ?>/hilo/0/hilo.png)"></div>
+            <div style="background: url(<?php echo $button_url ?>/big.png) no-repeat scroll left top" class="boton boton-background"></div>
+            <div class="ojal" style="background: url(<?php echo $image_category ?>/ojal/0/ojal.png)"></div>
         </div>
         <div class="side_hoel_seletor attr-front">
             <label class="label_normal">Button threads</label>

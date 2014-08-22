@@ -6,39 +6,23 @@
 global $post;
 // Add an nonce field so we can check for it later.
 wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
-$plugins_url = plugins_url('woocommerce-custom-attribute');
-$category = 'trenchcoat';
-$fabric = '813_fabric';
-$blank_image = $plugins_url . '/assets/images/blank.png';
+
+// Use get_post_meta to retrieve an existing value from the database.
+$value = get_post_meta($post->ID, '_my_meta_value_key', true);
+include ABS_WCA . 'admin/includes/get_attrs.php';
 ?>
 <script type="text/javascript">
-    var blank_image = '<?php echo $blank_image ?>';
-    var cat_url = '<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>';
-    var image_front_url = '<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/front';
-    var image_back_url = '<?php echo $plugins_url ?>/assets/images/3d/man/<?php echo $category ?>/<?php echo $fabric ?>/back';
-    var button_url = '<?php echo $plugins_url ?>/assets/images/3d/man/trenchcoat/botones';
-    var zipper_url = '<?php echo $plugins_url ?>/assets/images/3d/man/trenchcoat/zipper';
-    var category = '<?php echo $category ?>';
-    var fabric = '<?php echo $fabric ?>';
-    jQuery(document).data({
-        pos2: '<img src="" style="z-index: 1600;">',
-        pos3: '<img src="" style="z-index: 1500;">',
-        pos4: '<img src="" style="z-index: 1700;">',
-        pos5: '<img src="" style="z-index: 1800;">',
-        pos6: '<img src="" style="z-index: 1850;">',
-        pos7: '<img src="" style="z-index: 1800;">',
-        ref_pos6: '<img src="" style="z-index: 2770;">',
-        ref_pos7: '<img src="" style="z-index: 2750;">',
-    });
-    jQuery(document).data({
-        back_pos5: '<img src="" style="z-index: 1800;">',
-        back_pos6: '<img src="" style="z-index: 1900;">',
-        back_pos7: '<img src="" style="z-index: 2600;">',
-        back_pos10: '<img src="" style="z-index: 2700;">',
-        back_pos11: '<img src="" style="z-index: 2750;">',
-        back_pos12: '<img src="" style="z-index: 2760;">',
-        back_pos13: '<img src="" style="z-index: 2770;">',
-    });
+    $fabric = '<?php echo $fabric ?>';
+    $fabric_data=jQuery.parseJSON('<?php echo $fabric_data ?>');
+    $buttons = $fabric_data[$fabric].button;
+    $zipper = $fabric_data[$fabric].zipper;
+    var blank_image =     '<?php echo $blank_image ?>';
+    var cat_url =         '<?php echo $image_category ?>';
+    var image_front_url = cat_url+'/fabric/'+$fabric+'/front';
+    var image_back_url =  cat_url+'/fabric/'+$fabric+'/back';
+    var button_url =      cat_url+'/botones/'+$buttons;
+    var zipper_url =      cat_url+'/zipper/'+$zipper;
+    var category =        '<?php echo $category ?>';
 </script>
 
 <div id="product_image">
@@ -63,7 +47,6 @@ $blank_image = $plugins_url . '/assets/images/blank.png';
             </div>
             <!-- pos for not in use -->
             <div class="layer" pos="4">
-                <img  style="z-index: 1700;">
             </div> 
             <!-- pos for front end belt-->
             <div class="layer" pos="5">

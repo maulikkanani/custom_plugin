@@ -440,6 +440,61 @@ label {
   width: 13px;
 }
 
+/*Added 8-21 by Dharmesh*/
+
+.preview_fabric_3d_common div.preview {
+    border-radius: 4px;
+    float: left;
+    height: 140px;
+    width: 100%;
+}
+.bottom_all_patten_main{
+  clear: both;
+  margin-top: 20px;
+  overflow: hidden;
+  width: 492px;
+}
+div.fabric_box_3d {
+    background: url("../images/design/box_fabric_title.png") no-repeat center bottom;
+    float: left;
+    height: 111px;
+    margin: 0 7px 4px 6px;
+    overflow: hidden;
+    width: 110px;
+}
+div.fabric_box_3d div.image{
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  border-color: white white -moz-use-text-color;
+  border-image: none;
+  border-radius: 9px 9px 0 0;
+  border-style: solid solid none;
+  border-width: 2px 2px medium;
+  margin-top: 3px;
+  position: relative;
+}
+div.fabric_box_3d div.image a {
+    display: block;
+    height: 74px;
+    width: 106px;
+}
+.detail_of_fabric a{
+  font-size: 12px;
+  padding-left: 5px;
+  text-decoration: none;
+}
+.detail_of_fabric span{
+   float: right;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+.category_main_box{
+   margin-bottom: 25px;
+}
+
 
 /*---------------Added by mk Start-----------------------*/
 .pull-right {
@@ -486,5 +541,11 @@ label {
 }
 .text_uper{
    margin:131px 0px 0px 77px
+}
+.fabric-active{
+    border-color:red;
+}
+.detail_of_fabric a{
+    font-size: 10px;
 }
 /*---------------Added by mk End-----------------------*/
