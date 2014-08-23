@@ -22,6 +22,9 @@ $attr_default_values = json_encode($default_values);               // Array of d
     $extra_relationship = jQuery.parseJSON('<?php echo $extra_relationship ?>');
     $attribute_lugs = '<?php echo $atribute_slugs ?>';
     $price = '<?php echo $price ?>';
+    
+    $extra_linings = jQuery.parseJSON('<?php echo $extra_linings ?>');
+    
     $embroidary_attributes = jQuery.parseJSON('<?php echo $embroidary_attributes ?>');
     $embroidary_fonts = $embroidary_attributes.fonts;
     $embroidary_color = $embroidary_attributes.color;
@@ -80,6 +83,7 @@ $attr_default_values = json_encode($default_values);               // Array of d
         //jQuery(document).trigger("set-pos-1");
         //jQuery(document).trigger("set-pos-1");
         jQuery(document).trigger('set-fabric');
+        jQuery(document).trigger('extra-linings');
         jQuery(document).trigger("back-pos-10");
         jQuery(document).trigger("set-pos-2");
         jQuery(document).trigger('back-pos-12');
@@ -89,7 +93,7 @@ $attr_default_values = json_encode($default_values);               // Array of d
         /* End:- Triggers for initialt create a image as per selcted attributes*/
 
         /* Start for count price*/
-        $price.base_price = 100;
+        //$price.base_price = 100;
         jQuery(document).trigger("count_price");
         /* End for count price*/
 

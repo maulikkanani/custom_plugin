@@ -22,6 +22,7 @@ include ABS_WCA . 'admin/includes/get_attrs.php';
     var image_back_url =  cat_url+'/fabric/'+$fabric+'/back';
     var button_url =      cat_url+'/botones/'+$buttons;
     var zipper_url =      cat_url+'/zipper/'+$zipper;
+    var linig_url =       cat_url+'/linings';
     var category =        '<?php echo $category ?>';
 </script>
 
@@ -46,7 +47,10 @@ include ABS_WCA . 'admin/includes/get_attrs.php';
                 <img src="" style="z-index: 1500;">
             </div>
             <!-- pos for not in use -->
-            <div class="layer" pos="4">
+            <div class="layer all_lining_imgs" pos="4">
+                <img class="fabric_lining_img" src="<?php echo $blank_image ?>" style="z-index: 3000;">
+                <img class="lining_img"src="<?php echo $blank_image ?>" style="z-index: 3010;">
+                <img class="lining_base" src="<?php echo $blank_image ?>" style="z-index: 3020;">
             </div> 
             <!-- pos for front end belt-->
             <div class="layer" pos="5">

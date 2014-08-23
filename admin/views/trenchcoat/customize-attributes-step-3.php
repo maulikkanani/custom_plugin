@@ -19,31 +19,59 @@
 <div class="form-group" id="main_interior">
     <div class="heading_main">
         <h2 toggle="Add_Interior" class="arrow_toggle">Customize Trench Coat Lining <span>(+12,95)</span>
-                    <a class="delete" href="javascript:;">Delete</a>
+            <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
     <div class="category_main_box clearfix Add_Interior">
-    <div class="clearfix">
-        <div class="radio">
-            <label>
-                <input type="radio" value="0" name="wca_trenchcoat_interior_type" > Color by default
-            </label>
-            <div class="clearfix"></div>
-            <label>
-                <input type="radio" value="1" name="wca_trenchcoat_interior_type" > Custom color (+12,95) 
-            </label>		       
-        </div>		      
+        <div class="clearfix">
+            <div class="radio">
+                <label>
+                    <input type="radio" value="0" name="wca_trenchcoat_interior_type" class="linings"> Color by default
+                </label>
+                <div class="clearfix"></div>
+                <label>
+                    <input type="radio" value="1" name="wca_trenchcoat_interior_type" class="linings"> Custom color (+12,95) 
+                </label>		       
+            </div>		      
+        </div>
+
+        <a href="#"><img src="<?php echo $man_url ?>/forros_interior.jpg"></a>
+        <div id="interriors" style="display:none"> 
+            <input type="hidden" name="wca_trenchcoat_interior" value="">
+            <div class="preview_fabric_3d_common">
+                <div class="preview fabric-background" style="background: url(<?php echo $image_category . '/linings/' . $lining_fabric ?>/big.jpg) no-repeat scroll right top transparent;"> </div>
+            </div>
+            <div class="bottom_all_patten_main">
+                <?php
+                if (is_array($lining_fabrics)):
+                    foreach ($lining_fabrics as $fabric_id => $fabic_single):
+                        ?>
+                        <div class="fabric_box_3d lining_change" data-rel="<?php echo $fabric_id ?>">
+                            <div class="image trenchcoat_lining" style="background: url(<?php echo $image_category . '/linings/' . $lining_fabric ?>/thumb.jpg) top center no-repeat;">
+                                <a href="javascript:;"></a>
+                            </div> 
+                            <div class="detail_of_fabric">
+                                <a href="#"><?php echo $fabic_single['titel'] ?></a>
+                                <span class="price"><?php echo $fabic_single['price'] ?></span>
+                            </div>                                       
+                        </div>
+                    <?php
+                    endforeach;
+                endif;
+                ?>
+            </div>
+        </div>
     </div>
-        <input type="hidden" name="wca_trenchcoat_interior" value="">
-            <a href="#"><img src="<?php echo $man_url ?>/forros_interior.jpg"></a>
-    </div>  
+
+
 </div>
 <div class="form-group">
 </div>
+
 <div class="form-group" id="main_embroidery">
     <div class="heading_main">
         <h2 toggle="Add_Embroidery" class="arrow_toggle">Add Embroidery<span>(+9,95)</span>
-                    <a class="delete" href="javascript:;">Delete</a>
+            <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
 
@@ -139,14 +167,14 @@
             </div>
         </div> 
     </div>
-    
-    
+
+
 </div>
 <div class="form-group" id="main_neck_lapel">
     <div class="heading_main">
         <h2 toggle="Neck_Lining" class="arrow_toggle">Neck Lining<span>(+3,50)</span>
-        <a class="delete" href="javascript:;">Delete</a></h2>
-        
+            <a class="delete" href="javascript:;">Delete</a></h2>
+
     </div>
     <div class="category_main_box clearfix Neck_Lining">
         <div class="clearfix">
@@ -199,7 +227,7 @@
 <div class="form-group" id="main_elbow_patch">
     <div class="heading_main">
         <h2 toggle="elbow_patches" class="arrow_toggle">Add elbow patches<span>(+12,95)</span>
-        <a class="delete" href="javascript:;">Delete</a></h2>
+            <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
     <div class="category_main_box clearfix elbow_patches">
         <div class="clearfix">
@@ -242,7 +270,7 @@
 <div class="form-group" id="main_buton_thread">
     <div class="heading_main">
         <h2 toggle="button_holes" class="arrow_toggle">Add colored button holes / threads<span>(+3,50)</span>
-        <a class="delete" href="javascript:;">Delete</a></h2>
+            <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
 
     <div class="category_main_box clearfix button_holes">
@@ -253,7 +281,7 @@
             </label>
             <label>
                 <input name="wca_trenchcoat_btn_thread_apply" value="cuff"  type="radio">
-                 Cuffs only
+                Cuffs only
             </label>
         </div>
         <input type="hidden" value="0" name="wca_buton_thread">

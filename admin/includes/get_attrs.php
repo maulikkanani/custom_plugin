@@ -3,91 +3,69 @@
 /*Start:- array for default value of each attribute*/
 $default_values = array(
     'wca_trenchcoat_style' => array(
-        'name' => 'wca_trenchcoat_style',
         'value' => 'simple'
     ),
     'wca_trenchcoat_length' => array(
-        'name' => 'wca_trenchcoat_length',
         'value' => 'long'
     ),
     'wca_trenchcoat_fit' => array(
-        'name' => 'wca_trenchcoat_fit',
         'value' => '1'
     ),
     'wca_trenchcoat_closure' => array(
-        'name' => 'wca_trenchcoat_closure',
         'value' => 'boton'
     ),
     'wca_trenchcoat_closure_type_boton' => array(
-        'name' => 'wca_trenchcoat_closure_type_boton',
         'value' => 'standard'
     ),
     'wca_trenchcoat_pockets' => array(
-        'name' => 'wca_trenchcoat_pockets',
         'value' => '3'
     ),
     'wca_trenchcoat_pockets_type' => array(
-        'name' => 'wca_trenchcoat_pockets_type',
         'value' => '7'
     ),
     'wca_trenchcoat_chest_pocket' => array(
-        'name' => 'wca_trenchcoat_chest_pocket',
         'value' => '0'
     ),
     'wca_trenchcoat_belt' => array(
-        'name' => 'wca_trenchcoat_belt',
         'value' => 'sewing'
     ),
     'wca_trenchcoat_backcut' => array(
-        'name' => 'wca_trenchcoat_backcut',
         'value' => '1'
     ),
     'wca_trenchcoat_sleeve' => array(
-        'name' => 'wca_trenchcoat_sleeve',
         'value' => 'button'
     ),
     'wca_trenchcoat_shoulder' => array(
-        'name' => 'wca_trenchcoat_shoulder',
         'value' => '1'
     ),
     'wca_trenchcoat_back_lapel' => array(
-        'name' => 'wca_trenchcoat_back_lapel',
         'value' => '1'
     ),
     'wca_trenchcoat_fabric_type' => array(
-        'name' => 'wca_trenchcoat_fabric_type',
         'value' => '1'
     ),
     'wca_trenchcoat_interior_type' => array(
-        'name' => 'wca_trenchcoat_interior_type',
         'value' => '0'
     ),
     'wca_trenchcoat_interior' => array(
-        'name' => 'wca_trenchcoat_interior',
         'value' => '0'
     ),
     'wca_trenchcoat_embroidery_font' => array(
-        'name' => 'wca_trenchcoat_embroidery_font',
         'value' => '1'
     ),
     'wca_embroidary_color' => array(
-        'name' => 'wca_embroidary_color',
         'value' => '1'
     ),
     'wca_trenchcoat_neck_lapel' => array(
-        'name' => 'wca_trenchcoat_neck_lapel',
         'value' => '1'
     ),
     'wca_trenchcoat_elbow_patch' => array(
-        'name' => 'wca_trenchcoat_elbow_patch',
         'value' => '1'
     ),
     'neck_lining' => array(
-        'name' => 'neck_lining',
         'value' => '4'
     ),
     'elbow_patch' => array(
-        'name' => 'elbow_patch',
         'value' => '3'
     ),
     'wca_trenchcoat_btn_thread_apply' => array(
@@ -382,29 +360,108 @@ $attributes=array(
                                                        'price'=>'1.75'
                                                        ),   
 
-                                          ),                            
-                                                
-    
+                                          ),     
             );
 
+/* END :- array for set price of all attributes */
 
-
-
+/*Start:- Craetea a arry for calculation of price in js of each attributes*/
 $attribute_price=array();
-
 foreach($attributes as $attr_slug=>$subattributes):
+    if(is_array($subattributes)):
+     $attribute_price['base_price']=0;      // For bacse price of the product 
      foreach($subattributes as $value=>$sub_data):
              $k=$attr_slug.'**NIS**'.$value;
              $attribute_price[$k]=$sub_data['price'];
-     endforeach;     
+     endforeach; 
+   endif;
 endforeach;
+/*END:- Craetea a arry for calculation of price in js of each attributes*/
 
-
+/*Start:- Array for get attribute key in price calulation*/
 $atribute_slugs=array_keys($attributes);
 
 $atribute_slugs= json_encode($atribute_slugs);
+/*End :-  Array for get attribute key in price calulation*/
 
-/* END :- array for set price of all attributes */
+
+/*start:- array for facric related butoons and zippers */
+$all_fabric_data=array(
+             '1'=>array(
+                    'button'=>'1',
+                    'zipper'=>'1',
+                    'titel'=>'Elandia',
+                    'price'=>'217',
+                    'lining'=>'1',
+                    ),   
+             '2'=>array(
+                    'button'=>'2',
+                    'zipper'=>'2',
+                    'titel'=>'Newport',
+                    'price'=>'218',
+                    'lining'=>'1',
+                    ),   
+             '3'=>array(
+                    'button'=>'4',
+                    'zipper'=>'3',
+                    'titel'=>'Seeland',
+                    'price'=>'219',
+                    'lining'=>'1',
+                    ),   
+             '4'=>array(
+                    'button'=>'3',
+                    'zipper'=>'1',
+                    'titel'=>'Izaro',
+                    'price'=>'220',
+                    'lining'=>'1',
+                    ),   
+             '5'=>array(
+                    'button'=>'4',
+                    'zipper'=>'1',
+                    'titel'=>'Newington',
+                    'price'=>'221',
+                    'lining'=>'1',
+                    ),   
+             '6'=>array(
+                    'button'=>'3',
+                    'zipper'=>'1',
+                    'titel'=>'Bloomsbury',
+                    'price'=>'222',
+                    'lining'=>'1',
+                    ),   
+             '7'=>array(
+                    'button'=>'4',
+                    'zipper'=>'1',
+                    'titel'=>'Lambeth',
+                    'price'=>'223',
+                    'lining'=>'1',
+                    ),   
+             '8'=>array(
+                    'button'=>'2',
+                    'zipper'=>'1',
+                    'titel'=>'Clapham',
+                    'price'=>'224',
+                    'lining'=>'1',
+                    ),   
+    
+                  );
+
+$fabric_data=json_encode($all_fabric_data);
+/*End:- array for facric related butoons and zippers */
+
+
+$all_extra_linings=array(
+           '1'=>array(                                              //This ia a key for fabric ids
+                 '1'=>array(                                        //This ia a key for fabric's lining ids
+                      'titel'=>'Beauvans',  // tile of lining fabric               
+                      'price'=>'19.95',    // price of lining fabric
+                      'color'=>'red',       // color of lining fabric
+                      'pattern'=>'squared', // pattern of lining fabric  
+                     ), 
+                ), 
+);
+
+$extra_linings=json_encode($all_extra_linings); 
 
 
 /* Start :- Array for ste3 configration patch, nech, button thread& hole thread and embroidery */
@@ -486,62 +543,6 @@ $embroidary_attributes=array(
 $embroidary_attributes =  json_encode($embroidary_attributes);
 /*End :- Array for ste3 configration embroidery  fonts and colors*/
 
-/*start:- array for facric related butoons and zippers */
-$all_fabric_data=array(
-             '1'=>array(
-                    'button'=>'1',
-                    'zipper'=>'1',
-                    'titel'=>'Elandia',
-                    'price'=>'217',
-                    ),   
-             '2'=>array(
-                    'button'=>'2',
-                    'zipper'=>'2',
-                    'titel'=>'Newport',
-                    'price'=>'218',
-                    ),   
-             '3'=>array(
-                    'button'=>'4',
-                    'zipper'=>'3',
-                    'titel'=>'Seeland',
-                    'price'=>'219',
-                    ),   
-             '4'=>array(
-                    'button'=>'3',
-                    'zipper'=>'1',
-                    'titel'=>'Izaro',
-                    'price'=>'220',
-                    ),   
-             '5'=>array(
-                    'button'=>'4',
-                    'zipper'=>'1',
-                    'titel'=>'Newington',
-                    'price'=>'221',
-                    ),   
-             '6'=>array(
-                    'button'=>'3',
-                    'zipper'=>'1',
-                    'titel'=>'Bloomsbury',
-                    'price'=>'222',
-                    ),   
-             '7'=>array(
-                    'button'=>'4',
-                    'zipper'=>'1',
-                    'titel'=>'Lambeth',
-                    'price'=>'223',
-                    ),   
-             '8'=>array(
-                    'button'=>'2',
-                    'zipper'=>'1',
-                    'titel'=>'Clapham',
-                    'price'=>'224',
-                    ),   
-    
-                  );
-
-$fabric_data=json_encode($all_fabric_data);
-/*End:- array for facric related butoons and zippers */
-
 
 
 
@@ -557,6 +558,10 @@ $image_front_url = "$image_fabric_url/front";                    // category ima
 $image_back_url = "$image_fabric_url/back";                      // category image url for back side 
 $button_url = "$image_category/botones/$button";                 // category image url for buttons
 $zipper_url = "$image_category/zipper/$zipper";                  // category image url for zippers
-$man_url = wca_image_url . "/man/$category";
-$blank_image = $plugins_url . '/assets/images/blank.png';
+$man_url = wca_image_url . "/man/$category";                     // category image url for satatic man       
+$blank_image = $plugins_url . '/assets/images/blank.png';        // image url for Blankk image   
+
+$lining_fabrics=$all_extra_linings[$fabric];
+$lining_fabric=1;
+
 ?>

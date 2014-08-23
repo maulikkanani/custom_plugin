@@ -273,6 +273,7 @@ jQuery(document).ready(function() {
                 jQuery('.ref_pos7 img').attr('src',blank_image);
                 jQuery('.back .layer[pos=7] img').attr('src', image_back_url + '/' + image_url);
                 jQuery('#thread_appy').hide();
+                jQuery('input[name=wca_trenchcoat_btn_thread_apply]').removeAttr('checked','');
             }
             if (sleev == 'button') {
                 jQuery('.back .layer[pos=7] img').attr('src',blank_image);
@@ -281,6 +282,7 @@ jQuery(document).ready(function() {
                 jQuery('#thread_appy').show();
             } 
         } else {
+             jQuery('input[name=wca_trenchcoat_btn_thread_apply]').removeAttr('checked','');
             jQuery('.front .layer[pos=7] img').attr('src',blank_image);
             jQuery('.back .layer[pos=7] img').attr('src',blank_image);
             jQuery('.ref_pos7 img').attr('src',blank_image);
@@ -336,7 +338,7 @@ jQuery(document).ready(function() {
     /* Start coding for change price */
     jQuery(document).bind("count_price", function() {
         $prices = jQuery.parseJSON($price);
-        var final_price = 100;
+        var final_price = $prices.base_price;
         jQuery.each(jQuery.parseJSON($attribute_lugs), function(key, val) {
             var selector = GetValue(val);
             var temp = val + '**NIS**' + selector;
@@ -344,18 +346,20 @@ jQuery(document).ready(function() {
         });
         jQuery('#_wca_extra_price').val(final_price);
     });
+    
+        /*Start:- Fuinction for get value ouf attributes*/ 
+           function GetValue(selector) {
+               var tag = "input";
+               $selector = jQuery('input[name=' + selector + ']');
+               $chkedselector = jQuery('input[name=' + selector + ']:checked');
+               var type = $selector.attr("type");
 
-    function GetValue(selector) {
-        var tag = "input";
-        $selector = jQuery('input[name=' + selector + ']');
-        $chkedselector = jQuery('input[name=' + selector + ']:checked');
-        var type = $selector.attr("type");
-
-        if (tag == "input" && (type == "checkbox" || type == "radio")) {
-            return $chkedselector.val();
-        }
-        return $selector.val();
-    }
+               if (tag == "input" && (type == "checkbox" || type == "radio")) {
+                   return $chkedselector.val();
+               }
+               return $selector.val();
+           }
+         /*End:- Fuinction for get value ouf attributes*/  
     
     /*  End coding for change price  */
 
@@ -399,12 +403,12 @@ jQuery(document).ready(function() {
        });
        
        jQuery('.fabric-background').each(function() {
-            var replaced = jQuery(this).css('background').replace($old_fabric_dir, $new_fabric_dir);
+            var replaced = jQuery(this).css('background-image').replace($old_fabric_dir, $new_fabric_dir);
             jQuery(this).css('background',replaced);
        });
        
        jQuery('.boton-background').each(function() {
-            var replaced = jQuery(this).css('background').replace($old_button_dir, $new_button_dir);
+            var replaced = jQuery(this).css('background-image').replace($old_button_dir, $new_button_dir);
             jQuery(this).css('background',replaced);
        });
          
@@ -425,6 +429,11 @@ jQuery(document).ready(function() {
     /*Start step 3 JS*/
 
     //Start for extra item click like neck and ellbow
+    jQuery(document).on('click', '.linings', function() {
+        jQuery(document).trigger('extra-linings');
+    });
+    
+    
     jQuery(document).on('click', '.extra_item', function() {
         $extra_name = jQuery(this).attr('name');
         jQuery(document).trigger('extra_items');
@@ -442,7 +451,40 @@ jQuery(document).ready(function() {
         jQuery(document).trigger('embroidery_set');
     });
 
-    //END for extra item click like neck and ellbow
+    //end: for extra item click like neck and ellbow
+    
+     /* Start:- Start for extra linig */
+    jQuery(document).bind('extra-linings',function(){
+            var trenchcoat_interior_type=jQuery('input[name=wca_trenchcoat_interior_type]:checked').val();
+            if(trenchcoat_interior_type > 0){
+                 jQuery('#interriors').show();
+                 var tmp_linig= $fabric_data[$fabric].lining;  
+                 jQuery('input[name=wca_trenchcoat_interior]').val(tmp_linig);
+            }else{
+                 jQuery('#interriors').hide();
+                 jQuery('input[name=wca_trenchcoat_interior]').val(0);
+            }
+            
+             jQuery(document).trigger('extra-linings-images');
+    });
+    
+    jQuery(document).bind('extra-linings-images',function(){
+       var trenchcoat_interior=jQuery('input[name=wca_trenchcoat_interior]').val();
+       jQuery('.lining_change .image').removeClass('fabric-active');
+       jQuery('.lining_change[data-rel='+trenchcoat_interior+'] .image').addClass('fabric-active');
+       if(trenchcoat_interior>0){
+           var fabric_lining_img= image_front_url+'/lupa_forro.png';
+           var lining_img=linig_url+'/'+trenchcoat_interior+'/linings.png';
+           var lining_base=linig_url+'/superior.png'
+       }else{
+            fabric_lining_img=lining_img=lining_base=blank_image;
+       }
+        jQuery('.fabric_lining_img').attr('src',fabric_lining_img);
+        jQuery('.lining_img').attr('src',lining_img);
+        jQuery('.lining_base').attr('src',lining_base);
+       
+    });
+    /* End:- Start for extra linig */
     
     /* Start:- this is for neck lining and elbow */
     jQuery(document).bind('extra_items', function() {
