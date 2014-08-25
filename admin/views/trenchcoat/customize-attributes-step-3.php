@@ -17,14 +17,14 @@
 
 <h3 class="main_titel_list">Custom Trench Coat / <span class="sub-titel">Step 3: Add your personal touch</span></h3><br>
 <div class="form-group" id="main_interior">
-    <div class="heading_main">
+    <div class="heading_main attr-front">
         <h2 toggle="Add_Interior" class="arrow_toggle">Customize Trench Coat Lining <span>(+12,95)</span>
             <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
     <div class="category_main_box clearfix Add_Interior">
         <div class="clearfix">
-            <div class="radio">
+            <div class="radio attr-front">
                 <label>
                     <input type="radio" value="0" name="wca_trenchcoat_interior_type" class="linings"> Color by default
                 </label>
@@ -35,31 +35,44 @@
             </div>		      
         </div>
 
-        <a href="#"><img src="<?php echo $man_url ?>/forros_interior.jpg"></a>
+        <a href="javascript:;"><img src="<?php echo $man_url ?>/forros_interior.jpg" class="linings_img"></a>
         <div id="interriors" style="display:none"> 
             <input type="hidden" name="wca_trenchcoat_interior" value="">
+            <div class="info_fabric" style="width:72%">
+                <div class="pull-right" style="rgin-right:38px;">
+                    <b>Material</b>: <span id="lining_material"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
             <div class="preview_fabric_3d_common">
-                <div class="preview fabric-background" style="background: url(<?php echo $image_category . '/linings/' . $lining_fabric ?>/big.jpg) no-repeat scroll right top transparent;"> </div>
+                <div class="preview linig-background" style="width:73%; background: url(<?php echo $image_category . '/linings/' . $lining_fabric ?>/big.jpg) no-repeat scroll right top transparent;"> </div>
             </div>
-            <div class="bottom_all_patten_main">
-                <?php
-                if (is_array($lining_fabrics)):
-                    foreach ($lining_fabrics as $fabric_id => $fabic_single):
-                        ?>
-                        <div class="fabric_box_3d lining_change" data-rel="<?php echo $fabric_id ?>">
-                            <div class="image trenchcoat_lining" style="background: url(<?php echo $image_category . '/linings/' . $lining_fabric ?>/thumb.jpg) top center no-repeat;">
-                                <a href="javascript:;"></a>
-                            </div> 
-                            <div class="detail_of_fabric">
-                                <a href="#"><?php echo $fabic_single['titel'] ?></a>
-                                <span class="price"><?php echo $fabic_single['price'] ?></span>
-                            </div>                                       
+            <div class="main_slider">
+                <div class="bottom_all_patten_main">
+                    <div class="customNavigation">
+                        <a class="btn prev">Previous</a>
+                        <a class="btn next">Next</a>                                        
+                    </div>     
+                    
+                        <!-- Start :- this loop is with knockout js "LiningModel"    -->
+                       <div id="owl-demo" class="owl-carousel owl-theme" data-bind="foreach:lining">
+                            <div class="item">
+                                <div class="fabric_box_3d lining_change attr-front" data-bind="attr: { 'data-rel': fabric_id }" >
+                                    <div class="image trenchcoat_lining" data-bind="style: { background: backgroud_url}">
+                                        <a href="javascript:;"></a>
+                                    </div> 
+                                    <div class="detail_of_fabric">
+                                        <a href="#" data-bind="text: titel"></a>
+                                        <span class="price" data-bind="text: price"></span>
+                                    </div>                                       
+                                </div>
+                            </div>
                         </div>
-                    <?php
-                    endforeach;
-                endif;
-                ?>
+                        <!-- End :- this loop is with knockout js "LiningModel"    --> 
+                  
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -176,7 +189,7 @@
             <a class="delete" href="javascript:;">Delete</a></h2>
 
     </div>
-    <div class="category_main_box clearfix Neck_Lining">
+    <div class="category_main_box clearfix wca_Neck_Lining">
         <div class="clearfix">
             <div class="radio attr-back">
                 <label>
@@ -189,34 +202,34 @@
             </div>		      
         </div>
         <div class="clearfix attr-back">
-            <input type="hidden" name="neck_lining" value="">
-            <div href="javascript:;" class="color_selecter neck_lining">
+            <input type="hidden" name="wca_neck_lining" value="">
+            <div href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="0" href="javascript:;" class="box_color color_item" >
                     <div class="active"></div>
                     <img src="<?php echo $man_url ?>/neck_lining/1.jpg" class="color" data-rel="1" >
                 </a>
             </div>
-            <div  href="javascript:;" class="color_selecter neck_lining">
+            <div  href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="1" href="javascript:;" class="box_color color_item" >			
                     <img src="<?php echo $man_url ?>/neck_lining/2.jpg" class="color" data-rel="2" >
                 </a>
             </div>
-            <div href="javascript:;" class="color_selecter neck_lining">
+            <div href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="2" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/3.jpg" class="color" data-rel="3" >
                 </a>
             </div>
-            <div href="javascript:;" class="color_selecter neck_lining">
+            <div href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="3" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/4.jpg" class="color" data-rel="4" >
                 </a>
             </div>
-            <div  href="javascript:;" class="color_selecter neck_lining">
+            <div  href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="4" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/5.jpg" class="color" data-rel="5" >
                 </a>
             </div>
-            <div href="javascript:;" class="color_selecter neck_lining">
+            <div href="javascript:;" class="color_selecter wca_neck_lining">
                 <a img_index="5" href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/neck_lining/6.jpg" class="color" data-rel="6" >
                 </a>
@@ -242,24 +255,24 @@
             </div>		      
         </div>
         <div class="clearfix attr-back">
-            <input type="hidden" name="elbow_patch" value="">
-            <div  href="javascript:;" class="color_selecter back_lables elbow_patch">
+            <input type="hidden" name="wca_elbow_patch" value="">
+            <div  href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
                 <a href="javascript:;" class="box_color color_item">
                     <div class="active"></div>
                     <img src="<?php echo $man_url ?>/patches/55.jpg" class="color" data-rel="1">
                 </a>
             </div>
-            <div  href="javascript:;" class="color_selecter back_lables elbow_patch">
+            <div  href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
                 <a href="javascript:;" class="box_color color_item">			
                     <img src="<?php echo $man_url ?>/patches/56.jpg" class="color" data-rel="2">
                 </a>
             </div>
-            <div href="javascript:;" class="color_selecter back_lables elbow_patch">
+            <div href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
                 <a href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/patches/57.jpg" class="color" data-rel="3">
                 </a>
             </div>
-            <div href="javascript:;" class="color_selecter back_lables elbow_patch">
+            <div href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
                 <a href="javascript:;" class="box_color color_item" >
                     <img src="<?php echo $man_url ?>/patches/58.jpg" class="color" data-rel="4">
                 </a>

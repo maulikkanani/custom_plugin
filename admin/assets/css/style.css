@@ -495,6 +495,46 @@ div.fabric_box_3d div.image a {
    margin-bottom: 25px;
 }
 
+/*Added 8-25 by Dharmesh*/
+.owl-carousel .owl-item {
+  float: left;
+}
+
+.customNavigation{
+  position: absolute;
+  text-align: center;
+  width: 77%;
+}
+//use styles below to disable ugly selection
+.customNavigation a{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.customNavigation a{
+  cursor: pointer;
+  font-size: 0;
+  position: absolute;
+  top: 39px;
+  z-index: 9999;
+}
+.customNavigation .prev{
+  left: -16px;
+  height: 23px;width: 16px;
+  background: url(../images/design/left_arrow_lining.gif) no-repeat;
+}
+.customNavigation .next{
+  right: 0;
+  height: 23px;width: 16px;
+  background: url(../images/design/right_arrow_lining.gif) no-repeat;
+}
+.main_slider{
+  position: relative;
+}
+
 
 /*---------------Added by mk Start-----------------------*/
 .pull-right {
@@ -543,7 +583,7 @@ div.fabric_box_3d div.image a {
    margin:131px 0px 0px 77px
 }
 .fabric-active{
-    border-color:red;
+    border-color:#F00 !important
 }
 .detail_of_fabric a{
     font-size: 10px;

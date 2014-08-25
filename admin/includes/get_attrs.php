@@ -62,10 +62,10 @@ $default_values = array(
     'wca_trenchcoat_elbow_patch' => array(
         'value' => '1'
     ),
-    'neck_lining' => array(
+    'wca_neck_lining' => array(
         'value' => '4'
     ),
-    'elbow_patch' => array(
+    'wca_elbow_patch' => array(
         'value' => '3'
     ),
     'wca_trenchcoat_btn_thread_apply' => array(
@@ -248,7 +248,7 @@ $attributes=array(
                                                   'price'=>'9.95'
                                                   ),  
                                          ),
-                        'neck_lining'=>array(
+                        'wca_neck_lining'=>array(
                                               '0'=>array(
                                                        'price'=>'0'
                                                        ),   
@@ -272,7 +272,7 @@ $attributes=array(
                                                        ),   
 
                                           ),                               
-                       'elbow_patch'=>array(
+                       'wca_elbow_patch'=>array(
                                               '0'=>array(
                                                        'price'=>'0'
                                                        ),   
@@ -388,10 +388,13 @@ $atribute_slugs= json_encode($atribute_slugs);
 /*start:- array for facric related butoons and zippers */
 $all_fabric_data=array(
              '1'=>array(
-                    'button'=>'1',
-                    'zipper'=>'1',
                     'titel'=>'Elandia',
                     'price'=>'217',
+                    'ref'=>'21-482',
+                    'composition'=>'52% cotton & 48% polyester',
+                    'price'=>'217',
+                    'button'=>'1',
+                    'zipper'=>'1',
                     'lining'=>'1',
                     ),   
              '2'=>array(
@@ -399,49 +402,63 @@ $all_fabric_data=array(
                     'zipper'=>'2',
                     'titel'=>'Newport',
                     'price'=>'218',
-                    'lining'=>'1',
+                    'ref'=>'22-482',
+                    'composition'=>'53% cotton & 48% polyester',
+                    'lining'=>'5',
                     ),   
              '3'=>array(
                     'button'=>'4',
                     'zipper'=>'3',
                     'titel'=>'Seeland',
                     'price'=>'219',
-                    'lining'=>'1',
+                    'ref'=>'23-482',
+                    'composition'=>'54% cotton & 48% polyester',
+                    'lining'=>'9',
                     ),   
              '4'=>array(
                     'button'=>'3',
                     'zipper'=>'1',
                     'titel'=>'Izaro',
                     'price'=>'220',
-                    'lining'=>'1',
+                    'ref'=>'24-482',
+                    'composition'=>'55% cotton & 48% polyester',
+                    'lining'=>'13',
                     ),   
              '5'=>array(
                     'button'=>'4',
                     'zipper'=>'1',
                     'titel'=>'Newington',
                     'price'=>'221',
-                    'lining'=>'1',
+                    'ref'=>'25-482',
+                    'composition'=>'56% cotton & 48% polyester',
+                    'lining'=>'17',
                     ),   
              '6'=>array(
                     'button'=>'3',
-                    'zipper'=>'1',
+                    'zipper'=>'21',
                     'titel'=>'Bloomsbury',
                     'price'=>'222',
-                    'lining'=>'1',
+                    'ref'=>'26-482',
+                    'composition'=>'57% cotton & 48% polyester',
+                    'lining'=>'21',
                     ),   
              '7'=>array(
-                    'button'=>'4',
+                    'button'=>'1',
                     'zipper'=>'1',
                     'titel'=>'Lambeth',
                     'price'=>'223',
-                    'lining'=>'1',
+                    'ref'=>'27-482',
+                    'composition'=>'58% cotton & 48% polyester',
+                    'lining'=>'25',
                     ),   
              '8'=>array(
-                    'button'=>'2',
+                    'button'=>'4',
                     'zipper'=>'1',
                     'titel'=>'Clapham',
                     'price'=>'224',
-                    'lining'=>'1',
+                    'ref'=>'28-482',
+                    'composition'=>'59% cotton & 48% polyester',
+                    'lining'=>'29',
                     ),   
     
                   );
@@ -449,34 +466,336 @@ $all_fabric_data=array(
 $fabric_data=json_encode($all_fabric_data);
 /*End:- array for facric related butoons and zippers */
 
-
+/*Start:- array for lning related fbrics*/
 $all_extra_linings=array(
            '1'=>array(                                              //This ia a key for fabric ids
                  '1'=>array(                                        //This ia a key for fabric's lining ids
-                      'titel'=>'Beauvans',  // tile of lining fabric               
-                      'price'=>'19.95',    // price of lining fabric
-                      'color'=>'red',       // color of lining fabric
-                      'pattern'=>'squared', // pattern of lining fabric  
+                      'titel'=>'Beauvans',                          // tile of lining fabric               
+                      'price'=>'19.95',                             // price of lining fabric
+                      'color'=>'red',                               // color of lining fabric
+                      'pattern'=>'squared',                         // pattern of lining fabric  
+                      'material'=>'100% cotton'                     // material of linig     
+                     ), 
+                 '2'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton'  
+                     ), 
+                 '3'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',                           
+                     ), 
+                 '4'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton'
+                     ), 
+                 '29'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% poiister' ,                         
+                     ), 
+                 '30'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '31'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '32'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton' ,                           
                      ), 
                 ), 
+           '2'=>array(                                              
+                 '5'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',  
+                     'material'=>'100% cotton'
+                     ), 
+                 '6'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                          
+                     ), 
+                 '7'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '8'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '29'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% poiister' ,                         
+                     ), 
+                 '30'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '31'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '32'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '3'=>array(                                              
+                 '9'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton' ,                         
+                     ), 
+                 '10'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '11'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '12'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '4'=>array(                                              
+                 '13'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                         
+                     ), 
+                 '14'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '15'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '16'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '5'=>array(                                              
+                 '17'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                         
+                     ), 
+                 '18'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '19'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '20'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '6'=>array(                                              
+                 '21'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                         
+                     ), 
+                 '22'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '23'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '24'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '7'=>array(                                              
+                 '25'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                         
+                     ), 
+                 '26'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '27'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '28'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+           '8'=>array(                                              
+                 '29'=>array(                                       
+                      'titel'=>'Beauvans',                                     
+                      'price'=>'19.95',                            
+                      'color'=>'red',                              
+                      'pattern'=>'squared',
+                     'material'=>'100% poiister' ,                         
+                     ), 
+                 '30'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '31'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                     'material'=>'100% cotton' ,                           
+                     ), 
+                 '32'=>array(                                        
+                      'titel'=>'Beauvans',                                        
+                      'price'=>'19.95',                             
+                      'color'=>'red',                               
+                      'pattern'=>'squared',
+                      'material'=>'100% cotton' ,                           
+                     ), 
+                ), 
+                
 );
 
-$extra_linings=json_encode($all_extra_linings); 
 
+$extra_linings=json_encode($all_extra_linings); 
+/*End:- array for lning related fbrics*/
+
+/*Start :- create  array for lining as pre knockout JSON format */
+$knockout_extralinigs=array();
+foreach($all_extra_linings as $fabric_id=>$linigs){
+    $lining=array();
+    foreach($linigs as $lining_id=>$values){
+        $values['fabric_id']=$lining_id;
+        $values['backgroud_url']="url(".wca_image_url."/3d/man/trenchcoat/linings/$lining_id/thumb.jpg) top center no-repeat";
+        $lining[]=$values;
+    }
+    $knockout_extralinigs[$fabric_id]=$lining;
+}
+/*End:- create  array for lining as pre knockout JSON format */
 
 /* Start :- Array for ste3 configration patch, nech, button thread& hole thread and embroidery */
 $extra_relationship=array(
     'wca_trenchcoat_neck_lapel'=>array(
                                     'default'=>'0',                        // Default Value for item
-                                    'hidden_name'=>'neck_lining',          // hidden input name for item
-                                    'class'=>'neck_lining',                // item image parent div class -> a -> img  
+                                    'hidden_name'=>'wca_neck_lining',          // hidden input name for item
+                                    'class'=>'wca_neck_lining',                // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                      // First div rel 
                                     'main_div'=>'#main_neck_lapel'    
                                   ),
     'wca_trenchcoat_elbow_patch'=>array(
                                     'default'=>'0',                          // Default Value for item
-                                    'hidden_name'=>'elbow_patch',            // hidden input name for item
-                                    'class'=>'elbow_patch',                  // item image parent div class -> a -> img  
+                                    'hidden_name'=>'wca_elbow_patch',            // hidden input name for item
+                                    'class'=>'wca_elbow_patch',                  // item image parent div class -> a -> img  
                                     'first_rel'=>'1',                        // First div rel  
                                     'main_div'=>'#main_elbow_patch'   
                                   ),
@@ -561,7 +880,6 @@ $zipper_url = "$image_category/zipper/$zipper";                  // category ima
 $man_url = wca_image_url . "/man/$category";                     // category image url for satatic man       
 $blank_image = $plugins_url . '/assets/images/blank.png';        // image url for Blankk image   
 
-$lining_fabrics=$all_extra_linings[$fabric];
+$lining_fabrics= json_encode($knockout_extralinigs);              // aall lining realted to fabrics for knock out js     
 $lining_fabric=1;
-
 ?>
