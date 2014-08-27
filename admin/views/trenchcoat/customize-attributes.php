@@ -9,7 +9,8 @@ wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
 // Use get_post_meta to retrieve an existing value from the database.
 $value = get_post_meta($post->ID, '_my_meta_value_key', true);
-include ABS_WCA . 'admin/includes/get_attrs.php';
+global $post_id; 
+include ABS_MODEL.'/get_attrs.php';
 $price = json_encode($attribute_price);                          // Array of default attribute price
 $attr_default_values = json_encode($default_values);               // Array of default attribute values     
 ?>
@@ -73,31 +74,31 @@ $attr_default_values = json_encode($default_values);               // Array of d
         /* END:- step 3---> toggle h2   */
 
         /* Start:- function for selected attribute*/
-        var default_data = '<?php echo $attr_default_values ?>';    // JSON of default values of attrybutes
+        $default_vals = '<?php echo $attr_default_values ?>';    // JSON of default values of attrybutes
         var chk_array = [];
-        chk_array.push('abc');
-        chk_array.push('wca_elbow_patch');
+        chk_array.push('wca_embroidary_color');
         chk_array.push('wca_neck_lining');
+        chk_array.push('wca_elbow_patch');
         chk_array.push('wca_buton_thread');
         chk_array.push('wca_buton_hole_thread');
 
-        $default_vals = default_data;
-        jQuery.each(jQuery.parseJSON(default_data), function(key, val) {
+        //$default_vals = default_data;
+        jQuery.each(jQuery.parseJSON($default_vals), function(key, value) {
             if (key == 'wca_trenchcoat_pockets_type') {
-                if (val.value >= 1 && val.value <= 5)
+                if (value >= 1 && value <= 5)
                     jQuery('.trenchcoat_pockets_2').show();
-                if (val.value >= 6)
+                if (value >= 6)
                     jQuery('.trenchcoat_pockets_3').show();
-                jQuery('.pocket_modal_main[data-rel=' + val.value + '] img').addClass('boxpart_active');
-                jQuery('input[name=wca_trenchcoat_pockets_type]').val(val.value);
-            } else if (jQuery.inArray(key, chk_array)) {
-                jQuery('.' + key + ' a img[data-rel=' + val.value + ']').addClass('boxpart_active');
+                jQuery('.pocket_modal_main[data-rel=' + value + '] img').addClass('boxpart_active');
+                jQuery('input[name=wca_trenchcoat_pockets_type]').val(value);
+            } else if (jQuery.inArray(key, chk_array)>=0) {
+                jQuery('.' + key + ' a img[data-rel=' + value + ']').addClass('boxpart_active');
             }
             var type = jQuery('input[name=' + key + ']').attr('type');
             if (type == "checkbox" || type == "radio")
-                jQuery('input[name=' + key + '][value=' + val.value + ']').attr('checked', '');
+                jQuery('input[name=' + key + '][value=' + value + ']').attr('checked', '');
             else
-                jQuery('input[name=' + key + ']').val(val.value);
+                jQuery('input[name=' + key + ']').val(value);
         });
 
 
@@ -118,6 +119,7 @@ $attr_default_values = json_encode($default_values);               // Array of d
         jQuery(document).trigger("set-pos-2");
         jQuery(document).trigger('back-pos-12');
         jQuery(document).trigger('back-pos-13');
+        jQuery(document).trigger('embroidery_set');
         jQuery(document).trigger('change-button-thread');
         jQuery(document).trigger('change-button-hole-thread');
 
@@ -181,18 +183,18 @@ $attr_default_values = json_encode($default_values);               // Array of d
         <li><a href="#tabs-3"><div class="number">3</div>Accents</a></li>
     </ul>
     <div id="tabs-1">
-<?php
-include_once ABS_WCA . "admin/views/$category/customize-attributes-step-1.php";
-?>
+        <?php
+            include_once ABS_WCA."admin/views/$category/customize-attributes-step-1.php";
+        ?>
     </div>
     <div id="tabs-2">
         <?php
-        include_once ABS_WCA . "admin/views/$category/customize-attributes-step-2.php";
+            include_once ABS_WCA."admin/views/$category/customize-attributes-step-2.php";
         ?>
     </div>
     <div id="tabs-3">
         <?php
-        include_once ABS_WCA . "admin/views/$category/customize-attributes-step-3.php";
+            include_once ABS_WCA."admin/views/$category/customize-attributes-step-3.php";
         ?>
     </div>
 </div>    

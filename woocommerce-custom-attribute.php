@@ -41,8 +41,10 @@ if ( ! defined( 'WPINC' ) ) {
  * - replace `class-plugin-name.php` with the name of the plugin's class file
  *
  */
+                          //absolute path of plugin
+require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/global_functions.php');
+require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/wca_load.php');
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-woocommerce-custom-attribute.php' );
-
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
@@ -86,13 +88,26 @@ add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute', 'get_instan
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
-	add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
+        /*Include file for a save a attribute data*/
+        add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
 
 }
 
-define('ABS_WCA', plugin_dir_path( __FILE__ ));   //absolute path of plugin
-define('wca_url', plugins_url('woocommerce-custom-attribute'));   //url of plugin
-define('wca_admin_asset_url', wca_url.'/admin/assets');   //url of plugin
-define('wca_admin_image_url', wca_url.'/admin/assets/images');   //url of plugin
-define('wca_asset_url', wca_url.'/assets');   //url of plugin
-define('wca_image_url', wca_url.'/assets/images');   //url of plugin
+
+define('ABS_WCA', plugin_dir_path( __FILE__ ));  
+define('ABS_MODEL',ABS_WCA.'admin/models/');                        //absolute path of models
+define('ABS_CONTROLLER', ABS_WCA.'admin/controllers/');             //absolute path of contollers
+define('ABS_VIEW', ABS_WCA.'admin/Views/');                   //absolute path of views
+define('wca_url', plugins_url('woocommerce-custom-attribute'));     //url of plugin
+define('wca_admin_asset_url', wca_url.'/admin/assets');             //url of admin assets
+define('wca_admin_image_url', wca_url.'/admin/assets/images');      //url of admin images 
+define('wca_asset_url', wca_url.'/assets');                         //url of public assets
+define('wca_image_url', wca_url.'/assets/images');                  //url of public images
+
+
+add_action( 'wp_ajax_upload_button', 'upload_buttons');
+function upload_buttons(){
+    echo $dir_name=get_next_id('wp_wca_buttons');
+    pr($_POST);
+    pr($_FILES,true);
+}

@@ -9,7 +9,7 @@ wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
 // Use get_post_meta to retrieve an existing value from the database.
 $value = get_post_meta($post->ID, '_my_meta_value_key', true);
-include ABS_WCA . 'admin/includes/get_attrs.php';
+include ABS_WCA . 'admin/models/get_attrs.php';
 ?>
 <script type="text/javascript">
     $fabric = '<?php echo $fabric ?>';

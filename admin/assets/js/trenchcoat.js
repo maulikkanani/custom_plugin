@@ -28,7 +28,9 @@ jQuery(document).ready(function() {
     jQuery(document).on('click', '#wca_trenchcoat_style_simple', function() {
         jQuery('input[name=wca_trenchcoat_chest_pocket][value!=0]').removeAttr('disabled');
         jQuery('input[name=wca_trenchcoat_closure_type_boton][value=hide]').removeAttr('disabled');
-        jQuery('input[name=wca_trenchcoat_pockets][value=3]').removeAttr('disabled');
+        if(jQuery('input[name=wca_trenchcoat_belt]:checked').val()!='loose'){
+            jQuery('input[name=wca_trenchcoat_pockets][value=3]').removeAttr('disabled');
+        }
     });
     /*End - select style Simple */
 
@@ -196,10 +198,11 @@ jQuery(document).ready(function() {
         var fit = jQuery('input[name=wca_trenchcoat_fit]:checked').val();
         if (pockets != 0) {
             var front_image = 'pockets_' + pockets + '_type' + type + '_fit' + fit + '.png';
-            jQuery('.front .layer[pos=2] img').attr('src', image_front_url + '/' + front_image);
+            var src= image_front_url + '/' + front_image;
         } else {
-            jQuery('.front .layer[pos=2] img').attr('src', blank_image);
+            var src=blank_image;
         }
+        jQuery('.front .layer[pos=2] img').attr('src',src);
         jQuery('.pocket_modal_main').remove('boxpart_active');
         jQuery('.pocket_modal_main [data-rel=' + type + ']').addClass('boxpart_active');
         jQuery(document).trigger('front-show');
@@ -229,8 +232,8 @@ jQuery(document).ready(function() {
                 jQuery('.front .layer[pos=5] img').attr('src', image_front_url + '/' + image_url);
                 jQuery('.back .layer[pos=6] img').attr('src', blank_image);
             } else {
-                jQuery('.back .layer[pos=6] img').attr('src', button_url + '/' + btn_url);
                 jQuery('.front .layer[pos=5] img').attr('src', blank_image);
+                jQuery('.back .layer[pos=6] img').attr('src', button_url + '/' + btn_url);
             }
             jQuery('.back .layer[pos=5] img').attr('src', image_back_url + '/' + image_url);
 
@@ -274,6 +277,7 @@ jQuery(document).ready(function() {
                 jQuery('.back .layer[pos=7] img').attr('src', image_back_url + '/' + image_url);
                 jQuery('#thread_appy').hide();
                 jQuery('input[name=wca_trenchcoat_btn_thread_apply]').removeAttr('checked', '');
+                jQuery('input[name=wca_trenchcoat_btn_thread_apply][value=all]').attr('checked', '');
             }
             if (sleev == 'button') {
                 jQuery('.back .layer[pos=7] img').attr('src', blank_image);
@@ -346,7 +350,7 @@ jQuery(document).ready(function() {
         });
         jQuery('#_wca_extra_price').val(final_price);
     });
-
+    
     /*Start:- Fuinction for get value ouf attributes*/
     function GetValue(selector) {
         var tag = "input";
@@ -434,11 +438,15 @@ jQuery(document).ready(function() {
 
     //Start for extra item click like neck and ellbow
     jQuery(document).on('click', '.linings', function() {
+        var tmp_linig = $fabric_data[$fabric].lining;
+        jQuery('input[name=wca_trenchcoat_interior]').val(tmp_linig);
         jQuery(document).trigger('extra-linings');
     });
 
     jQuery(document).on('click', '.linings_img', function() {
         jQuery('input[name=wca_trenchcoat_interior_type][value=1]').attr('checked', '');
+        var tmp_linig = $fabric_data[$fabric].lining;
+        jQuery('input[name=wca_trenchcoat_interior]').val(tmp_linig);
         jQuery(document).trigger('extra-linings');
     });
 
@@ -463,7 +471,7 @@ jQuery(document).ready(function() {
         jQuery(document).trigger('extra_items');
     });
 
-    jQuery(document).on('change', 'input[name=wca_embroidery_text]', function() {
+    jQuery(document).on('keydown', 'input[name=wca_embroidery_text]', function() {
         jQuery(document).trigger('embroidery_set');
     });
 
@@ -485,8 +493,6 @@ jQuery(document).ready(function() {
         } else {
             jQuery('#interriors').hide();
         }
-        var tmp_linig = $fabric_data[$fabric].lining;
-        jQuery('input[name=wca_trenchcoat_interior]').val(tmp_linig);
         jQuery(document).trigger('extra-linings-images');
     });
 

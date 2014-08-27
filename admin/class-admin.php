@@ -69,14 +69,19 @@ class woocommerce_custom_attribute_admin {
          */
         $plugin = woocommerce_custom_attribute::get_instance();
         $this->plugin_slug = $plugin->get_plugin_slug();
-
+       
         // Load admin style sheet and JavaScript.
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
-
+        
+        wca_load::controller('wca_custome_attributes');
+        
         add_action('add_meta_boxes', array($this, 'add_meta_box'));
-        add_action('save_post', array($this, 'save_attributs'));
-
+        add_action( 'save_post', array( $this, 'save_attributs' ), 1, 2 );
+        
+        // Save Product Meta Boxes
+        
+        add_action( 'wca_product_attribute_save', 'wca_custome_attributes::save', 10, 2 );
         // Add the options page and menu item.
         add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
 
@@ -135,6 +140,8 @@ class woocommerce_custom_attribute_admin {
         $screen = get_current_screen();
             //wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('jquery.fileupload', plugins_url('assets/css/jquery.fileupload.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('fileupload', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
     }
 
@@ -150,9 +157,11 @@ class woocommerce_custom_attribute_admin {
      * @return    null    Return early if no settings page is registered.
      */
     public function enqueue_admin_scripts() {
+        
             wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/comman.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('jQuery-ui', plugins_url('assets/js/jquery-ui.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_script('jQuery-fileupload', plugins_url('assets/js/jquery.fileupload.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('owl.carousel', plugins_url('assets/js/owl.carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('owl-carousel', plugins_url('assets/js/owl-carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('knockhout', plugins_url('assets/js/knockout-3.2.0.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
@@ -186,11 +195,11 @@ class woocommerce_custom_attribute_admin {
           $this->plugin_slug,
           array( $this, 'display_plugin_admin_page' )
           ); */
-        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'));
+        $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'),59);
 
 
 
-        add_submenu_page('woo-custome-attribute', 'Button Thread', 'Button Threads', 'manage_options', 'button_thread', array($this, 'button_thread'));
+        add_submenu_page('woo-custome-attribute', 'Buttons', 'Buttons', 'manage_options', 'button_thread', array($this, 'button_thread'));
     }
 
     /**
@@ -207,7 +216,7 @@ class woocommerce_custom_attribute_admin {
     }
 
     public function button_thread() {
-        include_once( 'views/admin.php' );
+        include_once 'views/masters/buttons/list.php';
     }
 
     /**
@@ -280,8 +289,37 @@ class woocommerce_custom_attribute_admin {
      *
      * @param int $post_id The ID of the post being saved.
      */
-    public function save_attributs($post_id) {
-            
+    public function save_attributs( $post_id, $post ) {
+           // $post_id and $post are required
+		if ( empty( $post_id ) || empty( $post ) ) {
+			return;
+		}
+
+		// Dont' save meta boxes for revisions or autosaves
+		if ( defined( 'DOING_AUTOSAVE' ) || is_int( wp_is_post_revision( $post ) ) || is_int( wp_is_post_autosave( $post ) ) ) {
+			return;
+		}
+		
+		// Check the nonce
+		if ( empty( $_POST['woocommerce_meta_nonce'] ) || ! wp_verify_nonce( $_POST['woocommerce_meta_nonce'], 'woocommerce_save_data' ) ) {
+			return;
+		} 
+
+		// Check the post being saved == the $post_id to prevent triggering this call for other save_post events
+		if ( empty( $_POST['post_ID'] ) || $_POST['post_ID'] != $post_id ) {
+			return;
+		}
+
+		// Check user has permission to edit
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		// Check the post type
+		if ( ! in_array( $post->post_type, array( 'product') ) ) {
+			return;
+		}
+		do_action( 'wca_product_attribute_save', $post_id, $post );
     }
 
     /**
@@ -297,10 +335,8 @@ class woocommerce_custom_attribute_admin {
     }
     
     public function rander_image_layers($post) {
-         global $post;
-         $category='trenchcoat';                                         // Current category
-        include_once( "views/$category/image-layer.php" );
-        
+          global $post;
+        $category='trenchcoat';                                         // Current category
+        include_once("views/$category/image-layer.php");
     }
-
 }
