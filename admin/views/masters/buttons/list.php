@@ -8,7 +8,6 @@ global $wpdb, $include, $pluginDir, $table, $current_tab_url, $unique;
 require_once( ABS_WCA.'admin/includes/wca_grid_data.php' );
 
 extract($_POST);
-session_start();
 
 $master_id='1';
 $form_name = "Buttons";

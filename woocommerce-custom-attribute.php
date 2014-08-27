@@ -107,7 +107,10 @@ define('wca_image_url', wca_url.'/assets/images');                  //url of pub
 
 add_action( 'wp_ajax_upload_button', 'upload_buttons');
 function upload_buttons(){
-    echo $dir_name=get_next_id('wp_wca_buttons');
-    pr($_POST);
-    pr($_FILES,true);
+    //$dir_name=get_next_id('wp_wca_buttons');
+    include ABS_WCA.'admin/includes/UploadHandler.php';
+    $upload_handler = new UploadHandler();
+    $dirname='1';
+    //pr($_POST);
+    //pr($_FILES,true);
 }

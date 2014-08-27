@@ -33,8 +33,10 @@ $images = json_encode($images);
             if (jQuery('.image_name').val() == '') {
                 alert('please select image name');
                 return false;
+            }else{
+                jQuery('#progress').show();
             }
-            data.formData = {action: 'upload_button', image_name: jQuery('.image_name').val()};
+                data.formData = {action: 'upload_button', image_name: jQuery('.image_name').val()};
         });
         jQuery('#fileupload').fileupload({
             url: ajax_url,
@@ -43,9 +45,10 @@ $images = json_encode($images);
                 jQuery.each(data.result.files, function(index, file) {
                     jQuery('<p/>').text(file.name).appendTo('#files');
                 });
+                jQuery('#progress').hide();
                 $options = [];
-                 jQuery('.image_name').html();
-                jQuery(document).trigger('button-img-option');
+//                 /jQuery('.image_name').html();
+                //jQuery(document).trigger('button-img-option');
             },
             progressall: function(e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -55,7 +58,7 @@ $images = json_encode($images);
                         );
                 if (progress == '100') {
                     $options = [];
-                    jQuery(document).trigger('button-img-option');
+                    //jQuery(document).trigger('button-img-option');
                 }
             }
         }).prop('disabled', !jQuery.support.fileInput)
@@ -69,10 +72,11 @@ $images = json_encode($images);
 
 
     jQuery(document).bind('button-img-option', function() {
+        jQuery('.image_name').html('');
         if ($options.length > 0) {
             jQuery('.image_name').append('<option value="">select image name</option>');
             jQuery.each($options, function(key, value) {
-                var tmp_html = '<option value="' + value.key + '">' + value.name + '</option>';
+                var tmp_html = '<option value="'+value.value +'">' + value.name + '</option>';
                 jQuery('.image_name').append(tmp_html);
             });
         }
@@ -112,13 +116,7 @@ $images = json_encode($images);
                             endforeach;
                             ?>  
                             </select>-->
-                            <select class="image_name" data-bind="
-                                    options: Images,
-                                    optionsText: 'name',
-                                    optionsValue: 'value',
-                                    optionsCaption: 'select image',
-                                    event:{change:set_image}" 
-                                    ">
+                            <select class="image_name">
                             </select>
                         </div> 
                         <div class="col-sm-3">
@@ -127,14 +125,20 @@ $images = json_encode($images);
                                 <span>Select files...</span>
                                 <input id="fileupload" type="file" name="files" data-bind="event:{change:update_image}" >
                             </span>
-                            <br>
-                            <br>
+                        </div>    
+                         <div class="col-sm-3">
                             <!-- The global progress bar -->
-                            <div id="progress" class="progress">
+                            <div id="progress" class="progress" style="display:none;">
                                 <div class="progress-bar progress-bar-success"></div>
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div id="files" class="files"></div>
+                        </div>
                     </div>
 
                     <div class="form-group">
