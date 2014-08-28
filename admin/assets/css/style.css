@@ -659,6 +659,13 @@ div.fabric_box_3d div.image a {
 .progress-bar-success {
     background-color: #5cb85c;
 }
+
+.row-actions .delete{
+    float:none;
+}
+#images img {
+    border: 1px solid;
+}
 /*End:- for image upload */
 
 

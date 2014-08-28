@@ -15,15 +15,19 @@ $masters=array(
         
 $master_images=array(
     '1'=>array(
-        'boton_belt_back_lapel_1'=>'Back Laple',
-        'boton_belt_sewing_fit0'=>'Belt Sewing Waisted',
-        'boton_belt_sewing_fit1'=>'Belt Sewing straight',
-        'boton_body_crossed_boton_standard'=>'Double breasted',
-        'boton_body_simple_boton_hide'=>'Single breasted',
-        'boton_body_simple_boton_standard'=>'Single breasted Hide',
-        'boton_shoulder_tape'=>'Epaulettes',
-        'boton_sleeve'=>'Sleeves Buttons',
-        'big'=>'Main image',
+        'boton_belt_back_lapel_1.png'=>'Back Laple',
+        'boton_belt_sewing_fit0.png'=>'Belt Sewing Waisted',
+        'boton_belt_sewing_fit1.png'=>'Belt Sewing straight',
+        'boton_body_crossed_boton_standard.png'=>'Double breasted',
+        'boton_body_simple_boton_hide.png'=>'Single breasted',
+        'boton_body_simple_boton_standard.png'=>'Single breasted Hide',
+        'boton_shoulder_tape.png'=>'Epaulettes',
+        'boton_sleeve.png'=>'Sleeves Buttons',
+        'big.jpg'=>'Main image',
     ),
-);        
+);     
+
+
+$category = 'trenchcoat';                                        // Current category      
+$image_category = wca_image_url . "/3d/man/$category";           // category image url
 ?>

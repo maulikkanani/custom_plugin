@@ -37,7 +37,7 @@ class Wca_Grid_Data extends WP_List_Table {
         $this->_arg=$arg;
         $this->columns=$this->_arg['columns'];
         $this->table = $this->_arg['table'];
-        $this->UniqueKey=$this->get_uniquekey();
+        $this->UniqueKey=$this->_arg['uniquekey'];
         $this->titel=$this->_arg['titel'];
         $this->table=$this->_arg['table'];
             

@@ -104,8 +104,21 @@ define('wca_admin_image_url', wca_url.'/admin/assets/images');      //url of adm
 define('wca_asset_url', wca_url.'/assets');                         //url of public assets
 define('wca_image_url', wca_url.'/assets/images');                  //url of public images
 
+/*Start :- define master tables*/
 
-add_action( 'wp_ajax_upload_button', 'upload_buttons');
+define('IMAGES_TABLE', $wpdb->prefix.'wca_images');                  //Butoon master
+define('BUTTONS', $wpdb->prefix.'wca_buttons');                  //Butoon master
+
+
+/*end :- define master tables*/
+
+wca_load::controller('wca_buttons');
+add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
+add_action( 'wp_ajax_delete_image', 'wca_buttons::delete_images'); 
+ 
+ 
+ 
+//add_action( 'wp_ajax_upload_button', 'upload_buttons');
 function upload_buttons(){
     //$dir_name=get_next_id('wp_wca_buttons');
     include ABS_WCA.'admin/includes/UploadHandler.php';
@@ -114,3 +127,5 @@ function upload_buttons(){
     //pr($_POST);
     //pr($_FILES,true);
 }
+
+ 
