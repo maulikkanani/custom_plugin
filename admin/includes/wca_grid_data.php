@@ -128,18 +128,20 @@ class Wca_Grid_Data extends WP_List_Table {
     
     // Fetch datas from database
     function fetch_data($sql) {
-        global $total_result;
+        global $wpdb ,$total_result;
         if (trim($sql) != "") {
             $fnlarr = array();
              $fsql = $sql;
-            $fresults = mysql_query($fsql);
+            $fresults = $wpdb->get_results($fsql,ARRAY_A);
             if($fresults){ 
-                for ($i = 0; $i < mysql_num_rows($fresults); $i++) {
-                    $farr = mysql_fetch_assoc($fresults);
+                for ($i = 0; $i < count($fresults); $i++) {
+                    $farr=$fresults[$i];
                     array_push($fnlarr, $farr);
                 }
              }
+             echo mysql_error();
                 $total_result = sizeof($fnlarr);
+                
                 return $fnlarr;
         }
     }

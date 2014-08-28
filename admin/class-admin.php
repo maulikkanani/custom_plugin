@@ -142,7 +142,7 @@ class woocommerce_custom_attribute_admin {
             //wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('jquery.fileupload', plugins_url('assets/css/jquery.fileupload.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
-            wp_enqueue_style('fileupload', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('fileupload', plugins_url('assets/css/font_awesome/css/font-awesome.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
     }
 

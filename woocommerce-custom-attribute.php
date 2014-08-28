@@ -115,6 +115,7 @@ define('BUTTONS', $wpdb->prefix.'wca_buttons');                  //Butoon master
 wca_load::controller('wca_buttons');
 add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
 add_action( 'wp_ajax_delete_image', 'wca_buttons::delete_images'); 
+add_action( 'wp_ajax_active_button', 'wca_buttons::active_button'); 
  
  
  

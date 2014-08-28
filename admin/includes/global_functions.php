@@ -96,6 +96,20 @@ function uploaded_images_section($master_id, $row_id, $data, $type = '') {
     return $image;
 }
 
+
+
+function uploaded_images_count($master_id, $row_id, $type = '') {
+    global $wpdb;
+    $images = $wpdb->get_row("select COUNT(id) as count from " . IMAGES_TABLE . " 
+                                                    where master_id=$master_id
+                                                      and row_id=$row_id
+                                                      and type='$type'"
+    );
+    
+    return $images->count;
+}
+
+
 function images_data($id) {
     global $wpdb;
     $image_names = $wpdb->get_row("select image_name from " . IMAGES_TABLE . " 

@@ -15,16 +15,6 @@ $uploded_image_section = json_encode($uploded_image_section);
 $butoon_url = $image_category . '/botones/6';
 ?>
 <script>
-    /*Start:- create a model for change lining (Knockout js)*/
-
-//    $options = [
-//        {name: 'Item 1', value: 1},
-//        {name: 'Item 3', value: 3},
-//        {name: 'Item 4', value: 4}
-//    ];
-
-
-    /*End:- create a model for change lining(Knockout js)*/
     $options = jQuery.parseJSON('<?php echo $images ?>');
     $uploded_images = jQuery.parseJSON('<?php echo $uploded_image_section ?>');
 
@@ -49,11 +39,6 @@ $butoon_url = $image_category . '/botones/6';
             url: ajax_url,
             dataType: 'json',
             done: function(e, data) {
-                console.log(data.result);
-                /*jQuery.each(data.result.files, function(index, data) {
-                 jQuery('<p/>').text(file.name).appendTo('#files');
-                 });*/
-
                 jQuery('#progress').hide();
                 $options = data.result.remaing;
                 jQuery('.image_name').html();

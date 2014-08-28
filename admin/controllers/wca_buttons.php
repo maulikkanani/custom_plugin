@@ -50,6 +50,7 @@ class wca_buttons{
             $row = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$id'");
             $data['name']=$row->name;
             $data['color']=$row->color;
+            $data['status']=$row->status;
             return $data;
      }
      
@@ -152,6 +153,44 @@ class wca_buttons{
         }
         exit;
         
+    }
+    
+    function active_button(){
+         global $wpdb;
+         include ABS_MODEL . 'master_attrs.php';
+         $master_id=  mysql_real_escape_string($_POST[master_id]);
+         $row_id=  mysql_real_escape_string($_POST[button_id]);
+         $uploded_image=uploaded_images_count($master_id, $row_id);
+         $total_images = count($master_images[$master_id]);
+         
+         
+         $button = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$row_id'");
+         if($button->status==0){
+             if($uploded_image==$total_images):
+                 wca_buttons::do_active_button($row_id);
+                echo 0; 
+             else:   
+                echo "Please all images for active button"; 
+             endif; 
+         }else{
+             wca_buttons::do_active_button($row_id);
+             echo 1;
+         }
+         exit;
+    }
+    
+    
+    function do_active_button($id){
+        global $wpdb;
+        $button = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$id'");
+        if($button->status==0){
+            $update=array('status'=>1);
+        }else{
+            $update=array('status'=>0);
+        }
+        
+        $where=array('id'=>$id);
+        $wpdb->update(BUTTONS,$update,$where);
     }
      
 }

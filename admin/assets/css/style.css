@@ -666,6 +666,16 @@ div.fabric_box_3d div.image a {
 #images img {
     border: 1px solid;
 }
+.active_img{
+    color: green;
+    cursor: pointer;
+    font-size: 20px !important;
+}
+.inactive_img{
+    color: red;
+    cursor: pointer;
+    font-size: 20px !important;
+}
 /*End:- for image upload */
 
 
