@@ -8,16 +8,15 @@ $uploded_images = uploaded_images($master_id, $row_id);
 $images = array_diff_key($master_images[$master_id], $uploded_images);
 $images = create_image_combo($images);
 $images = json_encode($images);
-
-$uploded_image_section = uploaded_images_section($master_id, $row_id, $master_images[$master_id]);
+$image_url=$category_url.'/botones/'.$row_id;
+$uploded_image_section = uploaded_images_section($master_id, $row_id,$master_images[$master_id],$image_url);
 $uploded_image_section = json_encode($uploded_image_section);
 
-$butoon_url = $image_category . '/botones/6';
 ?>
 <script>
     $options = jQuery.parseJSON('<?php echo $images ?>');
     $uploded_images = jQuery.parseJSON('<?php echo $uploded_image_section ?>');
-
+    console.log($options);
     jQuery(document).ready(function() {
         'use strict';
         jQuery.noConflict();
@@ -67,7 +66,7 @@ $butoon_url = $image_category . '/botones/6';
                 jQuery.ajax({
                     url: ajax_url,
                     type: "POST",
-                    data: {action:'delete_image',img_id:img_id,master_id:master_id,button_id:button_id,side:side},
+                    data: {action:'delete_button_image',img_id:img_id,master_id:master_id,button_id:button_id,side:side},
                     success:function(data){
                         var data=jQuery.parseJSON(data);
                         $options =data.remaing;
@@ -89,6 +88,7 @@ $butoon_url = $image_category . '/botones/6';
 
     jQuery(document).bind('button-img-option', function() {
         jQuery('.image_name').html('');
+        jQuery('.image_uploder').hide();
         if ($options.length > 0) {
             jQuery('.image_uploder').show();
             jQuery('.image_name').append('<option value="">select image name</option>');
@@ -100,19 +100,20 @@ $butoon_url = $image_category . '/botones/6';
     });
 
     jQuery(document).bind('uploaded-images', function() {
-        if ($uploded_images.length > 0) {
             jQuery('#images').html('');
+            jQuery('.images_hading').hide();
+        if ($uploded_images.length > 0) {
             jQuery('.images_hading').show();
             jQuery.each($uploded_images, function(key, value) {
-                var tmp_html = '<div class="row">'
-                        + '<div class="col-sm-3">'
-                        + '<img width="100" height="100" src="' + value.image_src + '">'
+                var tmp_html = '<div class="data_main">'
+                        + '<div class="image_main">'
+                        + '<img width="70" height="70" src="' + value.image_src + '">'
                         + '</div>'
-                        + '<div class="col-sm-3">'
+                        + '<div class="label_main">'
                         + '<span>' + value.imade_lable + '</span>'
                         + '</div>'
-                        + '<div class="col-sm-3">'
-                        + '<span> <a href="javascript:;" class="delete_image" data-img_id="' + value.image_id + '" data-side="' + value.side + '"> Delete </a></span>'
+                        + '<div class="label_main">'
+                        + '<span> <a href="javascript:;" class="delete_image fa fa-trash fa-2x" data-img_id="' + value.image_id + '" data-side="' + value.side + '"></a></span>'
                         + '</div>'
                         + '</div>';
                 jQuery('#images').append(tmp_html);
@@ -123,7 +124,8 @@ $butoon_url = $image_category . '/botones/6';
 </script>      
 <div class="wrap">
     <div class="shape-icon"></div>
-    <h2 class="shape-wrap">Button Images</h2>
+    <h2 class="shape-wrap">Button Images <a class="add-new-h2" href="admin.php?page=<?php echo $CurrentPage; ?>">Back</a>
+        </h2>
 </div>
 <div class="container">
     <div class="main_content">
@@ -159,19 +161,11 @@ $butoon_url = $image_category . '/botones/6';
                     </div>
 
                     <div class="col-sm-12 images_hading" style="display:none;">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <span> Image </span>
-                            </div> 
-
-                            <div class="col-sm-3">
-                                <span> Lable </span>
-                            </div> 
-
-                            <div class="col-sm-3">
-                                <span> Action </span>
-                            </div> 
-                        </div>
+                        <div class="top_bar_headings">
+				<label class="image_label">Images</label>
+				<label>Label</label>
+				<label>Action</label>
+			</div>
                         <div id="images">
                             
                         </div>

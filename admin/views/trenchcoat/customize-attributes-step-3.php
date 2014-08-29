@@ -302,7 +302,7 @@
         <div id="img_ojal_hilo">
             <div style="background: url(<?php echo $image_fabric_url ?>/big.jpg) no-repeat left top" class="fabric fabric-background"></div>
             <div class="hilo" style="background: url(<?php echo $image_category ?>/hilo/0/hilo.png)"></div>
-            <div style="background: url(<?php echo $button_url ?>/big.png) no-repeat scroll left top" class="boton boton-background"></div>
+            <div style="background: url(<?php echo $button_url ?>/big.jpg) no-repeat scroll left top" class="boton boton-background"></div>
             <div class="ojal" style="background: url(<?php echo $image_category ?>/ojal/0/ojal.png)"></div>
         </div>
         <div class="side_hoel_seletor attr-front">

@@ -18,12 +18,73 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class wca_buttons{
     
+    
+    /*
+     * @function get_button      $id= button id
+     * Get data of single buttons
+     */
+     function get_button($id){
+            global $wpdb;
+            $data=array();
+            $row = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$id'");
+            $data['name']=$row->name;
+            $data['color']=$row->color;
+            $data['status']=$row->status;
+            return $data;
+     }
+     
+     
+    /*
+     * @function delete_multi_buttons 
+     * $button_ids =  array of button ids 
+     * delete multiple buttons
+     */
+     function delete_multi_buttons($button_ids){
+            global $wpdb;
+            foreach($button_ids as $button_id){
+                wca_buttons::delete_button($button_id);
+            }
+            return true;
+     }
+     
+     
+     /*
+     * @function delete_multi_buttons 
+     * $button_id =   button id 
+     * delete multiple buttons
+     */
+     function delete_button($button_id){
+         global $wpdb;
+         include ABS_MODEL . 'master_attrs.php';
+         $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
+         $master_id=$masters['buttons'];
+         $image_dir=$category_dir.'/botones/'.$button_id;
+         if(delete_dir($image_dir)){
+              $result=$wpdb->query("DELETE FROM ".BUTTONS." 
+                                        WHERE id='$button_id' 
+                                    ");
+              
+               $result=$wpdb->query("DELETE FROM ".IMAGES_TABLE." 
+                                     WHERE master_id=$master_id
+                                       and row_id=$button_id
+                            ");
+         }
+         
+         return true;
+     }
+     
+     
+    /*
+     * @function save_buttons
+     * to add and update buttons
+     */
      public static function save_buttons($id=''){
          global $wpdb;
+         include ABS_MODEL . 'master_attrs.php';
          extract($_POST);  
-      
-            $category=1;
          
+             $category=1;
+             
              $data=array(
                         'name'=>$name,
                         'color'=>$color,
@@ -32,7 +93,7 @@ class wca_buttons{
            if($id==''){
                 $wpdb->insert(BUTTONS,$data);
                 $dir_id=$wpdb->insert_id;
-                $image_dir=ABS_WCA.'assets/images/3d/man/trenchcoat/botones/'.$dir_id;
+                $image_dir=$category_dir.'/botones/'.$dir_id;
                 if (!is_dir($image_dir)) {
                      mkdir($image_dir,777, true);
                 }
@@ -44,16 +105,12 @@ class wca_buttons{
             }
      }
      
-     function get_button($id){
-            global $wpdb;
-            $data=array();
-            $row = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$id'");
-            $data['name']=$row->name;
-            $data['color']=$row->color;
-            $data['status']=$row->status;
-            return $data;
-     }
      
+     
+     /*
+     * @function upload_buttons      $id= button id
+     * upload images for button
+     */
      function upload_buttons(){
          global $wpdb;
          include ABS_MODEL . 'master_attrs.php';
@@ -61,8 +118,9 @@ class wca_buttons{
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
          $master_id=$masters['buttons'];
         
-         $image_dir=ABS_WCA.'assets/images/3d/man/trenchcoat/botones/'.$dir_name;
-         $image_url=wca_image_url.'/3d/man/trenchcoat/botones/'.$dir_name;
+         $image_dir=$category_dir.'/botones/'.$dir_name;
+         $image_url= $category_url.'/botones/'.$dir_name;
+         
          if (!is_dir($image_dir)) {
                 mkdir($image_dir,777, true);
          }
@@ -81,7 +139,7 @@ class wca_buttons{
                 unlink($savepath);
          }
         
-         if(move_uploaded_file($upload['tmp_name'],$savepath)){
+         if(image_upload($upload['tmp_name'],$savepath,$image_name,$upload['name'])){
                 
                 
                 $ins=array(
@@ -99,7 +157,7 @@ class wca_buttons{
                 $uploded_images=uploaded_images($master_id,$row_id);
                 $remaing_images=array_diff_key($master_images[$master_id],$uploded_images);
                 $remaing_images=create_image_combo($remaing_images);
-                $uploded_image_section = uploaded_images_section($master_id, $row_id, $master_images[$master_id]);
+                $uploded_image_section = uploaded_images_section($master_id, $row_id, $master_images[$master_id],$image_url);
                 
                 $image_lable=$master_images[$master_id][$image_name];
                 
@@ -120,19 +178,26 @@ class wca_buttons{
          }
      }
      
-     
+     /*
+     * @function delete_images     
+     * delete images for button
+     */
       function delete_images(){
-          global $wpdb;
+        global $wpdb;
         include ABS_MODEL . 'master_attrs.php';
         $id=  mysql_real_escape_string($_POST[img_id]);
         $master_id=  mysql_real_escape_string($_POST[master_id]);
         $row_id=  mysql_real_escape_string($_POST[button_id]);
                  
-        $image_dir=ABS_WCA.'assets/images/3d/man/trenchcoat/botones/'.$row_id;
+        $image_dir=$category_dir.'/botones/'.$row_id;
+        $image_url=$category_url.'/botones/'.$row_id;
         $images_data=images_data($id); 
          $image_path="$image_dir/$images_data->image_name";
          
         if(unlink($image_path)){
+                $update=array('status'=>0);
+                $where=array('id'=>$row_id);
+                $wpdb->update(ZIPPER,$update,$where);
                 $result=$wpdb->query("DELETE FROM ".IMAGES_TABLE." 
                                      WHERE id='$id' 
                                        and master_id=$master_id
@@ -142,7 +207,7 @@ class wca_buttons{
                 $remaing_images=array_diff_key($master_images[$master_id],$uploded_images);
                 $remaing_images=create_image_combo($remaing_images);
                 
-                $uploded_image_section = uploaded_images_section($master_id, $row_id, $master_images[$master_id]);
+                $uploded_image_section = uploaded_images_section($master_id, $row_id, $master_images[$master_id],$image_url);
                 
                 $data=array();
                 $data['remaing']=$remaing_images;
@@ -155,6 +220,10 @@ class wca_buttons{
         
     }
     
+    /*
+     * @function active_button     
+     * Active button whose have all images
+     */
     function active_button(){
          global $wpdb;
          include ABS_MODEL . 'master_attrs.php';
@@ -170,7 +239,7 @@ class wca_buttons{
                  wca_buttons::do_active_button($row_id);
                 echo 0; 
              else:   
-                echo "Please all images for active button"; 
+                echo "Please upload all images for active button"; 
              endif; 
          }else{
              wca_buttons::do_active_button($row_id);
@@ -180,6 +249,10 @@ class wca_buttons{
     }
     
     
+    /*
+     * @function do_active_button     
+     * used in active_button
+     */
     function do_active_button($id){
         global $wpdb;
         $button = $wpdb->get_row("SELECT * from ".BUTTONS." where id='$id'");

@@ -106,18 +106,41 @@ define('wca_image_url', wca_url.'/assets/images');                  //url of pub
 
 /*Start :- define master tables*/
 
-define('IMAGES_TABLE', $wpdb->prefix.'wca_images');                  //Butoon master
-define('BUTTONS', $wpdb->prefix.'wca_buttons');                  //Butoon master
+define('IMAGES_TABLE', $wpdb->prefix.'wca_images');             //Butoon master
+define('BUTTONS', $wpdb->prefix.'wca_buttons');                 //Butoon master
+define('ZIPPER', $wpdb->prefix.'wca_zippers');                  //zipper master
+define('LINING', $wpdb->prefix.'wca_linings');                  //Lining master
+define('BUTTON_HILO', $wpdb->prefix.'wca_button_hilo');         //Button hilo master
+define('BUTTON_OJAL', $wpdb->prefix.'wca_button_ojal');         //Button ojal master
 
 
 /*end :- define master tables*/
 
 wca_load::controller('wca_buttons');
 add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
-add_action( 'wp_ajax_delete_image', 'wca_buttons::delete_images'); 
+add_action( 'wp_ajax_delete_button_image', 'wca_buttons::delete_images'); 
 add_action( 'wp_ajax_active_button', 'wca_buttons::active_button'); 
+
+wca_load::controller('wca_zippers');
+add_action( 'wp_ajax_upload_zipper_image', 'wca_zippers::upload_image'); 
+add_action( 'wp_ajax_delete_zipper_image', 'wca_zippers::delete_images'); 
+add_action( 'wp_ajax_active_zipper', 'wca_zippers::active_inactive'); 
  
- 
+wca_load::controller('wca_lining');
+add_action( 'wp_ajax_upload_lining_image', 'wca_lining::upload_image'); 
+add_action( 'wp_ajax_delete_lining_image', 'wca_lining::delete_images'); 
+add_action( 'wp_ajax_active_lining', 'wca_lining::active_inactive'); 
+
+wca_load::controller('wca_button_hilo');
+add_action( 'wp_ajax_upload_button_hilo_image', 'wca_button_hilo::upload_image'); 
+add_action( 'wp_ajax_delete_button_hilo_image', 'wca_button_hilo::delete_images'); 
+add_action( 'wp_ajax_active_button_hilo', 'wca_button_hilo::active_inactive'); 
+
+wca_load::controller('wca_button_ojal');
+add_action( 'wp_ajax_upload_button_ojal_image', 'wca_button_ojal::upload_image'); 
+add_action( 'wp_ajax_delete_button_ojal_image', 'wca_button_ojal::delete_images'); 
+add_action( 'wp_ajax_active_button_ojal', 'wca_button_ojal::active_inactive');
+
  
 //add_action( 'wp_ajax_upload_button', 'upload_buttons');
 function upload_buttons(){

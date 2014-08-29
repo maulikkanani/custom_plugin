@@ -350,7 +350,7 @@ $all_fabric_data = array(
         'ref' => '21-482',
         'composition' => '52% cotton & 48% polyester',
         'price' => '217',
-        'button' => '1',
+        'button' => '7',
         'zipper' => '1',
         'lining' => '1',
     ),
@@ -824,7 +824,7 @@ $plugins_url = plugins_url('woocommerce-custom-attribute');
 $category = 'trenchcoat';    // Current category                                    
 $fabric = $default_values['wca_trenchcoat_fabric_type'];          // Current fabric
 $button = $all_fabric_data[$fabric]['button'];                   // Button for current fabric 
-$button = $all_fabric_data[$fabric]['zipper'];                   // Zipper for current fabric 
+$zipper = $all_fabric_data[$fabric]['zipper'];                   // Zipper for current fabric 
 
 $image_category = wca_image_url . "/3d/man/$category";           // category image url
 $image_fabric_url = "$image_category/fabric/$fabric";            // category fabric image url

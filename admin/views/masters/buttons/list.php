@@ -4,7 +4,7 @@
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
-global $wpdb, $include, $pluginDir, $table, $current_tab_url, $unique, $master_id;
+global $wpdb, $include, $pluginDir, $table, $current_page_url, $unique, $master_id, $cbid;
 
 extract($_POST);
 
@@ -15,21 +15,23 @@ $cbid = 'button_id';
 $header_botton = 'Add Button';
 $CurrentPage = $_REQUEST['page'];
 $siteurl = get_bloginfo('siteurl');
-$current_tab_url = $siteurl . '/wp-admin/admin.php?page=' . $CurrentPage . '&action=image_add';
+$image_form_url = $siteurl . '/wp-admin/admin.php?page=' . $CurrentPage . '&action=image_add&id='.$_GET['id'];
+$current_page_url = $siteurl . '/wp-admin/admin.php?page=' . $CurrentPage ;
 $data['form_button_value'] = "Add";
 
-function redirect() {
-    global $current_tab_url;
-    echo '<script type="text/javascript">
-            window.location="' . $current_tab_url . '";
-    </script>';
-    exit;
-}
+include ABS_WCA . "admin/views/masters/buttons/grid.php";
+require_once( ABS_WCA . 'admin/includes/wca_grid_data.php' );
+$Buttons_grid = new Wca_Grid_Data($arg);
+$Buttons_grid->registerMethod('CreateQuery');
+$Buttons_grid->registerMethod('CreteList');
+$Buttons_grid->registerMethod('BluckAction');
+$Buttons_grid->prepare_items();
+$unique = $Buttons_grid->UniqueKey;
 
 /* Start:- In this you van INSERT your data to your table */
 if (isset($_POST['submit']) && $_POST['submit'] == 'Add'):
     wca_buttons::save_buttons();
-    redirect();
+    wp_redirect($image_form_url);
 endif;
 /* End:- In this you van insert your data to your table */
 
@@ -37,12 +39,24 @@ endif;
 if (isset($_POST['submit']) && $_POST['submit'] == 'Update'):
     $button_id = mysql_real_escape_string($_GET['id']);
     wca_buttons::save_buttons($button_id);
-    redirect();
+    wp_redirect($image_form_url);
 endif;
 /* END:- In this you van UPDATE your data to your table */
 
-/* Start:- set varialbel for eit form */
-if (isset($_GET['action']) && $_GET['action'] == 'edit'):
+
+/* Start:- In this you can delete data to your table */
+if ($Buttons_grid->current_action() == 'dodelete'):
+     if($_POST['delete_option']=='delete'){
+             $button_ids=array_map('mysql_real_escape_string', $_REQUEST[$cbid]);   
+             wca_buttons::delete_multi_buttons($button_id);
+     }
+     wp_redirect($current_page_url);
+endif;
+/* end :- In this you can delete data to your table */
+
+
+/* Start:- set varialbel for edit form */
+if ($Buttons_grid->current_action() == 'edit'):
     $form_titel = "Edit button";
     ?>
     <div class="wrap">
@@ -61,8 +75,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit'):
 endif;
 /* End:- set varialbel for edit form */
 
-/* Form:- Start form for insert */
-if ($_GET['action'] == "add") {
+/* Start:- Start form for insert */
+if ($Buttons_grid->current_action() == "add") {
     $form_titel = "Add new button";
     $form_button = 'Add';
     $default_values = '[]';
@@ -75,22 +89,21 @@ if ($_GET['action'] == "add") {
     include ABS_WCA . "admin/views/masters/buttons/add.php";
     exit;
 }
+/* end :- Start form for insert */
 
-if ($_GET['action'] == "image_add") {
+/* Start:- Start form for Image add*/
+if ($Buttons_grid->current_action() == "image_add") {
     include ABS_WCA . "admin/views/masters/buttons/image_add.php";
     exit;
 }
-/* End:- Start form for insert and update */
+/* end:- Start form for Image add*/
 
-include ABS_WCA . "admin/views/masters/buttons/grid.php";
-require_once( ABS_WCA . 'admin/includes/wca_grid_data.php' );
-$ListTable = new Wca_Grid_Data($arg);
-$ListTable->registerMethod('CreateQuery');
-$ListTable->registerMethod('CreteList');
-$ListTable->registerMethod('BluckAction');
-$ListTable->prepare_items();
-$unique = $ListTable->UniqueKey;
-getview($ListTable);
+/*start:- delete form */
+if ($Buttons_grid->current_action()== 'delete'){
+    include ABS_WCA . "admin/views/masters/buttons/delete.php";
+    exit;
+}
+/*End:- delete form */
 ?>
 <div class="wrap"> 
 
@@ -110,12 +123,12 @@ getview($ListTable);
 
     <form id="Narola-List-filter" action="" method="get">
         <input type="hidden" name="page" value="<?php echo $CurrentPage ?>" />
-        <?php $ListTable->search_box('Search', 'search'); // this is for display search area  ?>
+        <?php $Buttons_grid->search_box('Search', 'search'); // this is for display search area  ?>
     </form>
 
     <form id="Narola-List-filter" method="post">
         <input type="hidden" name="page" value="<?php echo $CurrentPage; ?>" />
-        <?php $ListTable->display(); // this is for display Grid   ?>
+        <?php $Buttons_grid->display(); // this is for display Grid   ?>
     </form>
 </div>
 

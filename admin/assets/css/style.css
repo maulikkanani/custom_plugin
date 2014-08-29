@@ -556,6 +556,41 @@ div.fabric_box_3d div.image a {
     width: 100%;
 }
 
+/*given by DS for image grid*/
+.top_bar_headings label{
+    font-weight: bold;
+    font-size: 14px;
+    width: 33%;
+    float: left;
+}
+.data_main > div{
+    width: 33%;
+    float: left;
+}
+.image_label{
+    width: 70px !important;
+    margin-right: 15px;
+}
+.image_main{
+    width: 70px !important;
+    height: 70px;
+    border: 1px solid #ddd;
+    margin-right: 15px;
+}
+.top_bar_headings{
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.data_main{
+    clear: both;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.label_main a{
+    color: #bdbdbd;
+    text-decoration: none;
+}
+
 /*---------------Added by mk Start-----------------------*/
 .pull-right {
     float: right !important;

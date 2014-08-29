@@ -158,7 +158,6 @@ class woocommerce_custom_attribute_admin {
      * @return    null    Return early if no settings page is registered.
      */
     public function enqueue_admin_scripts() {
-        
             wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/comman.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('jQuery-ui', plugins_url('assets/js/jquery-ui.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
@@ -173,7 +172,8 @@ class woocommerce_custom_attribute_admin {
      *
      * @since    1.0.0
      */
-    public function add_plugin_admin_menu() {
+    
+    public function add_plugin_admin_menu(){
 
         /*
          * Add a settings page for this plugin to the Settings menu.
@@ -197,10 +197,11 @@ class woocommerce_custom_attribute_admin {
           array( $this, 'display_plugin_admin_page' )
           ); */
         $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'),59);
-
-
-
-        add_submenu_page('woo-custome-attribute', 'Buttons', 'Buttons', 'manage_options', 'button_thread', array($this, 'button_thread'));
+        add_submenu_page('woo-custome-attribute', 'Buttons', 'Buttons', 'manage_options', 'button', array($this, 'button_master'));
+        add_submenu_page('woo-custome-attribute', 'Zipper', 'Zipper', 'manage_options', 'zipper', array($this, 'zipper_master'));
+        add_submenu_page('woo-custome-attribute', 'Linings', 'Linings', 'manage_options', 'lining', array($this, 'lining_master'));
+        add_submenu_page('woo-custome-attribute', 'Button hilo', 'Button hilo', 'manage_options', 'Buttonhilo', array($this, 'button_hilo_master'));
+        add_submenu_page('woo-custome-attribute', 'Button ojal', 'Button ojal', 'manage_options', 'Buttonojal', array($this, 'button_ojal_master'));
     }
 
     /**
@@ -216,8 +217,24 @@ class woocommerce_custom_attribute_admin {
         include_once( 'views/admin.php' );
     }
 
-    public function button_thread() {
+    public function button_master() {
         include_once 'views/masters/buttons/list.php';
+    }
+    
+    public function zipper_master() {
+        include_once 'views/masters/zippers/list.php';
+    }
+    
+    public function lining_master() {
+        include_once 'views/masters/linings/list.php';
+    }
+    
+    public function button_hilo_master() {
+        include_once 'views/masters/button_hilo/list.php';
+    }
+
+    public function button_ojal_master() {
+        include_once 'views/masters/button_ojal/list.php';
     }
 
     /**

@@ -40,8 +40,8 @@ include ABS_MODEL . 'master_attrs.php';
 
                     <div class="form-group">
                         <input type="hidden" name="action" value="insert">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input class="button button-primary button-large" type="submit" value="<?= $form_button ?>" name="submit">
+                        <div class="col-sm-offset-2 col-sm-5">
+                            <input class="button button-primary button-large pull-right" type="submit" value="<?= $form_button ?>" name="submit">
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
         jQuery.ajax({
             url: ajax_url,
             type: "POST",
-            data: {action:'active_button', button_id: button_id,master_id: master_id},
+            data: {action:'buttons_active_button', button_id: button_id,master_id: master_id},
             success: function(data) {
                 if(data==0){
                      $this.html('<i class="fa fa-circle fa-lg active_img"></i>');
@@ -28,7 +28,7 @@
 /* Start:- Columns with DB table fields */
 $columns = array(
     'name' => array('lable' => 'Button Name', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
-    'color' => array('lable' => 'Last Name', 'sort' => true,),
+    'color' => array('lable' => 'color', 'sort' => true,),
     'active' => array('lable' => 'Active', 'sort' => false),
     'images' => array('lable' => 'Images', 'sort' => false),
 );
@@ -47,11 +47,11 @@ $arg = array(
 function getconformation($id) {
     global $wpdb, $table, $unique;
     $row = $wpdb->get_row("SELECT * from $table where $unique='$id'");
-    return $row->firstname . ' ' . $row->lastname;
+    return $row->name;
 }
 
 function CreteList($item, $column_name) {
-    global $current_tab_url, $master_id, $wpdb;
+    global $current_page_url, $master_id, $wpdb;
     include ABS_MODEL . 'master_attrs.php';
     switch ($column_name):
         case 'active':
@@ -71,7 +71,7 @@ function CreteList($item, $column_name) {
         case 'images':
             ?>
             <div class="col-sm-5">
-                <a href="<?php echo $current_tab_url . '&action=image_add&id=' . $item['id'] ?>" ><i class="fa fa-image fa-3x"></i></a> 
+                <a href="<?php echo $current_page_url .'&action=image_add&id=' . $item['id'] ?>" ><i class="fa fa-image fa-3x"></i></a> 
             </div>
 
             <?php
@@ -84,7 +84,7 @@ function CreteList($item, $column_name) {
 
 function BluckAction() {
     $actions = array(
-        'delete' => 'Delete All', // delete is a name of combo && Delete ALL is a lable of combo
+        //'delete' => 'Delete All', // delete is a name of combo && Delete ALL is a lable of combo
             //'active' => 'Active All',    // please uncomment this and get code for active section
     );
     return $actions;
@@ -108,54 +108,7 @@ function getview($ListTable) {
 
     switch ($ListTable->current_action()):
 
-        case 'delete':
-            if (is_array($_REQUEST[$cbid])):
-                $ids = array_map('mysql_real_escape_string', $_REQUEST[$cbid]);
-            else:
-                $ids = array(mysql_real_escape_string($_REQUEST[$cbid]));
-            endif;
-            ?>
-            <form action="" method="post" name="deletesingle" id="deletesingle">
-                <div class="wrap">
-                    <div id="icon-users" class="icon32"><br/></div>
-                    <h2><?php _e('Delete Test'); ?></h2>
-                    <p><?php echo _n('You have specified this Test for deletion:', 'Please check the user:', count($id)); ?></p>
-                    <ul>
-                        <?php
-                        foreach ($ids as $id):
-                            $id = (int) $id;
-                            echo "<li><input type=\"hidden\" id=\"Narola-List\" name=\"" . $cbid . "[]\" value=\"" . esc_attr($id) . "\" />" . "<strong>ID</strong>:" . $id . "-><strong>Name</strong>:" . getconformation($id) . "</li>\n";
-                        endforeach;
-                        ?>
-                    </ul>
-                    <?php if ($id) : ?>
-                        <fieldset><p><legend><?php echo _n('Are you sure to delete this Test?', 'Are you sure to delete this Test?', $go_delete); ?></legend></p>
-                            <ul style="list-style:none;">
-                                <li>
-                                    <label>
-                                        <input type="radio" id="delete_option0" name="delete_option" value="delete" />
-                                        <?php _e('Delete Test.'); ?>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="radio" id="delete_option0" name="delete_option" value="cancel" checked="checked" />
-                                        <?php _e('cancel.'); ?>
-                                    </label>
-                                </li>
-                            </ul>
-                        </fieldset>
-                        <input type="hidden" name="action" value="dodelete" />
-                        <?php
-                        submit_button(__('Confirm all Process'), 'secondary');
-                    else :
-                        ?>
-                        <p><?php _e('There are no valid Test selected for deletion.'); ?></p>
-                    <?php endif; ?>
-                </div>
-            </form>
-            <?php
-            break;
+        
 
         case 'dodelete':
             $ids = array_map('mysql_real_escape_string', $_REQUEST[$cbid]);
