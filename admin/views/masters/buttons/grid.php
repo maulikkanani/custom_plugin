@@ -9,7 +9,7 @@
         jQuery.ajax({
             url: ajax_url,
             type: "POST",
-            data: {action:'buttons_active_button', button_id: button_id,master_id: master_id},
+            data: {action:'active_button', button_id: button_id,master_id: master_id},
             success: function(data) {
                 if(data==0){
                      $this.html('<i class="fa fa-circle fa-lg active_img"></i>');

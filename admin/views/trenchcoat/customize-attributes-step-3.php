@@ -308,109 +308,25 @@
         <div class="side_hoel_seletor attr-front">
             <label class="label_normal">Button threads</label>
             <div class="clearfix">
+                <?php foreach($button_threads as $button_thread){?>
                 <div href="javascript:;" class="color_selecter wca_buton_thread">
                     <a img_index="0" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/9.jpg" data-rel="1" class="color">
+                        <img src="<?php echo $image_category.'/hilo/'.$button_thread->id ?>/hilo_icon.jpg" data-rel="<?php echo $button_thread->id ?>" class="color">
                     </a>
                 </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="1" href="javascript:;" class="box_color color_item" >			
-                        <img src="<?php echo $man_url ?>/extras/colors/11.jpg" data-rel="2" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="2" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/12.jpg" data-rel="3" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/13.jpg" data-rel="4" class="color">
-                    </a>
-                </div>	
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/14.jpg" data-rel="5" class="color">
-                    </a>
-                </div>	
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/16.jpg" data-rel="6" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/17.jpg" data-rel="7" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/18.jpg" data-rel="8" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a img_index="3" href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/19.jpg" data-rel="9" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/25.jpg" data-rel="10" class="color">
-                    </a>
-                </div>														
+                <?php }?>														
             </div>
             <label class="label_normal">Button hoels</label>
             <div class="clearfix">
+                
+                <?php foreach($button_holes as $button_hole){?>
                 <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/9.jpg" data-rel="1" class="color">
+                    <a img_index="0" href="javascript:;" class="box_color color_item" >
+                        <img src="<?php echo $image_category.'/ojal/'.$button_hole->id ?>/ojal_icon.jpg" data-rel="<?php echo $button_hole->id ?>" class="color">
                     </a>
                 </div>
-                <div href="javascript:;" class="color_selecter  wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >			
-                        <img src="<?php echo $man_url ?>/extras/colors/11.jpg" data-rel="2" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter  wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/12.jpg" data-rel="3" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/13.jpg" data-rel="4" class="color">
-                    </a>
-                </div>	
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/14.jpg" data-rel="5" class="color">
-                    </a>
-                </div>	
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/16.jpg" data-rel="6" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/17.jpg" data-rel="7" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/18.jpg" data-rel="8" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/19.jpg" data-rel="9" class="color">
-                    </a>
-                </div>
-                <div href="javascript:;" class="color_selecter wca_buton_hole_thread">
-                    <a href="javascript:;" class="box_color color_item" >
-                        <img src="<?php echo $man_url ?>/extras/colors/25.jpg" data-rel="10" class="color">
-                    </a>
-                </div>														
+                <?php }?>
+                												
             </div>
         </div>	
     </div>	

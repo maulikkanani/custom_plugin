@@ -33,8 +33,8 @@ if ($attrs != '') {
         'wca_trenchcoat_elbow_patch' => '1',
         'wca_elbow_patch' => '2',
         'wca_trenchcoat_btn_thread_apply' => 'all',
-        'wca_buton_thread' => '6',
-        'wca_buton_hole_thread' => '6',
+        'wca_buton_thread' => '1',
+        'wca_buton_hole_thread' => '1',
         'wca_category' => 'trenchcote',
     );
 }
@@ -817,10 +817,13 @@ $embroidary_attributes = array(
 $embroidary_attributes = json_encode($embroidary_attributes);
 /* End :- Array for ste3 configration embroidery  fonts and colors */
 
-
-
+$button_threads=$wpdb->get_results("select * from ".BUTTON_HILO." where status='1'");
+$button_holes=$wpdb->get_results("select * from ".BUTTON_OJAL." where status='1'");
 
 $plugins_url = plugins_url('woocommerce-custom-attribute');
+
+
+
 $category = 'trenchcoat';    // Current category                                    
 $fabric = $default_values['wca_trenchcoat_fabric_type'];          // Current fabric
 $button = $all_fabric_data[$fabric]['button'];                   // Button for current fabric 

@@ -197,6 +197,7 @@ class woocommerce_custom_attribute_admin {
           array( $this, 'display_plugin_admin_page' )
           ); */
         $this->plugin_screen_hook_suffix = add_menu_page('Fabric Master', 'Woo Attributes', 'manage_options', 'woo-custome-attribute', array($this, 'attributes_master'), plugins_url('woocommerce-custom-attribute/admin/assets/images/woo-custome_attribute.png'),59);
+        add_submenu_page('woo-custome-attribute', 'Fabric', 'Fabric', 'manage_options', 'fabric', array($this, 'fabric_master'));
         add_submenu_page('woo-custome-attribute', 'Buttons', 'Buttons', 'manage_options', 'button', array($this, 'button_master'));
         add_submenu_page('woo-custome-attribute', 'Zipper', 'Zipper', 'manage_options', 'zipper', array($this, 'zipper_master'));
         add_submenu_page('woo-custome-attribute', 'Linings', 'Linings', 'manage_options', 'lining', array($this, 'lining_master'));
@@ -214,6 +215,9 @@ class woocommerce_custom_attribute_admin {
     }
 
     public function attributes_master() {
+        include_once( 'views/admin.php' );
+    }
+    public function fabric_master() {
         include_once( 'views/admin.php' );
     }
 
