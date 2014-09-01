@@ -94,7 +94,7 @@ class wca_button_hilo{
                 $dir_id=$wpdb->insert_id;
                 $image_dir=$category_dir.'/hilo/'.$dir_id;
                 if (!is_dir($image_dir)) {
-                     mkdir($image_dir,777, true);
+                     mkdir($image_dir,0777, true);
                 }
                 $_SESSION['msg']="Color Added successfully";
                 return $dir_id;
@@ -122,7 +122,7 @@ class wca_button_hilo{
          $image_url=$category_url.'/hilo/'.$dir_name;
          
          if (!is_dir($image_dir)) {
-                mkdir($image_dir,777, true);
+                mkdir($image_dir,0777, true);
          }
          $upload=$_FILES['files'];
          

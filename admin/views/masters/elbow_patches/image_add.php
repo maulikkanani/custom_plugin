@@ -8,7 +8,7 @@ $uploded_images = uploaded_images($master_id, $row_id);
 $images = array_diff_key($master_images[$master_id], $uploded_images);
 $images = create_image_combo($images);
 $images = json_encode($images);
-$image_url=$category_url.'/zipper/'.$row_id;
+$image_url=$category_url.'/patches/'.$row_id;
 $uploded_image_section = uploaded_images_section($master_id, $row_id,$master_images[$master_id],$image_url);
 $uploded_image_section = json_encode($uploded_image_section);
 
@@ -32,7 +32,7 @@ $butoon_url = $image_category . '/botones/6';
             } else {
                 jQuery('#progress').show();
             }
-            data.formData = {action: 'upload_zipper_image', id: row_id, image_name: jQuery('.image_name').val()};
+            data.formData = {action: 'upload_elbow_patches_image', id: row_id, image_name: jQuery('.image_name').val()};
         });
 
         jQuery('#fileupload').fileupload({
@@ -67,7 +67,7 @@ $butoon_url = $image_category . '/botones/6';
                 jQuery.ajax({
                     url: ajax_url,
                     type: "POST",
-                    data: {action:'delete_zipper_image',img_id:img_id,master_id:master_id,row_id:row_id,side:side},
+                    data: {action:'delete_elbow_patches_image',img_id:img_id,master_id:master_id,row_id:row_id,side:side},
                     success:function(data){
                         var data=jQuery.parseJSON(data);
                         $options =data.remaing;

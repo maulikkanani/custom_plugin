@@ -6,7 +6,7 @@
  *
  * @author      Nalola infotech
  * @category 	Trench coat
- * @package 	woocommerce-custom-attribute/admin/controller/wca_lining
+ * @package 	woocommerce-custom-attribute/admin/controller/wca_fabric
  * @version     1.0.0
  */
 
@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 /**
- * wca_lining
+ * wca_fabric
  */
-class wca_lining{
+class wca_fabric{
     
      /*
      * @function get_single      $id= row id
@@ -25,7 +25,7 @@ class wca_lining{
     function get_single_row($id){
             global $wpdb;
             $data=array();
-            $row = $wpdb->get_row("SELECT * from ".LINING." where id='$id'");
+            $row = $wpdb->get_row("SELECT * from ".FABRICS." where id='$id'");
             $data['titel']=$row->titel;
             $data['color']=$row->color;
             $data['pattern']=$row->pattern;
@@ -35,6 +35,50 @@ class wca_lining{
             return $data;
      }
      
+     function get_active_buttons(){
+            global $wpdb;
+            $data=array();
+            $rows = $wpdb->get_results("SELECT * from ".BUTTONS." where status='1'");
+            if(count($rows)>0){
+                foreach ($rows as $row){
+                    $data[]=array(
+                          'id'=>$row->id,
+                           'name'=>$row->name
+                    );
+                }
+            }
+            return $data;
+     }
+     
+     function get_active_zippers(){
+            global $wpdb;
+            $data=array();
+            $rows = $wpdb->get_results("SELECT * from ".ZIPPER." where status='1'");
+            if(count($rows)>0){
+                foreach ($rows as $row){
+                    $data[]=array(
+                          'id'=>$row->id,
+                           'name'=>$row->name
+                    );
+                }
+            }
+            return $data;
+     }
+     
+     function get_active_linings(){
+            global $wpdb;
+            $data=array();
+            $rows = $wpdb->get_results("SELECT * from ".LINING." where status='1'");
+            if(count($rows)>0){
+                foreach ($rows as $row){
+                    $data[]=array(
+                          'id'=>$row->id,
+                           'name'=>$row->titel
+                    );
+                }
+            }
+            return $data;
+     }
      
     /*
      * @function delete_multiple 
@@ -59,10 +103,10 @@ class wca_lining{
          global $wpdb;
          include ABS_MODEL . 'master_attrs.php';
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
-         $master_id=$masters['lining'];
+         $master_id=$masters['fabric'];
          $image_dir=$category_dir.'/linings/'.$id;
          if(delete_dir($image_dir)){
-              $result=$wpdb->query("DELETE FROM ".LINING." 
+              $result=$wpdb->query("DELETE FROM ".FABRICS." 
                                         WHERE id='$id' 
                                     ");
               
@@ -97,7 +141,7 @@ class wca_lining{
                         );
              
            if($id==''){
-                $wpdb->insert(LINING,$data);
+                $wpdb->insert(FABRICS,$data);
                 $dir_id=$wpdb->insert_id;
                 $image_dir=$category_dir.'/linings/'.$dir_id;
                 if (!is_dir($image_dir)) {
@@ -107,7 +151,7 @@ class wca_lining{
                 return $dir_id;
             }else{
                 $where=array('id'=>$id);
-                $wpdb->update(LINING,$data,$where);
+                $wpdb->update(FABRICS,$data,$where);
                 $_SESSION['msg']="Color Updated successfully";
             }
      }
@@ -123,7 +167,7 @@ class wca_lining{
          include ABS_MODEL . 'master_attrs.php';
          
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
-         $master_id=$masters['lining'];
+         $master_id=$masters['fabric'];
         
          $image_dir=$category_dir.'/linings/'.$dir_name;
          $image_url=$category_url.'/linings/'.$dir_name;
@@ -206,7 +250,7 @@ class wca_lining{
                 
                 $update=array('status'=>0);
                 $where=array('id'=>$row_id);
-                $wpdb->update(LINING,$update,$where);
+                $wpdb->update(FABRICS,$update,$where);
                 
                 $result=$wpdb->query("DELETE FROM ".IMAGES_TABLE." 
                                      WHERE id='$id' 
@@ -243,13 +287,13 @@ class wca_lining{
          $total_images = count($master_images[$master_id]);
          
          
-         $lining = $wpdb->get_row("SELECT * from ".LINING." where id='$row_id'");
-         if($lining->status==0){
+         $fabric = $wpdb->get_row("SELECT * from ".FABRICS." where id='$row_id'");
+         if($fabric->status==0){
              if($uploded_image==$total_images):
                  self::do_active_inactive($row_id);
                 echo 0; 
              else:   
-                echo "Please upload all images for active Lining"; 
+                echo "Please upload all images for active Fabric"; 
              endif; 
          }else{
              self::do_active_inactive($row_id);
@@ -265,15 +309,15 @@ class wca_lining{
      */
     function do_active_inactive($id){
         global $wpdb;
-        $lining = $wpdb->get_row("SELECT * from ".LINING." where id='$id'");
-        if($lining->status==0){
+        $fabric = $wpdb->get_row("SELECT * from ".FABRICS." where id='$id'");
+        if($fabric->status==0){
             $update=array('status'=>1);
         }else{
             $update=array('status'=>0);
         }
         
         $where=array('id'=>$id);
-        $wpdb->update(LINING,$update,$where);
+        $wpdb->update(FABRICS,$update,$where);
     }
      
 }

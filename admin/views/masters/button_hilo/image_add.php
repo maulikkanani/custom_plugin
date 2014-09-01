@@ -40,6 +40,7 @@ $butoon_url = $image_category . '/botones/6';
             dataType: 'json',
             done: function(e, data) {
                 jQuery('#progress').hide();
+                jQuery('#progress .progress-bar').css('width','0%');
                 $options = data.result.remaing;
                 jQuery('.image_name').html();
                 jQuery(document).trigger('img-option');
@@ -129,7 +130,7 @@ $butoon_url = $image_category . '/botones/6';
 </div>
 <div class="container">
     <div class="main_content">
-        <div class="col-sm-13">
+        <div class="col-sm-12">
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="form-group image_uploder" style="display:none">

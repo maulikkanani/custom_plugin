@@ -6,7 +6,7 @@
  *
  * @author      Nalola infotech
  * @category 	Trench coat
- * @package 	woocommerce-custom-attribute/admin/controller/wca_lining
+ * @package 	woocommerce-custom-attribute/admin/controller/wca_elbow_patches
  * @version     1.0.0
  */
 
@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 /**
- * wca_lining
+ * wca_elbow_patches
  */
-class wca_lining{
+class wca_elbow_patches{
     
      /*
      * @function get_single      $id= row id
@@ -25,12 +25,9 @@ class wca_lining{
     function get_single_row($id){
             global $wpdb;
             $data=array();
-            $row = $wpdb->get_row("SELECT * from ".LINING." where id='$id'");
-            $data['titel']=$row->titel;
+            $row = $wpdb->get_row("SELECT * from ".ELBOW_PATCHES." where id='$id'");
+            $data['name']=$row->name;
             $data['color']=$row->color;
-            $data['pattern']=$row->pattern;
-            $data['material']=$row->material;
-            $data['price']=$row->price;
             $data['status']=$row->status;
             return $data;
      }
@@ -59,10 +56,10 @@ class wca_lining{
          global $wpdb;
          include ABS_MODEL . 'master_attrs.php';
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
-         $master_id=$masters['lining'];
-         $image_dir=$category_dir.'/linings/'.$id;
+         $master_id=$masters['elbow_patches'];
+         $image_dir=$category_dir.'/patches/'.$id;
          if(delete_dir($image_dir)){
-              $result=$wpdb->query("DELETE FROM ".LINING." 
+              $result=$wpdb->query("DELETE FROM ".ELBOW_PATCHES." 
                                         WHERE id='$id' 
                                     ");
               
@@ -88,18 +85,14 @@ class wca_lining{
              $category=1;
              
              $data=array(
-                        'titel'=>$titel,
+                        'name'=>$name,
                         'color'=>$color,
-                        'pattern'=>$pattern,
-                        'material'=>$material,
-                        'price'=>$price,
                         'category_id'=>$category,
-                        );
-             
+                       );
            if($id==''){
-                $wpdb->insert(LINING,$data);
+                $wpdb->insert(ELBOW_PATCHES,$data);
                 $dir_id=$wpdb->insert_id;
-                $image_dir=$category_dir.'/linings/'.$dir_id;
+                $image_dir=$category_dir.'/patches/'.$dir_id;
                 if (!is_dir($image_dir)) {
                      mkdir($image_dir,0777, true);
                 }
@@ -107,7 +100,7 @@ class wca_lining{
                 return $dir_id;
             }else{
                 $where=array('id'=>$id);
-                $wpdb->update(LINING,$data,$where);
+                $wpdb->update(ELBOW_PATCHES,$data,$where);
                 $_SESSION['msg']="Color Updated successfully";
             }
      }
@@ -123,10 +116,10 @@ class wca_lining{
          include ABS_MODEL . 'master_attrs.php';
          
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
-         $master_id=$masters['lining'];
+         $master_id=$masters['elbow_patches'];
         
-         $image_dir=$category_dir.'/linings/'.$dir_name;
-         $image_url=$category_url.'/linings/'.$dir_name;
+         $image_dir=$category_dir.'/patches/'.$dir_name;
+         $image_url=$category_url.'/patches/'.$dir_name;
          
          if (!is_dir($image_dir)) {
                 mkdir($image_dir,0777, true);
@@ -196,8 +189,8 @@ class wca_lining{
         $master_id=  mysql_real_escape_string($_POST[master_id]);
         $row_id=  mysql_real_escape_string($_POST[row_id]);
                  
-         $image_dir=$category_dir.'/linings/'.$row_id;
-         $image_url=$category_url.'/linings/'.$row_id;
+         $image_dir=$category_dir.'/patches/'.$row_id;
+         $image_url=$category_url.'/patches/'.$row_id;
          
          $images_data=images_data($id); 
          $image_path="$image_dir/$images_data->image_name";
@@ -206,7 +199,7 @@ class wca_lining{
                 
                 $update=array('status'=>0);
                 $where=array('id'=>$row_id);
-                $wpdb->update(LINING,$update,$where);
+                $wpdb->update(ELBOW_PATCHES,$update,$where);
                 
                 $result=$wpdb->query("DELETE FROM ".IMAGES_TABLE." 
                                      WHERE id='$id' 
@@ -243,13 +236,13 @@ class wca_lining{
          $total_images = count($master_images[$master_id]);
          
          
-         $lining = $wpdb->get_row("SELECT * from ".LINING." where id='$row_id'");
-         if($lining->status==0){
+         $elbow_patches = $wpdb->get_row("SELECT * from ".ELBOW_PATCHES." where id='$row_id'");
+         if($elbow_patches->status==0){
              if($uploded_image==$total_images):
                  self::do_active_inactive($row_id);
                 echo 0; 
              else:   
-                echo "Please upload all images for active Lining"; 
+                echo "Please upload all images for active elbow patches"; 
              endif; 
          }else{
              self::do_active_inactive($row_id);
@@ -265,15 +258,15 @@ class wca_lining{
      */
     function do_active_inactive($id){
         global $wpdb;
-        $lining = $wpdb->get_row("SELECT * from ".LINING." where id='$id'");
-        if($lining->status==0){
+        $elbow_patches = $wpdb->get_row("SELECT * from ".ELBOW_PATCHES." where id='$id'");
+        if($elbow_patches->status==0){
             $update=array('status'=>1);
         }else{
             $update=array('status'=>0);
         }
         
         $where=array('id'=>$id);
-        $wpdb->update(LINING,$update,$where);
+        $wpdb->update(ELBOW_PATCHES,$update,$where);
     }
      
 }

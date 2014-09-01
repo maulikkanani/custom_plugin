@@ -40,6 +40,7 @@ $butoon_url = $image_category . '/botones/6';
             dataType: 'json',
             done: function(e, data) {
                 jQuery('#progress').hide();
+                jQuery('#progress .progress-bar').css('width','0%');
                 $options = data.result.remaing;
                 jQuery('.image_name').html();
                 jQuery(document).trigger('img-option');

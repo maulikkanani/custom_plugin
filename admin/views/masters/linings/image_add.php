@@ -40,6 +40,7 @@ $butoon_url = $image_category . '/botones/6';
             dataType: 'json',
             done: function(e, data) {
                 jQuery('#progress').hide();
+                jQuery('#progress .progress-bar').css('width','0%');
                 $options = data.result.remaing;
                 jQuery('.image_name').html();
                 jQuery(document).trigger('img-option');
@@ -129,16 +130,16 @@ $butoon_url = $image_category . '/botones/6';
 </div>
 <div class="container">
     <div class="main_content">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="form-group image_uploder" style="display:none">
-                        <label for="inputEmail3" class="col-sm-3 control-label">Images:</label>
+                        <label for="inputEmail3" class="col-sm-1 control-label">Images:</label>
                         <div class="col-sm-3">
                             <select class="image_name">
                             </select>
                         </div> 
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <span class="btn btn-success fileinput-button">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>Select files...</span>

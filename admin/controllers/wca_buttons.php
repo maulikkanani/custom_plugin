@@ -95,7 +95,7 @@ class wca_buttons{
                 $dir_id=$wpdb->insert_id;
                 $image_dir=$category_dir.'/botones/'.$dir_id;
                 if (!is_dir($image_dir)) {
-                     mkdir($image_dir,777, true);
+                     mkdir($image_dir,0777, true);
                 }
                 $_SESSION['msg']="Color Added successfully";
             }else{
@@ -122,7 +122,7 @@ class wca_buttons{
          $image_url= $category_url.'/botones/'.$dir_name;
          
          if (!is_dir($image_dir)) {
-                mkdir($image_dir,777, true);
+                mkdir($image_dir,0777, true);
          }
          $upload=$_FILES['files'];
          

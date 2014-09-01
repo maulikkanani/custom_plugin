@@ -16,6 +16,8 @@ $masters = array(
     'button_ojal' => '4',
     'lining' => '5',
     'fabric' => '6',
+    'neck_lining' => '7',
+    'elbow_patches' => '8',
 );
 
 
@@ -44,8 +46,8 @@ $master_images = array(
         'belt_sewing_fit0.png' => 'Belt Sewing Waisted Butoon thread ',
         'belt_sewing_fit1.png' => 'Belt Sewing straight Butoon thread ',
         'body_crossed_boton_standard.png' => 'Double breasted Butoon thread ',
-        'body_simple_boton_hide.png' => 'Single breasted Butoon thread ',
-        'body_simple_boton_standard.png' => 'Single breasted Hide Butoon thread ',
+        'body_simple_boton_standard.png' => 'Single breasted Butoon thread ',
+        'body_simple_boton_hide.png' => 'Single breasted Hide Butoon thread ',
         'shoulder.png' => 'Epaulettes Butoon thread ',
         'sleev.png' => 'Sleeves Buttons Butoon thread ',
         'hilo.png' => 'Main image Butoon thread ',
@@ -55,8 +57,8 @@ $master_images = array(
         'belt_sewing_fit0.png' => 'Belt Sewing Waisted Ojal',
         'belt_sewing_fit1.png' => 'Belt Sewing straight Ojal',
         'body_crossed_boton_standard.png' => 'Double breasted Ojal',
-        'body_simple_boton_hide.png' => 'Single breasted Ojal',
-        'body_simple_boton_standard.png' => 'Single breasted Hide Ojal',
+        'body_simple_boton_standard.png' => 'Single breasted Ojal',
+        'body_simple_boton_hide.png' => 'Single breasted Hide Ojal',
         'shoulder.png' => 'Epaulettes Ojal',
         'sleev.png' => 'Sleeves Buttons Ojal',
         'ojal.png' => 'Main image Ojal',
@@ -135,6 +137,14 @@ $master_images = array(
         'back_belt_sewing_fit0.png' => 'Back belt_sewing_fit0',
         'back_belt_sewing_fit1.png' => 'Back belt_sewing_fit1',
         'back_sleeve_tape.png' => 'Back sleeve_tape',
+    ),
+    '7' => array(
+        'neck_lining.png' => 'Neck Lining',
+        'neck_lining_icon.jpg' => 'Neck Lining Icon',
+    ),
+    '8' => array(
+        'elbow_patches.png' => 'Elbow patches',
+        'elbow_patches_icon.jpg' => 'Elbow Patches Icon',
     ),
 );
 

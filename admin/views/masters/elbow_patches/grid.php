@@ -9,7 +9,7 @@
         jQuery.ajax({
             url: ajax_url,
             type: "POST",
-            data: {action:'active_button_hilo', row_id: row_id,master_id: master_id},
+            data: {action:'active_elbow_patches', row_id: row_id,master_id: master_id},
             success: function(data) {
                 if(data==0){
                      $this.html('<i class="fa fa-circle fa-lg active_img"></i>');
@@ -27,7 +27,7 @@
 <?php
 /* Start:- Columns with DB table fields */
 $columns = array(
-    'name' => array('lable' => 'Button hilo Name', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
+    'name' => array('lable' => 'Titel', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
     'color' => array('lable' => 'Color', 'sort' => true,),
     'icon' => array('lable' => 'Icon', 'sort' => false),
     'active' => array('lable' => 'Active', 'sort' => false),
@@ -57,16 +57,16 @@ function CreteList($item, $column_name) {
     switch ($column_name):
         
         case 'icon':
-                $icon_path="$category_dir/hilo/$item[id]/hilo_icon.jpg";
+                $icon_path="$category_dir/patches/$item[id]/elbow_patches_icon.jpg";
                 if(file_exists($icon_path))
-                    echo "<img src='$category_url/hilo/$item[id]/hilo_icon.jpg' style='width: 25px;'>";        
+                    echo "<img src='$category_url/patches/$item[id]/elbow_patches_icon.jpg' style='width: 25px;'>";        
         break;
-    
+        
         case 'active':
             $total_images = count($master_images[$master_id]);
             $status = 'inactive_img';
             $upload_count = uploaded_images_count($master_id,$item['id']);
-            $data= wca_button_hilo::get_single_row($item['id']);
+            $data= wca_elbow_patches::get_single_row($item['id']);
             if ($total_images == $upload_count && $data['status']==1)
                 $status = 'active_img';
             ?>
@@ -92,7 +92,7 @@ function CreteList($item, $column_name) {
 
 function BluckAction() {
     $actions = array(
-           'delete' => 'Delete All', // delete is a name of combo && Delete ALL is a lable of combo
+            //'delete' => 'Delete All', // delete is a name of combo && Delete ALL is a lable of combo
             //'active' => 'Active All',    // please uncomment this and get code for active section
     );
     return $actions;

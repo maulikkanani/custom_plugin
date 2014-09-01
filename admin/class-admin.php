@@ -67,12 +67,14 @@ class woocommerce_custom_attribute_admin {
          * - Rename "Plugin_Name" to the name of your initial plugin class
          *
          */
+        ob_start();
         $plugin = woocommerce_custom_attribute::get_instance();
         $this->plugin_slug = $plugin->get_plugin_slug();
        
         // Load admin style sheet and JavaScript.
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+        add_action('woocommerce_product_options_pricing', array($this, 'add_extra_price'));
         
         wca_load::controller('wca_custome_attributes');
         
@@ -142,7 +144,8 @@ class woocommerce_custom_attribute_admin {
             //wp_enqueue_style('Bootstarp3', plugins_url('assets/css/bootstrap.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('jquery.fileupload', plugins_url('assets/css/jquery.fileupload.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
-            wp_enqueue_style('fileupload', plugins_url('assets/css/font_awesome/css/font-awesome.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('font-awesome', plugins_url('assets/css/font_awesome/css/font-awesome.min.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_style('tocken-input', plugins_url('assets/css/token-input.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
             wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
     }
 
@@ -162,6 +165,7 @@ class woocommerce_custom_attribute_admin {
             wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('jQuery-ui', plugins_url('assets/js/jquery-ui.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('jQuery-fileupload', plugins_url('assets/js/jquery.fileupload.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+            wp_enqueue_script('jQuery-token-input', plugins_url('assets/js/jquery.tokeninput.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('owl.carousel', plugins_url('assets/js/owl.carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('owl-carousel', plugins_url('assets/js/owl-carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
             wp_enqueue_script('knockhout', plugins_url('assets/js/knockout-3.2.0.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
@@ -200,9 +204,11 @@ class woocommerce_custom_attribute_admin {
         add_submenu_page('woo-custome-attribute', 'Fabric', 'Fabric', 'manage_options', 'fabric', array($this, 'fabric_master'));
         add_submenu_page('woo-custome-attribute', 'Buttons', 'Buttons', 'manage_options', 'button', array($this, 'button_master'));
         add_submenu_page('woo-custome-attribute', 'Zipper', 'Zipper', 'manage_options', 'zipper', array($this, 'zipper_master'));
+        add_submenu_page('woo-custome-attribute', 'Neck Lining', 'Neck Lining', 'manage_options', 'necklining', array($this, 'neck_lining_master'));
         add_submenu_page('woo-custome-attribute', 'Linings', 'Linings', 'manage_options', 'lining', array($this, 'lining_master'));
         add_submenu_page('woo-custome-attribute', 'Button hilo', 'Button hilo', 'manage_options', 'Buttonhilo', array($this, 'button_hilo_master'));
         add_submenu_page('woo-custome-attribute', 'Button ojal', 'Button ojal', 'manage_options', 'Buttonojal', array($this, 'button_ojal_master'));
+		 add_submenu_page('woo-custome-attribute', 'Elbow Patches', 'Elbow Patches', 'manage_options', 'elbowpatches', array($this, 'elbow_patches_master'));
     }
 
     /**
@@ -210,6 +216,11 @@ class woocommerce_custom_attribute_admin {
      *
      * @since    1.0.0
      */
+    public function add_extra_price() {
+        // extraprice
+       echo '<p class="form-field _wca_extra_price_field "><label for="_wca_extra_price">Extra Price (£)</label><input type="text" placeholder="" value="" id="_wca_extra_price" name="_wca_extra_price" class="short wc_input_price"> </p>';
+                                        
+    }
     public function display_plugin_admin_page() {
         include_once( 'views/admin.php' );
     }
@@ -218,7 +229,7 @@ class woocommerce_custom_attribute_admin {
         include_once( 'views/admin.php' );
     }
     public function fabric_master() {
-        include_once( 'views/admin.php' );
+       include_once 'views/masters/fabrics/list.php';
     }
 
     public function button_master() {
@@ -232,7 +243,15 @@ class woocommerce_custom_attribute_admin {
     public function lining_master() {
         include_once 'views/masters/linings/list.php';
     }
-    
+	
+	 public function neck_lining_master() {
+        include_once 'views/masters/neck_lining/list.php';
+    }
+	
+     public function elbow_patches_master() {
+        include_once 'views/masters/elbow_patches/list.php';
+    }
+	
     public function button_hilo_master() {
         include_once 'views/masters/button_hilo/list.php';
     }

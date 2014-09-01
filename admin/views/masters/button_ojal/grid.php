@@ -29,6 +29,7 @@
 $columns = array(
     'name' => array('lable' => 'Button ojal Name', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
     'color' => array('lable' => 'Color', 'sort' => true,),
+    'icon' => array('lable' => 'Icon', 'sort' => false),
     'active' => array('lable' => 'Active', 'sort' => false),
     'images' => array('lable' => 'Images', 'sort' => false),
 );
@@ -54,6 +55,12 @@ function CreteList($item, $column_name) {
     global $current_page_url, $master_id, $wpdb;
     include ABS_MODEL . 'master_attrs.php';
     switch ($column_name):
+        case 'icon':
+                $icon_path="$category_dir/ojal/$item[id]/ojal_icon.jpg"; 
+                if(file_exists($icon_path))
+                    echo "<img src='$category_url/ojal/$item[id]/ojal_icon.jpg' style='width: 25px;'>";        
+        break;
+        
         case 'active':
             $total_images = count($master_images[$master_id]);
             $status = 'inactive_img';

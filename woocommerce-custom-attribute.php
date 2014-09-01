@@ -112,9 +112,12 @@ define('ZIPPER', $wpdb->prefix.'wca_zippers');                  //zipper master
 define('LINING', $wpdb->prefix.'wca_linings');                  //Lining master
 define('BUTTON_HILO', $wpdb->prefix.'wca_button_hilo');         //Button hilo master
 define('BUTTON_OJAL', $wpdb->prefix.'wca_button_ojal');         //Button ojal master
-
-
+define('NECK_LINING', $wpdb->prefix.'wca_neck_lining');         // Neck lining master
+define('ELBOW_PATCHES', $wpdb->prefix.'wca_elbow_patches');     // Elbow patches master
+define('FABRICS', $wpdb->prefix.'wca_fabrics');                // Elbow Fabric master
 /*end :- define master tables*/
+
+wca_load::controller('wca_fabric');
 
 wca_load::controller('wca_buttons');
 add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
@@ -139,7 +142,17 @@ add_action( 'wp_ajax_active_button_hilo', 'wca_button_hilo::active_inactive');
 wca_load::controller('wca_button_ojal');
 add_action( 'wp_ajax_upload_button_ojal_image', 'wca_button_ojal::upload_image'); 
 add_action( 'wp_ajax_delete_button_ojal_image', 'wca_button_ojal::delete_images'); 
-add_action( 'wp_ajax_active_button_ojal', 'wca_button_ojal::active_inactive');
+add_action( 'wp_ajax_active_button_ojal', 'wca_button_ojal::active_inactive'); 
+
+wca_load::controller('wca_neck_lining');
+add_action( 'wp_ajax_upload_neck_lining_image', 'wca_neck_lining::upload_image'); 
+add_action( 'wp_ajax_delete_neck_lining_image', 'wca_neck_lining::delete_images'); 
+add_action( 'wp_ajax_active_neck_lining', 'wca_neck_lining::active_inactive'); 
+
+wca_load::controller('wca_elbow_patches');
+add_action( 'wp_ajax_upload_elbow_patches_image', 'wca_elbow_patches::upload_image'); 
+add_action( 'wp_ajax_delete_elbow_patches_image', 'wca_elbow_patches::delete_images'); 
+add_action( 'wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive');  
 
  
 //add_action( 'wp_ajax_upload_button', 'upload_buttons');
@@ -151,5 +164,3 @@ function upload_buttons(){
     //pr($_POST);
     //pr($_FILES,true);
 }
-
- 

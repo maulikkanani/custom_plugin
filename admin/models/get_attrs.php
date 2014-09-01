@@ -346,7 +346,6 @@ $atribute_slugs = json_encode($atribute_slugs);
 $all_fabric_data = array(
     '1' => array(
         'titel' => 'Elandia',
-        'price' => '217',
         'ref' => '21-482',
         'composition' => '52% cotton & 48% polyester',
         'price' => '217',

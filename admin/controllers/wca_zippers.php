@@ -94,7 +94,7 @@ class wca_zippers{
                 $dir_id=$wpdb->insert_id;
                 $image_dir=$category_dir.'/zipper/'.$dir_id;
                 if (!is_dir($image_dir)) {
-                     mkdir($image_dir,777, true);
+                     mkdir($image_dir,0777, true);
                 }
                 $_SESSION['msg']="Color Added successfully";
                 return $dir_id;
@@ -122,7 +122,7 @@ class wca_zippers{
          $image_url=$category_url.'/zipper/'.$dir_name;
          
          if (!is_dir($image_dir)) {
-                mkdir($image_dir,777, true);
+                mkdir($image_dir,0777, true);
          }
          $upload=$_FILES['files'];
          
