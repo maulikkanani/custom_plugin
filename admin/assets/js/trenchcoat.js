@@ -1,5 +1,37 @@
 jQuery(document).ready(function() {
 
+    /*start:- Get attributes of category*/
+    jQuery(document).bind("load-attributes", function() {
+        if (jQuery('.customise_product').val() == 1) {
+            jQuery('.mask').show();
+            jQuery.ajax({
+                url: ajax_url,
+                type: "POST",
+                data: {action: 'get_image_box', post_id: post_id},
+                success: function(html) {
+                    jQuery('#main_image_layer').hide();
+                    jQuery('#main_image_layer').html(html);
+                    jQuery.ajax({
+                        url: ajax_url,
+                        type: "POST",
+                        data: {action: 'get_attribute_box', post_id: post_id},
+                        success: function(html) {
+                            jQuery('#main_customization').html(html);
+                            jQuery('#main_image_layer').show();
+                            jQuery('#customize_image_layer').show();
+                            jQuery('.mask').hide();
+                        }
+                    });
+                }
+            });
+        }else{
+            jQuery('#main_customization').html('');
+            jQuery('#main_image_layer').html('');
+            jQuery('#customize_image_layer').hide();
+        }
+    });
+    /*End:- Get attributes of category*/
+
     /*Start:- hide show pockets*/
     jQuery(document).on('click', '.subshow', function() {
         $main_sub_class = jQuery('.' + jQuery(this).attr('name'));
@@ -28,7 +60,7 @@ jQuery(document).ready(function() {
     jQuery(document).on('click', '#wca_trenchcoat_style_simple', function() {
         jQuery('input[name=wca_trenchcoat_chest_pocket][value!=0]').removeAttr('disabled');
         jQuery('input[name=wca_trenchcoat_closure_type_boton][value=hide]').removeAttr('disabled');
-        if(jQuery('input[name=wca_trenchcoat_belt]:checked').val()!='loose'){
+        if (jQuery('input[name=wca_trenchcoat_belt]:checked').val() != 'loose') {
             jQuery('input[name=wca_trenchcoat_pockets][value=3]').removeAttr('disabled');
         }
     });
@@ -198,11 +230,11 @@ jQuery(document).ready(function() {
         var fit = jQuery('input[name=wca_trenchcoat_fit]:checked').val();
         if (pockets != 0) {
             var front_image = 'pockets_' + pockets + '_type' + type + '_fit' + fit + '.png';
-            var src= image_front_url + '/' + front_image;
+            var src = image_front_url + '/' + front_image;
         } else {
-            var src=blank_image;
+            var src = blank_image;
         }
-        jQuery('.front .layer[pos=2] img').attr('src',src);
+        jQuery('.front .layer[pos=2] img').attr('src', src);
         jQuery('.pocket_modal_main').remove('boxpart_active');
         jQuery('.pocket_modal_main [data-rel=' + type + ']').addClass('boxpart_active');
         jQuery(document).trigger('front-show');
@@ -350,7 +382,7 @@ jQuery(document).ready(function() {
         });
         jQuery('#_wca_extra_price').val(final_price);
     });
-    
+
     /*Start:- Fuinction for get value ouf attributes*/
     function GetValue(selector) {
         var tag = "input";
@@ -380,14 +412,14 @@ jQuery(document).ready(function() {
 
     jQuery(document).bind('set-fabric', function() {
         $new_fabric = jQuery('input[name=wca_trenchcoat_fabric_type]').val();
+        $new_fabric_color = $fabric_data[$new_fabric].color;
         jQuery('.fabric_change .image').removeClass('fabric-active');
         jQuery('.fabric_change[data-rel=' + $new_fabric + '] .image').addClass('fabric-active');
     });
 
     jQuery(document).bind('fabric_change', function() {
-        $old_fabric_dir = '/fabric/' + $fabric + '/';         //OLD fabric
-        $new_fabric_dir = '/fabric/' + $new_fabric + '/';     // New fabric
-
+        $old_fabric_dir = '/fabric_color/' + $fabric_color + '/';         //OLD fabric
+        $new_fabric_dir = '/fabric_color/' + $new_fabric_color + '/';     // New fabric
         $old_button_dir = '/botones/' + $buttons + '/';       //Old button 
         $buttons = $fabric_data[$new_fabric].button;    //New button id 
         $new_button_dir = '/botones/' + $buttons + '/';       // new button
@@ -422,8 +454,9 @@ jQuery(document).ready(function() {
         jQuery('#fabric_ref').html(fabric_ref);
 
         $fabric = $new_fabric;
-        image_front_url = cat_url + '/fabric/' + $fabric + '/front';
-        image_back_url = cat_url + '/fabric/' + $fabric + '/back';
+        $fabric_color = $new_fabric_color;
+        image_front_url = cat_url + '/fabric_color/' + $fabric_color + '/front';
+        image_back_url = cat_url + '/fabric_color/' + $fabric_color + '/back';
         button_url = cat_url + '/botones/' + $buttons;
         zipper_url = cat_url + '/zipper/' + $zipper;
 
@@ -516,7 +549,7 @@ jQuery(document).ready(function() {
         jQuery('.lining_base').attr('src', lining_base);
         jQuery(document).trigger('set-linig-slider');
     });
-   
+
     jQuery(document).bind('set-linig-slider', function() {
         var owl = jQuery("#owl-demo");
         owl.owlCarousel({
@@ -566,7 +599,7 @@ jQuery(document).ready(function() {
     /* Start:- this is for neck lining */
     jQuery(document).bind('back-pos-12', function() {
         var img = jQuery('input[name=wca_neck_lining]').val();
-        var img_url = cat_url + '/neck_lining/' + img + '.png';
+        var img_url = cat_url + '/neck_lining/' + img + '/neck_lining.png';
         if (img != 0) {
             jQuery('.back .layer[pos=12] img').attr('src', img_url);
         } else {
@@ -579,7 +612,7 @@ jQuery(document).ready(function() {
     /* Start:- this is for elbow patch */
     jQuery(document).bind('back-pos-13', function() {
         var img = jQuery('input[name=wca_elbow_patch]').val();
-        var img_url = cat_url + '/patches/' + img + '.png';
+        var img_url = cat_url + '/patches/' + img + '/elbow_patches.png';
         if (img != 0) {
             jQuery('.back .layer[pos=13] img').attr('src', img_url);
         } else {

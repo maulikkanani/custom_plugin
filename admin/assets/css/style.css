@@ -711,6 +711,35 @@ div.fabric_box_3d div.image a {
     cursor: pointer;
     font-size: 20px !important;
 }
+.mask {
+    background-color: #000000;
+    height: 100%;
+    left: 0;
+    opacity: 0.59;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+.loader{
+    color: #0074a2;
+    font-size: 80px !important;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 200;
+} 
+
+.turn_arround{
+    text-align: center;
+}
+.turn_arround i {
+    font-size: 20px;
+    color: #1e8cbe;
+}
+.turn_arround a {
+    text-decoration: none;
+}
 /*End:- for image upload */
 
 

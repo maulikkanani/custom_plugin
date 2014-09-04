@@ -21,7 +21,7 @@ if ($attrs != '') {
         'wca_trenchcoat_sleeve' => 'button',
         'wca_trenchcoat_shoulder' => '1',
         'wca_trenchcoat_back_lapel' => '1',
-        'wca_trenchcoat_fabric_type' => '1',
+        'wca_trenchcoat_fabric_type' => '2',
         'wca_trenchcoat_interior_type' => '1',
         'wca_trenchcoat_interior' => '2',
         'wca_trenchcoat_embroidery_font' => '1',
@@ -29,9 +29,9 @@ if ($attrs != '') {
         'wca_embroidery_text'=>'Maulik b kanani',
         'wca_embroidary_color' => '2',
         'wca_trenchcoat_neck_lapel' => '1',
-        'wca_neck_lining' => '2',
+        'wca_neck_lining' => '1',
         'wca_trenchcoat_elbow_patch' => '1',
-        'wca_elbow_patch' => '2',
+        'wca_elbow_patch' => '1',
         'wca_trenchcoat_btn_thread_apply' => 'all',
         'wca_buton_thread' => '1',
         'wca_buton_hole_thread' => '1',
@@ -342,387 +342,47 @@ $atribute_slugs = json_encode($atribute_slugs);
 /* End :-  Array for get attribute key in price calulation */
 
 
-/* start:- array for facric related butoons and zippers */
-$all_fabric_data = array(
-    '1' => array(
-        'titel' => 'Elandia',
-        'ref' => '21-482',
-        'composition' => '52% cotton & 48% polyester',
-        'price' => '217',
-        'button' => '7',
-        'zipper' => '1',
-        'lining' => '1',
-    ),
-    '2' => array(
-        'button' => '2',
-        'zipper' => '2',
-        'titel' => 'Newport',
-        'price' => '218',
-        'ref' => '22-482',
-        'composition' => '53% cotton & 48% polyester',
-        'lining' => '5',
-    ),
-    '3' => array(
-        'button' => '4',
-        'zipper' => '3',
-        'titel' => 'Seeland',
-        'price' => '219',
-        'ref' => '23-482',
-        'composition' => '54% cotton & 48% polyester',
-        'lining' => '9',
-    ),
-    '4' => array(
-        'button' => '3',
-        'zipper' => '1',
-        'titel' => 'Izaro',
-        'price' => '220',
-        'ref' => '24-482',
-        'composition' => '55% cotton & 48% polyester',
-        'lining' => '13',
-    ),
-    '5' => array(
-        'button' => '4',
-        'zipper' => '1',
-        'titel' => 'Newington',
-        'price' => '221',
-        'ref' => '25-482',
-        'composition' => '56% cotton & 48% polyester',
-        'lining' => '17',
-    ),
-    '6' => array(
-        'button' => '3',
-        'zipper' => '2',
-        'titel' => 'Bloomsbury',
-        'price' => '222',
-        'ref' => '26-482',
-        'composition' => '57% cotton & 48% polyester',
-        'lining' => '21',
-    ),
-    '7' => array(
-        'button' => '1',
-        'zipper' => '1',
-        'titel' => 'Lambeth',
-        'price' => '223',
-        'ref' => '27-482',
-        'composition' => '58% cotton & 48% polyester',
-        'lining' => '25',
-    ),
-    '8' => array(
-        'button' => '4',
-        'zipper' => '1',
-        'titel' => 'Clapham',
-        'price' => '224',
-        'ref' => '28-482',
-        'composition' => '59% cotton & 48% polyester',
-        'lining' => '29',
-    ),
-);
 
+/* start:- array for facric related butoons and zippers and linings */
+$fabrics=$wpdb->get_results("select * from ".FABRICS." where status='1' ");
+$all_extra_linings=array();
+$all_fabric_data=array();
+if(count($fabrics)>0){
+    foreach($fabrics as $fabric){
+        $all_fabric_data[$fabric->id]=array(
+            'titel' => $fabric->titel,
+            'ref' => $fabric->reference,
+            'composition' => $fabric->material,
+            'price' =>  $fabric->price,
+            'button' => $fabric->button_id,
+            'zipper' => $fabric->zipper_id,
+            'lining' => $fabric->lining_id,
+            'color' =>  $fabric->color
+        );
+        
+        $fabric_linigs=array();
+        $tmplinigs=$fabric->lining_id.','.$fabric->total_linings;
+        $linings=$wpdb->get_results("select * from ".LINING." where status='1' and id IN($tmplinigs)");
+        foreach($linings as $lining){
+            $fabric_linigs[$lining->id]=array(
+                                        'titel' => $lining->titel,      // tile of lining fabric               
+                                        'price' => $lining->price,         // price of lining fabric
+                                        'color' => $lining->color,           // color of lining fabric
+                                        'pattern' => $lining->pattern,     // pattern of lining fabric  
+                                        'material' => $lining->material // material of linig   
+                                        );
+        }
+        $all_extra_linings[$fabric->id]=$fabric_linigs;
+    }
+}
 $fabric_data = json_encode($all_fabric_data);
-/* End:- array for facric related butoons and zippers */
+/* End:- array for facric related butoons  and zippers and linings */
+
 
 /* Start:- array for lning related fbrics */
-$all_extra_linings = array(
-    '1' => array(//This ia a key for fabric ids
-        '1' => array(//This ia a key for fabric's lining ids
-            'titel' => 'Beauvans', // tile of lining fabric               
-            'price' => '19.95', // price of lining fabric
-            'color' => 'red', // color of lining fabric
-            'pattern' => 'squared', // pattern of lining fabric  
-            'material' => '100% cotton'                     // material of linig     
-        ),
-        '2' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton'
-        ),
-        '3' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-        ),
-        '4' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton'
-        ),
-        '29' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% poiister',
-        ),
-        '30' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '31' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '32' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '2' => array(
-        '5' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton'
-        ),
-        '6' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '7' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '8' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '29' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% poiister',
-        ),
-        '30' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '31' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '32' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '3' => array(
-        '9' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '10' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '11' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '12' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '4' => array(
-        '13' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '14' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '15' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '16' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '5' => array(
-        '17' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '18' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '19' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '20' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '6' => array(
-        '21' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '22' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '23' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '24' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '7' => array(
-        '25' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '26' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '27' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '28' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-    '8' => array(
-        '29' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% poiister',
-        ),
-        '30' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '31' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-        '32' => array(
-            'titel' => 'Beauvans',
-            'price' => '19.95',
-            'color' => 'red',
-            'pattern' => 'squared',
-            'material' => '100% cotton',
-        ),
-    ),
-);
-
-
 $extra_linings = json_encode($all_extra_linings);
 /* End:- array for lning related fbrics */
+
 
 /* Start :- create  array for lining as pre knockout JSON format */
 $knockout_extralinigs = array();
@@ -818,6 +478,8 @@ $embroidary_attributes = json_encode($embroidary_attributes);
 
 $button_threads=$wpdb->get_results("select * from ".BUTTON_HILO." where status='1'");
 $button_holes=$wpdb->get_results("select * from ".BUTTON_OJAL." where status='1'");
+$neck_linings=$wpdb->get_results("select * from ".NECK_LINING." where status='1'");
+$elbow_patches=$wpdb->get_results("select * from ".ELBOW_PATCHES." where status='1'");
 
 $plugins_url = plugins_url('woocommerce-custom-attribute');
 
@@ -825,6 +487,10 @@ $plugins_url = plugins_url('woocommerce-custom-attribute');
 
 $category = 'trenchcoat';    // Current category                                    
 $fabric = $default_values['wca_trenchcoat_fabric_type'];          // Current fabric
+
+$fabric_datas=wca_fabric::get_single_row($fabric);
+$fabric_color=$fabric_datas[color];
+
 $button = $all_fabric_data[$fabric]['button'];                   // Button for current fabric 
 $zipper = $all_fabric_data[$fabric]['zipper'];                   // Zipper for current fabric 
 

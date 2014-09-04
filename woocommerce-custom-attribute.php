@@ -65,39 +65,11 @@ register_deactivation_hook( __FILE__, array( 'woocommerce_custom_attribute', 'de
  */
 add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute', 'get_instance' ) );
 
-/*----------------------------------------------------------------------------*
- * Dashboard and Administrative Functionality
- *----------------------------------------------------------------------------*/
-
-/*
- * @TODO:
- *
- * - replace `class-plugin-name-admin.php` with the name of the plugin's admin file
- * - replace Plugin_Name_Admin with the name of the class defined in
- *   `class-plugin-name-admin.php`
- *
- * If you want to include Ajax within the dashboard, change the following
- * conditional to:
- *
- * if ( is_admin() ) {
- *   ...
- * }
- *
- * The code below is intended to to give the lightest footprint possible.
- */
-if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
-        /*Include file for a save a attribute data*/
-        add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
-
-}
-
 
 define('ABS_WCA', plugin_dir_path( __FILE__ ));  
 define('ABS_MODEL',ABS_WCA.'admin/models/');                        //absolute path of models
 define('ABS_CONTROLLER', ABS_WCA.'admin/controllers/');             //absolute path of contollers
-define('ABS_VIEW', ABS_WCA.'admin/Views/');                   //absolute path of views
+define('ABS_VIEW', ABS_WCA.'admin/views/');                   //absolute path of views
 define('wca_url', plugins_url('woocommerce-custom-attribute'));     //url of plugin
 define('wca_admin_asset_url', wca_url.'/admin/assets');             //url of admin assets
 define('wca_admin_image_url', wca_url.'/admin/assets/images');      //url of admin images 
@@ -115,9 +87,18 @@ define('BUTTON_OJAL', $wpdb->prefix.'wca_button_ojal');         //Button ojal ma
 define('NECK_LINING', $wpdb->prefix.'wca_neck_lining');         // Neck lining master
 define('ELBOW_PATCHES', $wpdb->prefix.'wca_elbow_patches');     // Elbow patches master
 define('FABRICS', $wpdb->prefix.'wca_fabrics');                // Elbow Fabric master
+define('FABRIC_COLORS', $wpdb->prefix.'wca_fabric_colors');                // Elbow Fabric Color master
+
 /*end :- define master tables*/
 
+wca_load::controller('wca_custome_attributes');
+
 wca_load::controller('wca_fabric');
+add_action( 'wp_ajax_upload_fabric_image', 'wca_fabric::upload_image'); 
+add_action( 'wp_ajax_delete_fabric_image', 'wca_fabric::delete_images'); 
+add_action( 'wp_ajax_active_fabric', 'wca_fabric::active_inactive'); 
+
+wca_load::controller('wca_fabric_color');
 
 wca_load::controller('wca_buttons');
 add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
@@ -154,6 +135,26 @@ add_action( 'wp_ajax_upload_elbow_patches_image', 'wca_elbow_patches::upload_ima
 add_action( 'wp_ajax_delete_elbow_patches_image', 'wca_elbow_patches::delete_images'); 
 add_action( 'wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive');  
 
+global $post;
+add_action('wp_ajax_get_attribute_box', 'rander_attributes',$post);
+add_action('wp_ajax_get_image_box', 'rander_image_layers',$post);
+ function rander_attributes($post) {
+        global $post;
+        $post_id=  mysql_real_escape_string($_POST['post_id']);
+        $post = get_post($post_id);
+        $category = 'trenchcoat';  
+        include_once(ABS_WCA."admin/views/$category/customize-attributes.php");
+        exit;
+ }
+  
+  function rander_image_layers($post) {
+        global $post;
+        $post_id=  mysql_real_escape_string($_POST['post_id']);
+        $post = get_post($post_id);
+        $category = 'trenchcoat';                                         // Current category
+        include_once(ABS_WCA."admin/views/$category/image-layer.php");
+        exit;
+ }
  
 //add_action( 'wp_ajax_upload_button', 'upload_buttons');
 function upload_buttons(){
@@ -164,3 +165,32 @@ function upload_buttons(){
     //pr($_POST);
     //pr($_FILES,true);
 }
+
+/*----------------------------------------------------------------------------*
+ * Dashboard and Administrative Functionality
+ *----------------------------------------------------------------------------*/
+
+/*
+ * @TODO:
+ *
+ * - replace `class-plugin-name-admin.php` with the name of the plugin's admin file
+ * - replace Plugin_Name_Admin with the name of the class defined in
+ *   `class-plugin-name-admin.php`
+ *
+ * If you want to include Ajax within the dashboard, change the following
+ * conditional to:
+ *
+ * if ( is_admin() ) {
+ *   ...
+ * }
+ *
+ * The code below is intended to to give the lightest footprint possible.
+ */
+if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
+        /*Include file for a save a attribute data*/
+        add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
+
+}
+

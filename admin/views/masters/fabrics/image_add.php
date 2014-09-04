@@ -8,11 +8,10 @@ $uploded_images = uploaded_images($master_id, $row_id);
 $images = array_diff_key($master_images[$master_id], $uploded_images);
 $images = create_image_combo($images);
 $images = json_encode($images);
-$image_url=$category_url.'/linings/'.$row_id;
+$image_url=$category_url.'/fabric/'.$row_id;
 $uploded_image_section = uploaded_images_section($master_id, $row_id,$master_images[$master_id],$image_url);
 $uploded_image_section = json_encode($uploded_image_section);
 
-$butoon_url = $image_category . '/botones/6';
 ?>
 <script>
     $options = jQuery.parseJSON('<?php echo $images ?>');
@@ -125,7 +124,7 @@ $butoon_url = $image_category . '/botones/6';
 </script>      
 <div class="wrap">
     <div class="shape-icon"></div>
-    <h2 class="shape-wrap">Button Images <a class="add-new-h2" href="admin.php?page=<?php echo $CurrentPage; ?>">Back</a>
+    <h2 class="shape-wrap">Fabric Images <a class="add-new-h2" href="admin.php?page=<?php echo $CurrentPage; ?>">Back</a>
         </h2>
 </div>
 <div class="container">

@@ -26,13 +26,22 @@ class wca_fabric{
             global $wpdb;
             $data=array();
             $row = $wpdb->get_row("SELECT * from ".FABRICS." where id='$id'");
-            $data['titel']=$row->titel;
-            $data['color']=$row->color;
-            $data['pattern']=$row->pattern;
-            $data['material']=$row->material;
-            $data['price']=$row->price;
-            $data['status']=$row->status;
-            return $data;
+                if(count($row) > 0){ 
+                $data['titel']=$row->titel;
+                $data['color']=$row->color;
+                $data['reference']=$row->reference;
+                $data['material']=$row->material;
+                $data['price']=$row->price;
+                $data['button_id']=$row->button_id;
+                $data['zipper_id']=$row->zipper_id;
+                $data['lining_id']=$row->lining_id;
+                $data['total_linings']=$row->total_linings;
+                $data['status']=$row->status;
+                return $data;
+            }else{
+                echo mysql_error();
+                return $data;
+            }
      }
      
      function get_active_buttons(){
@@ -104,7 +113,7 @@ class wca_fabric{
          include ABS_MODEL . 'master_attrs.php';
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
          $master_id=$masters['fabric'];
-         $image_dir=$category_dir.'/linings/'.$id;
+         $image_dir=$category_dir.'/fabric/'.$id;
          if(delete_dir($image_dir)){
               $result=$wpdb->query("DELETE FROM ".FABRICS." 
                                         WHERE id='$id' 
@@ -128,31 +137,33 @@ class wca_fabric{
          global $wpdb;
          include ABS_MODEL . 'master_attrs.php';
          extract($_POST);  
-      
              $category=1;
-             
              $data=array(
                         'titel'=>$titel,
                         'color'=>$color,
-                        'pattern'=>$pattern,
+                        'reference'=>$reference, 
                         'material'=>$material,
                         'price'=>$price,
+                        'button_id'=>$button_id,
+                        'zipper_id'=>$zipper_id,
+                        'lining_id'=>$lining_id,
+                        'total_linings'=>$total_linings,
                         'category_id'=>$category,
                         );
              
            if($id==''){
                 $wpdb->insert(FABRICS,$data);
                 $dir_id=$wpdb->insert_id;
-                $image_dir=$category_dir.'/linings/'.$dir_id;
+                $image_dir=$category_dir.'/fabric/'.$dir_id;
                 if (!is_dir($image_dir)) {
                      mkdir($image_dir,0777, true);
                 }
-                $_SESSION['msg']="Color Added successfully";
+                $_SESSION['msg']="Fabric added successfully. Please ulpoad this image to active this fabric.";
                 return $dir_id;
             }else{
                 $where=array('id'=>$id);
                 $wpdb->update(FABRICS,$data,$where);
-                $_SESSION['msg']="Color Updated successfully";
+                $_SESSION['msg']="Fabric updated successfully. Please ulpoad this image to active this fabric.";
             }
      }
      
@@ -169,8 +180,8 @@ class wca_fabric{
          $dir_name=$row_id=mysql_real_escape_string($_POST['id']);
          $master_id=$masters['fabric'];
         
-         $image_dir=$category_dir.'/linings/'.$dir_name;
-         $image_url=$category_url.'/linings/'.$dir_name;
+         $image_dir=$category_dir.'/fabric/'.$dir_name;
+         $image_url=$category_url.'/fabric/'.$dir_name;
          
          if (!is_dir($image_dir)) {
                 mkdir($image_dir,0777, true);
@@ -240,8 +251,8 @@ class wca_fabric{
         $master_id=  mysql_real_escape_string($_POST[master_id]);
         $row_id=  mysql_real_escape_string($_POST[row_id]);
                  
-         $image_dir=$category_dir.'/linings/'.$row_id;
-         $image_url=$category_url.'/linings/'.$row_id;
+         $image_dir=$category_dir.'/fabric/'.$row_id;
+         $image_url=$category_url.'/fabric/'.$row_id;
          
          $images_data=images_data($id); 
          $image_path="$image_dir/$images_data->image_name";

@@ -56,8 +56,9 @@ $attr_default_values = json_encode($default_values);               // Array of d
     jQuery(document).ready(function() {
 
         /*Start:-  Binding model of knockout for a lining (Knockout js)*/
+        ko.cleanNode(jQuery('#main_customization')[0]);
         LiningModel.lining();
-        ko.applyBindings(LiningModel);
+        ko.applyBindings(LiningModel,jQuery('#main_customization')[0]);
         /*End:-  Binding model of knockout for a lining (Knockout js)*/
 
         jQuery("#tabs").tabs();

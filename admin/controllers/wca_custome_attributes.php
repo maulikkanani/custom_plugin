@@ -54,9 +54,16 @@ class wca_custome_attributes {
                 'wca_trenchcoat_btn_thread_apply'=>$_POST['wca_trenchcoat_btn_thread_apply'],
                 'wca_buton_thread'=>$_POST['wca_buton_thread'],
                 'wca_buton_hole_thread'=>$_POST['wca_buton_hole_thread'],
-                'wca_category'=>'trenchcote',
+                'wca_category'=>'1',
             );
-            $data=serialize($save_data);
+            
+            
+            update_post_meta($post_id,'_wca_customise_product', $_POST['wca_customise_product']);
+            if($_POST['wca_customise_product']=='1'){
+                $data=serialize($save_data);
+            }else{
+                 $data='';
+            }
             update_post_meta($post_id,'_wca_attribute_data', $data);
     }
 }

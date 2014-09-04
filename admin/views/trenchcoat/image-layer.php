@@ -13,13 +13,14 @@ include ABS_WCA . 'admin/models/get_attrs.php';
 ?>
 <script type="text/javascript">
     $fabric = '<?php echo $fabric ?>';
+    $fabric_color = '<?php echo $fabric_color ?>';
     $fabric_data=jQuery.parseJSON('<?php echo $fabric_data ?>');
     $buttons = $fabric_data[$fabric].button;
     $zipper = $fabric_data[$fabric].zipper;
     var blank_image =     '<?php echo $blank_image ?>';
     var cat_url =         '<?php echo $image_category ?>';
-    var image_front_url = cat_url+'/fabric/'+$fabric+'/front';
-    var image_back_url =  cat_url+'/fabric/'+$fabric+'/back';
+    var image_front_url =  cat_url+'/fabric_color/'+$fabric_color+'/front';
+    var image_back_url =  cat_url+'/fabric_color/'+$fabric_color+'/back';
     var button_url =      cat_url+'/botones/'+$buttons;
     var zipper_url =      cat_url+'/zipper/'+$zipper;
     var linig_url =       cat_url+'/linings';
@@ -27,7 +28,9 @@ include ABS_WCA . 'admin/models/get_attrs.php';
 </script>
 
 <div id="product_image">
-    <a id="change_position" class="change_position" data-rel="front" href="javascript:;">Turn around model</a>
+    <div class="turn_arround">  
+        <i class="fa fa-retweet"></i> <a id="change_position" class="change_position" data-rel="front" href="javascript:;">Turn around model</a>
+    </div>
     <div>
         <div class="man_trenchcoat front" id="model_3d_preview">    
             <!-- pos for front end base-->

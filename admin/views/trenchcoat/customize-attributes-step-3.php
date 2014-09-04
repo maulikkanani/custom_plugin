@@ -15,6 +15,8 @@
     }
 </style>
 
+<!-- Start for linings -->
+
 <h3 class="main_titel_list">Custom Trench Coat / <span class="sub-titel">Step 3: Add your personal touch</span></h3><br>
 <div class="form-group" id="main_interior">
     <div class="heading_main attr-front">
@@ -78,8 +80,9 @@
 
 
 </div>
-<div class="form-group">
-</div>
+<!-- End  for linings -->
+
+<!-- Start for Embroidery texts -->
 
 <div class="form-group" id="main_embroidery">
     <div class="heading_main">
@@ -183,13 +186,16 @@
 
 
 </div>
+<!-- End for Embroidery texts -->
+
+<!-- Start for neck linig -->
 <div class="form-group" id="main_neck_lapel">
     <div class="heading_main">
         <h2 toggle="Neck_Lining" class="arrow_toggle">Neck Lining<span>(+3,50)</span>
             <a class="delete" href="javascript:;">Delete</a></h2>
 
     </div>
-    <div class="category_main_box clearfix wca_Neck_Lining">
+    <div class="category_main_box clearfix Neck_Lining wca_Neck_Lining">
         <div class="clearfix">
             <div class="radio attr-back">
                 <label>
@@ -203,40 +209,19 @@
         </div>
         <div class="clearfix attr-back">
             <input type="hidden" name="wca_neck_lining" value="">
-            <div href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="0" href="javascript:;" class="box_color color_item" >
-                    <div class="active"></div>
-                    <img src="<?php echo $man_url ?>/neck_lining/1.jpg" class="color" data-rel="1" >
-                </a>
-            </div>
-            <div  href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="1" href="javascript:;" class="box_color color_item" >			
-                    <img src="<?php echo $man_url ?>/neck_lining/2.jpg" class="color" data-rel="2" >
-                </a>
-            </div>
-            <div href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="2" href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/neck_lining/3.jpg" class="color" data-rel="3" >
-                </a>
-            </div>
-            <div href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="3" href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/neck_lining/4.jpg" class="color" data-rel="4" >
-                </a>
-            </div>
-            <div  href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="4" href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/neck_lining/5.jpg" class="color" data-rel="5" >
-                </a>
-            </div>
-            <div href="javascript:;" class="color_selecter wca_neck_lining">
-                <a img_index="5" href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/neck_lining/6.jpg" class="color" data-rel="6" >
-                </a>
-            </div>
+            <?php foreach($neck_linings as $neck_lining){ ?>
+                <div href="javascript:;" class="color_selecter wca_neck_lining">
+                    <a href="javascript:;" class="box_color color_item">			
+                        <img src="<?php echo $image_category.'/neck_lining/'.$neck_lining->id.'/neck_lining_icon.jpg' ?>" class="color" data-rel="<?php echo $neck_lining->id; ?>">
+                    </a>
+                </div>
+            <?php  } ?>
         </div>	
     </div>	
 </div>
+<!-- End for neck linig -->
+
+<!-- Start for neck elbow pacthes -->
 <div class="form-group" id="main_elbow_patch">
     <div class="heading_main">
         <h2 toggle="elbow_patches" class="arrow_toggle">Add elbow patches<span>(+12,95)</span>
@@ -256,30 +241,19 @@
         </div>
         <div class="clearfix attr-back">
             <input type="hidden" name="wca_elbow_patch" value="">
-            <div  href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
-                <a href="javascript:;" class="box_color color_item">
-                    <div class="active"></div>
-                    <img src="<?php echo $man_url ?>/patches/55.jpg" class="color" data-rel="1">
-                </a>
-            </div>
-            <div  href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
-                <a href="javascript:;" class="box_color color_item">			
-                    <img src="<?php echo $man_url ?>/patches/56.jpg" class="color" data-rel="2">
-                </a>
-            </div>
-            <div href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
-                <a href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/patches/57.jpg" class="color" data-rel="3">
-                </a>
-            </div>
-            <div href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
-                <a href="javascript:;" class="box_color color_item" >
-                    <img src="<?php echo $man_url ?>/patches/58.jpg" class="color" data-rel="4">
-                </a>
-            </div>									
+            <?php foreach($elbow_patches as $elbow_patche){ ?>
+                <div  href="javascript:;" class="color_selecter back_lables wca_elbow_patch">
+                    <a href="javascript:;" class="box_color color_item">			
+                        <img src="<?php echo $image_category.'/patches/'.$elbow_patche->id.'/elbow_patches_icon.jpg' ?>" class="color" data-rel="<?php echo $elbow_patche->id; ?>">
+                    </a>
+                </div>
+            <?php  } ?>									
         </div>	
     </div>	
 </div>
+<!-- End for neck elbow pacthes -->
+
+<!-- Start for button thread and button hole  -->
 <div class="form-group" id="main_buton_thread">
     <div class="heading_main">
         <h2 toggle="button_holes" class="arrow_toggle">Add colored button holes / threads<span>(+3,50)</span>
@@ -306,6 +280,7 @@
             <div class="ojal" style="background: url(<?php echo $image_category ?>/ojal/0/ojal.png)"></div>
         </div>
         <div class="side_hoel_seletor attr-front">
+            
             <label class="label_normal">Button threads</label>
             <div class="clearfix">
                 <?php foreach($button_threads as $button_thread){?>
@@ -316,6 +291,7 @@
                 </div>
                 <?php }?>														
             </div>
+            
             <label class="label_normal">Button hoels</label>
             <div class="clearfix">
                 
@@ -331,3 +307,5 @@
         </div>	
     </div>	
 </div>
+
+<!-- End for button thread and button hole  -->

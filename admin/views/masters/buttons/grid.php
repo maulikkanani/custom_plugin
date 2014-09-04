@@ -27,7 +27,7 @@
 <?php
 /* Start:- Columns with DB table fields */
 $columns = array(
-    'name' => array('lable' => 'Button Name', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
+    'name' => array('lable' => 'Title', 'sort' => true, 'DefaultShort' => true, 'Sort_order' => 'ASC'),
     'color' => array('lable' => 'color', 'sort' => true,),
     'active' => array('lable' => 'Active', 'sort' => false),
     'images' => array('lable' => 'Images', 'sort' => false),

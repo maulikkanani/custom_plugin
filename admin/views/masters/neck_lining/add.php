@@ -27,14 +27,14 @@ include ABS_MODEL . 'master_attrs.php';
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">Neck Lining Name:</label>
                         <div class="col-sm-3">
-                            <input type="text" name="name" class="input_same" placeholder="Button name">
+                            <input type="text" name="name" class="input_same" placeholder="Neck Lining name">
                         </div>         
                     </div>
 
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">Neck Lining Color:</label>
                         <div class="col-sm-3">
-                            <input type="text" name="color" class="input_same" placeholder="Button color">
+                            <input type="text" name="color" class="input_same" placeholder="Neck Lining color">
                         </div>         
                     </div>
 

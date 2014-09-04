@@ -7,17 +7,18 @@
 ?>
 <div class="clearfix">
             <div class="col-sm-12">
-                <h3>Custom Trench Coat</h3>   	
-                <form class="form-horizontal" role="form">
+                <h3>Custom Trench Coat</h3>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Style:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1 pos4">
                                 <label>
                                     <input type="radio" name="wca_trenchcoat_style" value="simple" data-imgpos="1" id="wca_trenchcoat_style_simple" class="rel_enable"> Single breasted
+                                     <input type="button" name="wca_trenchcoat_style_simple" class="wca_trenchcoat_attr_edit" value="edit"/>      
                                 </label>
                                 <label>
                                     <input type="radio" name="wca_trenchcoat_style" value="crossed" data-imgpos="1" id="wca_trenchcoat_style_crossed"  class="rel_deseable"> Double breasted
+                                    <input type="button" name="wca_trenchcoat_style_crossed" class="wca_trenchcoat_attr_edit" value="edit"/>
                                 </label>
                             </div>		      
                         </div>
@@ -240,10 +241,19 @@
                                 </label>		       
                             </div>		      
                         </div>
-                    </div>		  		 		  
-                </form>
+                    </div>
             </div>
             <div class="col-sm-4">
 
             </div>
         </div>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    jQuery('.wca_trenchcoat_attr_edit').on('click',function(){
+       alert('hello');
+    
+    
+    
+});
+});
+</script>

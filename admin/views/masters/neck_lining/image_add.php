@@ -125,7 +125,7 @@ $butoon_url = $image_category . '/botones/6';
 </script>      
 <div class="wrap">
     <div class="shape-icon"></div>
-    <h2 class="shape-wrap">Button Images <a class="add-new-h2" href="admin.php?page=<?php echo $CurrentPage; ?>">Back</a>
+    <h2 class="shape-wrap">Neck Lining Images <a class="add-new-h2" href="admin.php?page=<?php echo $CurrentPage; ?>">Back</a>
         </h2>
 </div>
 <div class="container">

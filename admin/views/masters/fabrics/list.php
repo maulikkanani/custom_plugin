@@ -8,7 +8,7 @@ global $wpdb, $include, $pluginDir, $table, $current_page_url, $unique, $master_
 
 extract($_POST);
 
-$master_id = '5';
+$master_id = '6';
 $form_name = "Fabric";
 $table = FABRICS;
 $cbid = 'fabric_id';
@@ -37,8 +37,8 @@ endif;
 
 /* Start:- In this you van UPDATE your data to your table */
 if (isset($_POST['submit']) && $_POST['submit'] == 'Update'):
-    $zipper_id = mysql_real_escape_string($_GET['id']);
-    wca_fabric::save($zipper_id);
+    $fabric_id = mysql_real_escape_string($_GET['id']);
+    wca_fabric::save($fabric_id);
     wp_redirect($image_form_url);
 endif;
 /* END:- In this you van UPDATE your data to your table */
@@ -47,8 +47,8 @@ endif;
 /* Start:- In this you can delete data to your table */
 if ($Buttons_grid->current_action() == 'dodelete'):
      if($_POST['delete_option']=='delete'){
-             $zipper_ids=array_map('mysql_real_escape_string', $_REQUEST[$cbid]);   
-             wca_fabric::delete_multiple($zipper_ids);
+             $fabric_ids=array_map('mysql_real_escape_string', $_REQUEST[$cbid]);   
+             wca_fabric::delete_multiple($fabric_ids);
      }
      wp_redirect($current_page_url);
 endif;
@@ -66,8 +66,8 @@ if ($Buttons_grid->current_action() == 'edit'):
         </h2>
     </div> 
     <?php
-    $zipper_id = mysql_real_escape_string($_GET['id']);
-    $data = wca_fabric::get_single_row($zipper_id);
+    $fabric_id = mysql_real_escape_string($_GET['id']);
+    $data = wca_fabric::get_single_row($fabric_id);
     $form_button = 'Update';
     $default_values = json_encode($data);
     include ABS_WCA . "admin/views/masters/fabrics/add.php";
