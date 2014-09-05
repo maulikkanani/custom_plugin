@@ -9,7 +9,7 @@ $images = array_diff_key($master_images[$master_id], $uploded_images);
 $images = create_image_combo($images);
 $images = json_encode($images);
 $image_url=$category_url.'/fabric_color/'.$row_id;
-$uploded_image_section = uploaded_images_section($master_id, $row_id,$master_images[$master_id],$image_url);
+$uploded_image_section = wca_fabric_color::uploaded_images_section($master_id, $row_id,$master_images[$master_id],$image_url);
 $uploded_image_section = json_encode($uploded_image_section);
 ?>
 <script>
@@ -133,7 +133,7 @@ $uploded_image_section = json_encode($uploded_image_section);
                 <div class="form-group">
                     <div class="form-group image_uploder" style="display:none">
                         <label for="inputEmail3" class="col-sm-1 control-label">Images:</label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                             <select class="image_name">
                             </select>
                         </div> 

@@ -83,15 +83,17 @@ function create_image_combo($images) {
  */
 function uploaded_images($master_id, $row_id, $type = '') {
     global $wpdb;
-    $image_names = $wpdb->get_results("select image_name from " . IMAGES_TABLE . " 
+    $image_names = $wpdb->get_results("select image_name,type from " . IMAGES_TABLE . " 
                                                     where master_id=$master_id
-                                                      and row_id=$row_id
-                                                      and type='$type'"
+                                                      and row_id=$row_id"
     );
 
     $image = array();
     if (count($image_names) > 0):
         foreach ($image_names as $image_name):
+        if($image_name->type!='')
+            $image[$image_name->type.'_'.$image_name->image_name] = $image_name->image_name;
+        else    
             $image[$image_name->image_name] = $image_name->image_name;
         endforeach;
     endif;
@@ -106,10 +108,9 @@ function uploaded_images($master_id, $row_id, $type = '') {
 
 function uploaded_images_section($master_id, $row_id, $data, $image_url,$type = '') {
     global $wpdb;
-    $image_names = $wpdb->get_results("select image_name,id from " . IMAGES_TABLE . " 
+    $image_names = $wpdb->get_results("select image_name,id,type from " . IMAGES_TABLE . " 
                                                     where master_id=$master_id
-                                                      and row_id=$row_id
-                                                      and type='$type'"
+                                                      and row_id=$row_id"
     );
     
     
@@ -120,7 +121,7 @@ function uploaded_images_section($master_id, $row_id, $data, $image_url,$type = 
                             'image_src'=>$image_url.'/'.$image_name->image_name,  
                             'imade_lable'=>$data[$image_name->image_name],  
                             'image_id'=>$image_name->id,  
-                            'side'=>$type,  
+                            'side'=>$image_name->type,  
                           );
         endforeach;
     endif;
@@ -136,8 +137,7 @@ function uploaded_images_count($master_id, $row_id, $type = '') {
     global $wpdb;
     $images = $wpdb->get_row("select COUNT(id) as count from " . IMAGES_TABLE . " 
                                                     where master_id=$master_id
-                                                      and row_id=$row_id
-                                                      and type='$type'"
+                                                      and row_id=$row_id"
     );
     
     return $images->count;
@@ -149,7 +149,7 @@ function uploaded_images_count($master_id, $row_id, $type = '') {
  */
 function images_data($id) {
     global $wpdb;
-    $image_names = $wpdb->get_row("select image_name from " . IMAGES_TABLE . " 
+    $image_names = $wpdb->get_row("select * from " . IMAGES_TABLE . " 
                                                     where id=$id"
     );
 

@@ -94,7 +94,7 @@ $master_images = array(
         'front_body_crossed_zipper_standard_fit0_long.png' => 'Front body double brested Zipper standard straight long',
         'front_body_crossed_zipper_standard_fit0_short.png' => 'Front body double brested Zipper standard straight short',
         'front_body_crossed_zipper_standard_fit1_long.png' => 'Front body double brested Zipper standard waisted long',
-        'front_body_crossed_zipper_standard_fit1_short.png' => 'Front body double brested Zipper standard waisted long',
+        'front_body_crossed_zipper_standard_fit1_short.png' => 'Front body double brested Zipper standard waisted Short',
         
         'front_body_simple_boton_hide_fit0_long.png' => 'Front body Single brested button hide straight long ',
         'front_body_simple_boton_hide_fit0_short.png' => 'Front body Single brested button hide straight short',
@@ -103,7 +103,7 @@ $master_images = array(
         'front_body_simple_boton_standard_fit0_long.png' => 'Front body Single brested button standard straight long',
         'front_body_simple_boton_standard_fit0_short.png' => 'Front body Single brested button standard straight short',
         'front_body_simple_boton_standard_fit1_long.png' => 'Front body Single brested button standard waisted long',
-        'front_body_simple_boton_standard_fit1_short.png' => 'Front body Single brested button standard waisted long',
+        'front_body_simple_boton_standard_fit1_short.png' => 'Front body Single brested button standard waisted short',
         
        
         'front_body_simple_zipper_hide_fit0_long.png' => 'Front body Single brested Zipper hide straight long ',
@@ -113,7 +113,7 @@ $master_images = array(
         'front_body_simple_zipper_standard_fit0_long.png' => 'Front body Single brested Zipper standard straight long',
         'front_body_simple_zipper_standard_fit0_short.png' => 'Front body Single brested Zipper standard straight short',
         'front_body_simple_zipper_standard_fit1_long.png' => 'Front body Single brested Zipper standard waisted long',
-        'front_body_simple_zipper_standard_fit1_short.png' => 'Front body Single brested Zipper standard waisted long',
+        'front_body_simple_zipper_standard_fit1_short.png' => 'Front body Single brested Zipper standard waisted short',
        
         'front_lupa_forro.png' => 'Front lupa_forro',
         
@@ -132,7 +132,7 @@ $master_images = array(
         'front_pockets_3_type7_fit0.png' => 'Front 3 pockets straight Double Welt',
         'front_pockets_3_type7_fit1.png' => 'Front 3 pockets waisted Double Welt',
         
-        'front_pockets_chest_type_patched.png' => 'Front chest pocket Welt',
+        'front_pockets_chest_type_patched.png' => 'Front chest pocket Patched',
         'front_pockets_chest_type_vertical.png' => 'Front chest pocket vertical',
         'front_pockets_chest_type_welt.png' => 'Front chest pocket welt',
         'front_pockets_chest_type_zipper.png' => 'Front chest pocket zipper',
@@ -166,7 +166,7 @@ $master_images = array(
 );
 
 
-$fabric_colors=array(
+$fabric_colors_old=array(
     '1'=>'first color',
     '2'=>'second color',
     '3'=>'third color',
@@ -176,6 +176,13 @@ $fabric_colors=array(
     '7'=>'seventh color',
     '8'=>'eighth color',
 );
+
+$fabric_colors=array();
+$fabric_color_datas=$wpdb->get_results("select * From ". FABRIC_COLORS ." where status='1'");
+
+foreach($fabric_color_datas as $fabric_color_data){
+    $fabric_colors[$fabric_color_data->id]=$fabric_color_data->name;
+}
 
 $category = 'trenchcoat';                                        // Current category      
 $image_category = wca_image_url . "/3d/man/$category";           // category image url
