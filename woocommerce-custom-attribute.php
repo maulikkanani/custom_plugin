@@ -218,28 +218,22 @@ function wca_product_link($post_link, $post, $leavename, $sample) {
     return $post_link;
 }
 
-add_filter( 'template_include', 'wca_template_loader');
-
+add_filter('template_include', 'wca_template_loader', 11, 1);
 
 function wca_template_loader($template) {
-    $template=WCA_TEMPLATE_PATH.'single-product.php';
+    $template = WCA_TEMPLATE_PATH . 'single-product.php';
     if (is_single() && get_post_type() == 'product') {
         global $post;
-         get_the_ID();
+        get_the_ID();
         $file = 'single-product.php';
         $find[] = $file;
-        $find[] = WC_TEMPLATE_PATH . $file;
-    } 
-    
+        $find[] = 'woocommerce-custom-attribute/' . $file;
+    }
     if ($file) {
         $template = locate_template($find);
-        echo $template;
-        echo '<br>==========================<br>';
         $status_options = get_option('woocommerce_status_options', array());
         if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
-            $template = WC()->plugin_path() . '/templates/' . $file;
+            $template = WCA_TEMPLATE_PATH . $file;
     }
-    echo $template=WCA_TEMPLATE_PATH.'single-product.php'; 
-    echo '<br>';
     return $template;
 }
