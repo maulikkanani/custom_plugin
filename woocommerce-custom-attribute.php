@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The WordPress Plugin Boilerplate.
  *
@@ -26,14 +25,15 @@
  * GitHub Plugin URI: https://github.com/<owner>/<repo>
  * WordPress-Plugin-Boilerplate: v2.6.1
  */
+
 // If this file is called directly, abort.
-if (!defined('WPINC')) {
-    die;
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
 
-/* ----------------------------------------------------------------------------*
+/*----------------------------------------------------------------------------*
  * Public-Facing Functionality
- * ---------------------------------------------------------------------------- */
+ *----------------------------------------------------------------------------*/
 
 /*
  * @TODO:
@@ -41,10 +41,10 @@ if (!defined('WPINC')) {
  * - replace `class-plugin-name.php` with the name of the plugin's class file
  *
  */
-//absolute path of plugin
-require_once( plugin_dir_path(__FILE__) . 'admin/includes/global_functions.php');
-require_once( plugin_dir_path(__FILE__) . 'admin/includes/wca_load.php');
-require_once( plugin_dir_path(__FILE__) . 'public/class-woocommerce-custom-attribute.php' );
+                          //absolute path of plugin
+require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/global_functions.php');
+require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/wca_load.php');
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-woocommerce-custom-attribute.php' );
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
@@ -54,8 +54,8 @@ require_once( plugin_dir_path(__FILE__) . 'public/class-woocommerce-custom-attri
  * - replace Plugin_Name with the name of the class defined in
  *   `class-plugin-name.php`
  */
-register_activation_hook(__FILE__, array('woocommerce_custom_attribute', 'activate'));
-register_deactivation_hook(__FILE__, array('woocommerce_custom_attribute', 'deactivate'));
+register_activation_hook( __FILE__, array( 'woocommerce_custom_attribute', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'woocommerce_custom_attribute', 'deactivate' ) );
 
 /*
  * @TODO:
@@ -63,117 +63,120 @@ register_deactivation_hook(__FILE__, array('woocommerce_custom_attribute', 'deac
  * - replace Plugin_Name with the name of the class defined in
  *   `class-plugin-name.php`
  */
-add_action('plugins_loaded', array('woocommerce_custom_attribute', 'get_instance'));
+add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute', 'get_instance' ) );
 
 
-define('ABS_WCA', plugin_dir_path(__FILE__));
-define('WCA_TEMPLATE_PATH', ABS_WCA . 'templates/');                        //absolute path of models
-define('ABS_MODEL', ABS_WCA . 'admin/models/');                        //absolute path of models
-define('ABS_CONTROLLER', ABS_WCA . 'admin/controllers/');             //absolute path of contollers
-define('ABS_VIEW', ABS_WCA . 'admin/views/');                   //absolute path of views
+define('ABS_WCA', plugin_dir_path( __FILE__ ));  
+define('WCA_TEMPLATE_PATH',ABS_WCA.'template/');                        //absolute path of models
+define('ABS_MODEL',ABS_WCA.'admin/models/');                        //absolute path of models
+define('ABS_CONTROLLER', ABS_WCA.'admin/controllers/');             //absolute path of contollers
+define('ABS_VIEW', ABS_WCA.'admin/views/');                   //absolute path of views
 define('wca_url', plugins_url('woocommerce-custom-attribute'));     //url of plugin
-define('wca_admin_asset_url', wca_url . '/admin/assets');             //url of admin assets
-define('wca_admin_image_url', wca_url . '/admin/assets/images');      //url of admin images 
-define('wca_asset_url', wca_url . '/assets');                         //url of public assets
-define('wca_image_url', wca_url . '/assets/images');                  //url of public images
+define('wca_admin_asset_url', wca_url.'/admin/assets');             //url of admin assets
+define('wca_admin_image_url', wca_url.'/admin/assets/images');      //url of admin images 
+define('wca_asset_url', wca_url.'/assets');                         //url of public assets
+define('wca_image_url', wca_url.'/assets/images');                  //url of public images
 
-/* Start :- define master tables */
+/*Start :- define master tables*/
 
-define('IMAGES_TABLE', $wpdb->prefix . 'wca_images');             //Butoon master
-define('BUTTONS', $wpdb->prefix . 'wca_buttons');                 //Butoon master
-define('ZIPPER', $wpdb->prefix . 'wca_zippers');                  //zipper master
-define('LINING', $wpdb->prefix . 'wca_linings');                  //Lining master
-define('BUTTON_HILO', $wpdb->prefix . 'wca_button_hilo');         //Button hilo master
-define('BUTTON_OJAL', $wpdb->prefix . 'wca_button_ojal');         //Button ojal master
-define('NECK_LINING', $wpdb->prefix . 'wca_neck_lining');         // Neck lining master
-define('ELBOW_PATCHES', $wpdb->prefix . 'wca_elbow_patches');     // Elbow patches master
-define('FABRICS', $wpdb->prefix . 'wca_fabrics');                // Elbow Fabric master
-define('FABRIC_COLORS', $wpdb->prefix . 'wca_fabric_colors');                // Elbow Fabric Color master
+define('IMAGES_TABLE', $wpdb->prefix.'wca_images');             //Butoon master
+define('BUTTONS', $wpdb->prefix.'wca_buttons');                 //Butoon master
+define('ZIPPER', $wpdb->prefix.'wca_zippers');                  //zipper master
+define('LINING', $wpdb->prefix.'wca_linings');                  //Lining master
+define('BUTTON_HILO', $wpdb->prefix.'wca_button_hilo');         //Button hilo master
+define('BUTTON_OJAL', $wpdb->prefix.'wca_button_ojal');         //Button ojal master
+define('NECK_LINING', $wpdb->prefix.'wca_neck_lining');         // Neck lining master
+define('ELBOW_PATCHES', $wpdb->prefix.'wca_elbow_patches');     // Elbow patches master
+define('FABRICS', $wpdb->prefix.'wca_fabrics');                // Elbow Fabric master
+define('FABRIC_COLORS', $wpdb->prefix.'wca_fabric_colors');                // Elbow Fabric Color master
 
-/* end :- define master tables */
+/*end :- define master tables*/
 
 wca_load::controller('wca_custome_attributes');
 
 wca_load::controller('wca_fabric');
-add_action('wp_ajax_upload_fabric_image', 'wca_fabric::upload_image');
-add_action('wp_ajax_delete_fabric_image', 'wca_fabric::delete_images');
-add_action('wp_ajax_active_fabric', 'wca_fabric::active_inactive');
+add_action( 'wp_ajax_upload_fabric_image', 'wca_fabric::upload_image'); 
+add_action( 'wp_ajax_delete_fabric_image', 'wca_fabric::delete_images'); 
+add_action( 'wp_ajax_active_fabric', 'wca_fabric::active_inactive'); 
 
 wca_load::controller('wca_fabric_color');
-add_action('wp_ajax_upload_fabric_color_image', 'wca_fabric_color::upload_image');
-add_action('wp_ajax_delete_fabric_color_image', 'wca_fabric_color::delete_images');
-add_action('wp_ajax_active_fabric_color', 'wca_fabric_color::active_inactive');
+add_action( 'wp_ajax_upload_fabric_color_image', 'wca_fabric_color::upload_image'); 
+add_action( 'wp_ajax_delete_fabric_color_image', 'wca_fabric_color::delete_images'); 
+add_action( 'wp_ajax_active_fabric_color', 'wca_fabric_color::active_inactive'); 
 
 wca_load::controller('wca_buttons');
-add_action('wp_ajax_upload_button', 'wca_buttons::upload_buttons');
-add_action('wp_ajax_delete_button_image', 'wca_buttons::delete_images');
-add_action('wp_ajax_active_button', 'wca_buttons::active_button');
+add_action( 'wp_ajax_upload_button', 'wca_buttons::upload_buttons'); 
+add_action( 'wp_ajax_delete_button_image', 'wca_buttons::delete_images'); 
+add_action( 'wp_ajax_active_button', 'wca_buttons::active_button'); 
 
 wca_load::controller('wca_zippers');
-add_action('wp_ajax_upload_zipper_image', 'wca_zippers::upload_image');
-add_action('wp_ajax_delete_zipper_image', 'wca_zippers::delete_images');
-add_action('wp_ajax_active_zipper', 'wca_zippers::active_inactive');
-
+add_action( 'wp_ajax_upload_zipper_image', 'wca_zippers::upload_image'); 
+add_action( 'wp_ajax_delete_zipper_image', 'wca_zippers::delete_images'); 
+add_action( 'wp_ajax_active_zipper', 'wca_zippers::active_inactive'); 
+ 
 wca_load::controller('wca_lining');
-add_action('wp_ajax_upload_lining_image', 'wca_lining::upload_image');
-add_action('wp_ajax_delete_lining_image', 'wca_lining::delete_images');
-add_action('wp_ajax_active_lining', 'wca_lining::active_inactive');
+add_action( 'wp_ajax_upload_lining_image', 'wca_lining::upload_image'); 
+add_action( 'wp_ajax_delete_lining_image', 'wca_lining::delete_images'); 
+add_action( 'wp_ajax_active_lining', 'wca_lining::active_inactive'); 
 
 wca_load::controller('wca_button_hilo');
-add_action('wp_ajax_upload_button_hilo_image', 'wca_button_hilo::upload_image');
-add_action('wp_ajax_delete_button_hilo_image', 'wca_button_hilo::delete_images');
-add_action('wp_ajax_active_button_hilo', 'wca_button_hilo::active_inactive');
+add_action( 'wp_ajax_upload_button_hilo_image', 'wca_button_hilo::upload_image'); 
+add_action( 'wp_ajax_delete_button_hilo_image', 'wca_button_hilo::delete_images'); 
+add_action( 'wp_ajax_active_button_hilo', 'wca_button_hilo::active_inactive'); 
 
 wca_load::controller('wca_button_ojal');
-add_action('wp_ajax_upload_button_ojal_image', 'wca_button_ojal::upload_image');
-add_action('wp_ajax_delete_button_ojal_image', 'wca_button_ojal::delete_images');
-add_action('wp_ajax_active_button_ojal', 'wca_button_ojal::active_inactive');
+add_action( 'wp_ajax_upload_button_ojal_image', 'wca_button_ojal::upload_image'); 
+add_action( 'wp_ajax_delete_button_ojal_image', 'wca_button_ojal::delete_images'); 
+add_action( 'wp_ajax_active_button_ojal', 'wca_button_ojal::active_inactive'); 
 
 wca_load::controller('wca_neck_lining');
-add_action('wp_ajax_upload_neck_lining_image', 'wca_neck_lining::upload_image');
-add_action('wp_ajax_delete_neck_lining_image', 'wca_neck_lining::delete_images');
-add_action('wp_ajax_active_neck_lining', 'wca_neck_lining::active_inactive');
+add_action( 'wp_ajax_upload_neck_lining_image', 'wca_neck_lining::upload_image'); 
+add_action( 'wp_ajax_delete_neck_lining_image', 'wca_neck_lining::delete_images'); 
+add_action( 'wp_ajax_active_neck_lining', 'wca_neck_lining::active_inactive'); 
 
 wca_load::controller('wca_elbow_patches');
-add_action('wp_ajax_upload_elbow_patches_image', 'wca_elbow_patches::upload_image');
-add_action('wp_ajax_delete_elbow_patches_image', 'wca_elbow_patches::delete_images');
-add_action('wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive');
+add_action( 'wp_ajax_upload_elbow_patches_image', 'wca_elbow_patches::upload_image'); 
+add_action( 'wp_ajax_delete_elbow_patches_image', 'wca_elbow_patches::delete_images'); 
+add_action( 'wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive');
+
+add_action( 'wp_ajax_label_change', 'wca_custome_attributes::label_change');
+//add_action( 'wp_ajax_retrieve_attr', 'wca_custome_attributes::retrieve_attr');
 
 global $post;
-add_action('wp_ajax_get_attribute_box', 'rander_attributes', $post);
-add_action('wp_ajax_get_image_box', 'rander_image_layers', $post);
-
-function rander_attributes($post) {
-    global $post;
-    $post_id = mysql_real_escape_string($_POST['post_id']);
-    $post = get_post($post_id);
-    $category = 'trenchcoat';
-    include_once(ABS_WCA . "admin/views/$category/customize-attributes.php");
-    exit;
-}
-
-function rander_image_layers($post) {
-    global $post;
-    $post_id = mysql_real_escape_string($_POST['post_id']);
-    $post = get_post($post_id);
-    $category = 'trenchcoat';                                         // Current category
-    include_once(ABS_WCA . "admin/views/$category/image-layer.php");
-    exit;
-}
-
+add_action('wp_ajax_get_attribute_box', 'rander_attributes',$post);
+add_action('wp_ajax_get_image_box', 'rander_image_layers',$post);
+ function rander_attributes($post) {
+        global $post;
+        $post_id=  mysql_real_escape_string($_POST['post_id']);
+        $post = get_post($post_id);
+        $category = 'trenchcoat';  
+        include_once(ABS_WCA."admin/views/$category/customize-attributes.php");
+        exit;
+ }
+  
+  function rander_image_layers($post) {
+        global $post;
+        $post_id=  mysql_real_escape_string($_POST['post_id']);
+        $post = get_post($post_id);
+        $category = 'trenchcoat';                                         // Current category
+        include_once(ABS_WCA."admin/views/$category/image-layer.php");
+        exit;
+ }
+ 
 //add_action( 'wp_ajax_upload_button', 'upload_buttons');
-function upload_buttons() {
+function upload_buttons(){
     //$dir_name=get_next_id('wp_wca_buttons');
-    include ABS_WCA . 'admin/includes/UploadHandler.php';
+    include ABS_WCA.'admin/includes/UploadHandler.php';
     $upload_handler = new UploadHandler();
-    $dirname = '1';
+    $dirname='1';
     //pr($_POST);
     //pr($_FILES,true);
 }
 
-/* ----------------------------------------------------------------------------*
+
+/*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
- * ---------------------------------------------------------------------------- */
+ *----------------------------------------------------------------------------*/
 
 /*
  * @TODO:
@@ -191,22 +194,22 @@ function upload_buttons() {
  *
  * The code below is intended to to give the lightest footprint possible.
  */
-if (is_admin() && (!defined('DOING_AJAX') || !DOING_AJAX )) {
+if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
-    require_once( plugin_dir_path(__FILE__) . 'admin/class-admin.php' );
-    /* Include file for a save a attribute data */
-    add_action('plugins_loaded', array('woocommerce_custom_attribute_admin', 'get_instance'));
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-admin.php' );
+        /*Include file for a save a attribute data*/
+        add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute_admin', 'get_instance' ) );
+
 }
 
-//add_filter('woocommerce_register_post_type_product', 'test_datas');
 
-function test_datas($data) {
-    //pr($data);
-    $data['rewrite']['slug'] = '/shop';
-    return $data;
-}
+/*Start front end codes*/
 
-add_filter('post_type_link', 'wca_product_link', 10, 4);
+
+define('WCA_PUBLIC_PATH', ABS_WCA . 'public/');                        //absolute path of models
+define('WCA_VIEW_PATH', WCA_PUBLIC_PATH . 'views/');                        //absolute path of models
+//
+//add_filter('post_type_link', 'wca_product_link', 10, 4);
 
 function wca_product_link($post_link, $post, $leavename, $sample) {
     $post_id = $post->ID;
@@ -221,19 +224,33 @@ function wca_product_link($post_link, $post, $leavename, $sample) {
 add_filter('template_include', 'wca_template_loader', 11, 1);
 
 function wca_template_loader($template) {
-    $template = WCA_TEMPLATE_PATH . 'single-product.php';
-    if (is_single() && get_post_type() == 'product') {
+    $post_id = get_the_ID();
+    $customize = get_post_meta($post_id, '_wca_customise_product', true);
+    if (is_single() && get_post_type() == 'product' && $customize == 1 && $_GET['customize']==1) {
         global $post;
-        get_the_ID();
         $file = 'single-product.php';
+        $template = plugin_template_path().$file;
         $find[] = $file;
-        $find[] = 'woocommerce-custom-attribute/' . $file;
+        $find[] = template_path(). $file;
     }
     if ($file) {
         $template = locate_template($find);
         $status_options = get_option('woocommerce_status_options', array());
         if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
-            $template = WCA_TEMPLATE_PATH . $file;
+            $template =  plugin_template_path().$file;
     }
     return $template;
+}
+
+add_action('woocommerce_after_add_to_cart_form','add_customize_butoon');
+function add_customize_butoon(){
+    $post_id = get_the_ID();
+    $customize = get_post_meta($post_id, '_wca_customise_product', true);
+    if (is_single() && get_post_type() == 'product' && $customize == 1) {
+        $link=get_permalink($post_id);
+        $link = add_query_arg('customize', '1', $link);
+        echo '<div class="gbtr_add_to_cart_simple" style="padding: 10px 0px; width: 100%;">
+                <a href="'.$link.'" class="single_add_to_cart_button button alt" style="width:55%">Customization</a>
+                </div>';
+    }
 }

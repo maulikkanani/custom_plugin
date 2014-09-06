@@ -180,4 +180,42 @@ function image_upload($temp_path,$savepath,$renamed='',$orignalname='') {
         return FALSE;
 }
 
+
+
+/*Start public functions*/
+
+function template_path(){
+                $cateory =apply_filters( 'category', 'trenchcoat' );
+		return apply_filters( 'template_path_wca', "woocommerce-custom-attribute/$cateory/");
+}
+
+function plugin_template_path(){
+                $cateory =apply_filters( 'category', 'trenchcoat' );
+		return apply_filters( 'plugin_template_path_wca', WCA_VIEW_PATH."$cateory/");
+}
+
+
+
+function wca_get_template_part( $slug, $name = '' ) {
+	$template = '';
+	// Look in yourtheme/slug-name.php and yourtheme/woocommerce/slug-name.php
+        
+	if ( $name ) {
+		$template = locate_template( array( "{$slug}-{$name}.php", template_path() . "{$slug}-{$name}.php" ) );
+	}
+        echo $template;
+        echo '<br>';
+	// Get default slug-name.php
+	if ( ! $template && $name && file_exists( plugin_template_path()."{$slug}-{$name}.php" ) ) {
+		$template =  plugin_template_path()."{$slug}-{$name}.php";
+	}
+        
+	// Allow 3rd party plugin filter template file from their plugin
+	$template = apply_filters( 'wca_get_template_part', $template, $slug, $name );
+
+	if ( $template ) {
+                echo $template;
+		load_template( $template, false );
+	}
+}
 ?>
