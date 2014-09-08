@@ -220,37 +220,3 @@ function wca_product_link($post_link, $post, $leavename, $sample) {
     }
     return $post_link;
 }
-
-add_filter('template_include', 'wca_template_loader', 11, 1);
-
-function wca_template_loader($template) {
-    $post_id = get_the_ID();
-    $customize = get_post_meta($post_id, '_wca_customise_product', true);
-    if (is_single() && get_post_type() == 'product' && $customize == 1 && $_GET['customize']==1) {
-        global $post;
-        $file = 'single-product.php';
-        $template = plugin_template_path().$file;
-        $find[] = $file;
-        $find[] = template_path(). $file;
-    }
-    if ($file) {
-        $template = locate_template($find);
-        $status_options = get_option('woocommerce_status_options', array());
-        if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
-            $template =  plugin_template_path().$file;
-    }
-    return $template;
-}
-
-add_action('woocommerce_after_add_to_cart_form','add_customize_butoon');
-function add_customize_butoon(){
-    $post_id = get_the_ID();
-    $customize = get_post_meta($post_id, '_wca_customise_product', true);
-    if (is_single() && get_post_type() == 'product' && $customize == 1) {
-        $link=get_permalink($post_id);
-        $link = add_query_arg('customize', '1', $link);
-        echo '<div class="gbtr_add_to_cart_simple" style="padding: 10px 0px; width: 100%;">
-                <a href="'.$link.'" class="single_add_to_cart_button button alt" style="width:55%">Customization</a>
-                </div>';
-    }
-}
