@@ -196,26 +196,31 @@ function plugin_template_path(){
 
 
 
-function wca_get_template_part( $slug, $name = '' ) {
-	$template = '';
-	// Look in yourtheme/slug-name.php and yourtheme/woocommerce/slug-name.php
-        
-	if ( $name ) {
-		$template = locate_template( array( "{$slug}-{$name}.php", template_path() . "{$slug}-{$name}.php" ) );
-	}
-        echo $template;
-        echo '<br>';
-	// Get default slug-name.php
-	if ( ! $template && $name && file_exists( plugin_template_path()."{$slug}-{$name}.php" ) ) {
-		$template =  plugin_template_path()."{$slug}-{$name}.php";
-	}
-        
-	// Allow 3rd party plugin filter template file from their plugin
-	$template = apply_filters( 'wca_get_template_part', $template, $slug, $name );
+function wca_get_template_part($name) {
+	$file=$name;
+        $template = plugin_template_path() . $file;
+        $find[] = $file;
+        $find[] = template_path() . $file;
+    if ($file) {
+        $template = locate_template($find);
+        $status_options = get_option('woocommerce_status_options', array());
+        if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
+            $template = plugin_template_path() . $file;
+    }   
+    include $template;
+}
 
-	if ( $template ) {
-                echo $template;
-		load_template( $template, false );
-	}
+function wca_get_template_path($name) {
+	$file=$name;
+        $template = plugin_template_path() . $file;
+        $find[] = $file;
+        $find[] = template_path() . $file;
+    if ($file) {
+        $template = locate_template($find);
+        $status_options = get_option('woocommerce_status_options', array());
+        if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
+            $template = plugin_template_path() . $file;
+    }   
+    return $template;
 }
 ?>

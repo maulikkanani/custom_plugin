@@ -4,6 +4,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+function retrieve_label($name, $value){
+  
+    global $wpdb;
+    $data = $wpdb->get_var("SELECT lable FROM `wp_wca_attr_lable` WHERE `attr_name` = '$name' AND `value` = '$value'");
+    $data= "<span id='".$name."__nis__".$value."'>$data</span>";
+    return $data;
+   }
+function retrive_price($name, $value){
+    global $wpdb;
+    $data = $wpdb->get_var('SELECT price FROM `wp_wca_attr_lable` WHERE `attr_name` = "'.$name.'" AND `value` = "'.$value.'"');
+    return $data;
+    }
+
 ?>
 <div class="clearfix">
             <div class="col-sm-12">
@@ -12,14 +26,19 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Style:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1 pos4">
+                               <span class="wca_trenchcoat_style_simple">
                                 <label>
-                                    <input type="radio" name="wca_trenchcoat_style" value="simple" data-imgpos="1" id="wca_trenchcoat_style_simple" class="rel_enable"> Single breasted
-                                     <input type="button" name="wca_trenchcoat_style_simple" class="wca_trenchcoat_attr_edit" value="edit"/>      
+                                    <input type="radio" name="wca_trenchcoat_style" value="simple" data-imgpos="1" id="wca_trenchcoat_style_simple" class="rel_enable">  <?php  echo retrieve_label('wca_trenchcoat_style','simple'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_style_crossed">
                                 <label>
-                                    <input type="radio" name="wca_trenchcoat_style" value="crossed" data-imgpos="1" id="wca_trenchcoat_style_crossed"  class="rel_deseable"> Double breasted
-                                    <input type="button" name="wca_trenchcoat_style_crossed" class="wca_trenchcoat_attr_edit" value="edit"/>
+                                    <input type="radio" name="wca_trenchcoat_style" value="crossed" data-imgpos="1" id="wca_trenchcoat_style_crossed"  class="rel_deseable"><?php  echo retrieve_label('wca_trenchcoat_style','crossed'); ?>
+                                    <!--<input type="button" name="wca_trenchcoat_style_crossed" class="wca_trenchcoat_attr_edit" value="edit"/>-->
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -27,12 +46,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Coat length:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1">
+                                <span class="wca_trenchcoat_length_short">
                                 <label>
-                                    <input id="wca_trenchcoat_length_short" type="radio" value="long" data-imgpos="1" name="wca_trenchcoat_length"> Long
+                                    <input id="wca_trenchcoat_length_short" type="radio" value="long" data-imgpos="1" name="wca_trenchcoat_length"><?php  echo retrieve_label('wca_trenchcoat_length','long'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_length_long">
                                 <label>
-                                    <input id="wca_trenchcoat_length_long" type="radio" value="short" data-imgpos="1" name="wca_trenchcoat_length"> Short
+                                    <input id="wca_trenchcoat_length_long" type="radio" value="short" data-imgpos="1" name="wca_trenchcoat_length"><?php  echo retrieve_label('wca_trenchcoat_length','short'); ?>
                                 </label>
+                                   <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -40,12 +65,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Fit:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1 pos2 pos5">
+                                <span class="wca_trenchcoat_fit_waisted">
                                 <label>
-                                    <input type="radio" value="1" name="wca_trenchcoat_fit"> Waisted
+                                    <input type="radio" value="1" name="wca_trenchcoat_fit"><?php  echo retrieve_label('wca_trenchcoat_fit','1'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                <span class="wca_trenchcoat_fit_straight">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_fit"> Straight
+                                    <input type="radio" value="0" name="wca_trenchcoat_fit"><?php  echo retrieve_label('wca_trenchcoat_fit','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -53,12 +84,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Fastening:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1">
+                                <span class="wca_trenchcoat_closure_zipper">
                                 <label>
-                                    <input type="radio" value="zipper" name="wca_trenchcoat_closure"> Zipper
+                                    <input type="radio" value="zipper" name="wca_trenchcoat_closure"><?php  echo retrieve_label('wca_trenchcoat_closure','zipper'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_closure_button">
                                 <label>
-                                    <input type="radio" value="boton" name="wca_trenchcoat_closure"> Buttons *
+                                    <input type="radio" value="boton" name="wca_trenchcoat_closure"><?php  echo retrieve_label('wca_trenchcoat_closure','boton'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -66,12 +103,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Fastening type:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos1">
+                                <span class="wca_trenchcoat_closure_type_button">
                                 <label>
-                                    <input type="radio" name="wca_trenchcoat_closure_type_boton" value="hide"> Hidden
+                                    <input type="radio" name="wca_trenchcoat_closure_type_boton" value="hide"><?php  echo retrieve_label('wca_trenchcoat_closure_type_boton','hide'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_Fasteningtype_button">
                                 <label>
-                                    <input type="radio"  name="wca_trenchcoat_closure_type_boton" value="standard"> Standard *
+                                    <input type="radio"  name="wca_trenchcoat_closure_type_boton" value="standard"><?php  echo retrieve_label('wca_trenchcoat_closure_type_boton','standard'); ?>
                                 </label>
+                                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                            </span>
                             </div>		      
                         </div>
                     </div>
@@ -79,15 +122,24 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Pockets:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front ">
+                                <span class="wca_trenchcoat_pockets_0">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_0"> No pockets
+                                    <input type="radio" value="0" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_0"><?php  echo retrieve_label('wca_trenchcoat_pockets','0'); ?>
                                 </label>
+                                     <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                        <span class="wca_trenchcoat_pockets_1">
+                                        <label>
+                                    <input type="radio" value="2" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_2"><?php  echo retrieve_label('wca_trenchcoat_pockets','2'); ?>
+                                </label>
+                                         <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                            </span>
+                                        <span class="wca_trenchcoat_pockets_2">
                                 <label>
-                                    <input type="radio" value="2" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_2"> 2 pockets
+                                    <input type="radio" value="3" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_3"><?php  echo retrieve_label('wca_trenchcoat_pockets','3'); ?>
                                 </label>
-                                <label>
-                                    <input type="radio" value="3" name="wca_trenchcoat_pockets" class="subshow" data-sh="trenchcoat_pockets_3"> 3 pockets
-                                </label>
+                                      <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                   </span>
                             </div>
                             <div class="pocket_selected_main row col-sm-12">
                                 <input id="hidden_trenchcoat_pockets" class="option_input" type="hidden" value="0" name="wca_trenchcoat_pockets_type">
@@ -150,21 +202,36 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Chest pocket:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos3">
+                                <span class="wca_trenchcoat_chest_pocket_0">
                                 <label>
-                                    <input type="radio" value="0"  name="wca_trenchcoat_chest_pocket"> No
+                                    <input type="radio" value="0"  name="wca_trenchcoat_chest_pocket"> <?php  echo retrieve_label('wca_trenchcoat_chest_pocket','0'); ?>
                                 </label>
+                                     <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    <span>
+                                 <span class="wca_trenchcoat_chest_pocket_welt">
                                 <label>
-                                    <input type="radio" value="welt"  name="wca_trenchcoat_chest_pocket"> Welt
+                                    <input type="radio" value="welt"  name="wca_trenchcoat_chest_pocket"><?php  echo retrieve_label('wca_trenchcoat_chest_pocket','welt'); ?>
                                 </label>
+                                      <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                 </span>
+                                <span class="wca_trenchcoat_chest_pocket_vertical">
                                 <label>
-                                    <input type="radio" value="vertical" name="wca_trenchcoat_chest_pocket" > Vertical
+                                    <input type="radio" value="vertical" name="wca_trenchcoat_chest_pocket" ><?php  echo retrieve_label('wca_trenchcoat_chest_pocket','vertical'); ?>
                                 </label>
+                                     <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                 </span>
+                                <span class="wca_trenchcoat_chest_pocket_zipper">
                                 <label>
-                                    <input type="radio" value="zipper" name="wca_trenchcoat_chest_pocket" > Zipper
+                                    <input type="radio" value="zipper" name="wca_trenchcoat_chest_pocket" ><?php  echo retrieve_label('wca_trenchcoat_chest_pocket','zipper'); ?>
                                 </label>
+                                     <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_chest_pocket_patched">
                                 <label>
-                                    <input type="radio" value="patched" name="wca_trenchcoat_chest_pocket" > Patched
+                                    <input type="radio" value="patched" name="wca_trenchcoat_chest_pocket" ><?php  echo retrieve_label('wca_trenchcoat_chest_pocket','patched'); ?>
                                 </label>
+                                     <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -172,15 +239,24 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Belt:</label>
                         <div class="col-sm-10">
                             <div class="radio  attr-back pos5">
+                                <span class="wca_trenchcoat_belt_no">
                                 <label>
-                                    <input type="radio" value="0"  name="wca_trenchcoat_belt" > No
+                                    <input type="radio" value="0"  name="wca_trenchcoat_belt" ><?php  echo retrieve_label('wca_trenchcoat_belt','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_belt_sewing">
                                 <label>
-                                    <input type="radio" value="sewing"  name="wca_trenchcoat_belt" id="trenchcoat_belt_sewing"> Sewed
+                                    <input type="radio" value="sewing"  name="wca_trenchcoat_belt" id="trenchcoat_belt_sewing"><?php  echo retrieve_label('wca_trenchcoat_belt','sewing'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_belt_loose">
                                 <label>
-                                    <input type="radio" value="loose" name="wca_trenchcoat_belt" id="trenchcoat_belt_loose"> Loose
+                                    <input type="radio" value="loose" name="wca_trenchcoat_belt" id="trenchcoat_belt_loose"><?php  echo retrieve_label('wca_trenchcoat_belt','loose'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
                             </div>		      
                         </div>
                     </div>
@@ -188,15 +264,24 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Back side:</label>
                         <div class="col-sm-10">
                             <div class="radio  attr-back pos1">
+                                <span class="wca_trenchcoat_backcut_Ventless">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_backcut" > Ventless
+                                    <input type="radio" value="0" name="wca_trenchcoat_backcut" ><?php  echo retrieve_label('wca_trenchcoat_backcut','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                <span class="wca_trenchcoat_backcut_Centervent">
                                 <label>
-                                    <input type="radio" value="1" name="wca_trenchcoat_backcut" > Center vent
+                                    <input type="radio" value="1" name="wca_trenchcoat_backcut" ><?php  echo retrieve_label('wca_trenchcoat_backcut','1'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                <span class="wca_trenchcoat_backcut_Sidevents">
                                 <label>
-                                    <input type="radio" value="2" name="wca_trenchcoat_backcut" > Side vents
+                                    <input type="radio" value="2" name="wca_trenchcoat_backcut" ><?php  echo retrieve_label('wca_trenchcoat_backcut','2'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
                             </div>		      
                         </div>
                     </div>
@@ -204,15 +289,24 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Sleeves:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos7">
+                                <span class="wca_trenchcoat_sleeve_no">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_sleeve" > No
+                                    <input type="radio" value="0" name="wca_trenchcoat_sleeve" ><?php  echo retrieve_label('wca_trenchcoat_sleeve','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                </span>
+                                <span class="wca_trenchcoat_sleeve_tape">
                                 <label>
-                                    <input type="radio" value="tape" name="wca_trenchcoat_sleeve" > Tape
+                                    <input type="radio" value="tape" name="wca_trenchcoat_sleeve" ><?php  echo retrieve_label('wca_trenchcoat_sleeve','tape'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                <span class="wca_trenchcoat_sleeve_button">
                                 <label>
-                                    <input type="radio" value="button" name="wca_trenchcoat_sleeve" > Buttons
+                                    <input type="radio" value="button" name="wca_trenchcoat_sleeve" ><?php  echo retrieve_label('wca_trenchcoat_sleeve','button'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                               </span>
                             </div>		      
                         </div>
                     </div>
@@ -220,12 +314,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Epaulettes:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-front pos6">
+                                <span class="wca_trenchcoat_shoulder_0">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_shoulder" > No
+                                    <input type="radio" value="0" name="wca_trenchcoat_shoulder" ><?php  echo retrieve_label('wca_trenchcoat_shoulder','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                    <span class="wca_trenchcoat_shoulder_1">
                                 <label>
-                                    <input type="radio" value="1" name="wca_trenchcoat_shoulder" > With ribbon
-                                </label>		       
+                                    <input type="radio" value="1" name="wca_trenchcoat_shoulder" ><?php  echo retrieve_label('wca_trenchcoat_shoulder','1'); ?>
+                                </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                  </span>		       
                             </div>		      
                         </div>
                     </div>
@@ -233,12 +333,18 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">Back piece:</label>
                         <div class="col-sm-10">
                             <div class="radio attr-back bck_pos10">
+                                <span class="wca_trenchcoat_back_lapel_0">
                                 <label>
-                                    <input type="radio" value="0" name="wca_trenchcoat_back_lapel" > No
+                                    <input type="radio" value="0" name="wca_trenchcoat_back_lapel" ><?php  echo retrieve_label('wca_trenchcoat_back_lapel','0'); ?>
                                 </label>
+                                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
+                                <span class="wca_trenchcoat_back_lapel_1">
                                 <label>
-                                    <input type="radio" value="1" name="wca_trenchcoat_back_lapel" > Yes
-                                </label>		       
+                                    <input type="radio" value="1" name="wca_trenchcoat_back_lapel" ><?php  echo retrieve_label('wca_trenchcoat_back_lapel','1'); ?>
+                                </label>
+                                 <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
+                                    </span>
                             </div>		      
                         </div>
                     </div>
@@ -248,12 +354,19 @@
             </div>
         </div>
 <script type="text/javascript">
-jQuery(document).ready(function(){
+/*jQuery(document).ready(function(){
     jQuery('.wca_trenchcoat_attr_edit').on('click',function(){
-       alert('hello');
+       // var data1 = jQuery(this).parent().data('values');
+       //var data12 = jQuery(this).parent().child('input').attr('name');
+      // var abc = jQuery(this).siblings('label').children('input').attr(name);
+       // alert(abc);
+        
+        jQuery("#black_overlay").css("display", "block");
+    }); 
+        jQuery("#white_content #cancel").click(function() {
+            jQuery("#black_overlay").hide();
+    });
     
     
-    
-});
-});
+});*/
 </script>

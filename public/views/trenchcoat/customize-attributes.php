@@ -12,7 +12,8 @@ $value = get_post_meta($post->ID, '_my_meta_value_key', true);
 global $post_id;
 include ABS_MODEL . '/get_attrs.php';
 $price = json_encode($attribute_price);                          // Array of default attribute price
-$attr_default_values = json_encode($default_values);               // Array of default attribute values     
+$attr_default_values = json_encode($default_values);               // Array of default attribute values 
+
 ?>
 <div id="default_value" class="hide"></div>
 <script type="text/javascript">
@@ -56,9 +57,12 @@ $attr_default_values = json_encode($default_values);               // Array of d
     jQuery(document).ready(function() {
 
         /*Start:-  Binding model of knockout for a lining (Knockout js)*/
-        ko.cleanNode(jQuery('#main_customization')[0]);
+        
         LiningModel.lining();
+        if(jQuery('#main_customization')[0])
+            ko.cleanNode(jQuery('#main_customization')[0]);
         ko.applyBindings(LiningModel, jQuery('#main_customization')[0]);
+        
         /*End:-  Binding model of knockout for a lining (Knockout js)*/
 
         jQuery("#tabs").tabs();
@@ -248,17 +252,18 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
     </ul>
     <div id="tabs-1">
         <?php
-        include_once ABS_WCA . "admin/views/$category/customize-attributes-step-1.php";
+            //include ABS_WCA . "public/views/$category/customize-attributes-step-1.php";
+            include_once wca_get_template_path('customize-attributes-step-1.php');
         ?>
     </div>
     <div id="tabs-2">
         <?php
-        include_once ABS_WCA . "admin/views/$category/customize-attributes-step-2.php";
+            include_once wca_get_template_path('customize-attributes-step-2.php');
         ?>
     </div>
     <div id="tabs-3">
         <?php
-        include_once ABS_WCA . "admin/views/$category/customize-attributes-step-3.php";
+            include_once wca_get_template_path('customize-attributes-step-3.php');
         ?>
     </div>
 </div>  

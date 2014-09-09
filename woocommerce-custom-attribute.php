@@ -67,6 +67,7 @@ add_action( 'plugins_loaded', array( 'woocommerce_custom_attribute', 'get_instan
 
 
 define('ABS_WCA', plugin_dir_path( __FILE__ ));  
+define('ABS_WCA_ADMIN', plugin_dir_path( __FILE__ ).'admin/');  
 define('WCA_TEMPLATE_PATH',ABS_WCA.'template/');                        //absolute path of models
 define('ABS_MODEL',ABS_WCA.'admin/models/');                        //absolute path of models
 define('ABS_CONTROLLER', ABS_WCA.'admin/controllers/');             //absolute path of contollers
@@ -76,6 +77,13 @@ define('wca_admin_asset_url', wca_url.'/admin/assets');             //url of adm
 define('wca_admin_image_url', wca_url.'/admin/assets/images');      //url of admin images 
 define('wca_asset_url', wca_url.'/assets');                         //url of public assets
 define('wca_image_url', wca_url.'/assets/images');                  //url of public images
+
+/* Start public constants */
+define('abs_wca_include', ABS_WCA.'includes/');                  //main include
+define('abs_wca_public_include', ABS_WCA.'public/includes/');                  //public include
+
+/* End public constants */
+
 
 /*Start :- define master tables*/
 
@@ -220,3 +228,4 @@ function wca_product_link($post_link, $post, $leavename, $sample) {
     }
     return $post_link;
 }
+

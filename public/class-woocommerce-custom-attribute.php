@@ -75,13 +75,10 @@ class woocommerce_custom_attribute {
         // Load public-facing style sheet and JavaScript.
         add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-
-        add_filter('template_include', array($this, 'wca_template_loader'), 11, 1);
-        add_action('woocommerce_after_add_to_cart_form', array($this, 'add_customize_butoon'));
-
         /* Define custom functionality.
          * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
          */
+        include abs_wca_include.'wca_public_hooks.php';
         add_action('@TODO', array($this, 'action_method_name'));
         add_filter('@TODO', array($this, 'filter_method_name'));
     }
@@ -260,7 +257,14 @@ class woocommerce_custom_attribute {
      * @since    1.0.0
      */
     public function enqueue_styles() {
-        wp_enqueue_style($this->plugin_slug . '-plugin-styles', plugins_url('assets/css/public.css', __FILE__), array(), self::VERSION);
+//        wp_enqueue_style($this->plugin_slug . '-plugin-styles', plugins_url('assets/css/public.css', __FILE__), array(), self::VERSION);
+        wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/style.css',__FILE__), array(), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_style('jquery.fileupload', plugins_url('assets/css/jquery.fileupload.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_style('font-awesome', plugins_url('admin/assets/css/font_awesome/css/font-awesome.min.css', ABS_WCA_ADMIN), array(), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_style('tocken-input', plugins_url('assets/css/token-input.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_style('jquery_popup', plugins_url('assets/css/jquery_popup.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);  
+        
     }
 
     /**
@@ -269,7 +273,15 @@ class woocommerce_custom_attribute {
      * @since    1.0.0
      */
     public function enqueue_scripts() {
-        wp_enqueue_script($this->plugin_slug . '-plugin-script', plugins_url('assets/js/public.js', __FILE__), array('jquery'), self::VERSION);
+        //wp_enqueue_script($this->plugin_slug . '-plugin-script', plugins_url('assets/js/public.js', __FILE__), array('jquery'), self::VERSION);
+        wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('admin/assets/js/comman.js', ABS_WCA_ADMIN), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script('jQuery-ui', plugins_url('admin/assets/js/jquery-ui.js', ABS_WCA_ADMIN), array('jquery'), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_script('jQuery-fileupload', plugins_url('assets/js/jquery.fileupload.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_script('jQuery-token-input', plugins_url('assets/js/jquery.tokeninput.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_script('owl.carousel', plugins_url('assets/js/owl.carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        //wp_enqueue_script('owl-carousel', plugins_url('assets/js/owl-carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script('knockhout', plugins_url('admin/assets/js/knockout-3.2.0.js', ABS_WCA_ADMIN), array('jquery'), woocommerce_custom_attribute::VERSION);
     }
 
     /**
@@ -297,36 +309,4 @@ class woocommerce_custom_attribute {
     public function filter_method_name() {
         // @TODO: Define your filter hook callback here
     }
-
-    function wca_template_loader($template) {
-        $post_id = get_the_ID();
-        $customize = get_post_meta($post_id, '_wca_customise_product', true);
-        if (is_single() && get_post_type() == 'product' && $customize == 1 && $_GET['customize'] == 1) {
-            global $post;
-            $file = 'single-product.php';
-            $template = plugin_template_path() . $file;
-            $find[] = $file;
-            $find[] = template_path() . $file;
-        }
-        if ($file) {
-            $template = locate_template($find);
-            $status_options = get_option('woocommerce_status_options', array());
-            if (!$template || (!empty($status_options['template_debug_mode']) && current_user_can('manage_options') ))
-                $template = plugin_template_path() . $file;
-        }
-        return $template;
-    }
-
-    function add_customize_butoon() {
-        $post_id = get_the_ID();
-        $customize = get_post_meta($post_id, '_wca_customise_product', true);
-        if (is_single() && get_post_type() == 'product' && $customize == 1) {
-            $link = get_permalink($post_id);
-            $link = add_query_arg('customize', '1', $link);
-            echo '<div class="gbtr_add_to_cart_simple" style="padding: 10px 0px; width: 100%;">
-                <a href="' . $link . '" class="single_add_to_cart_button button alt" style="width:55%">Customization</a>
-                </div>';
-        }
-    }
-
 }

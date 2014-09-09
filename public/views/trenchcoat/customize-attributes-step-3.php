@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 ?>
-
 <style type="text/css">
     #img_ojal_hilo div.hilo{
         /*background: url("<?php echo $man_url ?>/extras/hilo_ojal/hilos.png") no-repeat left top ;*/
@@ -21,29 +20,20 @@
 <h3 class="main_titel_list">Custom Trench Coat / <span class="sub-titel">Step 3: Add your personal touch</span></h3><br>
 <div class="form-group" id="main_interior">
     <div class="heading_main attr-front">
-        <h2 toggle="Add_Interior" class="arrow_toggle" name="customize_trench_coat_lining"><?php  echo retrieve_label('customize_trench_coat_lining',''); ?><span>(+<?php  echo retrive_price('wca_trenchcoat_interior_type','1'); ?>)</span>
-            <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit" data-name="customize_trench_coat_lining" data-flag="heading"></i>
+        <h2 toggle="Add_Interior" class="arrow_toggle">Customize Trench Coat Lining <span>(+12,95)</span>
             <a class="delete" href="javascript:;">Delete</a>
         </h2>
-                            
-
     </div>
     <div class="category_main_box clearfix Add_Interior">
         <div class="clearfix">
             <div class="radio attr-front">
-                <span class="wca_trenchcoat_interior_type_0">
                 <label>
-                    <input type="radio" value="0" name="wca_trenchcoat_interior_type" class="linings"><?php  echo retrieve_label('wca_trenchcoat_interior_type','0'); ?>
+                    <input type="radio" value="0" name="wca_trenchcoat_interior_type" class="linings"> Color by default
                 </label>
-                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                    </span>
                 <div class="clearfix"></div>
-               <span>
                 <label>
-                    <input type="radio" value="1" name="wca_trenchcoat_interior_type" class="linings"><?php  echo retrieve_label('wca_trenchcoat_interior_type','1'); ?>(+<?php  echo retrive_price('wca_trenchcoat_interior_type','1'); ?>) 
-                </label>
-                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
+                    <input type="radio" value="1" name="wca_trenchcoat_interior_type" class="linings"> Custom color (+12,95) 
+                </label>		       
             </div>		      
         </div>
 
@@ -96,8 +86,7 @@
 
 <div class="form-group" id="main_embroidery">
     <div class="heading_main">
-        <h2 toggle="Add_Embroidery" class="arrow_toggle" name="add_embroidery"><?php  echo retrieve_label('add_embroidery',''); ?><span>(+<?php  echo retrive_price('add_embroidery',''); ?>)</span>
-             <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit" data-name="add_embroidery" data-flag="heading"></i>
+        <h2 toggle="Add_Embroidery" class="arrow_toggle">Add Embroidery<span>(+9,95)</span>
             <a class="delete" href="javascript:;">Delete</a>
         </h2>
     </div>
@@ -202,26 +191,20 @@
 <!-- Start for neck linig -->
 <div class="form-group" id="main_neck_lapel">
     <div class="heading_main">
-        <h2 toggle="Neck_Lining" class="arrow_toggle" name="neck_lining"><?php  echo retrieve_label('neck_lining',''); ?><span>(+<?php  echo retrive_price('wca_trenchcoat_neck_lapel','1'); ?>)</span>
-            <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit" data-name="neck_lining" data-flag="heading"></i>
+        <h2 toggle="Neck_Lining" class="arrow_toggle">Neck Lining<span>(+3,50)</span>
             <a class="delete" href="javascript:;">Delete</a></h2>
-</div>
+
+    </div>
     <div class="category_main_box clearfix Neck_Lining wca_Neck_Lining">
         <div class="clearfix">
             <div class="radio attr-back">
-                <span class="wca_trenchcoat_neck_lapel_0">
                 <label>
-                    <input type="radio" value="0" name="wca_trenchcoat_neck_lapel" class="extra_item"><?php  echo retrieve_label('wca_trenchcoat_neck_lapel','0'); ?>
+                    <input type="radio" value="0" name="wca_trenchcoat_neck_lapel" class="extra_item"> Color by default
                 </label>
-                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
                 <div class="clearfix"></div>
-                <span class="wca_trenchcoat_neck_lapel_1">
                 <label>
-                    <input type="radio" value="1" name="wca_trenchcoat_neck_lapel" class="extra_item"><?php  echo retrieve_label('wca_trenchcoat_neck_lapel','1'); ?><span>(+<?php  echo retrive_price('wca_trenchcoat_neck_lapel','1'); ?>)</span> 
+                    <input type="radio" value="1" name="wca_trenchcoat_neck_lapel" class="extra_item"> Custom color (+3,50) 
                 </label>		       
-                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
             </div>		      
         </div>
         <div class="clearfix attr-back">
@@ -241,26 +224,19 @@
 <!-- Start for neck elbow pacthes -->
 <div class="form-group" id="main_elbow_patch">
     <div class="heading_main">
-        <h2 toggle="elbow_patches" class="arrow_toggle" name="add_elbow_patches"><?php  echo retrieve_label('add_elbow_patches',''); ?><span>(+<?php  echo retrive_price('wca_trenchcoat_elbow_patch','1'); ?>)</span>
-            <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit" data-name="add_elbow_patches" data-flag="heading"></i>
+        <h2 toggle="elbow_patches" class="arrow_toggle">Add elbow patches<span>(+12,95)</span>
             <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
     <div class="category_main_box clearfix elbow_patches">
         <div class="clearfix">
             <div class="radio attr-back">
-                <span class="wca_trenchcoat_elbow_patch_0">
                 <label>
-                    <input type="radio" value="0" name="wca_trenchcoat_elbow_patch" class="extra_item"><?php  echo retrieve_label('wca_trenchcoat_elbow_patch','0'); ?> 
+                    <input type="radio" value="0" name="wca_trenchcoat_elbow_patch" class="extra_item"> No elbow patches 
                 </label>
-                    <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                    </span>
                 <div class="clearfix"></div>
-                <span class="wca_trenchcoat_elbow_patch_1">
                 <label>
-                    <input type="radio" value="1" name="wca_trenchcoat_elbow_patch" class="extra_item"><?php  echo retrieve_label('wca_trenchcoat_elbow_patch','1'); ?><span>(+<?php  echo retrive_price('wca_trenchcoat_elbow_patch','1'); ?>)</span>  
-                </label>
-                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
+                    <input type="radio" value="1" name="wca_trenchcoat_elbow_patch" class="extra_item"> Add elbow patches (+12,95)  
+                </label>		       
             </div>		      
         </div>
         <div class="clearfix attr-back">
@@ -280,27 +256,20 @@
 <!-- Start for button thread and button hole  -->
 <div class="form-group" id="main_buton_thread">
     <div class="heading_main">
-        <h2 toggle="button_holes" class="arrow_toggle" name="add_colored_button_holes"><?php  echo retrieve_label('add_colored_button_holes',''); ?><span>(+<?php  echo retrive_price('add_colored_button_holes',''); ?>)</span>
-            <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit" data-name="add_colored_button_holes" data-flag="heading"></i>
+        <h2 toggle="button_holes" class="arrow_toggle">Add colored button holes / threads<span>(+3,50)</span>
             <a class="delete" href="javascript:;">Delete</a></h2>
     </div>
 
     <div class="category_main_box clearfix button_holes">
         <div id="thread_appy" class="attr-fron" style="display:none">
-            <span class="wca_trenchcoat_btn_thread_apply_all">
             <label>
                 <input name="wca_trenchcoat_btn_thread_apply" value="all" type="radio">
-                <?php  echo retrieve_label('wca_trenchcoat_btn_thread_apply','all'); ?>
+                All
             </label>
-                <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
-            <span class="wca_trenchcoat_btn_thread_apply_cuff">
             <label>
                 <input name="wca_trenchcoat_btn_thread_apply" value="cuff"  type="radio">
-                <?php  echo retrieve_label('wca_trenchcoat_btn_thread_apply','cuff'); ?>
+                Cuffs only
             </label>
-                 <i class="fa fa-pencil-square-o wca_trenchcoat_attr_edit"></i>
-                </span>
         </div>
         <input type="hidden" value="0" name="wca_buton_thread">
         <input type="hidden" value="0" name="wca_buton_hole_thread">

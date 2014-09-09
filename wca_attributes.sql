@@ -492,3 +492,69 @@ INSERT INTO `wp_wca_zippers` (`id`, `name`, `color`, `category_id`, `status`) VA
 (5, '5', '', 1, '0');
 
 -- --------------------------------------------------------
+
+
+
+CREATE TABLE IF NOT EXISTS `wp_wca_attr_lable` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `attr_name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `lable` varchar(255) DEFAULT NULL,
+  `category_id` int(12) NOT NULL,
+  `price` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
+
+--
+-- Dumping data for table `wp_wca_attr_lable`
+--
+
+INSERT INTO `wp_wca_attr_lable` (`id`, `attr_name`, `value`, `lable`, `category_id`, `price`) VALUES
+(9, 'wca_trenchcoat_style', 'crossed', 'Double breasted', 1, 1),
+(14, 'wca_trenchcoat_style', 'simple', 'Single breasted', 1, 0),
+(15, 'wca_trenchcoat_length', 'short', 'Short', 1, 0),
+(34, 'wca_trenchcoat_fit', '0', 'Straight', 1, 0),
+(35, 'wca_trenchcoat_closure', 'boton', 'Buttons ', 1, 0),
+(38, 'wca_trenchcoat_length', 'long', 'Long', 1, 0),
+(39, 'wca_trenchcoat_fit', '1', 'Waisted ', 1, 0),
+(40, 'wca_trenchcoat_closure', 'zipper', 'Hidden', 1, 0),
+(41, 'wca_trenchcoat_closure_type_boton', 'standard', 'Standard', 1, 0),
+(42, 'wca_trenchcoat_pockets', '3', '3 pockets', 1, 0),
+(43, 'wca_trenchcoat_pockets', '2', '2 pockets ', 1, 0),
+(44, 'wca_trenchcoat_pockets', '0', 'No pockets ', 1, 0),
+(45, 'wca_trenchcoat_closure_type_boton', 'hide', 'Hidden', 1, 0),
+(46, 'wca_trenchcoat_chest_pocket', 'patched', 'Patched ', 1, 0),
+(47, 'wca_trenchcoat_chest_pocket', 'zipper', 'Zipper ', 1, 0),
+(48, 'wca_trenchcoat_chest_pocket', 'vertical', 'Vertical', 1, 0),
+(49, 'wca_trenchcoat_chest_pocket', 'welt', 'Welt ', 1, 0),
+(50, 'wca_trenchcoat_chest_pocket', '0', 'No', 1, 0),
+(51, 'wca_trenchcoat_belt', 'loose', 'Loose', 1, 0),
+(52, 'wca_trenchcoat_belt', 'sewing', 'Sewed', 1, 0),
+(53, 'wca_trenchcoat_belt', '0', 'No ', 1, 0),
+(54, 'wca_trenchcoat_backcut', '2', 'Side vents', 1, 0),
+(55, 'wca_trenchcoat_backcut', '1', 'Center vent', 1, 0),
+(56, 'wca_trenchcoat_backcut', '0', 'Ventless', 1, 0),
+(57, 'wca_trenchcoat_sleeve', 'button', 'Buttons ', 1, 0),
+(58, 'wca_trenchcoat_sleeve', 'tape', 'Tape', 1, 0),
+(59, 'wca_trenchcoat_sleeve', '0', 'No ', 1, 0),
+(60, 'wca_trenchcoat_shoulder', '0', 'No ', 1, 0),
+(61, 'wca_trenchcoat_back_lapel', '0', 'No', 1, 0),
+(62, 'wca_trenchcoat_shoulder', '1', 'With ribbon', 1, 0),
+(64, 'wca_trenchcoat_back_lapel', '1', 'Yes', 1, 0),
+(65, 'wca_trenchcoat_interior_type', '0', 'Color by default', 1, 0),
+(66, 'wca_trenchcoat_interior_type', '1', 'Custom color', 1, 12.95),
+(67, 'customize_trench_coat_lining', '', 'Customize Trench Coat Lining', 1, 12.95),
+(68, 'add_embroidery', '', 'Add Embroidery', 1, 9.95),
+(69, 'neck_lining', '', 'Neck Lining', 1, 3.5),
+(70, 'wca_trenchcoat_neck_lapel', '0', 'Color by default', 1, 0),
+(71, 'wca_trenchcoat_neck_lapel', '1', 'Custom Color', 1, 3.5),
+(72, 'add_elbow_patches', '', 'Add elbow patches', 1, 12.95),
+(73, 'wca_trenchcoat_elbow_patch', '0', 'No elbow patches', 1, 0),
+(74, 'wca_trenchcoat_elbow_patch', '1', 'Add elbow patches', 1, 12.95),
+(75, 'add_colored_button_holes', '', 'Add colored button holes / threads', 1, 3.5),
+(76, 'wca_trenchcoat_btn_thread_apply', 'all', 'All', 1, 0),
+(77, 'wca_trenchcoat_btn_thread_apply', 'cuff', 'Cuffs Only', 1, 3.5);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

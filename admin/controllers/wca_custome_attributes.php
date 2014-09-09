@@ -66,5 +66,61 @@ class wca_custome_attributes {
             }
             update_post_meta($post_id,'_wca_attribute_data', $data);
     }
+    
+     public static function label_change(){
+         global $wpdb;
+         $name = $_POST['name'];
+         $label = $_POST['label'];
+         $priceattr = $_POST['price'];
+         $value = $_POST['value'];
+         $category_id = $_POST['category_id'];
+         
+          $data=array(
+                        'attr_name'=>$name,
+                        'value'=>$value, 
+                        'lable'=>$label,
+                        'price'=>$priceattr,
+                        'category_id'=>$category_id
+                        
+                        );
+        // print_r($data);
+          $where=array(
+              'attr_name'=>$name,
+              'value'=>$value 
+          );
+         $select = $wpdb->get_results("SELECT * FROM `wp_wca_attr_lable` WHERE `attr_name` = '$name' AND `value` = '$value'");
+         // $select = $wpdb->get_results('SELECT attr_name, value FROM `wp_wca_attr_lable`',ARRAY_A);
+        echo count($select);
+         if(count($select)){
+             $wpdb->update('wp_wca_attr_lable',$data,$where, $format = null, $where_format = null);
+         }
+         else {
+              $wpdb->insert('wp_wca_attr_lable',$data);
+         }
+         exit;
+         }
+          /*$count == 0;
+          foreach($select as $select1){
+              if($select1['attr_name'] == $name && $select1['value'] == $value){
+                  $wpdb->update('wp_wca_attr_lable',$data,$where, $format = null, $where_format = null);
+                  $count++;
+                  }
+              }
+              if($count==0){
+              $wpdb->insert('wp_wca_attr_lable',$data);
+             $count==0;
+              }
+         exit;
+         }
+     */
+     public static function retrieve_attr(){
+         global $wpdb;
+         $name = $_POST['name'];
+         $data = $wpdb->get_results("SELECT Lable,price FROM wp_wca_attr_lable WHERE name = $name");
+         print_r($data);
+     }
+     
+   
+  
 }
 ?>

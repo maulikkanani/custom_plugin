@@ -228,63 +228,6 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                 
                 <link rel="image_src" href="<?php echo $src[0] ?>" />
                 
-                <?php 
-        
-                if ( $attachment_ids ) {
-                
-                ?>
-                
-               <!-- <div class = 'doubleSlider-2'>-->
-                <div class="product_thumbs">   
-                    <div  id="sync2" class = 'slider doubleSlider-2'>
-                                
-                                <?php if ( has_post_thumbnail() ) : ?>
-                                <div class="button"><div itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, 'shop_thumbnail' ) ?></div></div>
-                                <?php endif; ?>
-                                
-                                <?php
-                        
-                                $loop = 0;
-                                $columns = apply_filters( 'woocommerce_product_thumbnails_columns', 3 );
-                                
-                                foreach ( $attachment_ids as $attachment_id ) {
-        
-                                    $classes = array( 'zoom' );
-                        
-                                    if ( $loop == 0 || $loop % $columns == 0 )
-                                        $classes[] = 'first';
-                        
-                                    if ( ( $loop + 1 ) % $columns == 0 )
-                                        $classes[] = 'last';
-                        
-                                    $image_link = wp_get_attachment_url( $attachment_id );
-                        
-                                    if ( ! $image_link )
-                                        continue;
-                        
-                                    $image       = wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_small_thumbnail_size', 'shop_thumbnail' ) );
-                                    $image_class = esc_attr( implode( ' ', $classes ) );
-                                    $image_title = esc_attr( get_the_title( $attachment_id ) );
-                                    
-                                    echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', sprintf( '<div class="button">%s</div>', $image ), $attachment_id, $post->ID, $image_class );
-                                    
-                                    $loop++;
-                                }
-                                
-                                if ($loop < 4) {
-                                    for ($i=1; $i<(4-$loop); $i++) {
-                                    ?>
-                                        <div class="button"><!-- empty placeholder --></div>
-                                    <?php
-                                    }
-                                }
-                                ?>
-                    
-                    </div>
-                
-                </div>
-                
-                <?php } ?>
             
             </div>
     
