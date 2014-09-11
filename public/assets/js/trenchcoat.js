@@ -24,7 +24,7 @@ jQuery(document).ready(function() {
                     });
                 }
             });
-        }else{
+        } else {
             jQuery('#main_customization').html('');
             jQuery('#main_image_layer').html('');
             jQuery('#customize_image_layer').hide();
@@ -377,10 +377,24 @@ jQuery(document).ready(function() {
         var final_price = $prices.base_price;
         jQuery.each(jQuery.parseJSON($attribute_lugs), function(key, val) {
             var selector = GetValue(val);
-            var temp = val + '**NIS**' + selector;
-            final_price = parseFloat(final_price) + parseFloat($prices[temp]);
+            if (selector) {
+
+                var temp = val + '**NIS**' + selector;
+                if (jQuery.isNumeric($prices[temp])) {
+                    final_price = parseFloat(final_price) + parseFloat($prices[temp]);
+                    /*
+                    console.log('name:-' + val);
+                    console.log('value:-' + selector);
+                    console.log('price:-' + $prices[temp]);
+                    console.log('final price:-' + final_price);
+                    console.log('=========================================================');
+                     */
+                }
+            }
+
         });
-        jQuery('.wca_price').html(final_price);
+        jQuery('#_wca_extra_price').val(final_price);
+        jQuery('.variable_price .wca_price').html(final_price);
     });
 
     /*Start:- Fuinction for get value ouf attributes*/
@@ -548,6 +562,7 @@ jQuery(document).ready(function() {
         jQuery('.lining_img').attr('src', lining_img);
         jQuery('.lining_base').attr('src', lining_base);
         jQuery(document).trigger('set-linig-slider');
+        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).bind('set-linig-slider', function() {
@@ -647,6 +662,7 @@ jQuery(document).ready(function() {
         jQuery('.back .btn_hilo img').attr('src', blank_image);
 
         if (thread_id > 0) {
+            jQuery('input[name=wca_button_hilo_ojal]').val('1');
             if (sleev == 'button') {
                 var img = hilo_imgs + '/sleev.png';
                 jQuery('.front .btn_hilo .sleev').attr('src', img);
@@ -703,6 +719,7 @@ jQuery(document).ready(function() {
         jQuery('.front .btn_ojal img').attr('src', blank_image);
         jQuery('.back .btn_ojal img').attr('src', blank_image);
         if (thread_id > 0) {
+            jQuery('input[name=wca_button_hilo_ojal]').val('1');
             if (sleev == 'button') {
                 var img = ojal_imgs + '/sleev.png';
                 jQuery('.front .btn_ojal .sleev').attr('src', img);

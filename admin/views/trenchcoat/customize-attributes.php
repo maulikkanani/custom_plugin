@@ -22,6 +22,7 @@ $attr_default_values = json_encode($default_values);               // Array of d
     $extra_relationship = jQuery.parseJSON('<?php echo $extra_relationship ?>');
     $attribute_lugs = '<?php echo $atribute_slugs ?>';
     $price = '<?php echo $price ?>';
+    $prices = jQuery.parseJSON($price);
 
     $extra_linings = jQuery.parseJSON('<?php echo $extra_linings ?>');
     $lining_fabrics = jQuery.parseJSON('<?php echo $lining_fabrics ?>');
@@ -63,16 +64,7 @@ $attr_default_values = json_encode($default_values);               // Array of d
 
         jQuery("#tabs").tabs();
 
-        /* Start:- step 3---> toggle h2   */
-        jQuery(document).on('click', '.arrow_toggle', function() {
-            var tdata = jQuery(this).attr('toggle');
-            jQuery(this).toggleClass('arrow_toggle_close');
-            jQuery('.' + tdata).slideToggle();
-            if (tdata == 'advance_option') {
-                jQuery('.advanced-attribute').toggle();
-            }
-        });
-        /* END:- step 3---> toggle h2   */
+
 
         /* Start:- function for selected attribute*/
         $default_vals = '<?php echo $attr_default_values ?>';    // JSON of default values of attrybutes
@@ -160,6 +152,9 @@ $attr_default_values = json_encode($default_values);               // Array of d
                 jQuery('input[name=' + key + ']').removeAttr('checked');
                 jQuery('input[name=' + key + '][value=0]').attr('checked', '');
                 jQuery('input[name=' + val.hidden_name + ']').val(0);
+                if (val.main_div == '#main_buton_thread')
+                    jQuery('input[name=wca_button_hilo_ojal]').val(0);
+
                 if (jQuery('input[name=' + val.hidden_name + ']').attr('type') == 'text')
                     jQuery('input[name=' + val.hidden_name + ']').val('');
                 jQuery(document).trigger('back-pos-12');
@@ -172,51 +167,44 @@ $attr_default_values = json_encode($default_values);               // Array of d
         });
 
         /*END:-binding events of  step 3 for embroidery , neck and elbow button threads and hole*/
-       
 
 
-/*if(jQuery('.wca_trenchcoat_attr_edit').data('flag') == "heading"){
-    jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
-    $name = jQuery(this).data('name');
-    jQuery("#black_overlay").show();
-});
-}else{
-var name, value, label, price, eledpr;
-        
-        jQuery(document).on('click', '.wca_trenchcoat_attr_edit', function() {
-        alert("in else");    
-        
-            
+
+        var name, value, label, price, eledpr;
+        var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+        jQuery(document).on("click", ".wca_trenchcoat_attr_edit", function() {
+            jQuery("#black_overlay").show();
+            jQuery(".attr_loader").show();
+            var flag = jQuery(this).data('flag');
+            if (flag == "heading") {
+                name = jQuery(this).data('name');
+                value = jQuery(this).data('value');
+            } else {
+                eledpr = jQuery(this);
+                var eleupr = jQuery(this).parent();
+                name = eleupr.find('input').attr('name');
+                value = eleupr.find('input').attr('value');
+            }
+
+            jQuery.ajax({
+                url: ajax_url,
+                type: "POST",
+                data: {action: 'label_form', name: name, value: value, category_id: 1},
+                success: function(data) {
+                    jQuery('#edit_lable').html(data);
+                    jQuery(".attr_loader").hide();
+                }
+            });
         });
-*/
- var name, value, label, price, eledpr;
- var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
-jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
-    var flag = jQuery(this).data('flag');
-    //var flag1 = jQuery(this).data('name');
-   // alert(flag);
- //   alert(flag1);
-    if(flag == "heading"){
-        // alert('in if');
-         name = jQuery(this).data('name');
-         value = null;
-         //jQuery("#black_overlay").show();
-    }else{
-       // alert('in else');
-        eledpr = jQuery(this);
-            var eleupr = jQuery(this).parent();
-            name = eleupr.find('input').attr('name');
-            value = eleupr.find('input').attr('value');
-        
-    }
- jQuery("#black_overlay").show();   
-});
 
         jQuery(document).on('click', '#white_content #cancel', function() {
             jQuery("#black_overlay").hide();
+            jQuery('#edit_lable').html('');
         });
 
-        jQuery(document).on('click', '#send', function() {
+        jQuery(document).on('click', '#send_attr_form', function() {
+            jQuery('.mask').show();
+            jQuery('#send_attr_form').attr('disabled', '');
             label = jQuery("#label_edit").val();
             price = jQuery("#price_edit").val();
             //  alert(name + value + price + label);
@@ -225,27 +213,41 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
                 type: "POST",
                 data: {action: 'label_change', label: label, price: price, name: name, value: value, category_id: 1},
                 success: function(data) {
-                    //alert(data);
+                    jQuery('#send_attr_form').removeAttr('disabled');
+                    var label_data = jQuery.parseJSON(data);
                     jQuery('#' + name + '__nis__' + value).html(label);
+                    if (parseFloat(label_data.price) > 0) {
+                        jQuery('#' + name + '__nis__' + value + '_price .wca_price').html(label_data.price);
+                        jQuery('#' + name + '__nis__' + value + '_price').show();
+                    } else {
+                        jQuery('#' + name + '__nis__' + value + '_price .wca_price').html('');
+                        jQuery('#' + name + '__nis__' + value + '_price').hide();
+                    }
+                    var tmp = name + '**NIS**' + value;
+                    $prices[tmp] = label_data.price;
+                    jQuery(document).trigger("count_price");
                     jQuery("#label_edit,#price_edit").val('');
+                    jQuery('#edit_lable').html('');
                     jQuery("#black_overlay").css("display", "none");
-
+                    jQuery('.mask').hide();
                 }
 
             });
         });
-    
-    
+
+
     });
 </script>
 
 
 <div id="tabs" class="custom_tabs_main">
+
     <ul>
         <li><a href="#tabs-1"><div class="number">1</div>Style</a></li>
         <li><a href="#tabs-2"><div class="number">2</div>Fabric</a></li>
         <li><a href="#tabs-3"><div class="number">3</div>Accents</a></li>
     </ul>
+    <div class="variable_price pull-right" style="font-weight:bold; margin-top:-61px;"> Price: <?php echo wca_price(1, 'dynamic') ?></div>
     <div id="tabs-1">
         <?php
         include_once ABS_WCA . "admin/views/$category/customize-attributes-step-1.php";
@@ -265,21 +267,9 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
 <div id="black_overlay" style="display:none">
     <div id="mask">
     </div>
+    <i class="fa fa-refresh fa-spin loader attr_loader"></i>
     <div id="edit_lable">
-        <form class="form" action="#" id="white_content">	
-            <h3>Attribute Edit Form</h3>
-            <hr/><br/>
-            <label>label:</label>
-            <br/>
-            <input type="text" id="label_edit" class="input_same" placeholder="Label"/><br/>
-            <br/>
-            <label>Price:</label>
-            <br/>
-            <input type="text" id="price_edit" class="input_same" placeholder="Price"/><br/>
-            <br/>
-            <input type="button" id="send" value="Save"/>
-            <input type="button" id="cancel" value="Cancel"/>
-            <br/>
-        </form>
-    </div>
-</div>  
+        
+   </div>
+</div>    
+

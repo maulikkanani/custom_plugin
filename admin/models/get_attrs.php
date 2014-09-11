@@ -4,6 +4,12 @@ global $post, $wpdb;
 $post_id = $post->ID;
 /* Start:- array for default value of each attribute */
 $attrs=get_post_meta($post_id, '_wca_attribute_data', true);
+
+$category_id=1;
+$categories=array(
+    '1'=>'trenchcoat',
+);
+
 if ($attrs != '') {
     $default_values = unserialize($attrs);
 } else {
@@ -33,6 +39,7 @@ if ($attrs != '') {
         'wca_trenchcoat_elbow_patch' => '1',
         'wca_elbow_patch' => '1',
         'wca_trenchcoat_btn_thread_apply' => 'all',
+        'wca_button_hilo_ojal' => '1',
         'wca_buton_thread' => '1',
         'wca_buton_hole_thread' => '1',
         'wca_category' => 'trenchcote',
@@ -41,165 +48,7 @@ if ($attrs != '') {
 /* End:- array for default value of each attribute */
 
 /* Start:- array for set price of all attributes */
-$attributes = array(
-    'wca_trenchcoat_style' => array(
-        'simple' => array(
-            'price' => '0'
-        ),
-        'crossed' => array(
-            'price' => '10'
-        ),
-    ),
-    'wca_trenchcoat_length' => array(
-        'long' => array(
-            'price' => '0'
-        ),
-        'short' => array(
-            'price' => '10'
-        ),
-    ),
-    'wca_trenchcoat_fit' => array(
-        '1' => array(
-            'price' => '0'
-        ),
-        '0' => array(
-            'price' => '10'
-        ),
-    ),
-    'wca_trenchcoat_closure' => array(
-        'zipper' => array(
-            'price' => '0'
-        ),
-        'boton' => array(
-            'price' => '12'
-        ),
-    ),
-    'wca_trenchcoat_closure_type_boton' => array(
-        'hide' => array(
-            'price' => '0'
-        ),
-        'standard' => array(
-            'price' => '12'
-        ),
-    ),
-    'wca_trenchcoat_pockets_type' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        '1' => array(
-            'price' => '10'
-        ),
-        '2' => array(
-            'price' => '10'
-        ),
-        '3' => array(
-            'price' => '10'
-        ),
-        '4' => array(
-            'price' => '10'
-        ),
-        '5' => array(
-            'price' => '10'
-        ),
-        '6' => array(
-            'price' => '15'
-        ),
-        '7' => array(
-            'price' => '15'
-        ),
-    ),
-    'wca_trenchcoat_chest_pocket' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        'welt' => array(
-            'price' => '5'
-        ),
-        'vertical' => array(
-            'price' => '5'
-        ),
-        'zipper' => array(
-            'price' => '5'
-        ),
-        'patched' => array(
-            'price' => '6'
-        ),
-    ),
-    'wca_trenchcoat_belt' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        'sewing' => array(
-            'price' => '5'
-        ),
-        'loose' => array(
-            'price' => '10'
-        ),
-    ),
-    'wca_trenchcoat_backcut' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        '1' => array(
-            'price' => '1'
-        ),
-        '2' => array(
-            'price' => '2'
-        ),
-    ),
-    'wca_trenchcoat_sleeve' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        'tape' => array(
-            'price' => '2'
-        ),
-        'button' => array(
-            'price' => '2'
-        ),
-    ),
-    'wca_trenchcoat_shoulder' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        '1' => array(
-            'price' => '2'
-        ),
-    ),
-    'wca_trenchcoat_back_lapel' => array(
-        '0' => array(
-            'price' => '0'
-        ),
-        '1' => array(
-            'price' => '2'
-        ),
-    ),
-    'wca_trenchcoat_fabric_type' => array(
-        '1' => array(
-            'price' => '217'
-        ),
-        '2' => array(
-            'price' => '218'
-        ),
-        '3' => array(
-            'price' => '219'
-        ),
-        '4' => array(
-            'price' => '220'
-        ),
-        '5' => array(
-            'price' => '221'
-        ),
-        '6' => array(
-            'price' => '222'
-        ),
-        '7' => array(
-            'price' => '223'
-        ),
-        '8' => array(
-            'price' => '224'
-        ),
-    ),
+$attributes_old = array(
     'wca_embroidery' => array(
         '0' => array(
             'price' => '0'
@@ -322,31 +171,14 @@ $attributes = array(
 
 /* END :- array for set price of all attributes */
 
-/* Start:- Craetea a arry for calculation of price in js of each attributes */
-$attribute_price = array();
-foreach ($attributes as $attr_slug => $subattributes):
-    if (is_array($subattributes)):
-        $attribute_price['base_price'] = 0;      // For bacse price of the product 
-        foreach ($subattributes as $value => $sub_data):
-            $k = $attr_slug . '**NIS**' . $value;
-            $attribute_price[$k] = $sub_data['price'];
-        endforeach;
-    endif;
-endforeach;
-/* END:- Craetea a arry for calculation of price in js of each attributes */
-
-/* Start:- Array for get attribute key in price calulation */
-$atribute_slugs = array_keys($attributes);
-
-$atribute_slugs = json_encode($atribute_slugs);
-/* End :-  Array for get attribute key in price calulation */
-
 
 
 /* start:- array for facric related butoons and zippers and linings */
 $fabrics=$wpdb->get_results("select * from ".FABRICS." where status='1' ");
 $all_extra_linings=array();
 $all_fabric_data=array();
+$attributes['wca_trenchcoat_interior']=array();
+
 if(count($fabrics)>0){
     foreach($fabrics as $fabric){
         $all_fabric_data[$fabric->id]=array(
@@ -371,10 +203,12 @@ if(count($fabrics)>0){
                                         'pattern' => $lining->pattern,     // pattern of lining fabric  
                                         'material' => $lining->material // material of linig   
                                         );
+            $attributes['wca_trenchcoat_interior'][$lining->id]=array('price' => $lining->price);
         }
         $all_extra_linings[$fabric->id]=$fabric_linigs;
     }
 }
+$attributes['wca_trenchcoat_fabric_type']=$all_fabric_data;
 $fabric_data = json_encode($all_fabric_data);
 /* End:- array for facric related butoons  and zippers and linings */
 
@@ -382,6 +216,46 @@ $fabric_data = json_encode($all_fabric_data);
 /* Start:- array for lning related fbrics */
 $extra_linings = json_encode($all_extra_linings);
 /* End:- array for lning related fbrics */
+
+
+
+/* Start:- Craetea a arry for calculation of price in js of each attributes */
+$attribute_price = array();
+foreach ($attributes as $attr_slug => $subattributes):
+    if (is_array($subattributes)):
+        $attribute_price['base_price'] = 0;      // For bacse price of the product 
+        foreach ($subattributes as $value => $sub_data):
+            $k = $attr_slug . '**NIS**' . $value;
+            $attribute_price[$k] = $sub_data['price'];
+        endforeach;
+    endif;
+endforeach;
+/* END:- Craetea a arry for calculation of price in js of each attributes */
+
+$tmp_attribute_datas=$wpdb->get_results("SELECT CONCAT( `attr_name` , '**NIS**', `value` ) AS attr_key, wp_wca_attr_lable . * from ".ATTR_LABEL." where category_id=$category_id and cart_variable='1'");
+$total_arrtibutes=array();
+$attribute_all_data=array();
+$atribute_slugs=array();
+foreach($tmp_attribute_datas as $tmp_attribute_data){
+    if($tmp_attribute_data->value != '')
+         $attribute_price[$tmp_attribute_data->attr_key]=$tmp_attribute_data->price;
+    
+    $attribute_all_data[$tmp_attribute_data->attr_key]=$tmp_attribute_data;
+    $atribute_slugs[$tmp_attribute_data->attr_name]='';
+}
+
+$attribute_price['wca_embroidery**NIS**0']=0;
+$attribute_price['wca_neck_lining**NIS**0']=0;
+$attribute_price['wca_elbow_patch**NIS**0']=0;
+$attribute_price['wca_button_hilo_ojal**NIS**0']=0;
+
+/* Start:- Array for get attribute key in price calulation */
+$atribute_slugs = array_keys($atribute_slugs);
+$atribute_slugs[]='wca_trenchcoat_fabric_type';
+$atribute_slugs[]='wca_trenchcoat_interior';
+$atribute_slugs = json_encode($atribute_slugs);
+/* End :-  Array for get attribute key in price calulation */
+
 
 
 /* Start :- create  array for lining as pre knockout JSON format */
@@ -434,10 +308,10 @@ $extra_relationship = array(
         'main_div' => '#main_embroidery'
     ),
     'wca_embroidery_text' => array(
-        'default' => '0', // Default Value for item
-        'hidden_name' => 'wca_embroidery_text', // hidden input name for item
-        'class' => 'not_define', // item image parent div class -> a -> img  
-        'first_rel' => '1', // First div rel
+        'default' => '0',                               // Default Value for item
+        'hidden_name' => 'wca_embroidery_text',         // hidden input name for item
+        'class' => 'not_define',                        // item image parent div class -> a -> img  
+        'first_rel' => '1',                             // First div rel
         'main_div' => '#main_embroidery'
     ),
     'wca_trenchcoat_interior_type' => array(
@@ -485,7 +359,7 @@ $plugins_url = plugins_url('woocommerce-custom-attribute');
 
 
 
-$category = 'trenchcoat';    // Current category                                    
+$category = $categories[$category_id];                            // Current category                                    
 $fabric = $default_values['wca_trenchcoat_fabric_type'];          // Current fabric
 
 $fabric_datas=wca_fabric::get_single_row($fabric);

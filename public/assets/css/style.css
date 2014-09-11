@@ -740,6 +740,16 @@ div.fabric_box_3d div.image a {
 .turn_arround a {
     text-decoration: none;
 }
+
+.quantity input.qty, #content .quantity input.qty {
+    margin: 0 0 0 35px !important;
+}
+.form-group label > span {
+    margin: 0 0 0 10px;
+}
+.form-group .radio > span {
+    padding-left: 10px;
+}
 /*End:- for image upload */
 
 

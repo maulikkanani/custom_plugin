@@ -164,6 +164,9 @@ $attr_default_values = json_encode($default_values);               // Array of d
                 jQuery('input[name=' + key + ']').removeAttr('checked');
                 jQuery('input[name=' + key + '][value=0]').attr('checked', '');
                 jQuery('input[name=' + val.hidden_name + ']').val(0);
+                if(val.main_div=='#main_buton_thread')
+                    jQuery('input[name=wca_button_hilo_ojal]').val(0);
+                
                 if (jQuery('input[name=' + val.hidden_name + ']').attr('type') == 'text')
                     jQuery('input[name=' + val.hidden_name + ']').val('');
                 jQuery(document).trigger('back-pos-12');

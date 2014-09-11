@@ -102,7 +102,7 @@ margin-top:-255px;
     background-color: white;
     border-radius: 15px;
 }
-#send, #cancel{
+#send_attr_form, #cancel{
     background-color:#0074a2;
     color:#fff;
     border:none;

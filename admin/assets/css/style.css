@@ -519,7 +519,7 @@ div.fabric_box_3d div.image a {
     font-size: 0;
     position: absolute;
     top: 39px;
-    z-index: 9999;
+    z-index: 1000;
 }
 .customNavigation .prev{
     left: -16px;
@@ -719,7 +719,7 @@ div.fabric_box_3d div.image a {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 8200;
 }
 .loader{
     color: #0074a2;
@@ -739,6 +739,14 @@ div.fabric_box_3d div.image a {
 }
 .turn_arround a {
     text-decoration: none;
+}
+
+.amount .wca_price, .amount .wca_price_symbol{
+    margin-left:0px !important;
+}
+.attr_loader{
+    position: fixed !important;
+    opacity: 1;
 }
 /*End:- for image upload */
 

@@ -95,8 +95,9 @@ define('BUTTON_HILO', $wpdb->prefix.'wca_button_hilo');         //Button hilo ma
 define('BUTTON_OJAL', $wpdb->prefix.'wca_button_ojal');         //Button ojal master
 define('NECK_LINING', $wpdb->prefix.'wca_neck_lining');         // Neck lining master
 define('ELBOW_PATCHES', $wpdb->prefix.'wca_elbow_patches');     // Elbow patches master
-define('FABRICS', $wpdb->prefix.'wca_fabrics');                // Elbow Fabric master
-define('FABRIC_COLORS', $wpdb->prefix.'wca_fabric_colors');                // Elbow Fabric Color master
+define('FABRICS', $wpdb->prefix.'wca_fabrics');                 // Elbow Fabric master
+define('FABRIC_COLORS', $wpdb->prefix.'wca_fabric_colors');     // Elbow Fabric Color master
+define('ATTR_LABEL', $wpdb->prefix.'wca_attr_lable');           // Attribute master
 
 /*end :- define master tables*/
 
@@ -148,6 +149,7 @@ add_action( 'wp_ajax_delete_elbow_patches_image', 'wca_elbow_patches::delete_ima
 add_action( 'wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive');
 
 add_action( 'wp_ajax_label_change', 'wca_custome_attributes::label_change');
+add_action( 'wp_ajax_label_form', 'wca_custome_attributes::create_attribute_label_form');
 //add_action( 'wp_ajax_retrieve_attr', 'wca_custome_attributes::retrieve_attr');
 
 global $post;

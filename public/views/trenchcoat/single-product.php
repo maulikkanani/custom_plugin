@@ -21,6 +21,15 @@ get_header('shop');
          margin-right: -174px !important;
          width: 704px !important;
     }
+    .wca_cusustome .product_navigation{
+        margin-bottom: 0px !important;
+    }
+    .wca_cusustome .gbtr_add_to_cart_simple{
+        padding: 0px !important;
+    }
+    .wca_cusustome .quantity.buttons_added{
+        margin-top: 40px !important;
+    }
     
 </style>
 <div class="global_content_wrapper">
@@ -210,10 +219,10 @@ get_header('shop');
                             /**
                              * woocommerce_single_product_summary hook
                              */
-                            wca_get_template_part('customize-attributes.php');
+                            //wca_get_template_part('customize-attributes.php');
                            ?>
                         
-                        <div class="summary">
+                        <div class="grid_12">
                             <?php
                                 wca_get_template_part( 'single-product/add-to-cart/simple.php' );
                             ?>

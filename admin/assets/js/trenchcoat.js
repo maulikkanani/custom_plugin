@@ -1,5 +1,17 @@
 jQuery(document).ready(function() {
 
+    /* Start:- step 3---> toggle h2   */
+    jQuery(document).on('click', '.arrow_toggle', function() {
+        var tdata = jQuery(this).attr('toggle');
+        jQuery(this).toggleClass('arrow_toggle_close');
+        jQuery('.' + tdata).slideToggle();
+        if (tdata == 'advance_option') {
+            jQuery('.advanced-attribute').toggle();
+        }
+    });
+    /* END:- step 3---> toggle h2   */
+
+
     /*start:- Get attributes of category*/
     jQuery(document).bind("load-attributes", function() {
         if (jQuery('.customise_product').val() == 1) {
@@ -24,7 +36,7 @@ jQuery(document).ready(function() {
                     });
                 }
             });
-        }else{
+        } else {
             jQuery('#main_customization').html('');
             jQuery('#main_image_layer').html('');
             jQuery('#customize_image_layer').hide();
@@ -373,14 +385,18 @@ jQuery(document).ready(function() {
 
     /* Start coding for change price */
     jQuery(document).bind("count_price", function() {
-        $prices = jQuery.parseJSON($price);
         var final_price = $prices.base_price;
         jQuery.each(jQuery.parseJSON($attribute_lugs), function(key, val) {
             var selector = GetValue(val);
-            var temp = val + '**NIS**' + selector;
-            final_price = parseFloat(final_price) + parseFloat($prices[temp]);
+            if (selector) {
+                var temp = val + '**NIS**' + selector;
+                if (jQuery.isNumeric($prices[temp]))
+                    ;
+                final_price = parseFloat(final_price) + parseFloat($prices[temp]);
+            }
         });
         jQuery('#_wca_extra_price').val(final_price);
+        jQuery('.variable_price .wca_price').html(final_price);
     });
 
     /*Start:- Fuinction for get value ouf attributes*/
@@ -504,7 +520,7 @@ jQuery(document).ready(function() {
         jQuery(document).trigger('extra_items');
     });
 
-    jQuery(document).on('keydown', 'input[name=wca_embroidery_text]', function() {
+    jQuery(document).on('keyup', 'input[name=wca_embroidery_text]', function() {
         jQuery(document).trigger('embroidery_set');
     });
 
@@ -548,6 +564,7 @@ jQuery(document).ready(function() {
         jQuery('.lining_img').attr('src', lining_img);
         jQuery('.lining_base').attr('src', lining_base);
         jQuery(document).trigger('set-linig-slider');
+        jQuery(document).trigger("count_price");
     });
 
     jQuery(document).bind('set-linig-slider', function() {
@@ -647,6 +664,7 @@ jQuery(document).ready(function() {
         jQuery('.back .btn_hilo img').attr('src', blank_image);
 
         if (thread_id > 0) {
+            jQuery('input[name=wca_button_hilo_ojal]').val('1');
             if (sleev == 'button') {
                 var img = hilo_imgs + '/sleev.png';
                 jQuery('.front .btn_hilo .sleev').attr('src', img);
@@ -703,6 +721,7 @@ jQuery(document).ready(function() {
         jQuery('.front .btn_ojal img').attr('src', blank_image);
         jQuery('.back .btn_ojal img').attr('src', blank_image);
         if (thread_id > 0) {
+            jQuery('input[name=wca_button_hilo_ojal]').val('1');
             if (sleev == 'button') {
                 var img = ojal_imgs + '/sleev.png';
                 jQuery('.front .btn_ojal .sleev').attr('src', img);

@@ -25,7 +25,17 @@ class wca_load{
         return include ABS_CONTROLLER.$controller.'.php';
     }
     
-    public static function view($category,$view){
+    public static function view($view,$data=array()){
+        extract($data);
+        return include_once  ABS_VIEW.$view.'.php';
+    }
+    
+    public static function view_old($category,$view,$data=array()){
+        if(count($data)==0)
+            $data=  get_defined_vars ();
+        
+        pr($data);
+        $data=  extract($data);
         return include_once  ABS_VIEW.$category.'/'.$view.'.php';
     }
     
