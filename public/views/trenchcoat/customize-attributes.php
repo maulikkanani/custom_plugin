@@ -269,25 +269,4 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
             include_once wca_get_template_path('customize-attributes-step-3.php');
         ?>
     </div>
-</div>  
-<div id="black_overlay" style="display:none">
-    <div id="mask">
-    </div>
-    <div id="edit_lable">
-        <form class="form" action="#" id="white_content">	
-            <h3>Attribute Edit Form</h3>
-            <hr/><br/>
-            <label>label:</label>
-            <br/>
-            <input type="text" id="label_edit" class="input_same" placeholder="Label"/><br/>
-            <br/>
-            <label>Price:</label>
-            <br/>
-            <input type="text" id="price_edit" class="input_same" placeholder="Price"/><br/>
-            <br/>
-            <input type="button" id="send" value="Save"/>
-            <input type="button" id="cancel" value="Cancel"/>
-            <br/>
-        </form>
-    </div>
-</div>  
+</div>   
