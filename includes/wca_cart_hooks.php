@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,23 +14,31 @@ class wca_cart_hooks {
         add_filter('woocommerce_get_item_data', array(&$this, 'wca_get_item_data'), 10, 2);
         add_filter('woocommerce_add_cart_item', array(&$this, 'wca_add_cart_item'), 10, 1);
         add_action('woocommerce_add_order_item_meta', array(&$this, 'wca_order_item_meta'), 10, 2);
-        
-        /*----- Start admin hooks ------*/
+
+
+        add_action('woocommerce_in_cart_product_thumbnail', array(&$this, 'wca_in_cart_product_thumbnail'), 10, 3);
+
+        add_action('woocommerce_checkout_before_customer_details', array(&$this, 'wca_add_measurments'), 10);
+        add_filter( 'woocommerce_checkout_process', array(&$this,'wca_measurement_validation'), 10, 3 );
+
+
+
+        /* ----- Start admin hooks ------ */
         add_action('woocommerce_admin_order_item_headers', array(&$this, 'wca_admin_order_item_headers'), 10);
         add_action('woocommerce_admin_order_item_values', array(&$this, 'wca_admin_order_item_values'), 11, 3);
-        /*----- End admin hooks ------*/
+        /* ----- End admin hooks ------ */
     }
-    
-    /*--- Start admin hooks ----*/
-    
-    function wca_admin_order_item_headers(){
+
+    /* --- Start admin hooks ---- */
+
+    function wca_admin_order_item_headers() {
         ?>
-        <th class="tax_class"><?php _e( 'wca', 'woocommerce' ) ?></th>
+        <th class="tax_class"><?php _e('Details', 'woocommerce') ?></th>
         <?php
     }
-    
-    /*--- Start admin hooks ----*/
-    
+
+    /* --- Start admin hooks ---- */
+
     function wca_load_left_attribute() {
         global $post;
         $post_id = get_the_ID();
@@ -41,15 +48,28 @@ class wca_cart_hooks {
             echo'<div class="clr"></div>';
         }
     }
-    
-    function wca_admin_order_item_values($_product, $item, $item_id){
+
+    function wca_admin_order_item_values($_product, $item, $item_id) {
         global $theorder;
-        pr(get_class_methods($theorder));
+        //pr(get_class_methods($theorder));
         ?>
-            <td class="tax_class"> Customized attributes</td>
+        <td class="tax_class"><?php _e('Details', 'woocommerce') ?></td>
         <?php
     }
-    
+
+    function wca_add_measurments() {
+        global $order_id;
+        $check_wca = FALSE;
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            if (isset($cart_item['wca_cart_data'])) {
+                $check_wca = TRUE;
+            }
+        }
+        if ($check_wca) {
+            $file = wca_get_template_path('wca-measurement.php');
+            include $file;
+        }
+    }
 
     function wca_add_cart_item_data($cart_item_meta, $product_id) {
         global $woocommerce;
@@ -113,10 +133,19 @@ class wca_cart_hooks {
             $data = $cart_item['wca_cart_data'];
 
             // Add custom data to product data
-            $other_data[] = array('name' => 'Custome Attributes', 'value' => pr(unserialize($data['wca_attributes'])));
+            //pr(unserialize($data['wca_attributes'])))
+            $other_data[] = array('name' => 'Custome Attributes', 'value' => '<a href="#">Details</a>');
         }
 
         return $other_data;
+    }
+
+    function wca_in_cart_product_thumbnail($thumb, $cart_item, $cart_item_key) {
+
+        if (isset($cart_item['wca_cart_data']))
+            $thumb.='<br><center><a href="javascript:;">Show Details</a></center>';
+
+        return $thumb;
     }
 
     function wca_add_cart_item($cart_item) {
@@ -132,8 +161,24 @@ class wca_cart_hooks {
     function wca_order_item_meta($item_id, $cart_item) {
         if (isset($cart_item['wca_cart_data'])) {
             $data = $cart_item['wca_cart_data'];
-            woocommerce_add_order_item_meta( $item_id, 'wca_attributes',$data['wca_attributes']);
+            woocommerce_add_order_item_meta($item_id, 'wca_attributes', $data['wca_attributes']);
         }
+    }
+
+    function wca_measurement_validation($passed, $product_id, $qty) {
+        global $woocommerce;
+
+        $person_name = 'person_name';
+        $message_to_person = 'message_to_person';
+        $e_deliverydate = 'e_deliverydate';
+
+        $occasion_type = 'occasion_type';
+        $occasion_date = 'occasion_date';
+        $shipping_address = 'shipping_address';
+
+        $woocommerce->add_error(sprintf(__('<b>"All measurments</b>" is a required field.', 'woocommerce'), $option));
+        $passed=FALSE;
+        return $passed;
     }
 
 }
