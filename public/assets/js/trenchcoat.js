@@ -763,10 +763,29 @@ jQuery(document).ready(function() {
     /* End :- this is for add text for embroidery work*/
 
     /*END step 3 JS*/
-
-
-
-
-
-
+	jQuery(document).on('click', '.product_details', function(){
+		$order_item_key=jQuery(this).data('order_item_key');
+		 jQuery(document).trigger('product_details');
+		 jQuery(".light").lightbox_me();
+    });
+	
+	
+	 jQuery(document).bind('product_details', function() {
+			 jQuery.ajax({
+				url: ajax_url,
+				type: "POST",
+				data: {action:'product_details',order_item_key:$order_item_key},
+				success: function(data) {
+							if(jQuery('.under_light').html() == ''){
+							jQuery('.under_light').append(data);
+							}
+				},
+			});
+	 });
+	 
+	 
+	
+	
 });
+
+

@@ -1,0 +1,84 @@
+/*
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, dialog, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, meter, nav, object, ol, output, p, pre, progress, q, rp, rt, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video, xmp {
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container_12 .grid_12 {
+    width: 940px;
+}
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.clr {
+    clear: both;
+}
+
+.woocommerce form .form-row-first, .woocommerce-page form .form-row-first, .woocommerce form .form-row-last, .woocommerce-page form .form-row-last {
+    width: 49%;
+}
+
+.entry-content p {
+    color: #555555;
+    font-size: 13px;
+    line-height: 1.7em;
+    padding: 0 0 20px;
+}
+.checkout p {
+    font-size: 13px !important;
+    margin: 0;
+    padding: 0 !important;
+}
+form .form-row {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+form .form-row-first, form .form-row-last {
+    overflow: visible;
+    width: 48.5%;
+}
+form .form-row label {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 15px 0 0 !important;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+form .form-row .input-text, form .form-row textarea {
+    box-sizing: border-box;
+    line-height: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 7px 8px !important;
+    width: 100%;
+}
+*/
+
+#customer_details {
+    margin: 40px 0;
+}
+
+#customer_details .col-1 {
+    margin: 10px 0 !important;
+}
+
+#customer_details .col-1 h3 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#inline_04_measure .title {
+    margin: 15px 0;
+}

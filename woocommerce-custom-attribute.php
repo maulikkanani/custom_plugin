@@ -80,6 +80,7 @@ define('wca_image_url', wca_url.'/assets/images');                  //url of pub
 
 /* Start public constants */
 define('abs_wca_include', ABS_WCA.'includes/');                  //main include
+define('abs_public', ABS_WCA.'public/');                  //main public
 define('abs_wca_public_include', ABS_WCA.'public/includes/');                  //public include
 
 /* End public constants */
@@ -151,6 +152,18 @@ add_action( 'wp_ajax_active_elbow_patches', 'wca_elbow_patches::active_inactive'
 add_action( 'wp_ajax_label_change', 'wca_custome_attributes::label_change');
 add_action( 'wp_ajax_label_form', 'wca_custome_attributes::create_attribute_label_form');
 //add_action( 'wp_ajax_retrieve_attr', 'wca_custome_attributes::retrieve_attr');
+
+//include '/includes/wca_cart_hooks.php';
+
+include abs_wca_include.'wca_cart_hooks.php';
+add_action( 'wp_ajax_product_details', 'wca_cart_hooks::wca_product_detail');
+add_action( 'wp_ajax_nopriv_product_details', 'wca_cart_hooks::wca_product_detail');
+
+
+add_action( 'wp_ajax_product_details_admin', 'wca_cart_hooks::wca_product_detail_admin');
+add_action( 'wp_ajax_nopriv_product_details_admin', 'wca_cart_hooks::wca_product_detail_admin');
+
+//add_action('woocommerce_admin_order_actions_start', 'wca_custome_attributes::wca_add_lightbox');
 
 global $post;
 add_action('wp_ajax_get_attribute_box', 'rander_attributes',$post);
@@ -229,5 +242,5 @@ function wca_product_link($post_link, $post, $leavename, $sample) {
             $post_link = add_query_arg('customize', '1', $post_link);
     }
     return $post_link;
-}
-
+} 
+?>

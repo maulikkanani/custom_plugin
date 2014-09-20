@@ -286,7 +286,7 @@ label {
     height: 39px;
     line-height: 26px;
     margin-right: 1px;
-    padding: 0 16px 0 13px !important;
+    padding: 0 16px 0 13px;
     text-decoration: none;
     color: #bcbcbc;
     font-size: 13px;
@@ -330,7 +330,7 @@ label {
     background: url("../../assets/images/design/box_close.jpg") no-repeat 0 -22px;
 }
 .arrow_toggle{
-    background: url("../../assets/images/design/box_open.jpg") no-repeat scroll 0 -22px;
+    background: url("../../assets/images/design/box_open.jpg") no-repeat;
     cursor: pointer;
     font-size: 15px !important;
     padding-left: 30px  !important;
@@ -481,15 +481,15 @@ div.fabric_box_3d div.image a {
     width: 106px;
 }
 .detail_of_fabric a{
-    font-size: 9px!important;
-    padding-left: 2px!important;
+    font-size: 12px;
+    padding-left: 5px;
     text-decoration: none;
 }
-.detail_of_fabric span {
-  float: right;
-  font-size: 8px!important;
-  margin-right: 1px;
-  margin-top: 1px;
+.detail_of_fabric span{
+    float: right;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-top: 3px;
 }
 .category_main_box{
     margin-bottom: 25px;
@@ -749,10 +749,6 @@ div.fabric_box_3d div.image a {
 }
 .form-group .radio > span {
     padding-left: 10px;
-}
-
-.grtr_product_price_desktops {
-    display: block !important;
 }
 /*End:- for image upload */
 

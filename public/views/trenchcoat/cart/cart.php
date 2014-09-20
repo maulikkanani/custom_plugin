@@ -73,7 +73,7 @@ global $woocommerce;
 											
 											// Meta data
                                             echo $woocommerce->cart->get_item_data( $values );
-            
+                                       
                                             // Backorder notification
                                             if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $values['quantity'] ) )
                                                 echo '<p class="backorder_notification">' . __('Available on backorder', 'theretailer') . '</p>';

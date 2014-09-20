@@ -5,11 +5,11 @@
  */
 ?>
 <div class="clearfix">
-    <div>
-        <h3 class="main_titel_list">Custom Trench Coat</h3><br/>
+    <div class="col-sm-12">
+        <h3>Custom Trench Coat</h3>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Style:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Style:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos1 pos4">
                     <span class="wca_trenchcoat_style_simple">
                         <label>
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Coat length:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Coat length:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos1">
                     <span class="wca_trenchcoat_length_short">
                         <label>
@@ -47,8 +47,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Fit:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Fit:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos1 pos2 pos5">
                     <span class="wca_trenchcoat_fit_waisted">
                         <label>
@@ -66,8 +66,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Fastening:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Fastening:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos1">
                     <span class="wca_trenchcoat_closure_zipper">
                         <label>
@@ -85,8 +85,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Fastening type:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Fastening type:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos1">
                     <span class="wca_trenchcoat_closure_type_button">
                         <label>
@@ -104,8 +104,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Pockets:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Pockets:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front ">
                     <span class="wca_trenchcoat_pockets_0">
                         <label>
@@ -134,32 +134,32 @@
                     </div>    
 
                     <div class="trenchcoat_pockets_2 wca_trenchcoat_pockets " style="display:none">   
-                        <div class="col-sm-3 col-xs-4 pocket_modal_main" data-rel="1">
+                        <div class="col-sm-3 pocket_modal_main" data-rel="1">
                             <div class="box_part">
                                 <img src="<?php echo $man_url ?>/estilo/trenchcoat_pockets_1.png">
                             </div>
                             <div class="box_title"><p>Flaps</p></div>
                         </div>
 
-                        <div class="col-sm-3 col-xs-4 pocket_modal_main" data-rel="2">
+                        <div class="col-sm-3 pocket_modal_main" data-rel="2">
                             <div class="box_part">
                                 <img src="<?php echo $man_url ?>/estilo/trenchcoat_pockets_2.png">
                             </div>
                             <div class="box_title"><p>Double Welt</p></div>
                         </div>
-                        <div class="col-sm-3 col-xs-4 pocket_modal_main" data-rel="3">
+                        <div class="col-sm-4 pocket_modal_main" data-rel="3">
                             <div class="box_part">
                                 <img src="<?php echo $man_url ?>/estilo/trenchcoat_pockets_3.png">
                             </div>
                             <div class="box_title"><p>Patched</p></div>
                         </div>
-                        <div class="col-sm-3 col-xs-4 pocket_modal_main" data-rel="4">
+                        <div class="col-sm-3 pocket_modal_main" data-rel="4">
                             <div class="box_part">
                                 <img src="<?php echo $man_url ?>/estilo/trenchcoat_pockets_4.png">
                             </div>
                             <div class="box_title"><p>Diagonal</p></div>
                         </div>
-                        <div class="col-sm-3 col-xs-4 pocket_modal_main" data-rel="5">
+                        <div class="col-sm-3 pocket_modal_main" data-rel="5">
                             <div class="box_part">
                                 <img src="<?php echo $man_url ?>/estilo/trenchcoat_pockets_5.png">
                             </div>
@@ -184,8 +184,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-3 control-label">Chest pocket:</label>
-            <div class="col-sm-9">
+            <label for="inputEmail3" class="col-sm-2 control-label">Chest pocket:</label>
+            <div class="col-sm-10">
                 <div class="radio attr-front pos3">
                     <span class="wca_trenchcoat_chest_pocket_0">
                         <label>
@@ -221,8 +221,8 @@
                             </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-3 control-label">Belt:</label>
-                                <div class="col-sm-9">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Belt:</label>
+                                <div class="col-sm-10">
                                     <div class="radio  attr-back pos5">
                                         <span class="wca_trenchcoat_belt_no">
                                             <label>
@@ -246,8 +246,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-3 control-label">Back side:</label>
-                                <div class="col-sm-9">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Back side:</label>
+                                <div class="col-sm-10">
                                     <div class="radio  attr-back pos1">
                                         <span class="wca_trenchcoat_backcut_Ventless">
                                             <label>
@@ -271,8 +271,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-3 control-label">Sleeves:</label>
-                                <div class="col-sm-9">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Sleeves:</label>
+                                <div class="col-sm-10">
                                     <div class="radio attr-front pos7">
                                         <span class="wca_trenchcoat_sleeve_no">
                                             <label>
@@ -296,8 +296,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-3 control-label">Epaulettes:</label>
-                                <div class="col-sm-9">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Epaulettes:</label>
+                                <div class="col-sm-10">
                                     <div class="radio attr-front pos6">
                                         <span class="wca_trenchcoat_shoulder_0">
                                             <label>
@@ -315,8 +315,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-3 control-label">Back piece:</label>
-                                <div class="col-sm-9">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Back piece:</label>
+                                <div class="col-sm-10">
                                     <div class="radio attr-back bck_pos10">
                                         <span class="wca_trenchcoat_back_lapel_0">
                                             <label>

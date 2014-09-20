@@ -753,3 +753,187 @@ div.fabric_box_3d div.image a {
 
 
 /*---------------Added by mk End-----------------------*/
+/*---------------Added by nib start-----------------------*/
+*{margin: 0;padding: 0;}
+		div.extras_product_preview {
+		    background-color: #eaeaea;
+		    border: 1px solid gray;
+		    border-radius: 5px;
+		    font-family: "Lato";
+		    font-size: 12px;
+		    margin-bottom: 40px;
+		    width: 95%;
+		}
+		div.extras_product_preview_box {
+		    margin: 15px;
+		    overflow: hidden;
+		}		
+		div.extras_product_preview div.fabric_left {
+		    float: left;
+		    overflow: hidden;
+		    width: 180px;
+		}
+		div#product_preview div.fabric_box {
+		    float: left;
+		    margin: 0 13px 0 0;
+		    min-height: 110px;
+		    overflow: hidden;
+		    width: 180px;
+		}
+		div.extras_product_preview div.extras_right {
+		    float: right;
+		    overflow: hidden;
+		    width: 230px;
+		}
+		div#product_preview div.cloth_preview {
+		    border: 1px solid gray;
+		    border-radius: 5px;
+		    max-height: 91px;
+		    max-width: 150px;
+		    overflow: hidden;
+		}
+		div#product_preview div.marge_inf {
+		    margin-bottom: 5px;
+		}
+		div#product_preview h3 {
+		    margin-bottom: 5px;
+		    text-transform: uppercase;
+		}
+		div#product_preview .label {
+		    color: #000;
+		    font-weight: 400;
+		    text-align: left;
+		}
+		div#product_preview .value {
+		    color: #5d5d5d;
+		    text-align: left;
+		}
+		div#product_preview div.extra_box {
+		    background-color: #fff;
+		    border: 1px solid gray;
+		    border-radius: 5px;
+		    line-height: 23px;
+		    margin-bottom: 10px;
+		    min-height: 23px;
+		    overflow: hidden;
+		    padding: 10px;
+		    width: 200px;
+		}
+		div#product_preview div.extra_box div.extra_description {
+		    float: left;
+		    width: 175px;
+		}
+		div#product_preview div.extra_img {
+		    border-radius: 2px;
+			float: left;
+			height: auto;
+			overflow: hidden;
+			width: 61px;
+		}		
+		div#product_preview div.extra_box p {
+		    width: 170px;
+		}		
+		div#product_preview div.extra_box span.label_initials {
+		    color: gray;
+		}
+		table.detalles_product_preview {
+		    border: 1px solid gray;
+		    border-collapse: inherit;
+		    border-radius: 5px;
+		    font-family: "Lato";
+		    font-size: 12px;
+		    overflow: hidden;
+		    width: 100%;
+		}
+		table.detalles_product_preview td {
+		    padding: 10px;
+		}
+		table.detalles_product_preview li {
+		    margin-bottom: 5px;
+		}
+		div#product_preview .label {
+		    color: #000;
+		    font-weight: 400;
+		    text-align: left;
+		}
+		div#product_preview .value {
+		    color: #5d5d5d;
+		    text-align: left;
+		}
+		#detalles_product_preview h2 {
+		    font-family: "Lato";
+		    font-size: 18px;
+		}
+		.detalles_product_preview ul{
+			list-style: none;
+		}
+		@media (max-width: 479px){
+			div.extras_product_preview ,#detalles_product_preview{
+				width: 94%;
+				margin: 20px auto;
+			}
+			div#product_preview div.extra_box{
+				width: 	91%;
+			}
+			div.extras_product_preview div.extras_right{
+				width: 100%;
+				float: none !important;
+			}
+			div.extras_product_preview div.fabric_left{
+				float: none;
+			    margin-bottom: 15px;
+				width: 100%;
+				text-align: center;
+			}
+			div#product_preview div.fabric_box{
+				width: 100%;
+			}
+			div#product_preview div.cloth_preview{
+				border: none;
+				max-width: inherit;
+			}
+			table.detalles_product_preview{
+				width: 100%;
+			}
+			
+}
+.under_light{
+			background: none repeat scroll 0 0 #fff!important;
+			border-radius: 5px!important;
+			padding: 30px!important;
+			overflow:hidden;
+		}
+		.light{
+		width: 1057px!important;		
+		}
+		#product_preview{
+		float:left;
+		width:50%;
+		}
+		#detalles_product_preview{
+		float:left;
+		width:50%;
+		}
+		
+		
+		@media (max-width: 1060px) {
+			.light{
+				width:100% !important;					
+			}
+		}
+		@media (max-width: 767px) {
+			#detalles_product_preview ,#product_preview{
+				width: 100%;
+			}
+			div.extras_product_preview, #detalles_product_preview{
+				width:100%;
+			}
+		}
+div.light{
+z-index: 9999 !important;
+display:none;
+}		
+.woocommerce_order_items_wrapper{
+overflow:hidden!important;
+}
+/*---------------Added by nib end-----------------------*/

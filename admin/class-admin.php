@@ -145,6 +145,9 @@ class woocommerce_custom_attribute_admin {
         wp_enqueue_style('tocken-input', plugins_url('assets/css/token-input.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
         wp_enqueue_style('Google-font', "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", array(), woocommerce_custom_attribute::VERSION);
         wp_enqueue_style('jquery_popup', plugins_url('assets/css/jquery_popup.css', __FILE__), array(), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_style($this->plugin_slug . '-measurement-styles', plugins_url('assets/css/measurement.css',__FILE__), array(), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_style($this->plugin_slug . '-theme-styles', plugins_url('assets/css/theme-style.css',__FILE__), array(), woocommerce_custom_attribute::VERSION);
+        
     }
     /**
      * Register and enqueue admin-specific JavaScript.
@@ -160,12 +163,14 @@ class woocommerce_custom_attribute_admin {
     public function enqueue_admin_scripts() {
         wp_enqueue_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/comman.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('trenchcoat', plugins_url('assets/js/trenchcoat.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script('jquerylightbox_me', plugins_url('assets/js/jquery.lightbox_me.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('jQuery-ui', plugins_url('assets/js/jquery-ui.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('jQuery-fileupload', plugins_url('assets/js/jquery.fileupload.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('jQuery-token-input', plugins_url('assets/js/jquery.tokeninput.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('owl.carousel', plugins_url('assets/js/owl.carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('owl-carousel', plugins_url('assets/js/owl-carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('knockhout', plugins_url('assets/js/knockout-3.2.0.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script($this->plugin_slug . '-measurent-script', plugins_url('assets/js/measurement.js',__FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
     }
 
     /**

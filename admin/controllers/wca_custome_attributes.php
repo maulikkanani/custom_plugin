@@ -125,6 +125,27 @@ class wca_custome_attributes {
         $data = $wpdb->get_results("SELECT Lable,price FROM " . ATTR_LABEL . " WHERE name = $name");
         print_r($data);
     }
+	
+    
+	/* public function wca_product_detail() {
+        $current_item_key=  mysql_real_escape_string($_POST['order_item_key']);
+        $items=WC()->cart->get_cart();
+        $curren_item=$items[$current_item_key];
+        $current_items = unserialize($curren_item['wca_cart_data']['wca_attributes']);
+        include ABS_MODEL . '/get_attrs.php';
+        //pr($current_items);
+        $wca_attributes=array();   //Custome attribute array
+        $file = ABS_VIEW . 'wca_product_details.php';
+        include $file;
+        exit;
+    }
+	
+	
+	public function wca_add_lightbox(){
+        echo '<div class="light"><div class="under_light"></div></div>';
+    }*/
+	
+    
 
 }
 

@@ -19,21 +19,34 @@ class wca_cart_hooks {
         add_action('woocommerce_in_cart_product_thumbnail', array(&$this, 'wca_in_cart_product_thumbnail'), 10, 3);
 
         add_action('woocommerce_checkout_before_customer_details', array(&$this, 'wca_add_measurments'), 10);
-        add_filter( 'woocommerce_checkout_process', array(&$this,'wca_measurement_validation'), 10, 3 );
+        add_action('woocommerce_checkout_process', array(&$this, 'wca_measurement_validation'), 10);
+        add_action('woocommerce_checkout_update_user_meta', array(&$this, 'wca_add_user_measurements'), 10, 2);
+        add_action('woocommerce_checkout_update_order_meta', array(&$this, 'wca_checkout_update_order_meta'), 10, 2);
 
 
 
         /* ----- Start admin hooks ------ */
-        add_action('woocommerce_admin_order_item_headers', array(&$this, 'wca_admin_order_item_headers'), 10);
+        add_action('woocommerce_admin_order_data_after_order_details', array(&$this, 'wca_admin_order_data_after_order_details'), 10, 1);
+        add_action('woocommerce_admin_order_item_headers', array(&$this, 'wca_admin_order_item_headers'), 10, 1);
         add_action('woocommerce_admin_order_item_values', array(&$this, 'wca_admin_order_item_values'), 11, 3);
+        add_action('woocommerce_after_cart_table', array($this, 'wca_add_lightbox'), 11, 3);
         /* ----- End admin hooks ------ */
     }
 
     /* --- Start admin hooks ---- */
 
-    function wca_admin_order_item_headers() {
+    function wca_admin_order_data_after_order_details($order) {
+        $serialized_measurement = get_post_meta($order->id, '_wca_measurement', true);
+        if ($serialized_measurement != '') {
+            $default_measurement = unserialize($serialized_measurement);
+            $file = ABS_VIEW.'measurement/wca-measurement.php';
+            include $file;
+        }
+    }
+
+    function wca_admin_order_item_headers($cart_item_key) {
         ?>
-        <th class="tax_class"><?php _e('Details', 'woocommerce') ?></th>
+            <th class="tax_class"><?php _e('Details', 'woocommerce') ?></th><div class="light"><div class="under_light"></div></div>
         <?php
     }
 
@@ -51,9 +64,11 @@ class wca_cart_hooks {
 
     function wca_admin_order_item_values($_product, $item, $item_id) {
         global $theorder;
-        //pr(get_class_methods($theorder));
         ?>
-        <td class="tax_class"><?php _e('Details', 'woocommerce') ?></td>
+        <script type="text/javascript">
+            var ajax_url = "<?php echo admin_url() . "admin-ajax.php" ?>";
+        </script>
+        <td class="tax_class" data-order_item_id="<?php echo $item_id ?>"><?php _e('Details', 'woocommerce') ?></td>
         <?php
     }
 
@@ -66,6 +81,12 @@ class wca_cart_hooks {
             }
         }
         if ($check_wca) {
+
+            if (is_user_logged_in()) {
+                $customer_id = get_current_user_id();
+                $default_measurement = unserialize(get_usermeta($customer_id, 'wca_measurement'));
+            }
+
             $file = wca_get_template_path('wca-measurement.php');
             include $file;
         }
@@ -134,7 +155,8 @@ class wca_cart_hooks {
 
             // Add custom data to product data
             //pr(unserialize($data['wca_attributes'])))
-            $other_data[] = array('name' => 'Custome Attributes', 'value' => '<a href="#">Details</a>');
+            //$other_data[] = array('name' => 'Custome Attributes', 'value' => '<a href="#">Details</a>');
+            $other_data = array();
         }
 
         return $other_data;
@@ -142,9 +164,14 @@ class wca_cart_hooks {
 
     function wca_in_cart_product_thumbnail($thumb, $cart_item, $cart_item_key) {
 
-        if (isset($cart_item['wca_cart_data']))
-            $thumb.='<br><center><a href="javascript:;">Show Details</a></center>';
-
+        if (isset($cart_item['wca_cart_data'])) {
+            $thumb.='
+                <script type = "text/javascript">
+                    var ajax_url = "' . admin_url() . '" + "admin-ajax.php"; 
+                </script>
+            ';
+            $thumb.='<br><center><a href="javascript:;" class="product_details" data-order_item_key="' . $cart_item_key . '">Show Details</a></center>';
+        }
         return $thumb;
     }
 
@@ -165,20 +192,161 @@ class wca_cart_hooks {
         }
     }
 
-    function wca_measurement_validation($passed, $product_id, $qty) {
+    function wca_measurement_validation() {
         global $woocommerce;
+        $passed = true;
 
-        $person_name = 'person_name';
-        $message_to_person = 'message_to_person';
-        $e_deliverydate = 'e_deliverydate';
 
-        $occasion_type = 'occasion_type';
-        $occasion_date = 'occasion_date';
-        $shipping_address = 'shipping_address';
+        if (isset($_POST['wca_measurment_height']) && !is_numeric($_POST['wca_measurment_height']) && $_POST['wca_measurment_height'] <= 0) {
+            $woocommerce->add_error(__('<b>"Measurment height</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
 
-        $woocommerce->add_error(sprintf(__('<b>"All measurments</b>" is a required field.', 'woocommerce'), $option));
-        $passed=FALSE;
+        if (isset($_POST['wca_measurment_weight']) && !is_numeric($_POST['wca_measurment_weight']) && $_POST['wca_measurment_weight'] <= 0) {
+            $woocommerce->add_error(__('<b>"Measurment weight</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_constitution']) && !is_numeric($_POST['wca_constitution']) && $_POST['wca_constitution'] <= 0) {
+            $woocommerce->add_error(__('<b>"Body shape</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_measurment_unit']) && !in_array($_POST['wca_measurment_unit'], array('cm', 'in'))) {
+            $woocommerce->add_error(__('<b>"Measurment height unit</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_weight_unit']) && !in_array($_POST['wca_weight_unit'], array('kg', 'lb'))) {
+            $woocommerce->add_error(__('<b>"Measurment weight unit</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        $leagth_unit = $_POST['wca_measurment_unit'];
+
+        if (isset($_POST['wca_coat_length']) && (!is_numeric($_POST['wca_coat_length']) || $_POST['wca_coat_length'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Coat/ Trench Coat length </b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_sleeves_length']) && (!is_numeric($_POST['wca_sleeves_length']) || $_POST['wca_sleeves_length'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Sleeves length</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_shoulders']) && (!is_numeric($_POST['wca_shoulders']) || $_POST['wca_shoulders'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Shoulder width</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_chest']) && (!is_numeric($_POST['wca_chest']) || $_POST['wca_chest'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Chest around</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_stomach']) && (!is_numeric($_POST['wca_stomach']) || $_POST['wca_stomach'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Stomach</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_hips']) && (!is_numeric($_POST['wca_hips']) || $_POST['wca_hips'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Hips</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
+        if (isset($_POST['wca_biceps']) && (!is_numeric($_POST['wca_biceps']) || $_POST['wca_biceps'] <= 0)) {
+            $woocommerce->add_error(__('<b>"Bicep around</b>" is a required field. Please enter valid value.', 'woocommerce-custom-attribute'));
+            $passed = false;
+        }
+
         return $passed;
+    }
+
+    public function wca_sub_validation($key, $legth_value, $leagth_unit) {
+        include ABS_MODEL . 'measurements.php';
+
+        if (is_numeric($_POST['wca_' . $key]) || $_POST['wca_' . $key] <= 0)
+            return false;
+
+        if ($leagth_unit == 'cm')
+            $mesurment = $measurments_cm;
+        else
+            $mesurment = $measurments_inech;
+
+
+        if ($legth_value >= $mesurment['valid_min'] && $legth_value <= $mesurment['valid_max'])
+            return true;
+        else
+            return false;
+    }
+
+    public function wca_add_user_measurements($customet_id, $posted_data) {
+        $wca_measurments = array();
+        $wca_measurments['wca_measurment_height'] = $_POST['wca_measurment_height'];
+        $wca_measurments['wca_measurment_height_2'] = $_POST['wca_measurment_height_2'];
+        $wca_measurments['wca_measurment_weight'] = $_POST['wca_measurment_weight'];
+        $wca_measurments['wca_constitution'] = $_POST['wca_constitution'];
+        $wca_measurments['wca_measurment_unit'] = $_POST['wca_measurment_unit'];
+        $wca_measurments['wca_weight_unit'] = $_POST['wca_weight_unit'];
+        $wca_measurments['wca_coat_length'] = $_POST['wca_coat_length'];
+        $wca_measurments['wca_sleeves_length'] = $_POST['wca_sleeves_length'];
+        $wca_measurments['wca_shoulders'] = $_POST['wca_shoulders'];
+        $wca_measurments['wca_chest'] = $_POST['wca_chest'];
+        $wca_measurments['wca_stomach'] = $_POST['wca_stomach'];
+        $wca_measurments['wca_hips'] = $_POST['wca_hips'];
+        $wca_measurments['wca_biceps'] = $_POST['wca_biceps'];
+        $wca_measurments = serialize($wca_measurments);
+        update_user_meta($customet_id, 'wca_measurement', $wca_measurments);
+        return true;
+    }
+
+    public function wca_checkout_update_order_meta($order_id, $posted_data) {
+        $wca_measurments = array();
+        $wca_measurments['wca_measurment_height'] = $_POST['wca_measurment_height'];
+        $wca_measurments['wca_measurment_height_2'] = $_POST['wca_measurment_height_2'];
+        $wca_measurments['wca_measurment_weight'] = $_POST['wca_measurment_weight'];
+        $wca_measurments['wca_constitution'] = $_POST['wca_constitution'];
+        $wca_measurments['wca_measurment_unit'] = $_POST['wca_measurment_unit'];
+        $wca_measurments['wca_weight_unit'] = $_POST['wca_weight_unit'];
+        $wca_measurments['wca_coat_length'] = $_POST['wca_coat_length'];
+        $wca_measurments['wca_sleeves_length'] = $_POST['wca_sleeves_length'];
+        $wca_measurments['wca_shoulders'] = $_POST['wca_shoulders'];
+        $wca_measurments['wca_chest'] = $_POST['wca_chest'];
+        $wca_measurments['wca_stomach'] = $_POST['wca_stomach'];
+        $wca_measurments['wca_hips'] = $_POST['wca_hips'];
+        $wca_measurments['wca_biceps'] = $_POST['wca_biceps'];
+        $wca_measurments = serialize($wca_measurments);
+
+        update_post_meta($order_id, '_wca_measurement', $wca_measurments);
+
+        return true;
+    }
+
+    public function wca_product_detail() {
+        $current_item_key = mysql_real_escape_string($_POST['order_item_key']);
+        $items = WC()->cart->get_cart();
+        $curren_item = $items[$current_item_key];
+        $current_items = unserialize($curren_item['wca_cart_data']['wca_attributes']);
+        //pr($current_items);
+        include ABS_MODEL . '/get_attrs.php';
+        //pr($current_items);
+        $wca_attributes = array();   //Custome attribute array
+        $file = wca_get_template_path('wca_product_details.php');
+        include $file;
+        exit;
+    }
+
+    public function wca_add_lightbox() {
+        echo '<div class="light"><div class="under_light"></div></div>';
+    }
+
+    public function wca_product_detail_admin() {
+        $current_item_id = mysql_real_escape_string($_POST['order_item_id']);
+        $current_items = unserialize(get_metadata('order_item', $current_item_id, 'wca_attributes', true));
+        include ABS_MODEL . '/get_attrs.php';
+        $file = ABS_VIEW . 'wca_product_details.php';
+        include $file;
+        exit;
     }
 
 }

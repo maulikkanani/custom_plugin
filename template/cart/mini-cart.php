@@ -19,7 +19,6 @@ global $woocommerce;
 <ul class="cart_list product_list_widget <?php echo $args['list_class']; ?>">
 
 	<?php if ( sizeof( $woocommerce->cart->get_cart() ) > 0 ) : ?>
-
 		<?php foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $cart_item ) :
 
 			$_product = $cart_item['data'];

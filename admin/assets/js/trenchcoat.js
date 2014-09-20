@@ -765,7 +765,25 @@ jQuery(document).ready(function() {
     /* End :- this is for add text for embroidery work*/
 
     /*END step 3 JS*/
-
+	jQuery(document).on('click', '.tax_class', function(){
+             
+	$order_item_id=jQuery(this).data('order_item_id');
+		 jQuery(document).trigger('product_details_admin');
+		 jQuery(".light").lightbox_me();
+    });
+	
+jQuery(document).bind('product_details_admin', function() {		
+                        jQuery.ajax({
+				url: ajax_url,
+				type: "POST",
+				data: {action:'product_details_admin',order_item_id:$order_item_id},
+				success: function(data) {
+							if(jQuery('.under_light').html() == ''){
+							jQuery('.under_light').append(data);
+							}
+				},
+			});
+	 });
 
 
 

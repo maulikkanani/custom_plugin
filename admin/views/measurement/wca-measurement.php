@@ -43,15 +43,8 @@ include ABS_MODEL . 'measurements.php';
                 jQuery(document).trigger('change_body_shape', [i.value]);
             }
         })
-        
-        jQuery(document).on('click', '#all_shape img', function() {
-            var h = parseInt(jQuery(this).data("rel"));
-            slider.slider("value", h);
-            //change_body_shape(h)
-            jQuery(document).trigger('change_body_shape', [h]);
-        });
 
-        jQuery(document).trigger('change_body_shape', [g]);
+        jQuery(document).trigger('change_body_shape', [$body_shape]);
         jQuery(document).trigger('change_measurement_data');
         jQuery(document).trigger('change-height-unit', [$length_units]);
         jQuery(document).trigger('change-weight-unit', [$weight_units]);
@@ -70,7 +63,7 @@ include ABS_MODEL . 'measurements.php';
 
     });
 </script>
-
+<div style="clear:both"></div>
 <div class="col2-set" id="customer_details">
     <div class="col-1">
         <h3><?php _e('Measurements', 'woocommerce'); ?></h3>
@@ -115,18 +108,18 @@ include ABS_MODEL . 'measurements.php';
                 </label>
             </p>
             <div class="clr"></div>
-            <div id="all_shape" class="col-sm-12">
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/1.jpg" class="icon" alt="Slender"  data-rel="1"  style="cursor: pointer; opacity: 0.5;"></div>
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/2.jpg" class="icon" alt="Average"  data-rel="2"   style="cursor: pointer; opacity: 0.5;"></div>
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/3.jpg" class="icon" alt="Fit"      data-rel="3"   style="cursor: pointer; opacity: 0.5;"></div>
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/4.jpg" class="icon" alt="Muscular" data-rel="4"   style="cursor: pointer; opacity: 0.5;"></div>
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/5.jpg" class="icon" alt="Husky"    data-rel="5"   style="cursor: pointer; opacity: 0.5;"></div>
-                <div class="col-sm-2"><img src="<?php echo wca_image_url ?>/man/measure/slider/6.jpg" class="icon" alt="Husky"    data-rel="6"   style="cursor: pointer; opacity: 0.5;"></div>
-            </div>
-            <div class="clr"></div>
-            <div id="slider"></div>
+            <table id="all_shape" class="new" width="100%">
+                <tr>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/1.jpg" class="icon" alt="Slender"  style="cursor: pointer; opacity: 0.5;"></td>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/2.jpg" class="icon" alt="Average" style="cursor: pointer; opacity: 0.5;"></td>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/3.jpg" class="icon" alt="Fit" style="cursor: pointer; opacity: 0.5;"></td>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/4.jpg" class="icon" alt="Muscular" style="cursor: pointer; opacity: 0.5;"></td>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/5.jpg" class="icon" alt="Husky" style="cursor: pointer; opacity: 0.5;"></td>
+                    <td><img src="<?php echo wca_image_url ?>/man/measure/slider/6.jpg" class="icon" alt="Husky" style="cursor: pointer; opacity: 0.5;"></td>
+                </tr>
+            </table>
         </div>
-        
+        <div id="slider"></div>
         <div class="clr"></div>
         <div class="controls">
             <a class="add_measurments button gbtr_minicart_checkout_but" href="javascript:;">
@@ -566,13 +559,13 @@ include ABS_MODEL . 'measurements.php';
     </div>
 
     <div class="man inline_box row" id="inline_04_measure" style="display: none;">
-        <div class="grid_6">
-            <p class="title">YOUR PROFILE DATA</p>
+        <div class="col-sm-6">
+            <p class="title">USER PROFILE DATA</p>
             <div class="row">
-                <div class="grid_2">
+                <div class="col-sm-4">
                     <img id="constitution_confirm" src="<?php echo wca_image_url ?>/man/measure/slider/3.jpg">
                 </div>
-                <div class="grid_4 col-sm-12 row">
+                <div class="col-sm-6 row">
                     <div class="col-sm-4">Height</div>
                     <div class="col-sm-7">
                         <span class="profile_height"></span>
@@ -587,14 +580,14 @@ include ABS_MODEL . 'measurements.php';
                     <div class="col-sm-5"><span class="profile_weight">12</span> <span class="weight_units">kg</span></div> 
                 </div>
             </div>
-            <div class="controls">
+            <div class="controls" style="display:none;">
                 <a class="edit_profile_data button gbtr_minicart_checkout_but" href="javascript:;">
                     <span>Edit profile data</span>
                 </a>
             </div>
         </div>
-        <div class="grid_6">
-            <p class="title">YOUR PROFILE MEASUREMENTS</p>
+        <div class="col-sm-6">
+            <p class="title">USER MEASUREMENTS</p>
             <div  class="wca_display_measurments row">
                 <div class="col-sm-12">
                     <div class="col-sm-7">Coat/ Trench Coat length</div>
@@ -632,20 +625,20 @@ include ABS_MODEL . 'measurements.php';
                     <div class="col-sm-2"><span class="units">cm</span></div> 
                 </div>
             </div>
-            <div class="controls">
+            <div class="controls" style="display:none;">
                 <a class="edit_meaurements button gbtr_minicart_checkout_but" href="javascript:;">
                     <span>Edit measurements</span>
                 </a>
-            </div>
         </div>
-        <!--    <div class="hidden_inputs">
-                <input type="hidden" name="wca_coat_length" value="0">
-                <input type="hidden" name="wca_sleeves_length" value="0">
-                <input type="hidden" name="wca_shoulders" value="0">
-                <input type="hidden" name="wca_chest" value="0">
-                <input type="hidden" name="wca_stomach" value="0">
-                <input type="hidden" name="wca_hips" value="0">
-                <input type="hidden" name="wca_biceps" value="0">
-            </div>-->
-
     </div>
+    <!--    <div class="hidden_inputs">
+            <input type="hidden" name="wca_coat_length" value="0">
+            <input type="hidden" name="wca_sleeves_length" value="0">
+            <input type="hidden" name="wca_shoulders" value="0">
+            <input type="hidden" name="wca_chest" value="0">
+            <input type="hidden" name="wca_stomach" value="0">
+            <input type="hidden" name="wca_hips" value="0">
+            <input type="hidden" name="wca_biceps" value="0">
+        </div>-->
+
+</div>

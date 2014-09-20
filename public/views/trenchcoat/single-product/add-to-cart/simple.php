@@ -30,7 +30,7 @@ if ( ! $product->is_purchasable() ) return;
 
 	<?php do_action('woocommerce_before_add_to_cart_form'); ?>
 
-	<form class="cart" method="post" enctype='multipart/form-data'>
+	<form class="cart" method="post" enctype='multipart/form-data' action="">
 	 	
 		<?php do_action('woocommerce_before_add_to_cart_button'); ?>
 
@@ -53,6 +53,7 @@ if ( ! $product->is_purchasable() ) return;
     </form>
 
 	<?php do_action('woocommerce_after_add_to_cart_form'); ?>
+  
 
 <?php endif; ?>
 

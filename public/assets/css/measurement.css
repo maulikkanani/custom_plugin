@@ -1,0 +1,408 @@
+/* 
+    Document   : measurement
+    Created on : Sep 16, 2014, 11:51:41 AM
+    Author     : kmaulik
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@import url(//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css);
+#inline_01_measure .ui-widget-content {
+    border: 1px solid #aaaaaa !important;
+    margin-left: 52px;
+    width: 81%;
+}
+
+#inline_01_measure input.input-text{
+    width: 18%;
+}
+
+.controls a.add_measurments{
+    margin: 3% 0 0 33%;
+    width: 25%;
+}
+.controls a.edit_meaurements {
+    margin: 3% 0 0 33%;
+    width: 38%;
+}
+.controls a.edit_profile_data {
+    width: 38%;
+    margin: 3% 0 0 26%;
+}
+
+
+#box_steps a.ko, #box_steps a.ok  {
+    opacity: 0.5;
+}
+#box_steps a {
+    display: block;
+    float: left;
+    height: 90px;
+    margin-right: 20px;
+    width: 46px;
+    z-index: 200;
+}
+#box_steps a.current {
+    opacity: 1 !important;
+}
+#box_steps a.ok span.ok {
+    display: block;
+}
+
+#box_steps span.ok {
+    background: url("../../../assets/images/measures/check_ok.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    display: none;
+    height: 18px;
+    margin: -20px 0 0 30px;
+    position: absolute;
+    width: 19px;
+}
+
+#inline_03_measure div.inline_03_measure div.measure_box {
+    background: url("../../../assets/images/measures/bg_measure_box2.png") no-repeat scroll left bottom rgba(0, 0, 0, 0);
+    height: 105px;
+    margin-top: 29px;
+    overflow: hidden;
+    position: relative;
+    width: 417px;
+}
+
+
+#inline_03_measure div.inline_03_measure div.measure_box span.slider-min {
+    color: #5e5c5b;
+    font-size: 11px;
+    left: 34px;
+    position: absolute;
+    top: 76px;
+}
+
+#inline_03_measure div.inline_03_measure div.measure_box span.slider-max {
+    color: #5e5c5b;
+    font-size: 11px;
+    position: absolute;
+    right: 31px;
+    top: 76px;
+}
+
+#inline_03_measure div.inline_03_measure div.measure_box div.ui-slider-box {
+    background: url("../../../assets/images/measures/slider_measure_box.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    border: medium none;
+    height: 19px;
+    margin: 54px 0 0 37px;
+    width: 346px;
+}
+
+#inline_03_measure a.ico_less {
+    background: url("../../../assets/images/measures/slider_less.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    display: block;
+    height: 14px;
+    left: 17px;
+    position: absolute;
+    top: 56px;
+    width: 14px;
+}
+
+#inline_03_measure a.ico_more {
+    background: url("../../../assets/images/measures/slider_more.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    display: block;
+    height: 14px;
+    position: absolute;
+    right: 16px;
+    top: 56px;
+    width: 14px;
+}
+
+#inline_03_measure div.inline_03_measure div.measure_box div.form_single_measure {
+    color: #5e5c5b;
+    font-weight: bold;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 12px;
+}
+
+
+#inline_03_measure div.inline_03_measure div.measure_box div.form_single_measure input {
+    background: url("../../../assets/images/measures/bg_input_measure.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    border: medium none;
+    color: #5e5c5b;
+    font-size: 14px;
+    font-weight: bold;
+    height: 41px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 54px;
+    border-radius: 0;
+}
+
+
+div.inline_03_measure div.measure_box div.form_single_measure input {
+    background: url("../../../assets/images/measures/bg_input_measure.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    border: medium none;
+    color: #5e5c5b;
+    font-size: 14px;
+    font-weight: bold;
+    height: 24px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 43px;
+}
+
+span.ui-slider-handle {
+    background: url("../../../assets/images/measures/ui-slider-handle2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 0 none !important;
+    display: block;
+    height: 26px !important;
+    position: absolute;
+    width: 18px;
+    margin: -4px 0 0 -6px !important;
+}
+div.ui-slider-box .ui-slider {
+    width: 94%;
+}
+
+#inline_01_base_form .box a.a_two span, #inline_04_finish_form a.a_two span, #inline_03_measure a.a_two span, #inline_01_base_form a.a_two span {
+    background: url("../../../assets/images/measures/tow_op_right.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    color: #ffffff;
+    display: block;
+    float: left;
+    font-family: "Lato";
+    font-size: 13px;
+    font-weight: bold;
+    height: 36px;
+    line-height: 36px;
+    padding-right: 30px;
+    text-transform: uppercase;
+}
+
+#box_steps{
+    display: table;
+    margin: 3% 22%;
+    text-align: center;
+}
+
+a.continue {
+    margin: 0 0 0 37% !important;
+    width: 23%;
+}
+
+.steps_description p.form-row span{
+    display: table-cell;
+}
+.steps_description p.form-row span.step_number{
+    vertical-align: top;
+}
+span.step_number i.fa-circle{
+    font-size: 25px;             
+}
+span.step_number i.num{
+    color: #ffffff;
+    font-size: 15px;             
+}
+
+.steps_description p.form-row span.step_des{
+    line-height: 1.6em;
+    vertical-align: middle;
+}
+
+
+
+.step_heading {
+    height: 53px;
+    margin: 1.6% 0;
+}
+.inline_03_measure .step_heading h3 {
+    border: 0 none !important;
+    font-size: 21px !important;
+    padding: 4px 0 !important;
+}
+.step_heading h3 span {
+    color: #999999;
+}
+
+
+#inline_03_measure #first_time_info .content {
+    padding: 26px 0 20px 40px;
+}
+#inline_03_measure #first_time_info {
+    color: #444444;
+    margin: 0 0 27px;
+    position: relative;
+}
+
+#inline_03_measure #first_time_info .measure {
+    background: none repeat scroll 0 0 #7bb2e0;
+}
+
+#inline_03_measure #first_time_info p {
+    color: #ffffff;
+    font-family: "Lato";
+    font-size: 21px !important;
+    margin-bottom: 10px;
+}
+
+#inline_03_measure #first_time_info p.title {
+    font-size: 23px !important;
+    font-weight: bold !important;
+}
+#inline_03_measure #first_time_info p.upper {
+}
+#inline_03_measure #first_time_info ul {
+    font-size: 12px;
+    margin-left: 35px;
+}
+
+#inline_03_measure #first_time_info ul li {
+    color: #ffffff;
+    font-family: "Lato";
+    font-size: 13px;
+    line-height: 24px;
+    list-style-image: url("../../../assets/images/measures/point.png");
+}
+
+#inline_03_measure #first_time_info a#close_first_time_info {
+    height: 25px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 25px;
+}
+
+#inline_01_measure span.wca_error {
+    color: #ff0000;
+    float: right;
+}
+.change_weight_unit a, .change_height_unit a {
+    color: #000000;
+    font-weight: bold;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+#inline_04_measure{
+    margin-top: 20px;
+}
+#inline_04_measure .title{
+    font-weight: bold;
+}
+div#all_shape {
+    margin: 9px 0 28px;
+}
+div#all_shape div {
+    display: inline-block;
+}
+
+
+
+/* Added New For Responsive*/
+
+@media (max-width:959px) and (min-width:718px){
+    #inline_03_measure div.inline_03_measure div.measure_box{
+        margin: 29px 0 15px;
+        width: 100%;
+        background-size: 100%; 
+    }
+    #inline_03_measure div.inline_03_measure div.measure_box div.ui-slider-box{
+        margin: 58px 0 0 37px;
+        width: 74%;
+        background-size: 100%;
+    }
+    #box_steps a{
+        display: inline-block;
+    }
+    #box_steps{
+        width: 100%;
+    }
+}
+@media (max-width:719px){
+    #inline_03_measure div.inline_03_measure div.measure_box{
+        margin: 20px auto;
+    }
+    #measure_wca_coat_length{
+        text-align: center;
+    }
+    div#all_shape div {
+        padding: 0 7px;
+        width: 16%;
+    }
+    #inline_01_measure .ui-widget-content {
+        height: 6px;
+        margin-left: 41px;
+        width: 77%;
+    }
+    .controls a.add_measurments {
+        width: 38%;
+    }
+    span.ui-slider-handle {
+        background-size: 12px 20px !important;
+    }
+}
+@media (max-width:479px){
+    #inline_01_measure .form-row{
+        width: 100%;
+    }
+
+    div#all_shape div {
+        padding: 0 4px;
+        width: 15%;
+    }
+
+    #inline_01_measure .ui-widget-content {
+        margin: -12px 0 19px 29px;
+        width: 73%;
+    }
+
+    span.ui-slider-handle {
+        background-size: 12px 20px !important;
+    }
+
+    .steps_description{
+        text-align: left;
+    }
+    .change_height_unit a{
+        display: block;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .controls a.add_measurments {
+        margin: 30px 0 0;
+        width: 100%;
+    }
+    #inline_03_measure #first_time_info .content{
+        padding: 26px 0 20px 20px;
+    }
+    #inline_03_measure #first_time_info ul{
+        margin-left: 0;
+        padding-left: 15px;
+    }
+
+    #inline_03_measure .controls a.continue ,#inline_04_measure .controls a.edit_meaurements{
+        width: 100%;
+        margin-left: 0 !important;
+    }
+    #inline_03_measure #first_time_info ul{
+        margin-left: 0;
+        padding-left: 15px;
+    }
+    #inline_03_measure div.inline_03_measure div.measure_box{
+        margin: 29px 0 15px;
+        width: 100%;
+        background-size: 100%; 
+    }
+    #inline_03_measure div.inline_03_measure div.measure_box div.ui-slider-box{
+        margin: 58px 0 0 37px;
+        width: 74%;
+        background-size: 100%;
+    }
+    #box_steps{
+        margin: 3% 0;
+        text-align: center;
+    }
+    #box_steps a{
+        width: 62px;
+        float: none;
+        display: inline-block;
+    }
+    .controls a.edit_profile_data{
+        margin: 20px 0 0;
+        width: 100%;
+    }
+}

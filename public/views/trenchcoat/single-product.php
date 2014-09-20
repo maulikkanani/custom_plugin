@@ -33,6 +33,7 @@ get_header('shop');
     
 </style>
 <div class="global_content_wrapper">
+    
 
     <div class="container_12 wca_cusustome">
 
@@ -102,8 +103,7 @@ get_header('shop');
                     <?php } ?>
 
                     <div class="grtr_product_header_mobiles">
-
-                        <h1 class="product_title entry-title"><?php the_title(); ?></h1>
+                           <h1 class="product_title entry-title"><?php the_title(); ?></h1>
 
                         <?php
                         if (comments_open()) {
@@ -132,17 +132,10 @@ get_header('shop');
                                 echo '<div class="after_title_reviews"><div class="reviews_nr">' . $count . ' ' . __('Reviews', 'theretailer') . '</div><div class="star-rating" title="' . sprintf(__('Rated %s out of 5', 'theretailer'), $average) . '"><span style="width:' . ($average * 16) . 'px"><span class="rating">' . $average . '</span> ' . __('out of 5', 'theretailer') . '</span></div><div class="clr"></div></div>';
                             }
                         }
+                                wca_get_template_part( 'single-product/price.php' );
                         ?>
 
-                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-
-                            <p class="price"><?php echo $product->get_price_html(); ?></p>
-
-                            <meta itemprop="price" content="<?php echo $product->get_price(); ?>" />
-
-                            <link itemprop="availability" href="http://schema.org/<?php echo $product->is_in_stock() ? 'InStock' : 'OutOfStock'; ?>" />
-
-                        </div>
+                        
 
                     </div>
 
