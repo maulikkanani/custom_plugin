@@ -9,7 +9,7 @@
         <h3 class="main_titel_list">Custom Trench Coat</h3><br/>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-3 control-label">Style:</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9 pad-right-0">
                 <div class="radio attr-front pos1 pos4">
                     <span class="wca_trenchcoat_style_simple">
                         <label>

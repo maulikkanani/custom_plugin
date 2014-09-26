@@ -30,7 +30,12 @@ get_header('shop');
     .wca_cusustome .quantity.buttons_added{
         margin-top: 40px !important;
     }
-    
+    .wca_cusustome .gbtr_poduct_details_left_col{
+        margin-right: 0px !important;
+    }
+    #product_image{
+        height: 503px;
+    }
 </style>
 <div class="global_content_wrapper">
     

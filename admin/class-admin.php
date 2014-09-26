@@ -171,6 +171,7 @@ class woocommerce_custom_attribute_admin {
         wp_enqueue_script('owl-carousel', plugins_url('assets/js/owl-carousel.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script('knockhout', plugins_url('assets/js/knockout-3.2.0.js', __FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
         wp_enqueue_script($this->plugin_slug . '-measurent-script', plugins_url('assets/js/measurement.js',__FILE__), array('jquery'), woocommerce_custom_attribute::VERSION);
+        wp_enqueue_script($this->plugin_slug . '-single-image-layers', plugins_url('woocommerce-custom-attribute/public/assets/js/cart_image.js'), array('jquery'), woocommerce_custom_attribute::VERSION);
     }
 
     /**

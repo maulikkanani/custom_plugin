@@ -569,12 +569,12 @@ include ABS_MODEL . 'measurements.php';
         <div class="grid_6">
             <p class="title">YOUR PROFILE DATA</p>
             <div class="row">
-                <div class="grid_2">
+                <div class="col-xs-5">
                     <img id="constitution_confirm" src="<?php echo wca_image_url ?>/man/measure/slider/3.jpg">
                 </div>
-                <div class="grid_4 col-sm-12 row">
-                    <div class="col-sm-4">Height</div>
-                    <div class="col-sm-7">
+                <div class="col-xs-7 row">
+                    <div class="col-xs-4">Height</div>
+                    <div class="col-xs-8">
                         <span class="profile_height"></span>
                         <span class="unit_cm unt">cm</span>
                         <span class="unit_in unt" style="display: inline;">
@@ -583,8 +583,8 @@ include ABS_MODEL . 'measurements.php';
                             <span>inches</span>
                         </span>
                     </div> 
-                    <div class="col-sm-4">Weight</div>
-                    <div class="col-sm-5"><span class="profile_weight">12</span> <span class="weight_units">kg</span></div> 
+                    <div class="col-xs-4">Weight</div>
+                    <div class="col-xs-8"><span class="profile_weight">12</span> <span class="weight_units">kg</span></div> 
                 </div>
             </div>
             <div class="controls">

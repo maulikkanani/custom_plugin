@@ -13,7 +13,6 @@ global $post_id;
 include ABS_MODEL . '/get_attrs.php';
 $price = json_encode($attribute_price);                          // Array of default attribute price
 $attr_default_values = json_encode($default_values);               // Array of default attribute values 
-
 ?>
 <div id="default_value" class="hide"></div>
 <script type="text/javascript">
@@ -57,15 +56,19 @@ $attr_default_values = json_encode($default_values);               // Array of d
     jQuery(document).ready(function() {
 
         /*Start:-  Binding model of knockout for a lining (Knockout js)*/
-        
+
         LiningModel.lining();
-        if(jQuery('#main_customization')[0])
+        if (jQuery('#main_customization')[0])
             ko.cleanNode(jQuery('#main_customization')[0]);
         ko.applyBindings(LiningModel, jQuery('#main_customization')[0]);
-        
+
         /*End:-  Binding model of knockout for a lining (Knockout js)*/
 
-        jQuery("#tabs").tabs();
+        jQuery("#tabs").tabs({
+            activate: function(event, ui) {
+                jQuery('#model_3d_preview .all_lining_imgs').hide();
+            }
+        });
 
         /* Start:- step 3---> toggle h2   */
         jQuery(document).on('click', '.arrow_toggle', function() {
@@ -164,9 +167,9 @@ $attr_default_values = json_encode($default_values);               // Array of d
                 jQuery('input[name=' + key + ']').removeAttr('checked');
                 jQuery('input[name=' + key + '][value=0]').attr('checked', '');
                 jQuery('input[name=' + val.hidden_name + ']').val(0);
-                if(val.main_div=='#main_buton_thread')
+                if (val.main_div == '#main_buton_thread')
                     jQuery('input[name=wca_button_hilo_ojal]').val(0);
-                
+
                 if (jQuery('input[name=' + val.hidden_name + ']').attr('type') == 'text')
                     jQuery('input[name=' + val.hidden_name + ']').val('');
                 jQuery(document).trigger('back-pos-12');
@@ -179,45 +182,45 @@ $attr_default_values = json_encode($default_values);               // Array of d
         });
 
         /*END:-binding events of  step 3 for embroidery , neck and elbow button threads and hole*/
-       
 
 
-/*if(jQuery('.wca_trenchcoat_attr_edit').data('flag') == "heading"){
-    jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
-    $name = jQuery(this).data('name');
-    jQuery("#black_overlay").show();
-});
-}else{
-var name, value, label, price, eledpr;
-        
-        jQuery(document).on('click', '.wca_trenchcoat_attr_edit', function() {
-        alert("in else");    
-        
-            
+
+        /*if(jQuery('.wca_trenchcoat_attr_edit').data('flag') == "heading"){
+         jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
+         $name = jQuery(this).data('name');
+         jQuery("#black_overlay").show();
+         });
+         }else{
+         var name, value, label, price, eledpr;
+         
+         jQuery(document).on('click', '.wca_trenchcoat_attr_edit', function() {
+         alert("in else");    
+         
+         
+         });
+         */
+        var name, value, label, price, eledpr;
+        var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+        jQuery(document).on("click", ".wca_trenchcoat_attr_edit", function() {
+            var flag = jQuery(this).data('flag');
+            //var flag1 = jQuery(this).data('name');
+            // alert(flag);
+            //   alert(flag1);
+            if (flag == "heading") {
+                // alert('in if');
+                name = jQuery(this).data('name');
+                value = null;
+                //jQuery("#black_overlay").show();
+            } else {
+                // alert('in else');
+                eledpr = jQuery(this);
+                var eleupr = jQuery(this).parent();
+                name = eleupr.find('input').attr('name');
+                value = eleupr.find('input').attr('value');
+
+            }
+            jQuery("#black_overlay").show();
         });
-*/
- var name, value, label, price, eledpr;
- var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
-jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
-    var flag = jQuery(this).data('flag');
-    //var flag1 = jQuery(this).data('name');
-   // alert(flag);
- //   alert(flag1);
-    if(flag == "heading"){
-        // alert('in if');
-         name = jQuery(this).data('name');
-         value = null;
-         //jQuery("#black_overlay").show();
-    }else{
-       // alert('in else');
-        eledpr = jQuery(this);
-            var eleupr = jQuery(this).parent();
-            name = eleupr.find('input').attr('name');
-            value = eleupr.find('input').attr('value');
-        
-    }
- jQuery("#black_overlay").show();   
-});
 
         jQuery(document).on('click', '#white_content #cancel', function() {
             jQuery("#black_overlay").hide();
@@ -241,8 +244,42 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
 
             });
         });
-    
-    
+
+
+        var g = jQuery("#product_image");
+        var f = g.parent().offset().top - 50;
+        jQuery(window).scroll(function() {
+            var h = g.height();
+            var i = jQuery("#tabs").height();
+            var j = (window.pageYOffset || (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop) - f;
+
+            j = (j + h > i) ? i - h : j;
+
+            if (j < 0) {
+                j = 0
+            } else {
+                j = j + jQuery('.gbtr_header_wrapper.on_page_scroll').height() + 40;
+            }
+
+            if (jQuery(window).width() < 767) {
+                j = 0;
+            }
+            if (document.all) {
+                g.css("marginTop", j + "px")
+            } else {
+                g.stop().animate({
+                    "margin-top": j
+                }, 200)
+            }
+        });
+        //','','','   
+        jQuery(document).on('click', '#tabs-1 input, #tabs-1 .box_part, #tabs-2 .fabric_change, #tabs-3 input, #tabs-3 .lining_change, #tabs-3 .box_color', function() {
+            if (jQuery(window).width() < 767) {
+                jQuery('html, body').animate({
+                    scrollTop: jQuery('#product_image').offset().top - 40
+                }, 1000);
+            }
+        });
     });
 </script>
 
@@ -255,18 +292,18 @@ jQuery(document).on("click",".wca_trenchcoat_attr_edit",function(){
     </ul>
     <div id="tabs-1">
         <?php
-            //include ABS_WCA . "public/views/$category/customize-attributes-step-1.php";
-            include_once wca_get_template_path('customize-attributes-step-1.php');
+        //include ABS_WCA . "public/views/$category/customize-attributes-step-1.php";
+        include_once wca_get_template_path('customize-attributes-step-1.php');
         ?>
     </div>
     <div id="tabs-2">
         <?php
-            include_once wca_get_template_path('customize-attributes-step-2.php');
+        include_once wca_get_template_path('customize-attributes-step-2.php');
         ?>
     </div>
     <div id="tabs-3">
         <?php
-            include_once wca_get_template_path('customize-attributes-step-3.php');
+        include_once wca_get_template_path('customize-attributes-step-3.php');
         ?>
     </div>
 </div>   

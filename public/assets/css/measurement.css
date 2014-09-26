@@ -21,7 +21,7 @@
     width: 25%;
 }
 .controls a.edit_meaurements {
-    margin: 3% 0 0 33%;
+    margin: 3% 0 0 26%;
     width: 38%;
 }
 .controls a.edit_profile_data {
@@ -282,6 +282,7 @@ span.step_number i.num{
 }
 #inline_04_measure .title{
     font-weight: bold;
+    margin: 20px 0;
 }
 div#all_shape {
     margin: 9px 0 28px;
@@ -289,7 +290,29 @@ div#all_shape {
 div#all_shape div {
     display: inline-block;
 }
+.wca_display_measurments .col-sm-12 {
+    width: 100%;
+}
 
+.wca_display_measurments .col-sm-12 div {
+    display: inline-block;
+}
+
+.wca_display_measurments .col-sm-7 {
+     width: 62.333% !important;
+}
+.wca_display_measurments .col-sm-3 {
+    width: 18%;
+}
+.wca_display_measurments .col-sm-2 {
+    width: 16.6667%;
+}
+#inline_04_measure .row div:not(.col-sm-12) {
+    padding: 0;
+}
+#inline_04_measure .grid_6 > div.row {
+    margin: 0 0 20px;
+}
 
 
 /* Added New For Responsive*/
@@ -310,6 +333,9 @@ div#all_shape div {
     }
     #box_steps{
         width: 100%;
+    }
+    .controls a.edit_meaurements{
+         width: 46%;
     }
 }
 @media (max-width:719px){

@@ -163,6 +163,9 @@ add_action( 'wp_ajax_nopriv_product_details', 'wca_cart_hooks::wca_product_detai
 add_action( 'wp_ajax_product_details_admin', 'wca_cart_hooks::wca_product_detail_admin');
 add_action( 'wp_ajax_nopriv_product_details_admin', 'wca_cart_hooks::wca_product_detail_admin');
 
+add_action( 'wp_ajax_product_details_view_order', 'wca_cart_hooks::wca_product_detail_view_order');
+add_action( 'wp_ajax_nopriv_product_details_view_order', 'wca_cart_hooks::wca_product_detail_view_order');
+
 //add_action('woocommerce_admin_order_actions_start', 'wca_custome_attributes::wca_add_lightbox');
 
 global $post;

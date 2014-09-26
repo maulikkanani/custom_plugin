@@ -460,7 +460,6 @@ div.fabric_box_3d {
     height: 111px;
     margin: 0 7px 4px 6px;
     overflow: hidden;
-    width: 110px;
 }
 div.fabric_box_3d div.image{
     -moz-border-bottom-colors: none;
@@ -486,10 +485,10 @@ div.fabric_box_3d div.image a {
     text-decoration: none;
 }
 .detail_of_fabric span {
-  float: right;
-  font-size: 8px!important;
-  margin-right: 1px;
-  margin-top: 1px;
+    float: right;
+    font-size: 8px!important;
+    margin-right: 1px;
+    margin-top: 1px;
 }
 .category_main_box{
     margin-bottom: 25px;
@@ -527,7 +526,7 @@ div.fabric_box_3d div.image a {
     background: url(../images/design/left_arrow_lining.gif) no-repeat;
 }
 .customNavigation .next{
-    right: 0;
+    right: -148px !important;
     height: 23px;width: 16px;
     background: url(../images/design/right_arrow_lining.gif) no-repeat;
 }
@@ -754,6 +753,9 @@ div.fabric_box_3d div.image a {
 .grtr_product_price_desktops {
     display: block !important;
 }
+.preview_fabric_3d_common .preview.linig-background{
+    width: 100% !important;
+}
 /*End:- for image upload */
 
 
@@ -762,177 +764,275 @@ div.fabric_box_3d div.image a {
 
 /*-----------------------Added by nikesh---------------*/
 *{margin: 0;padding: 0;}
-		div.extras_product_preview {
-		    background-color: #eaeaea;
-		    border: 1px solid gray;
-		    border-radius: 5px;
-		    font-family: "Lato";
-		    font-size: 12px;
-		    margin-bottom: 40px;
-		    width: 95%;
-		}
-		div.extras_product_preview_box {
-		    margin: 15px;
-		    overflow: hidden;
-		}		
-		div.extras_product_preview div.fabric_left {
-		    float: left;
-		    overflow: hidden;
-		    width: 180px;
-		}
-		div#product_preview div.fabric_box {
-		    float: left;
-		    margin: 0 13px 0 0;
-		    min-height: 110px;
-		    overflow: hidden;
-		    width: 180px;
-		}
-		div.extras_product_preview div.extras_right {
-		    float: right;
-		    overflow: hidden;
-		    width: 230px;
-		}
-		div#product_preview div.cloth_preview {
-		    border: 1px solid gray;
-		    border-radius: 5px;
-		    max-height: 91px;
-		    max-width: 150px;
-		    overflow: hidden;
-		}
-		div#product_preview div.marge_inf {
-		    margin-bottom: 5px;
-		}
-		div#product_preview h3 {
-		    margin-bottom: 5px;
-		    text-transform: uppercase;
-		}
-		div#product_preview .label {
-		    color: #000;
-		    font-weight: 400;
-		    text-align: left;
-		}
-		div#product_preview .value {
-		    color: #5d5d5d;
-		    text-align: left;
-		}
-		div#product_preview div.extra_box {
-		    background-color: #fff;
-		    border: 1px solid gray;
-		    border-radius: 5px;
-		    line-height: 23px;
-		    margin-bottom: 10px;
-		    min-height: 23px;
-		    overflow: hidden;
-		    padding: 10px;
-		    width: 200px;
-		}
-		div#product_preview div.extra_box div.extra_description {
-		    float: left;
-		    width: 175px;
-		}
-		div#product_preview div.extra_img {
-		    border-radius: 2px;
-			float: left;
-			height: auto;
-			overflow: hidden;
-			width: 61px;
-		}		
-		div#product_preview div.extra_box p {
-		    width: 170px;
-		}		
-		div#product_preview div.extra_box span.label_initials {
-		    color: gray;
-		}
-		table.detalles_product_preview {
-		    border: 1px solid gray;
-		    border-collapse: inherit;
-		    border-radius: 5px;
-		    font-family: "Lato";
-		    font-size: 12px;
-		    overflow: hidden;
-		    width: 100%;
-		}
-		table.detalles_product_preview td {
-		    padding: 10px;
-		}
-		table.detalles_product_preview li {
-		    margin-bottom: 5px;
-		}
-		div#product_preview .label {
-		    color: #000;
-		    font-weight: 400;
-		    text-align: left;
-		}
-		div#product_preview .value {
-		    color: #5d5d5d;
-		    text-align: left;
-		}
-		#detalles_product_preview h2 {
-		    font-family: "Lato";
-		    font-size: 18px;
-		}
-		.detalles_product_preview ul{
-			list-style: none;
-		}
-		@media (max-width: 479px){
-			div.extras_product_preview ,#detalles_product_preview{
-				width: 94%;
-				margin: 20px auto;
-			}
-			div#product_preview div.extra_box{
-				width: 	91%;
-			}
-			div.extras_product_preview div.extras_right{
-				width: 100%;
-				float: none !important;
-			}
-			div.extras_product_preview div.fabric_left{
-				float: none;
-			    margin-bottom: 15px;
-				width: 100%;
-				text-align: center;
-			}
-			div#product_preview div.fabric_box{
-				width: 100%;
-			}
-			div#product_preview div.cloth_preview{
-				border: none;
-				max-width: inherit;
-			}
-			table.detalles_product_preview{
-				width: 100%;
-			}
-			
+div.extras_product_preview {
+    background-color: #eaeaea;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-family: "Lato";
+    font-size: 12px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+div.extras_product_preview_box {
+    margin: 15px;
+    overflow: hidden;
+}		
+div.extras_product_preview div.fabric_left {
+    float: left;
+    overflow: hidden;
+    width: 40%;
+}
+
+.extra_img > img {
+    max-height: 80px;
+}
+
+div#product_preview div.fabric_box {
+    float: left;
+    margin: 0 13px 0 0;
+    min-height: 110px;
+    overflow: hidden;
+    width: 180px;
+}
+div.extras_product_preview div.extras_right {
+    float: right;
+    overflow: hidden;
+    width: 230px;
+}
+div#product_preview div.cloth_preview {
+    border: 1px solid gray;
+    border-radius: 5px;
+    max-height: 91px;
+    max-width: 150px;
+    overflow: hidden;
+}
+div#product_preview div.marge_inf {
+    margin-bottom: 5px;
+}
+div#product_preview h3 {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+div#product_preview .label {
+    color: #000;
+    font-weight: 400;
+    text-align: left;
+}
+div#product_preview .value {
+    color: #5d5d5d;
+    text-align: left;
+}
+div#product_preview div.extra_box {
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+    line-height: 23px;
+    margin-bottom: 10px;
+    min-height: 23px;
+    overflow: hidden;
+    padding: 10px;
+    width: 200px;
+}
+div#product_preview div.extra_box div.extra_description {
+    float: left;
+    width: 64%;
+}
+.extra_img > img {
+    float: right;
+}
+div#product_preview div.extra_img {
+    border-radius: 2px;
+    float: left;
+    height: auto;
+    overflow: hidden;
+    width: 35%;
+}		
+div#product_preview div.extra_box p {
+    width: 170px;
+}		
+div#product_preview div.extra_box span.label_initials {
+    color: gray;
+}
+table.detalles_product_preview {
+    border: 1px solid gray;
+    border-collapse: inherit;
+    border-radius: 5px;
+    font-family: "Lato";
+    font-size: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+table.detalles_product_preview td {
+    padding: 10px;
+}
+table.detalles_product_preview li {
+    margin-bottom: 5px;
+}
+div#product_preview .label {
+    color: #000;
+    font-weight: 400;
+    text-align: left;
+}
+div#product_preview .value {
+    color: #5d5d5d;
+    text-align: left;
+}
+#detalles_product_preview h2 {
+    font-family: "Lato";
+    font-size: 18px;
+}
+.detalles_product_preview ul{
+    list-style: none;
+}
+
+#tabs li {
+    width: 32%;
+}
+#tabs li a {
+    display: table;
+    font-size: 10px;
+    padding: 0 1px !important;
+    width: 100%;
+    word-wrap: break-word;
+}
+#tabs .ui-tabs-active a {
+    background: none repeat scroll 0 0 #ddd;
+    color: #000;
+}
+#tabs .ui-tabs-active .number {
+    background: none repeat scroll 0 0 #545454;
+    font-size: 22px;
+}
+
+#tabs-1 .radio span:first-child {
+    padding: 0;
+}
+
+#tabs-3 .radio {
+    padding: 0 !important;
+}
+
+#tabs-3 span.amount span.wca_price_symbol {
+    margin: 0 !important;
+}
+#tabs-3 span.amount span.wca_price {
+    margin: 0 !important;
+}
+.detail_of_fabric span {
+    color: #000;
+    font-weight: 600;
+    margin: 0 2px;
+}
+
+.wca_cusustome .input-text.qty.text {
+    margin-left: 36px !important;
+}
+
+@media (max-width: 479px){
+    div.extras_product_preview ,#detalles_product_preview{
+        width: 94%;
+        margin: 20px auto;
+    }
+    div#product_preview div.extra_box{
+        width: 	91%;
+    }
+    div.extras_product_preview div.extras_right{
+        width: 100%;
+        float: none !important;
+    }
+    div.extras_product_preview div.fabric_left{
+        float: none;
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+    }
+    div#product_preview div.fabric_box{
+        width: 100%;
+    }
+    div#product_preview div.cloth_preview{
+        border: none;
+        max-width: inherit;
+    }
+    table.detalles_product_preview{
+        width: 100%;
+    }
+
 }
 .under_light{
-			background: none repeat scroll 0 0 #fff!important;
-			border-radius: 5px!important;
-			padding: 30px!important;
-			overflow:hidden;
-		}
-		.light{
-		width: 1057px!important;		
-		}
-		#product_preview{
-		float:left;
-		width:50%;
-		}
-		#detalles_product_preview{
-		float:left;
-		width:50%;
-		}
-		
-		
-		@media (max-width: 1060px) {
-			.light{
-				width:100% !important;					
-			}
-		}
-		@media (max-width: 767px) {
-			#detalles_product_preview ,#product_preview{
-				width: 100%;
-			}
-			div.extras_product_preview, #detalles_product_preview{
-				width:100%;
-			}
-		}
+    overflow:hidden;
+}
+.light{
+    background: none repeat scroll 0 0 #fff!important;
+    border-radius: 5px!important;
+    padding: 30px;
+    width: 1057px!important;
+    max-height: 501px;
+    overflow-y: auto;
+    top: 26% !important;
+    z-index: 9999 !important;
+}
+.lb_overlay{
+    z-index: 9998 !important;
+}
+.light .loader {
+    color: #000;
+    font-size: 80px !important;
+    height: auto !important;
+    left: 47%;
+    position: relative;
+    top: unset;
+}
+
+#product_preview{
+    float:left;
+    width:100%;
+}
+#detalles_product_preview{
+    float:left;
+    width:100%;
+    margin-bottom: 30px; 
+}
+.pad-right-0{
+    padding-right: 0 !important;
+}
+#tabs-1 .radio > span{
+    float:left;
+}
+
+.extra_img > img {
+    align-self: center !important;
+    margin-left: 14px;
+    width: 29% !important;
+}
+
+.det_embroidery .extra_img > img, .det_lining .extra_img > img {
+    width: 100% !important;
+}
+
+.wca-cart-thumb{
+    height: 166px;
+    margin: -9px 0 -6px -9px;
+}
+
+.wca-cart-thumb .turn_arround{
+    display: none;
+}
+
+.wca_order_item_det .fa.fa-eye {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 1060px) {
+    .light{
+        width:100% !important;					
+    }
+}
+@media (max-width: 767px) {
+    #detalles_product_preview ,#product_preview{
+        width: 100%;
+    }
+    div.extras_product_preview, #detalles_product_preview{
+        width:100%;
+    }
+}

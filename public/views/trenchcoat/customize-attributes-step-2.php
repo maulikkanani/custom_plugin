@@ -23,9 +23,9 @@
         </div>		      -->
 </div>
 <div class="bottom_all_patten_main">
-     <div class="info_fabric">
-        <div class="pull-right"><b>Ref</b>: <span id="fabric_ref"></span></div>
-        <div class="pull-left">
+     <div class="info_fabric row">
+        <div class="col-xs-4 pull-right text-right"><b>Ref</b>: <span id="fabric_ref"></span></div>
+        <div class="col-xs-8">
             <b id="fabric_name"></b>
         </div>
     </div>

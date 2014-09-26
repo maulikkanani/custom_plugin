@@ -1,5 +1,6 @@
 jQuery(document).ready(function() {
 
+
     /*start:- Get attributes of category*/
     jQuery(document).bind("load-attributes", function() {
         if (jQuery('.customise_product').val() == 1) {
@@ -383,11 +384,11 @@ jQuery(document).ready(function() {
                 if (jQuery.isNumeric($prices[temp])) {
                     final_price = parseFloat(final_price) + parseFloat($prices[temp]);
                     /*
-                    console.log('name:-' + val);
-                    console.log('value:-' + selector);
-                    console.log('price:-' + $prices[temp]);
-                    console.log('final price:-' + final_price);
-                    console.log('=========================================================');
+                     console.log('name:-' + val);
+                     console.log('value:-' + selector);
+                     console.log('price:-' + $prices[temp]);
+                     console.log('final price:-' + final_price);
+                     console.log('=========================================================');
                      */
                 }
             }
@@ -432,8 +433,13 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).bind('fabric_change', function() {
+
         $old_fabric_dir = '/fabric_color/' + $fabric_color + '/';         //OLD fabric
         $new_fabric_dir = '/fabric_color/' + $new_fabric_color + '/';     // New fabric
+
+        $old_fabric_bg_dir = '/fabric/' + $fabric + '/';         //OLD fabric for bgimage
+        $new_fabric_bg_dir = '/fabric/' + $new_fabric + '/';     // New fabric for bgimage
+
         $old_button_dir = '/botones/' + $buttons + '/';       //Old button 
         $buttons = $fabric_data[$new_fabric].button;    //New button id 
         $new_button_dir = '/botones/' + $buttons + '/';       // new button
@@ -454,7 +460,7 @@ jQuery(document).ready(function() {
         });
 
         jQuery('.fabric-background').each(function() {
-            var replaced = jQuery(this).css('background-image').replace($old_fabric_dir, $new_fabric_dir);
+            var replaced = jQuery(this).css('background-image').replace($old_fabric_bg_dir, $new_fabric_bg_dir);
             jQuery(this).css('background', replaced);
         });
 
@@ -561,6 +567,7 @@ jQuery(document).ready(function() {
         jQuery('.fabric_lining_img').attr('src', fabric_lining_img);
         jQuery('.lining_img').attr('src', lining_img);
         jQuery('.lining_base').attr('src', lining_base);
+        jQuery('#model_3d_preview .all_lining_imgs').show();
         jQuery(document).trigger('set-linig-slider');
         jQuery(document).trigger("count_price");
     });
@@ -763,29 +770,60 @@ jQuery(document).ready(function() {
     /* End :- this is for add text for embroidery work*/
 
     /*END step 3 JS*/
-	jQuery(document).on('click', '.product_details', function(){
-		$order_item_key=jQuery(this).data('order_item_key');
-		 jQuery(document).trigger('product_details');
-		 jQuery(".light").lightbox_me();
+    jQuery(document).on('click', '.product_details', function() {
+        $order_item_key = jQuery(this).data('order_item_key');
+        jQuery(document).trigger('product_details');
+        jQuery('.under_light').html('');
+        jQuery(".light").lightbox_me({
+            centered: true,
+            preventScroll: true
+        });
+        jQuery(".light .loader").show();
     });
-	
-	
-	 jQuery(document).bind('product_details', function() {
-			 jQuery.ajax({
-				url: ajax_url,
-				type: "POST",
-				data: {action:'product_details',order_item_key:$order_item_key},
-				success: function(data) {
-							if(jQuery('.under_light').html() == ''){
-							jQuery('.under_light').append(data);
-							}
-				},
-			});
-	 });
-	 
-	 
-	
-	
+
+
+    jQuery(document).bind('product_details', function() {
+        jQuery.ajax({
+            url: ajax_url,
+            type: "POST",
+            data: {action: 'product_details', order_item_key: $order_item_key},
+            success: function(data) {
+                jQuery('.under_light').html(data);
+                jQuery(".light .loader").hide();
+            },
+        });
+    });
+    
+    jQuery(document).on('click', '.Product_detail_by_id', function() {
+        $wca_attributes = jQuery(this).data('wca_attrs');
+        jQuery(document).trigger('product_details_order_id');
+        jQuery('.under_light').html('');
+        jQuery(".light").lightbox_me({
+            centered: true,
+            preventScroll: true
+        });
+        jQuery(".light .loader").show();
+    });
+
+
+    jQuery(document).bind('product_details_order_id', function() {
+        jQuery.ajax({
+            url: ajax_url,
+            type: "POST",
+            data: {action: 'product_details_view_order', wca_attributes: $wca_attributes},
+            success: function(data) {
+                jQuery('.under_light').html(data);
+                jQuery(".light .loader").hide();
+            },
+        });
+    });
+
+
+
 });
+
+/*Start :- This is fo combination of Style, Coat length, Fit, Fastening and Fastening type:, */
+
+/*End :- This is fo combination of Style, Coat length, Fit, Fastening and Fastening type:, */
 
 

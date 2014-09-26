@@ -9,6 +9,8 @@ class wca_cart_hooks {
     public function __construct() {
         add_action('woocommerce_before_add_to_cart_button', array(&$this, 'wca_load_left_attribute'));
 
+        add_action('init', array(&$this, 'set_ajax_url'), 10);
+
         add_filter('woocommerce_add_cart_item_data', array(&$this, 'wca_add_cart_item_data'), 10, 2);
         add_filter('woocommerce_get_cart_item_from_session', array(&$this, 'wca_get_cart_item_from_session'), 10, 2);
         add_filter('woocommerce_get_item_data', array(&$this, 'wca_get_item_data'), 10, 2);
@@ -23,8 +25,12 @@ class wca_cart_hooks {
         add_action('woocommerce_checkout_update_user_meta', array(&$this, 'wca_add_user_measurements'), 10, 2);
         add_action('woocommerce_checkout_update_order_meta', array(&$this, 'wca_checkout_update_order_meta'), 10, 2);
 
-
-
+        add_filter('woocommerce_order_table_item_quantity', array(&$this, 'wca_order_table_item_quantity'), 10, 2);
+        add_filter('woocommerce_order_item_quantity_html', array(&$this, 'wca_order_table_item_quantity'), 10, 2);
+        add_filter('woocommerce_checkout_cart_item_quantity', array(&$this, 'wca_checkout_cart_item_quantity'), 10, 3);
+        add_filter('woocommerce_checkout_cart_item_quantity', array(&$this, 'wca_checkout_cart_item_quantity'), 10, 3);
+        add_action('woocommerce_review_order_before_payment', array(&$this, 'wca_review_order_before_payment'), 10);
+        add_action('woocommerce_order_details_after_order_table', array(&$this, 'wca_review_order_before_payment'), 10);
         /* ----- Start admin hooks ------ */
         add_action('woocommerce_admin_order_data_after_order_details', array(&$this, 'wca_admin_order_data_after_order_details'), 10, 1);
         add_action('woocommerce_admin_order_item_headers', array(&$this, 'wca_admin_order_item_headers'), 10, 1);
@@ -39,14 +45,14 @@ class wca_cart_hooks {
         $serialized_measurement = get_post_meta($order->id, '_wca_measurement', true);
         if ($serialized_measurement != '') {
             $default_measurement = unserialize($serialized_measurement);
-            $file = ABS_VIEW.'measurement/wca-measurement.php';
+            $file = ABS_VIEW . 'measurement/wca-measurement.php';
             include $file;
         }
     }
 
     function wca_admin_order_item_headers($cart_item_key) {
         ?>
-            <th class="tax_class"><?php _e('Details', 'woocommerce') ?></th><div class="light"><div class="under_light"></div></div>
+        <th class="tax_class"><?php _e('Details', 'woocommerce') ?></th><div class="light"><i class="fa fa-refresh fa-spin loader" style="display:none;"></i><div class="row under_light"></div></div>
         <?php
     }
 
@@ -68,8 +74,14 @@ class wca_cart_hooks {
         <script type="text/javascript">
             var ajax_url = "<?php echo admin_url() . "admin-ajax.php" ?>";
         </script>
-        <td class="tax_class" data-order_item_id="<?php echo $item_id ?>"><?php _e('Details', 'woocommerce') ?></td>
-        <?php
+        <?php if (get_metadata('order_item', $item_id, 'wca_attributes', true)) { ?>
+            <td class="tax_class wca_item_det" data-order_item_id="<?php echo $item_id ?>"><i class="fa fa-eye"></i></td>
+            <?php
+        } else {
+            ?>    
+            <td width="1%" class="wca_item_det"><i class="fa fa-ban"></i></td>
+            <?php
+        }
     }
 
     function wca_add_measurments() {
@@ -94,6 +106,44 @@ class wca_cart_hooks {
 
     function wca_add_cart_item_data($cart_item_meta, $product_id) {
         global $woocommerce;
+        $attrs=get_post_meta($product_id, '_wca_attribute_data', true);
+        if ($attrs != '') {
+            $wca_default_attrs = unserialize($attrs);
+            $save_data = array(
+                'wca_trenchcoat_style' => $wca_default_attrs ['wca_trenchcoat_style'],
+                'wca_trenchcoat_length' => $wca_default_attrs ['wca_trenchcoat_length'],
+                'wca_trenchcoat_fit' => $wca_default_attrs ['wca_trenchcoat_fit'],
+                'wca_trenchcoat_closure' => $wca_default_attrs ['wca_trenchcoat_closure'],
+                'wca_trenchcoat_closure_type_boton' => $wca_default_attrs ['wca_trenchcoat_closure_type_boton'],
+                'wca_trenchcoat_pockets' => $wca_default_attrs ['wca_trenchcoat_pockets'],
+                'wca_trenchcoat_pockets_type' => $wca_default_attrs ['wca_trenchcoat_pockets_type'],
+                'wca_trenchcoat_chest_pocket' => $wca_default_attrs ['wca_trenchcoat_chest_pocket'],
+                'wca_trenchcoat_belt' => $wca_default_attrs ['wca_trenchcoat_belt'],
+                'wca_trenchcoat_backcut' => $wca_default_attrs ['wca_trenchcoat_backcut'],
+                'wca_trenchcoat_sleeve' => $wca_default_attrs ['wca_trenchcoat_sleeve'],
+                'wca_trenchcoat_shoulder' => $wca_default_attrs ['wca_trenchcoat_shoulder'],
+                'wca_trenchcoat_back_lapel' => $wca_default_attrs ['wca_trenchcoat_back_lapel'],
+                'wca_trenchcoat_fabric_type' => $wca_default_attrs ['wca_trenchcoat_fabric_type'],
+                'wca_trenchcoat_interior_type' => $wca_default_attrs ['wca_trenchcoat_interior_type'],
+                'wca_trenchcoat_interior' => $wca_default_attrs ['wca_trenchcoat_interior'],
+                'wca_trenchcoat_embroidery_font' => $wca_default_attrs ['wca_trenchcoat_embroidery_font'],
+                'wca_embroidery' => $wca_default_attrs ['wca_embroidery'],
+                'wca_embroidery_text' => $wca_default_attrs ['wca_embroidery_text'],
+                'wca_embroidary_color' => $wca_default_attrs ['wca_embroidary_color'],
+                'wca_trenchcoat_neck_lapel' => $wca_default_attrs ['wca_trenchcoat_neck_lapel'],
+                'wca_neck_lining' => $wca_default_attrs ['wca_neck_lining'],
+                'wca_trenchcoat_elbow_patch' => $wca_default_attrs ['wca_trenchcoat_elbow_patch'],
+                'wca_elbow_patch' => $wca_default_attrs ['wca_elbow_patch'],
+                'wca_trenchcoat_btn_thread_apply' => $wca_default_attrs ['wca_trenchcoat_btn_thread_apply'],
+                'wca_button_hilo_ojal' => $wca_default_attrs ['wca_button_hilo_ojal'],
+                'wca_buton_thread' => $wca_default_attrs ['wca_buton_thread'],
+                'wca_buton_hole_thread' => $wca_default_attrs ['wca_buton_hole_thread'],
+                'wca_category' => $wca_default_attrs ['wca_category'],
+            );
+            $price = wca_get_price_from_arttributes($save_data);
+            $cart_item_meta['wca_cart_data']['wca_attributes'] = serialize($save_data);
+            $cart_item_meta['wca_cart_data']['wca_attributes_price'] = $price;
+        }
         if (isset($_POST) && $_POST['wca_trenchcoat_style'] != '') {
             $save_data = array(
                 'wca_trenchcoat_style' => $_POST['wca_trenchcoat_style'],
@@ -165,14 +215,60 @@ class wca_cart_hooks {
     function wca_in_cart_product_thumbnail($thumb, $cart_item, $cart_item_key) {
 
         if (isset($cart_item['wca_cart_data'])) {
-            $thumb.='
+            echo $thumb = '
                 <script type = "text/javascript">
                     var ajax_url = "' . admin_url() . '" + "admin-ajax.php"; 
                 </script>
             ';
+            ?>
+            <div class="col-xs-12 col-sm-12 wca-cart-thumb">
+                <?php
+                $current_items = unserialize($cart_item['wca_cart_data']['wca_attributes']);
+                //pr($current_items);
+
+                $wca_attributes = $current_items;   //Custome attribute array
+                $unique_class = $cart_item_key;
+                include ABS_MODEL . '/get_attrs.php';
+                include ABS_MODEL . '/sigle-image-data.php';
+
+                $default_attrs = json_encode($wca_attributes);
+                $file = wca_get_template_path('cart-image-layer.php');
+                include $file;
+                ?>
+            </div>
+            <?php
             $thumb.='<br><center><a href="javascript:;" class="product_details" data-order_item_key="' . $cart_item_key . '">Show Details</a></center>';
+
+            echo $thumb;
+        } else {
+            return $thumb;
         }
-        return $thumb;
+    }
+    
+    
+    function wca_in_mini_cart_product_thumbnail($thumb, $cart_item, $cart_item_key) {
+
+        if (isset($cart_item['wca_cart_data'])) {
+            ?>
+            <div class="col-xs-12 col-sm-12 wca-cart-thumb">
+                <?php
+                $current_items = unserialize($cart_item['wca_cart_data']['wca_attributes']);
+                //pr($current_items);
+
+                $wca_attributes = $current_items;   //Custome attribute array
+                $unique_class = $cart_item_key;
+                include ABS_MODEL . '/get_attrs.php';
+                include ABS_MODEL . '/sigle-image-data.php';
+
+                $default_attrs = json_encode($wca_attributes);
+                $file = wca_get_template_path('cart-image-layer.php');
+                include $file;
+                ?>
+            </div>
+            <?php
+        } else {
+            return $thumb;
+        }
     }
 
     function wca_add_cart_item($cart_item) {
@@ -323,30 +419,107 @@ class wca_cart_hooks {
     }
 
     public function wca_product_detail() {
+        global $wpdb;
         $current_item_key = mysql_real_escape_string($_POST['order_item_key']);
         $items = WC()->cart->get_cart();
         $curren_item = $items[$current_item_key];
         $current_items = unserialize($curren_item['wca_cart_data']['wca_attributes']);
         //pr($current_items);
+
+        $wca_attributes = $current_items;   //Custome attribute array
+        $unique_class = $current_item_key;
         include ABS_MODEL . '/get_attrs.php';
-        //pr($current_items);
-        $wca_attributes = array();   //Custome attribute array
+        include ABS_MODEL . '/sigle-image-data.php';
+
+
         $file = wca_get_template_path('wca_product_details.php');
+        echo '<div class="cart-customize-detail">';
         include $file;
+        echo '</div>';
         exit;
     }
 
     public function wca_add_lightbox() {
-        echo '<div class="light"><div class="under_light"></div></div>';
+        echo '<div class="light"><i class="fa fa-refresh fa-spin loader" style="display:none;"></i><div class="row under_light"></div></div>';
     }
 
     public function wca_product_detail_admin() {
         $current_item_id = mysql_real_escape_string($_POST['order_item_id']);
         $current_items = unserialize(get_metadata('order_item', $current_item_id, 'wca_attributes', true));
+
+        $wca_attributes = $current_items;   //Custome attribute array
+        $unique_class = $current_item_id;
         include ABS_MODEL . '/get_attrs.php';
+        include ABS_MODEL . '/sigle-image-data.php';
+
+
         $file = ABS_VIEW . 'wca_product_details.php';
+
+        echo '<div class="order-admin-detail">';
         include $file;
+        echo '</div>';
+
         exit;
+    }
+    
+    public function wca_product_detail_view_order() {
+        $current_items = base64_decode($_POST['wca_attributes']);
+        $current_items = unserialize($current_items);
+        
+        $wca_attributes = $current_items;   //Custome attribute array
+        
+        $unique_class = time();
+        include ABS_MODEL . '/get_attrs.php';
+        include ABS_MODEL . '/sigle-image-data.php';
+
+
+        $file = ABS_VIEW . 'wca_product_details.php';
+
+        echo '<div class="order-admin-detail">';
+        include $file;
+        echo '</div>';
+
+        exit;
+    }
+
+    public function wca_order_table_item_quantity($qty, $item) {
+        global $order_id;
+        ?>
+        <script type="text/javascript">
+            var ajax_url = "<?php echo admin_url() . "admin-ajax.php" ?>";
+        </script>
+        <?php
+        if ($item['wca_attributes'] != '') {
+            $attrs=  base64_encode(unserialize($item['wca_attributes']));
+            $qty .= '<div class="wca_order_item_det pull-right Product_detail_by_id" data-wca_attrs="'.$attrs.'"> <i class="fa fa-eye"></i> </div> ';
+        }
+        return $qty;
+    }
+
+    public function wca_checkout_cart_item_quantity($qty, $item, $item_key) {
+        ?>
+        <script type="text/javascript">
+            var ajax_url = "<?php echo admin_url() . "admin-ajax.php" ?>";
+        </script>
+        <?php
+        if (isset($item['wca_cart_data']) && $item['wca_cart_data']['wca_attributes'] != '') {
+            $qty .= '<div class="wca_order_item_det pull-right product_details" data-order_item_key="' . $item_key . '"> <i class="fa fa-eye"></i> </div>';
+        }
+
+        return $qty;
+    }
+
+    public function set_ajax_url() {
+        
+    }
+
+    public function wca_review_order_before_payment() {
+        ?>
+        <div class="light">
+            <i class="fa fa-refresh fa-spin loader" style="display:none;"></i>
+            <div class="row under_light"></div>
+        </div>
+        <?php
     }
 
 }

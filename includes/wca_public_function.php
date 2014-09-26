@@ -26,6 +26,19 @@ function wca_template_loader($template) {
     return $template;
 }
 
+function wca_locate_template($template, $template_name, $template_path){
+    
+    if($template_name=='single-product/price.php' && $template_path=='woocommerce/'){
+        $template = wca_get_template_path( 'single-product/price.php' );
+    }
+    if($template_name=='loop/price.php' && $template_path=='woocommerce/'){
+        $template = wca_get_template_path( 'loop/price.php' );
+    }
+    
+    return $template;
+}
+
+
 function add_customize_butoon() {
     $post_id = get_the_ID();
     $customize = get_post_meta($post_id, '_wca_customise_product', true);
@@ -33,7 +46,7 @@ function add_customize_butoon() {
         $link = get_permalink($post_id);
         $link = add_query_arg('customize', '1', $link);
         echo '<div class="gbtr_add_to_cart_simple" style="padding: 10px 0px; width: 100%;">
-                <a href="' . $link . '" class="single_add_to_cart_button button alt" style="width:55%;padding-bottom: 30px !important;">Customization</a>
+                <a href="' . $link . '" class="single_add_to_cart_button button alt" style="width:70%;padding-bottom: 30px !important;">Customization</a>
                 </div>';
     }
 }
@@ -112,6 +125,32 @@ function wca_sale_price($price, $product) {
     return $price;
 }
 
+function wca_product_price($price,$product) {
+    $post_id = $product->id;
+    $customize = get_post_meta($post_id, '_wca_customise_product', true);
+    
+    if ($customize == 1){
+        $regular_price=$product->get_regular_price();
+        $sale_price=$price;
+    }else{
+        $regular_price=$product->get_regular_price();
+        $sale_price=$product->get_sale_price();
+    }
+    $tax_display_mode = get_option('woocommerce_tax_display_shop');
+    $display_price = $tax_display_mode == 'incl' ? $product->get_price_including_tax() : $product->get_price_excluding_tax();
+    $display_regular_price = $tax_display_mode == 'incl' ? $product->get_price_including_tax(1, $regular_price) : $product->get_price_excluding_tax(1, $regular_price);
+     $display_sale_price = $tax_display_mode == 'incl' ? $product->get_price_including_tax(1, $sale_price) : $product->get_price_excluding_tax(1, $sale_price);
+
+    if ($product->is_on_sale()) {
+        $format = wca_price_formate();
+        $price = '<del>' . ( ( is_numeric($display_regular_price) ) ? wca_price($display_regular_price) : $display_regular_price ) . '</del> <ins>' . ( ( is_numeric($display_sale_price) ) ? wc_price($display_sale_price) : $display_sale_price ) . '</ins>';
+
+        $price = $price . $product->get_price_suffix();
+    } else {
+        $price = wca_price($sale_price,'formated_price');
+    }
+    return $price;
+}
 
 function wca_get_price_from_arttributes($secected_attributes) {
     include ABS_MODEL . '/get_attrs.php';

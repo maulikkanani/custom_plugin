@@ -1,7 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-global $post, $wpdb;
+global $post, $wpdb, $product;
 $post_id = $post->ID;
+if($post_id=='') $post_id=$product->id;
 /* Start:- array for default value of each attribute */
 $attrs=get_post_meta($post_id, '_wca_attribute_data', true);
 
