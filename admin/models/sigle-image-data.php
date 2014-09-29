@@ -15,7 +15,8 @@ $single_fabrics_data[$single_fabrics->id] = array(
     'lining' => $single_fabrics->lining_id,
     'color' => $single_fabrics->color
 );
-$fabric_data = json_encode($single_fabrics_data);
-$category = $categories[$wca_attributes['wca_category']];
-$image_category = wca_image_url . "/3d/man/$category";           // category image url
+
+$view_fabric_data = json_encode($single_fabrics_data);
+$view_category = $categories[$wca_attributes['wca_category']];
+$view_image_category = wca_image_url . "/3d/man/$category";           // category image url
 ?>
