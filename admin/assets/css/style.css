@@ -821,7 +821,7 @@ div#product_preview div.extra_box {
 }
 div#product_preview div.extra_box div.extra_description {
     float: left;
-     width: 64%;
+    width: 64%;
 }
 div#product_preview div.extra_img {
     border-radius: 2px;
@@ -897,7 +897,9 @@ div#product_preview .value {
     }
 
 }
-
+#customize_image_layer #main_image_layer #product_image {
+height: 503px !important;
+}
 .under_light {
     margin: 0 0 30px;
     overflow: hidden;

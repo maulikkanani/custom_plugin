@@ -644,6 +644,10 @@ div.fabric_box_3d div.image a {
     font-size: 10px;
 }
 
+#product_image {
+    height: 647px !important;
+}
+
 /*Start:- for image upload */
 .fileinput-button {
     overflow: hidden;
